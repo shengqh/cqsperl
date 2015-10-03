@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Pipeline::SmallRNA;
 use Pipeline::SmallRNAUtils;
-use Hash::Merge;
+use Hash::Merge qw( merge );
 
 require Exporter;
 our @ISA = qw(Exporter);
