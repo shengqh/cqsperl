@@ -22,13 +22,13 @@ our $VERSION = '0.01';
 
 sub supplement_genome {
   return {
-    bowtie1_tRNA_index            => "/scratch/cqs/shengq1/references/hg19_16569_MT/bowtie_index_1.1.2/hg19_16569_MT",
-    bowtie1_srRNA_index           => "/scratch/cqs/shengq1/references/hg19_16569_MT/bowtie_index_1.1.2/hg19_16569_MT",
-    bowtie1_lrRNA_index           => "/scratch/cqs/shengq1/references/hg19_16569_MT/bowtie_index_1.1.2/hg19_16569_MT",
-    bowtie1_bacteria_group1_index => "/scratch/cqs/shengq1/references/hg19_16569_MT/bowtie_index_1.1.2/hg19_16569_MT",
-    bowtie1_bacteria_group2_index => "/scratch/cqs/shengq1/references/hg19_16569_MT/bowtie_index_1.1.2/hg19_16569_MT",
+    bowtie1_tRNA_index            => "/scratch/cqs/zhaos/vickers/reference/tRna/bowtie_index_1.1.2/trna",
+    bowtie1_rRNAS_index           => "/scratch/cqs/zhaos/vickers/reference/rRna/SILVA_123_SSURef_Nr99_tax_silva",
+    bowtie1_rRNAL_index           => "/scratch/cqs/zhaos/vickers/reference/rRna/SILVA_123_LSURef_tax_silva",
+    bowtie1_bacteria_group1_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/bacteriaDatabaseGroup1",
+    bowtie1_bacteria_group2_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/bacteriaDatabaseGroup2",
   };
-}
+}   
 
 sub hg19_genome {
   return merge(
