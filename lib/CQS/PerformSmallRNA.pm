@@ -26,7 +26,9 @@ sub supplement_genome {
     bowtie1_rRNAS_index           => "/scratch/cqs/zhaos/vickers/reference/rRna/SILVA_123_SSURef_Nr99_tax_silva",
     bowtie1_rRNAL_index           => "/scratch/cqs/zhaos/vickers/reference/rRna/SILVA_123_LSURef_tax_silva",
     bowtie1_bacteria_group1_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/bacteriaDatabaseGroup1",
+    bacteria_group1_log => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20150902.log",
     bowtie1_bacteria_group2_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/bacteriaDatabaseGroup2",
+    bacteria_group2_log => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20150902.log",
   };
 }   
 
