@@ -55,8 +55,8 @@ sub hg19_3utr {
     search_3utr   => 1,
     bowtie1_index => hg19_genome()->{bowtie1_index},
     utr3_db       => "/data/cqs/shengq1/reference/utr3/20140612_ucsc_hg19_3UTR.txt",
-    fasta_file    => "/gpfs21/scratch/cqs/shengq1/references/hg19_16569_M/hg19_16569_M.fa",
-    refgene_file  => "/gpfs21/scratch/cqs/shengq1/references/hg19_16569_M/hg19_refgene.tsv",
+    fasta_file    => "/scratch/cqs/shengq1/references/hg19_16569_MT/hg19_16569_MT.fa",
+    refgene_file  => "/scratch/cqs/shengq1/references/hg19_16569_MT/hg19_refgene.tsv",
   };
 }
 
