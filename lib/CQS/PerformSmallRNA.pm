@@ -12,7 +12,7 @@ our @ISA = qw(Exporter);
 
 our %EXPORT_TAGS = (
   'all' => [
-    qw(hg19_genome hg38_genome mm10_genome rn5_genome cel235_genome performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg20 performSmallRNATask_hg20 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5 performSmallRNA_cel235 performSmallRNATask_cel235)
+    qw(hg19_genome hg19_3utr hg38_genome mm10_genome rn5_genome cel235_genome performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg20 performSmallRNATask_hg20 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5 performSmallRNA_cel235 performSmallRNATask_cel235)
   ]
 );
 
@@ -26,11 +26,11 @@ sub supplement_genome {
     bowtie1_rRNAS_index           => "/scratch/cqs/zhaos/vickers/reference/rRna/SILVA_123_SSURef_Nr99_tax_silva",
     bowtie1_rRNAL_index           => "/scratch/cqs/zhaos/vickers/reference/rRna/SILVA_123_LSURef_tax_silva",
     bowtie1_bacteria_group1_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/bacteriaDatabaseGroup1",
-    bacteria_group1_log => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20150902.log",
+    bacteria_group1_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20150902.log",
     bowtie1_bacteria_group2_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/bacteriaDatabaseGroup2",
-    bacteria_group2_log => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20150902.log",
+    bacteria_group2_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20150902.log",
   };
-}   
+}
 
 sub hg19_genome {
   return merge(
@@ -48,6 +48,16 @@ sub hg19_genome {
       star_index_directory  => "/scratch/cqs/shengq1/references/hg19_16569_MT/STAR_index_v37.75_2.4.2a_sjdb49"
     }
   );
+}
+
+sub hg19_3utr {
+  return {
+    search_3utr   => 1,
+    bowtie1_index => hg19_genome()->{bowtie1_index},
+    utr3_db       => "/data/cqs/shengq1/reference/utr3/20140612_ucsc_hg19_3UTR.txt",
+    fasta_file    => "/gpfs21/scratch/cqs/shengq1/references/hg19_16569_M/hg19_16569_M.fa",
+    refgene_file  => "/gpfs21/scratch/cqs/shengq1/references/hg19_16569_M/hg19_refgene.tsv",
+  };
 }
 
 sub hg38_genome {
