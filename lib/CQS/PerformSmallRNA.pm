@@ -105,7 +105,7 @@ sub rn5_genome {
       mirbase_count_option  => "-p rno",
       coordinate            => "/scratch/cqs/shengq1/references/smallrna/rn5_miRBase21_ucsc-tRNA_ensembl78.bed",
       coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/rn5_miRBase21_ucsc-tRNA_ensembl78.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq1/references/rn5/bowtie_index_1.1.1/rn5",
+      bowtie1_index         => "/scratch/cqs/shengq1/references/rn5/bowtie_index_1.1.2/rn5",
       bowtie1_miRBase_index => "/data/cqs/shengq1/reference/miRBase21/bowtie_index_1.1.1/mature.dna",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/rn5/gsnap_index_k14_2015-06-23/",
       gsnap_index_name      => "rn5",
