@@ -87,7 +87,7 @@ sub mm10_genome {
       mirbase_count_option  => "-p mmu",
       coordinate            => "/scratch/cqs/shengq1/references/smallrna/mm10_miRBase21_ucsc-tRNA_ensembl78.bed",
       coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/mm10_miRBase21_ucsc-tRNA_ensembl78.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq1/references/mm10/bowtie_index_1.1.1/mm10",
+      bowtie1_index         => "/scratch/cqs/shengq1/references/mm10/bowtie_index_1.1.2/mm10",
       bowtie1_miRBase_index => "/data/cqs/shengq1/reference/miRBase21/bowtie_index_1.1.1/mature.dna",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/mm10/gsnap_index_k14_2015-06-23/",
       gsnap_index_name      => "mm10",
