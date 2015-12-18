@@ -12,7 +12,7 @@ our @ISA = qw(Exporter);
 
 our %EXPORT_TAGS = (
   'all' => [
-    qw(hg19_genome hg19_3utr hg38_genome mm10_genome rn5_genome cel235_genome performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg20 performSmallRNATask_hg20 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5 performSmallRNA_cel235 performSmallRNATask_cel235)
+    qw(hg19_genome hg19_3utr hg38_genome mm10_genome mm10_3utr rn5_genome cel235_genome performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg20 performSmallRNATask_hg20 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5 performSmallRNA_cel235 performSmallRNATask_cel235)
   ]
 );
 
@@ -54,9 +54,9 @@ sub hg19_3utr {
   return {
     search_3utr   => 1,
     bowtie1_index => hg19_genome()->{bowtie1_index},
-    utr3_db       => "/data/cqs/shengq1/reference/utr3/20140612_ucsc_hg19_3UTR.txt",
     fasta_file    => "/scratch/cqs/shengq1/references/hg19_16569_MT/hg19_16569_MT.fa",
-    refgene_file  => "/scratch/cqs/shengq1/references/hg19_16569_MT/hg19_refgene.tsv",
+    utr3_db       => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg19_refgene_3utr.bed",
+    refgene_file  => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg19_refgene.tsv",
   };
 }
 
@@ -78,6 +78,16 @@ sub hg38_genome {
   );
 }
 
+sub hg38_3utr {
+  return {
+    search_3utr   => 1,
+    bowtie1_index => hg38_genome()->{bowtie1_index},
+    fasta_file    => "/scratch/cqs/shengq1/references/hg38_MT/hg38_MT.fa",
+    utr3_db       => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg38_refgene_3utr.bed",
+    refgene_file  => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg38_refgene.tsv",
+  };
+}
+
 sub mm10_genome {
   return merge(
     supplement_genome(),
@@ -87,13 +97,23 @@ sub mm10_genome {
       mirbase_count_option  => "-p mmu",
       coordinate            => "/scratch/cqs/shengq1/references/smallrna/mm10_miRBase21_ucsc-tRNA_ensembl78.bed",
       coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/mm10_miRBase21_ucsc-tRNA_ensembl78.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq1/references/mm10/bowtie_index_1.1.2/mm10",
+      bowtie1_index         => "/scratch/cqs/shengq1/references/mm10_sorted_M/bowtie_index_1.1.2/mm10",
       bowtie1_miRBase_index => "/data/cqs/shengq1/reference/miRBase21/bowtie_index_1.1.1/mature.dna",
-      gsnap_index_directory => "/scratch/cqs/shengq1/references/mm10/gsnap_index_k14_2015-06-23/",
+      gsnap_index_directory => "/scratch/cqs/shengq1/references/mm10_sorted_M/gsnap_index_k14_2015-06-23/",
       gsnap_index_name      => "mm10",
-      star_index_directory  => "/scratch/cqs/shengq1/references/mm10/STAR_index_v38.81_2.4.2a_sjdb49"
+      star_index_directory  => "/scratch/cqs/shengq1/references/mm10_sorted_M/STAR_index_v38.78_2.5.0b_sjdb49"
     }
   );
+}
+
+sub mm10_3utr {
+  return {
+    search_3utr   => 1,
+    bowtie1_index => mm10_genome()->{bowtie1_index},
+    fasta_file    => "/scratch/cqs/shengq1/references/mm10/mm10.fa",
+    utr3_db       => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_mm10_refgene_3utr.bed",
+    refgene_file  => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_mm10_refgene.tsv",
+  };
 }
 
 sub rn5_genome {
