@@ -22,11 +22,11 @@ our $VERSION = '0.01';
 use Cwd;
 
 sub output_header {
-  my ( $pbsFile, $pbsDesc, $path_file, $log ) = @_;
+  my ( $pbsFile, $pbs_description, $path_file, $log ) = @_;
 
   #print "writing file " . $pbsFile . "\n";
   open( OUT, ">$pbsFile" ) or die $!;
-  print OUT "$pbsDesc
+  print OUT "$pbs_description
 #PBS -o $log
 #PBS -j oe
 
@@ -50,7 +50,7 @@ my $bamfilter = sub {
 sub tcga_download {
   my ( $config, $section ) = @_;
 
-  my ( $task_name, $path_file, $pbsDesc, $target_dir, $logDir, $pbsDir, $resultDir, $option ) = get_parameter( $config, $section );
+  my ( $task_name, $path_file, $pbs_description, $target_dir, $log_dir, $pbs_dir, $result_dir, $option ) = get_parameter( $config, $section );
 
   my $idfile = get_param_file( $config->{$section}{idfile}, "analysis id file", 1 );
 
@@ -85,9 +85,9 @@ sub tcga_download {
 
   #print %batchmap;
 
-  my $rawdir = create_directory_or_die( $resultDir . "/raw" );
+  my $rawdir = create_directory_or_die( $result_dir . "/raw" );
 
-  my $shfile = $pbsDir . "/${task_name}.sh";
+  my $shfile = $pbs_dir . "/${task_name}.sh";
   open( SH, ">$shfile" ) or die "Cannot create $shfile";
   print SH "type -P qsub &>/dev/null && export MYCMD=\"qsub\" || export MYCMD=\"bash\" \n";
 
@@ -118,12 +118,12 @@ sub tcga_download {
       }
       $dindex = $dindex + 1;
       my $pbsName = "${task_name}_${dindex}_download.pbs";
-      my $pbsFile = "${pbsDir}/$pbsName";
-      my $log     = "${logDir}/${task_name}_${dindex}_download.log";
+      my $pbsFile = "${pbs_dir}/$pbsName";
+      my $log     = "${log_dir}/${task_name}_${dindex}_download.log";
 
       print SH "\$MYCMD ./$pbsName \n";
 
-      output_header( $pbsFile, $pbsDesc, $path_file, $log );
+      output_header( $pbsFile, $pbs_description, $path_file, $log );
 
       print OUT "echo download=`date` \n";
       print OUT "cd $rawdir \n";
@@ -149,7 +149,7 @@ sub tcga_download {
 sub tcga_get_coordinate {
   my ( $config, $section ) = @_;
 
-  my ( $task_name, $path_file, $pbsDesc, $target_dir, $logDir, $pbsDir, $resultDir, $option ) = get_parameter( $config, $section );
+  my ( $task_name, $path_file, $pbs_description, $target_dir, $log_dir, $pbs_dir, $result_dir, $option ) = get_parameter( $config, $section );
 
   my $idfile = get_param_file( $config->{$section}{idfile}, "analysis id file", 1 );
 
@@ -183,13 +183,13 @@ sub tcga_get_coordinate {
   my @raw_data = <DAT>;
   close(DAT);
 
-  my $pbsFile = $pbsDir . "/${task_name}_coordidate.pbs";
-  my $log     = $logDir . "/${task_name}_coordidate.log";
+  my $pbsFile = $pbs_dir . "/${task_name}_coordidate.pbs";
+  my $log     = $log_dir . "/${task_name}_coordidate.log";
 
-  output_header( $pbsFile, $pbsDesc, $path_file, $log );
+  output_header( $pbsFile, $pbs_description, $path_file, $log );
 
-  my $rawdir        = create_directory_or_die( $resultDir . "/raw" );
-  my $coordinatedir = create_directory_or_die( $resultDir . "/coordindates" );
+  my $rawdir        = create_directory_or_die( $result_dir . "/raw" );
+  my $coordinatedir = create_directory_or_die( $result_dir . "/coordindates" );
 
   print OUT "echo download=`date` \n";
 
