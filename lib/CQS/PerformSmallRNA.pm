@@ -20,8 +20,12 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
 our $VERSION = '0.01';
 
+my $mirBase20 = "/data/cqs/shengq1/reference/miRBase20/bowtie_index_1.1.1/mature.dna";
+my $mirBase21 = "/data/cqs/shengq1/reference/miRBase21/bowtie_index_1.1.1/mature.dna";
+
 sub supplement_genome {
   return {
+    bowtie1_miRBase_index => $mirBase21,
     bowtie1_tRNA_index            => "/scratch/cqs/zhaos/vickers/reference/tRna/bowtie_index_1.1.2/trna",
     bowtie1_rRNAS_index           => "/scratch/cqs/zhaos/vickers/reference/rRna/SILVA_123_SSURef_Nr99_tax_silva",
     bowtie1_rRNAL_index           => "/scratch/cqs/zhaos/vickers/reference/rRna/SILVA_123_LSURef_tax_silva",
@@ -32,19 +36,10 @@ sub supplement_genome {
   };
 }
 
-sub mirBase20 {
-  bowtie1_miRBase_index => "/data/cqs/shengq1/reference/miRBase20/bowtie_index_1.1.1/mature.dna";
-}
-
-sub mirBase21 {
-  bowtie1_miRBase_index => "/data/cqs/shengq1/reference/miRBase21/bowtie_index_1.1.1/mature.dna";
-}
-
 #for miRBase analysis, we use the most recent version (corresponding to hg38) since the coordinates are not used in analysis.
 sub hg19_genome {
   return merge(
     supplement_genome(),
-    mirBase21(),
     {
       #genome database
       mirbase_count_option  => "-p hsa",
@@ -71,7 +66,6 @@ sub hg19_3utr {
 sub hg38_genome {
   return merge(
     supplement_genome(),
-    mirBase21(),
     {
 
       #genome database
@@ -99,7 +93,6 @@ sub hg38_3utr {
 sub mm10_genome {
   return merge(
     supplement_genome(),
-    mirBase21(),
     {
 
       #genome database
@@ -127,7 +120,6 @@ sub mm10_3utr {
 sub rn5_genome {
   return merge(
     supplement_genome(),
-    mirBase21(),
     {
 
       #genome database
@@ -145,7 +137,6 @@ sub rn5_genome {
 sub cel235_genome {
   return merge(
     supplement_genome(),
-    mirBase21(),
     {
 
       #genome database
