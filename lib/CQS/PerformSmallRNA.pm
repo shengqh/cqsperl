@@ -151,6 +151,24 @@ sub cel235_genome {
   );
 }
 
+sub cfa3_genome {
+  return merge(
+    supplement_genome(),
+    {
+      #genome database
+      mirbase_count_option  => "-p cfa",
+      coordinate            => "/scratch/cqs/zhaos/vickers/reference/Canis_lupus_familiaris/cfa3_miRBase21_ucsc-tRNA_ensembl83.bed",
+      coordinate_fasta      => "/scratch/cqs/zhaos/vickers/reference/Canis_lupus_familiaris/cfa3_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
+      
+      bowtie1_index         => "/scratch/cqs/zhaos/vickers/reference/Canis_lupus_familiaris/bowtie_index_1.1.0/canFam3",
+      gsnap_index_directory => "/scratch/cqs/zhaos/vickers/reference/Canis_lupus_familiaris/gsnap_index_k14_2015-06-23",
+      gsnap_index_name      => "canFam3",
+      
+#      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
+    }
+  );
+}
+
 sub performSmallRNA_hg19 {
   my ( $userdef, $perform ) = @_;
   my $def = getSmallRNADefinition( $userdef, hg19_genome() );
@@ -222,6 +240,21 @@ sub performSmallRNA_cel235 {
 sub performSmallRNATask_cel235 {
   my ( $userdef, $task ) = @_;
   my $def = getSmallRNADefinition( $userdef, cel235_genome() );
+
+  performSmallRNATask( $def, $task );
+}
+
+sub performSmallRNA_cfa3 {
+  my ( $userdef, $perform ) = @_;
+  my $def = getSmallRNADefinition( $userdef, cfa3_genome() );
+
+  my $config = performSmallRNA( $def, $perform );
+  return $config;
+}
+
+sub performSmallRNATask_cfa3 {
+  my ( $userdef, $task ) = @_;
+  my $def = getSmallRNADefinition( $userdef, cfa3_genome() );
 
   performSmallRNATask( $def, $task );
 }

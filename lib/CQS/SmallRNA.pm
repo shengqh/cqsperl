@@ -57,4 +57,12 @@ sub performSmallRNATask_cel235 {
   CQS::PerformSmallRNA::performSmallRNATask_cel235(@_);
 }
 
+sub performSmallRNA_cfa3 {
+  CQS::PerformSmallRNA::performSmallRNA_cfa3(@_);
+}
+
+sub performSmallRNATask_cfa3 {
+  CQS::PerformSmallRNA::performSmallRNATask_cfa3(@_);
+}
+
 1;
