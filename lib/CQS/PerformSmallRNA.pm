@@ -12,7 +12,7 @@ our @ISA = qw(Exporter);
 
 our %EXPORT_TAGS = (
   'all' => [
-    qw(hg19_genome hg19_3utr hg38_genome mm10_genome mm10_3utr rn5_genome cel235_genome cfa3_genome performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg20 performSmallRNATask_hg20 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5 performSmallRNA_cel235 performSmallRNATask_cel235 performSmallRNA_cfa3 performSmallRNATask_cfa3)
+    qw(hg19_genome hg19_3utr hg38_genome mm10_genome mm10_3utr rn5_genome cel235_genome cfa3_genome performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg20 performSmallRNATask_hg20 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5 performSmallRNA_cel235 performSmallRNATask_cel235 performSmallRNA_cfa3 performSmallRNATask_cfa3 performSmallRNA_bta8 performSmallRNATask_bta8)
   ]
 );
 
@@ -169,6 +169,24 @@ sub cfa3_genome {
   );
 }
 
+sub bta8_genome {
+  return merge(
+    supplement_genome(),
+    {
+      #genome database
+      mirbase_count_option  => "-p bta",
+      coordinate            => "/scratch/cqs/zhaos/vickers/reference/Bos_taurus/bta31_miRBase21_ucsc-tRNA_ensembl83.bed",
+      coordinate_fasta      => "/scratch/cqs/zhaos/vickers/reference/Bos_taurus/bta31_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
+      
+      bowtie1_index         => "/scratch/cqs/zhaos/vickers/reference/Bos_taurus/bowtie_index_1.1.2/bosTau8",
+      gsnap_index_directory => "/scratch/cqs/zhaos/vickers/reference/Bos_taurus/gsnap_index_k14_2015-06-23",
+      gsnap_index_name      => "bosTau8",
+      
+#      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
+    }
+  );
+}
+
 sub performSmallRNA_hg19 {
   my ( $userdef, $perform ) = @_;
   my $def = getSmallRNADefinition( $userdef, hg19_genome() );
@@ -255,6 +273,21 @@ sub performSmallRNA_cfa3 {
 sub performSmallRNATask_cfa3 {
   my ( $userdef, $task ) = @_;
   my $def = getSmallRNADefinition( $userdef, cfa3_genome() );
+
+  performSmallRNATask( $def, $task );
+}
+
+sub performSmallRNA_bta8 {
+  my ( $userdef, $perform ) = @_;
+  my $def = getSmallRNADefinition( $userdef, bta8_genome() );
+
+  my $config = performSmallRNA( $def, $perform );
+  return $config;
+}
+
+sub performSmallRNATask_bta8 {
+  my ( $userdef, $task ) = @_;
+  my $def = getSmallRNADefinition( $userdef, bta8_genome() );
 
   performSmallRNATask( $def, $task );
 }

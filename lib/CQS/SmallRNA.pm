@@ -9,7 +9,8 @@ our @ISA = qw(Exporter);
 
 our %EXPORT_TAGS = (
   'all' => [
-    qw(performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg20 performSmallRNATask_hg20 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5 performSmallRNA_cel235 performSmallRNATask_cel235 performSmallRNA_cfa3 performSmallRNATask_cfa3)
+    qw(performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg20 performSmallRNATask_hg20 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5
+     performSmallRNA_cel235 performSmallRNATask_cel235 performSmallRNA_cfa3 performSmallRNATask_cfa3 performSmallRNA_bta8 performSmallRNATask_bta8)
   ]
 );
 
@@ -63,6 +64,14 @@ sub performSmallRNA_cfa3 {
 
 sub performSmallRNATask_cfa3 {
   CQS::PerformSmallRNA::performSmallRNATask_cfa3(@_);
+}
+
+sub performSmallRNA_bta8 {
+  CQS::PerformSmallRNA::performSmallRNA_bta8(@_);
+}
+
+sub performSmallRNATask_bta8 {
+  CQS::PerformSmallRNA::performSmallRNATask_bta8(@_);
 }
 
 1;
