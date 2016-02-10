@@ -33,6 +33,8 @@ sub supplement_genome {
     bacteria_group1_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20150902.log",
     bowtie1_bacteria_group2_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/bacteriaDatabaseGroup2",
     bacteria_group2_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20150902.log",
+    bowtie1_fungus_group4_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/bowtie_index_1.1.2/group4",
+    fungus_group4_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/20160210.log",
   };
 }
 
