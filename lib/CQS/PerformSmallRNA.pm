@@ -12,9 +12,9 @@ our @ISA = qw(Exporter);
 
 our %EXPORT_TAGS = (
   'all' => [
-    qw(hg19_genome hg19_3utr hg38_genome mm10_genome mm10_3utr rn5_genome cel235_genome cfa3_genome performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg20 performSmallRNATask_hg20 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5 
-    performSmallRNA_cel235 performSmallRNATask_cel235 performSmallRNA_cfa3 performSmallRNATask_cfa3 performSmallRNA_bta8 performSmallRNATask_bta8 performSmallRNA_eca2 performSmallRNATask_eca2 performSmallRNA_ssc3 performSmallRNATask_ssc3 performSmallRNA_ocu2 performSmallRNATask_ocu2 
-    performSmallRNA_oar3 performSmallRNATask_oar3)
+    qw(hg19_genome hg19_3utr hg38_genome mm10_genome mm10_3utr rn5_genome cel235_genome cfa3_genome performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg20 performSmallRNATask_hg20 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5
+      performSmallRNA_cel235 performSmallRNATask_cel235 performSmallRNA_cfa3 performSmallRNATask_cfa3 performSmallRNA_bta8 performSmallRNATask_bta8 performSmallRNA_eca2 performSmallRNATask_eca2 performSmallRNA_ssc3 performSmallRNATask_ssc3 performSmallRNA_ocu2 performSmallRNATask_ocu2
+      performSmallRNA_oar3 performSmallRNATask_oar3)
   ]
 );
 
@@ -27,7 +27,7 @@ my $mirBase21 = "/data/cqs/shengq1/reference/miRBase21/bowtie_index_1.1.1/mature
 
 sub supplement_genome {
   return {
-    bowtie1_miRBase_index => $mirBase21,
+    bowtie1_miRBase_index         => $mirBase21,
     bowtie1_tRNA_index            => "/scratch/cqs/zhaos/vickers/reference/tRna/bowtie_index_1.1.2/trna",
     bowtie1_rRNAS_index           => "/scratch/cqs/zhaos/vickers/reference/rRna/SILVA_123_SSURef_Nr99_tax_silva",
     bowtie1_rRNAL_index           => "/scratch/cqs/zhaos/vickers/reference/rRna/SILVA_123_LSURef_tax_silva",
@@ -35,8 +35,8 @@ sub supplement_genome {
     bacteria_group1_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20150902.log",
     bowtie1_bacteria_group2_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/bacteriaDatabaseGroup2",
     bacteria_group2_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20150902.log",
-    bowtie1_fungus_group4_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/bowtie_index_1.1.2/group4",
-    fungus_group4_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/20160210.log",
+    bowtie1_fungus_group4_index   => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/bowtie_index_1.1.2/group4",
+    fungus_group4_log             => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/20160210.log",
   };
 }
 
@@ -160,15 +160,15 @@ sub cfa3_genome {
     supplement_genome(),
     {
       #genome database
-      mirbase_count_option  => "-p cfa",
-      coordinate            => "/scratch/cqs/zhaos/vickers/reference/Canis_lupus_familiaris/cfa3_miRBase21_ucsc-tRNA_ensembl83.bed",
-      coordinate_fasta      => "/scratch/cqs/zhaos/vickers/reference/Canis_lupus_familiaris/cfa3_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
-      
+      mirbase_count_option => "-p cfa",
+      coordinate           => "/scratch/cqs/zhaos/vickers/reference/Canis_lupus_familiaris/cfa3_miRBase21_ucsc-tRNA_ensembl83.bed",
+      coordinate_fasta     => "/scratch/cqs/zhaos/vickers/reference/Canis_lupus_familiaris/cfa3_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
+
       bowtie1_index         => "/scratch/cqs/zhaos/vickers/reference/Canis_lupus_familiaris/bowtie_index_1.1.2/canFam3",
       gsnap_index_directory => "/scratch/cqs/zhaos/vickers/reference/Canis_lupus_familiaris/gsnap_index_k14_2015-06-23",
       gsnap_index_name      => "canFam3",
-      
-#      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
+
+      #      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
     }
   );
 }
@@ -178,15 +178,15 @@ sub bta8_genome {
     supplement_genome(),
     {
       #genome database
-      mirbase_count_option  => "-p bta",
-      coordinate            => "/scratch/cqs/zhaos/vickers/reference/Bos_taurus/bta31_miRBase21_ucsc-tRNA_ensembl83.bed",
-      coordinate_fasta      => "/scratch/cqs/zhaos/vickers/reference/Bos_taurus/bta31_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
-      
+      mirbase_count_option => "-p bta",
+      coordinate           => "/scratch/cqs/zhaos/vickers/reference/Bos_taurus/bta31_miRBase21_ucsc-tRNA_ensembl83.bed",
+      coordinate_fasta     => "/scratch/cqs/zhaos/vickers/reference/Bos_taurus/bta31_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
+
       bowtie1_index         => "/scratch/cqs/zhaos/vickers/reference/Bos_taurus/bowtie_index_1.1.2/bosTau8",
       gsnap_index_directory => "/scratch/cqs/zhaos/vickers/reference/Bos_taurus/gsnap_index_k14_2015-06-23",
       gsnap_index_name      => "bosTau8",
-      
-#      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
+
+      #      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
     }
   );
 }
@@ -196,15 +196,15 @@ sub eca2_genome {
     supplement_genome(),
     {
       #genome database
-      mirbase_count_option  => "-p eca",
-      coordinate            => "/scratch/cqs/zhaos/vickers/reference/Equus_caballus/eca2_miRBase21_ucsc-tRNA_ensembl83.bed",
-      coordinate_fasta      => "/scratch/cqs/zhaos/vickers/reference/Equus_caballus/eca2_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
-      
+      mirbase_count_option => "-p eca",
+      coordinate           => "/scratch/cqs/zhaos/vickers/reference/Equus_caballus/eca2_miRBase21_ucsc-tRNA_ensembl83.bed",
+      coordinate_fasta     => "/scratch/cqs/zhaos/vickers/reference/Equus_caballus/eca2_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
+
       bowtie1_index         => "/scratch/cqs/zhaos/vickers/reference/Equus_caballus/bowtie_index_1.1.2/equCab2",
       gsnap_index_directory => "/scratch/cqs/zhaos/vickers/reference/Equus_caballus/gsnap_index_k14_2015-06-23",
       gsnap_index_name      => "equCab2",
-      
-#      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
+
+      #      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
     }
   );
 }
@@ -214,15 +214,16 @@ sub ssc3_genome {
     supplement_genome(),
     {
       #genome database
-      mirbase_count_option  => "-p ssc",
-      coordinate            => "/scratch/cqs/zhaos/vickers/reference/Sus_scrofa/ssc3_miRBase21_ucsc-tRNA_ensembl83.bed",
-      coordinate_fasta      => "/scratch/cqs/zhaos/vickers/reference/Sus_scrofa/ssc3_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
-      
-      bowtie1_index         => "/scratch/cqs/zhaos/vickers/reference/Sus_scrofa/bowtie_index_1.1.2/susScr3",
-#      gsnap_index_directory => "/scratch/cqs/zhaos/vickers/reference/Equus_caballus/gsnap_index_k14_2015-06-23",
-#      gsnap_index_name      => "equCab2",
-      
-#      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
+      mirbase_count_option => "-p ssc",
+      coordinate           => "/scratch/cqs/zhaos/vickers/reference/Sus_scrofa/ssc3_miRBase21_ucsc-tRNA_ensembl83.bed",
+      coordinate_fasta     => "/scratch/cqs/zhaos/vickers/reference/Sus_scrofa/ssc3_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
+
+      bowtie1_index => "/scratch/cqs/zhaos/vickers/reference/Sus_scrofa/bowtie_index_1.1.2/susScr3",
+
+      #      gsnap_index_directory => "/scratch/cqs/zhaos/vickers/reference/Equus_caballus/gsnap_index_k14_2015-06-23",
+      #      gsnap_index_name      => "equCab2",
+
+      #      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
     }
   );
 }
@@ -232,15 +233,16 @@ sub ocu2_genome {
     supplement_genome(),
     {
       #genome database
-      mirbase_count_option  => "-p ocu",
-      coordinate            => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Oryctolagus_cuniculus/ocu2_miRBase21_ucsc-tRNA_ensembl83.bed",
-      coordinate_fasta      => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Oryctolagus_cuniculus/ocu2_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
-      
-      bowtie1_index         => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Oryctolagus_cuniculus/bowtie_index_1.1.2/oryCun2",
-#      gsnap_index_directory => "/scratch/cqs/zhaos/vickers/reference/Equus_caballus/gsnap_index_k14_2015-06-23",
-#      gsnap_index_name      => "equCab2",
-      
-#      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
+      mirbase_count_option => "-p ocu",
+      coordinate           => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Oryctolagus_cuniculus/ocu2_miRBase21_ucsc-tRNA_ensembl83.bed",
+      coordinate_fasta     => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Oryctolagus_cuniculus/ocu2_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
+
+      bowtie1_index => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Oryctolagus_cuniculus/bowtie_index_1.1.2/oryCun2",
+
+      #      gsnap_index_directory => "/scratch/cqs/zhaos/vickers/reference/Equus_caballus/gsnap_index_k14_2015-06-23",
+      #      gsnap_index_name      => "equCab2",
+
+      #      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
     }
   );
 }
@@ -250,15 +252,16 @@ sub oar3_genome {
     supplement_genome(),
     {
       #genome database
-      mirbase_count_option  => "-p oar",
-      coordinate            => "/scratch/cqs/zhaos/vickers/reference/Ovis_aries/oar3_miRBase21_ucsc-tRNA_ensembl83.bed",
-      coordinate_fasta      => "/scratch/cqs/zhaos/vickers/reference/Ovis_aries/oar3_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
-      
-      bowtie1_index         => "/scratch/cqs/zhaos/vickers/reference/Ovis_aries/bowtie_index_1.1.2/oviAri3",
-#      gsnap_index_directory => "/scratch/cqs/zhaos/vickers/reference/Equus_caballus/gsnap_index_k14_2015-06-23",
-#      gsnap_index_name      => "equCab2",
-      
-#      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
+      mirbase_count_option => "-p oar",
+      coordinate           => "/scratch/cqs/zhaos/vickers/reference/Ovis_aries/oar3_miRBase21_ucsc-tRNA_ensembl83.bed",
+      coordinate_fasta     => "/scratch/cqs/zhaos/vickers/reference/Ovis_aries/oar3_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
+
+      bowtie1_index => "/scratch/cqs/zhaos/vickers/reference/Ovis_aries/bowtie_index_1.1.2/oviAri3",
+
+      #      gsnap_index_directory => "/scratch/cqs/zhaos/vickers/reference/Equus_caballus/gsnap_index_k14_2015-06-23",
+      #      gsnap_index_name      => "equCab2",
+
+      #      star_index_directory  => "/scratch/cqs/shengq1/references/cel235/STAR_index_v78_2.4.2a_sjdb49"
     }
   );
 }
