@@ -4,6 +4,7 @@ use strict;
 
 use LWP::Simple;
 use LWP::UserAgent;
+use POSIX qw(strftime);
 
 my $ua = new LWP::UserAgent;
 $ua->agent( "AgentName/0.1 " . $ua->agent );
@@ -15,7 +16,11 @@ my $req = new HTTP::Request GET => $url;
 # Pass request to the user agent and get a response back
 my $res = $ua->request($req);
 
-my $trnafa = "GtRNAdb2.fa";
+my $datestring = strftime "%Y%m%d", localtime;
+my $trnafa = "GtRNAdb2." . $datestring . ".fa";
+
+print $trnafa;
+
 if ( -e $trnafa ) {
   unlink($trnafa);
 }
@@ -47,7 +52,7 @@ if ( $res->is_success ) {
       if ( $speciescontent =~ /href="(.*?\.fa)">FASTA Seqs/ ) {
         my $faurl = $speciesurl . $1;
         print $faurl, "\n";
-        `wget $faurl; cat $1 >> $trnafa; rm $1`
+        `wget $faurl; cat $1 >> $trnafa; rm $1`;
       }
 
       #exit;
