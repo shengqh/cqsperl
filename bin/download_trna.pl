@@ -72,7 +72,7 @@ if ( $res->is_success ) {
             else {
               print STDERR "duplicated ", $seq->id, "\n";
               if ( !( $seq->seq eq $seqnames->{ $seq->id } ) ) {
-                print STDERR "  sequence are not equal!!! \n";
+                die "  sequence are not equal!!! \n";
               }
             }
           }
