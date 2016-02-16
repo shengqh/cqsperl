@@ -5,6 +5,7 @@ use strict;
 use LWP::Simple;
 use LWP::UserAgent;
 use POSIX qw(strftime);
+use Bio::SeqIO;
 
 my $ua = new LWP::UserAgent;
 $ua->agent( "AgentName/0.1 " . $ua->agent );
@@ -50,9 +51,24 @@ if ( $res->is_success ) {
       #print $speciescontent, "\n";
 
       if ( $speciescontent =~ /href="(.*?\.fa)">FASTA Seqs/ ) {
+        my $file  = $1;
         my $faurl = $speciesurl . $1;
         print $faurl, "\n";
         `wget $faurl; cat $1 >> $trnafa; rm $1`;
+
+        my $seqio     = Bio::SeqIO->new( -file => $file,       '-format' => 'Fasta' );
+        my $seqio_obj = Bio::SeqIO->new( -file => ">>$trnafa", -format   => 'fasta' );
+
+        my $seqnames = {};
+        while ( my $seq = $seqio->next_seq ) {
+          if ( !exists $seqnames->{ $seq->name } ) {
+            $seqio_obj->write_seq($seq);
+            $seqnames->{ $seq->name } = "";
+          }
+          else {
+            print "duplicated ", $seq->name, "\n";
+          }
+        }
       }
 
       #exit;
