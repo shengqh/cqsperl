@@ -65,22 +65,20 @@ if ( !-e $trnafa ) {
 my $trnaRmdupFasta = "GtRNAdb2." . $datestring . ".rmdup.fa";
 
 my $seqio     = Bio::SeqIO->new( -file => $trnafa,             -format => 'fasta' );
-my $seqio_obj = Bio::SeqIO->new( -file => ">>$trnaRmdupFasta", -format => 'fasta' );
+#my $seqio_obj = Bio::SeqIO->new( -file => ">>$trnaRmdupFasta", -format => 'fasta' );
 
 my $seqnames    = {};
 my $totalcount  = 0;
-my $uniquecount = 0;
+my $uniqueidcount = 0;
+
 while ( my $seq = $seqio->next_seq ) {
   $totalcount++;
-  if ( !exists $seqnames->{ $seq->seq } ) {
-    $seqnames->{ $seq->seq } = $seq->id;
-    $uniquecount++;
-  }
-  else {
-    $seqnames->{ $seq->seq } = $seqnames->{ $seq->seq } . ";" . $seq->id;
+  if ( !exists $seqnames->{ $seq->id } ) {
+    $seqnames->{ $seq->id } = $seq->seq;
+    $uniqueidcount++;
   }
 }
 
-print "Total entries = ", $totalcount, " while unique sequences = ", $uniquecount, "\n";
+print "Total entries = ", $totalcount, " while unique sequences = ", $uniqueidcount, "\n";
 
 1;
