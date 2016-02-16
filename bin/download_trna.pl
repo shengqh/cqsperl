@@ -60,14 +60,20 @@ if ( $res->is_success ) {
           print STDERR "Could not download from $speciesurl \n";
         }
         else {
-          my $seqio     = Bio::SeqIO->new( -file => $file,       '-format' => 'Fasta' );
-          my $seqio_obj = Bio::SeqIO->new( -file => ">>$trnafa", -format   => 'fasta' );
+          my $seqio     = Bio::SeqIO->new( -file => $file,       -format => 'fasta' );
+          my $seqio_obj = Bio::SeqIO->new( -file => ">>$trnafa", -format => 'fasta' );
 
           my $seqnames = {};
           while ( my $seq = $seqio->next_seq ) {
-            if ( !exists $seqnames->{ $seq->seq } ) {
+            if ( !exists $seqnames->{ $seq->id } ) {
               $seqio_obj->write_seq($seq);
-              $seqnames->{ $seq->seq } = "";
+              $seqnames->{ $seq->id } = $seq->seq;
+            }
+            else {
+              print STDERR "duplicated ", $seq->id, "\n";
+              if ( !( $seq->seq eq $seqnames->{ $seq->id } ) ) {
+                print STDERR "  sequence are not equal!!! \n";
+              }
             }
           }
 
