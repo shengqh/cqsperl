@@ -67,7 +67,7 @@ if ( $res->is_success ) {
             $seqnames->{ $nameseq } = "";
           }
           else {
-            die "duplicated ", $seq->accession_number, "\n";
+            die "duplicated ", $nameseq, "\n";
           }
         }
         
