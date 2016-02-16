@@ -47,7 +47,7 @@ if ( $res->is_success ) {
       if ( $speciescontent =~ /href="(.*?\.fa)">FASTA Seqs/ ) {
         my $faurl = $speciesurl . $1;
         print $faurl, "\n";
-        `wget $faurl >> $trnafa`
+        `wget $faurl; cat $1 >> $trnafa; rm $1`
       }
 
       #exit;
