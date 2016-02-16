@@ -66,8 +66,6 @@ my $trnaRmdupFasta = "GtRNAdb2." . $datestring . ".rmdup.fa";
 
 my $seqio = Bio::SeqIO->new( -file => $trnafa, -format => 'fasta' );
 
-#my $seqio_obj = Bio::SeqIO->new( -file => ">>$trnaRmdupFasta", -format => 'fasta' );
-
 my $seqnames      = {};
 my $totalcount    = 0;
 my $uniqueidcount = 0;
@@ -79,8 +77,6 @@ while ( my $seq = $seqio->next_seq ) {
     $uniqueidcount++;
   }
 }
-
-print "Total entries = ", $totalcount, " while unique id = ", $uniqueidcount, "\n";
 
 my $sequences      = {};
 my $uniqueseqcount = 0;
@@ -95,7 +91,11 @@ for my $id ( keys %{$seqnames} ) {
   }
 }
 
-print " unique sequence = ", $uniqueseqcount, "\n";
+open( my $info, ">${trnaRmdupFasta}.info" ) or die "Cannot create ${trnaRmdupFasta}.info";
+print $info "Total entries\t$totalcount
+Unique id\t$uniqueidcount
+Unique sequence\t$uniqueseqcount";
+close($info);
 
 open( my $fasta, ">$trnaRmdupFasta" ) or die "Cannot create $trnaRmdupFasta";
 for my $seq ( keys %{$sequences} ) {
