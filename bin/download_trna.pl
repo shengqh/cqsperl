@@ -7,85 +7,80 @@ use LWP::UserAgent;
 use POSIX qw(strftime);
 use Bio::SeqIO;
 
-my $ua = new LWP::UserAgent;
-$ua->agent( "AgentName/0.1 " . $ua->agent );
-
-# Create a request
-my $url = 'http://gtrnadb.ucsc.edu/GtRNAdb2/genomes/';
-my $req = new HTTP::Request GET => $url;
-
-# Pass request to the user agent and get a response back
-my $res = $ua->request($req);
-
 my $datestring = strftime "%Y%m%d", localtime;
 my $trnafa = "GtRNAdb2." . $datestring . ".fa";
 
-print $trnafa;
+if ( !-e $trnafa ) {
+  my $ua = new LWP::UserAgent;
+  $ua->agent( "AgentName/0.1 " . $ua->agent );
 
-if ( -e $trnafa ) {
-  unlink($trnafa);
-}
+  # Create a request
+  my $url = 'http://gtrnadb.ucsc.edu/GtRNAdb2/genomes/';
+  my $req = new HTTP::Request GET => $url;
 
-if ( $res->is_success ) {
-  my $rescontent = $res->content;
+  # Pass request to the user agent and get a response back
+  my $res = $ua->request($req);
 
-  while ( $rescontent =~ m/folder.gif" alt="\[DIR\]"> <a href="(.*?)"/g ) {
-    my $category = $1;
+  print $trnafa;
 
-    #print $category, "\n";
+  if ( -e $trnafa ) {
+    unlink($trnafa);
+  }
 
-    my $categoryurl     = $url . $category;
-    my $categoryreq     = new HTTP::Request GET => $categoryurl;
-    my $categoryres     = $ua->request($categoryreq);
-    my $categorycontent = $categoryres->content;
+  if ( $res->is_success ) {
+    my $rescontent = $res->content;
 
-    while ( $categorycontent =~ m/folder.gif" alt="\[DIR\]"> <a href="(.*?)"/g ) {
-      my $species = $1;
+    while ( $rescontent =~ m/folder.gif" alt="\[DIR\]"> <a href="(.*?)"/g ) {
+      my $category = $1;
 
-      #print $category, " : ", $species, "\n";
-      my $speciesurl     = $categoryurl . $species;
-      my $speciesreq     = new HTTP::Request GET => $speciesurl;
-      my $speciesres     = $ua->request($speciesreq);
-      my $speciescontent = $speciesres->content;
+      #print $category, "\n";
 
-      #print $speciescontent, "\n";
+      my $categoryurl     = $url . $category;
+      my $categoryreq     = new HTTP::Request GET => $categoryurl;
+      my $categoryres     = $ua->request($categoryreq);
+      my $categorycontent = $categoryres->content;
 
-      if ( $speciescontent =~ /href="(.*?\.fa)">FASTA Seqs/ ) {
-        my $file  = $1;
-        my $faurl = $speciesurl . $1;
-        print $faurl, "\n";
-        `wget $faurl`;
+      while ( $categorycontent =~ m/folder.gif" alt="\[DIR\]"> <a href="(.*?)"/g ) {
+        my $species = $1;
 
-        if ( !-e $file ) {
-          print STDERR "Could not download from $speciesurl \n";
-        }
-        else {
-          my $seqio     = Bio::SeqIO->new( -file => $file,       -format => 'fasta' );
-          my $seqio_obj = Bio::SeqIO->new( -file => ">>$trnafa", -format => 'fasta' );
+        #print $category, " : ", $species, "\n";
+        my $speciesurl     = $categoryurl . $species;
+        my $speciesreq     = new HTTP::Request GET => $speciesurl;
+        my $speciesres     = $ua->request($speciesreq);
+        my $speciescontent = $speciesres->content;
 
-          my $seqnames = {};
-          while ( my $seq = $seqio->next_seq ) {
-            if ( !exists $seqnames->{ $seq->id } ) {
-              $seqio_obj->write_seq($seq);
-              $seqnames->{ $seq->id } = $seq->seq;
-            }
-            else {
-              print STDERR "duplicated ", $seq->id, "\n";
-              if ( !( $seq->seq eq $seqnames->{ $seq->id } ) ) {
-                die "  sequence are not equal!!! \n";
-              }
-            }
-          }
+        #print $speciescontent, "\n";
 
-          unlink($file);
+        if ( $speciescontent =~ /href="(.*?\.fa)">FASTA Seqs/ ) {
+          my $file  = $1;
+          my $faurl = $speciesurl . $1;
+          print $faurl, "\n";
+          `wget $faurl; cat $file >> $trnafa; rm $file`;
         }
       }
-
-      #exit;
     }
-
-    #exit;
   }
 }
+
+my $trnaRmdupFasta = "GtRNAdb2." . $datestring . ".rmdup.fa";
+
+my $seqio     = Bio::SeqIO->new( -file => $trnafa,             -format => 'fasta' );
+my $seqio_obj = Bio::SeqIO->new( -file => ">>$trnaRmdupFasta", -format => 'fasta' );
+
+my $seqnames    = {};
+my $totalcount  = 0;
+my $uniquecount = 0;
+while ( my $seq = $seqio->next_seq ) {
+  $totalcount++;
+  if ( !exists $seqnames->{ $seq->seq } ) {
+    $seqnames->{ $seq->seq } = $seq->id;
+    $uniquecount++;
+  }
+  else {
+    $seqnames->{ $seq->seq } = $seqnames->{ $seq->seq } . ";" . $seq->id;
+  }
+}
+
+print "Total entries = ", $totalcount, " while unique sequences = ", $uniquecount, "\n";
 
 1;
