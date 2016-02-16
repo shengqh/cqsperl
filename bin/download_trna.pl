@@ -79,6 +79,20 @@ while ( my $seq = $seqio->next_seq ) {
   }
 }
 
-print "Total entries = ", $totalcount, " while unique sequences = ", $uniqueidcount, "\n";
+print "Total entries = ", $totalcount, " while unique id = ", $uniqueidcount, "\n";
+
+my $sequences    = {};
+my $uniqueseqcount = 0;
+for my $id (keys %{$seqnames}){
+  my $seq = $seqnames->{$id};
+  if ( !exists $sequences->{ $seq } ) {
+    $sequences->{ $seq } = $id;
+    $uniqueseqcount++;
+  }else{
+    $sequences->{ $seq } = $sequences->{ $seq } . "," . $id;
+  }
+}
+
+print " unique sequence = ", $uniqueseqcount, "\n";
 
 1;
