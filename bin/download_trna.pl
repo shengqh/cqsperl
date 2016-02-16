@@ -56,18 +56,23 @@ if ( $res->is_success ) {
         print $faurl, "\n";
         `wget $faurl`;
 
-        my $seqio     = Bio::SeqIO->new( -file => $file,       '-format' => 'Fasta' );
-        my $seqio_obj = Bio::SeqIO->new( -file => ">>$trnafa", -format   => 'fasta' );
-
-        my $seqnames = {};
-        while ( my $seq = $seqio->next_seq ) {
-          if ( !exists $seqnames->{ $seq->seq } ) {
-            $seqio_obj->write_seq($seq);
-            $seqnames->{ $seq->seq } = "";
-          }
+        if ( !-e $file ) {
+          print STDERR "Could not download from $speciesurl \n";
         }
+        else {
+          my $seqio     = Bio::SeqIO->new( -file => $file,       '-format' => 'Fasta' );
+          my $seqio_obj = Bio::SeqIO->new( -file => ">>$trnafa", -format   => 'fasta' );
 
-        unlink($file);
+          my $seqnames = {};
+          while ( my $seq = $seqio->next_seq ) {
+            if ( !exists $seqnames->{ $seq->seq } ) {
+              $seqio_obj->write_seq($seq);
+              $seqnames->{ $seq->seq } = "";
+            }
+          }
+
+          unlink($file);
+        }
       }
 
       #exit;
