@@ -97,6 +97,8 @@ Unique id\t$uniqueidcount
 Unique sequence\t$uniqueseqcount";
 close($info);
 
+`cat ${trnaRmdupFasta}.info`;
+
 open( my $fasta, ">$trnaRmdupFasta" ) or die "Cannot create $trnaRmdupFasta";
 for my $seq ( keys %{$sequences} ) {
   my $id = $sequences->{$seq};
