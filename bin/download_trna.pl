@@ -61,13 +61,13 @@ if ( $res->is_success ) {
 
         my $seqnames = {};
         while ( my $seq = $seqio->next_seq ) {
-          my $nameseq = $seq->accession_number() . ":" . $seq->seq();
+          my $nameseq = $seq->id . ":" . $seq->seq;
           if ( !exists $seqnames->{ $nameseq } ) {
             $seqio_obj->write_seq($seq);
             $seqnames->{ $nameseq } = "";
           }
           else {
-            print "duplicated ", $seq->accession_number(), "\n";
+            print "duplicated ", $seq->id, "\n";
           }
         }
         
