@@ -64,11 +64,12 @@ if ( !-e $trnafa ) {
 
 my $trnaRmdupFasta = "GtRNAdb2." . $datestring . ".rmdup.fa";
 
-my $seqio     = Bio::SeqIO->new( -file => $trnafa,             -format => 'fasta' );
+my $seqio = Bio::SeqIO->new( -file => $trnafa, -format => 'fasta' );
+
 #my $seqio_obj = Bio::SeqIO->new( -file => ">>$trnaRmdupFasta", -format => 'fasta' );
 
-my $seqnames    = {};
-my $totalcount  = 0;
+my $seqnames      = {};
+my $totalcount    = 0;
 my $uniqueidcount = 0;
 
 while ( my $seq = $seqio->next_seq ) {
@@ -81,18 +82,27 @@ while ( my $seq = $seqio->next_seq ) {
 
 print "Total entries = ", $totalcount, " while unique id = ", $uniqueidcount, "\n";
 
-my $sequences    = {};
+my $sequences      = {};
 my $uniqueseqcount = 0;
-for my $id (keys %{$seqnames}){
+for my $id ( keys %{$seqnames} ) {
   my $seq = $seqnames->{$id};
-  if ( !exists $sequences->{ $seq } ) {
-    $sequences->{ $seq } = $id;
+  if ( !exists $sequences->{$seq} ) {
+    $sequences->{$seq} = $id;
     $uniqueseqcount++;
-  }else{
-    $sequences->{ $seq } = $sequences->{ $seq } . "," . $id;
+  }
+  else {
+    $sequences->{$seq} = $sequences->{$seq} . "," . $id;
   }
 }
 
 print " unique sequence = ", $uniqueseqcount, "\n";
 
+open( my $fasta, ">$trnaRmdupFasta" ) or die "Cannot create $trnaRmdupFasta";
+for my $seq ( keys %{$sequences} ) {
+  my $id = $sequences->{$seq};
+  print $fasta ">$id
+$seq
+";
+}
+close($fasta);
 1;
