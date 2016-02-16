@@ -61,16 +61,12 @@ if ( $res->is_success ) {
 
         my $seqnames = {};
         while ( my $seq = $seqio->next_seq ) {
-          my $nameseq = $seq->accession_number . ":" . $seq->seq;
-          if ( !exists $seqnames->{ $nameseq } ) {
+          if ( !exists $seqnames->{ $seq->seq } ) {
             $seqio_obj->write_seq($seq);
-            $seqnames->{ $nameseq } = "";
-          }
-          else {
-            die "duplicated ", $nameseq, "\n";
+            $seqnames->{ $seq->seq } = "";
           }
         }
-        
+
         unlink($file);
       }
 
