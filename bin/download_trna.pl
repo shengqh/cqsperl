@@ -54,7 +54,7 @@ if ( $res->is_success ) {
         my $file  = $1;
         my $faurl = $speciesurl . $1;
         print $faurl, "\n";
-        `wget $faurl; cat $1 >> $trnafa; rm $1`;
+        `wget $faurl`;
 
         my $seqio     = Bio::SeqIO->new( -file => $file,       '-format' => 'Fasta' );
         my $seqio_obj = Bio::SeqIO->new( -file => ">>$trnafa", -format   => 'fasta' );
@@ -70,6 +70,8 @@ if ( $res->is_success ) {
             print "duplicated ", $seq->name, "\n";
           }
         }
+        
+        unlink($file);
       }
 
       #exit;
