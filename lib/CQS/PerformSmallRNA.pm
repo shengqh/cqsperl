@@ -28,7 +28,7 @@ my $mirBase21 = "/data/cqs/shengq1/reference/miRBase21/bowtie_index_1.1.1/mature
 sub supplement_genome {
   return {
     bowtie1_miRBase_index         => $mirBase21,
-    bowtie1_tRNA_index            => "/scratch/cqs/zhaos/vickers/reference/tRna/bowtie_index_1.1.2/trna",
+    bowtie1_tRNA_index            => "/scratch/cqs/shengq1/references/ucsc/GtRNAdb2/bowtie_index_1.1.2/GtRNAdb2.20160216.rmdup",
     bowtie1_rRNAS_index           => "/scratch/cqs/zhaos/vickers/reference/rRna/SILVA_123_SSURef_Nr99_tax_silva",
     bowtie1_rRNAL_index           => "/scratch/cqs/zhaos/vickers/reference/rRna/SILVA_123_LSURef_tax_silva",
     bowtie1_bacteria_group1_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/bacteriaDatabaseGroup1",
