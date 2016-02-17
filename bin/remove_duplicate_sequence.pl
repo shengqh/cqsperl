@@ -78,7 +78,7 @@ Unique id\t$uniqueidcount
 Unique sequence\t$uniqueseqcount";
 close($info);
 
-`cat ${outputFile}.info`;
+system("cat ${outputFile}.info");
 
 open( my $fasta, ">$outputFile" ) or die "Cannot create $outputFile";
 for my $seq ( keys %{$sequences} ) {
