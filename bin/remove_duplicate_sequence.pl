@@ -75,7 +75,8 @@ for my $id ( keys %{$seqnames} ) {
 open( my $info, ">${outputFile}.info" ) or die "Cannot create ${outputFile}.info";
 print $info "Total entries\t$totalcount
 Unique id\t$uniqueidcount
-Unique sequence\t$uniqueseqcount";
+Unique sequence\t$uniqueseqcount
+";
 close($info);
 
 system("cat ${outputFile}.info");
