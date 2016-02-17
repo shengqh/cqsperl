@@ -61,50 +61,9 @@ if ( !-e $trnafa ) {
     }
   }
 }
-
+my $script         = dirname(__FILE__) . "/remove_duplicate_sequence.pl";
 my $trnaRmdupFasta = "GtRNAdb2." . $datestring . ".rmdup.fa";
 
-my $seqio = Bio::SeqIO->new( -file => $trnafa, -format => 'fasta' );
+`perl $script -i $trnafa -o $trnaRmdupFasta`;
 
-my $seqnames      = {};
-my $totalcount    = 0;
-my $uniqueidcount = 0;
-
-while ( my $seq = $seqio->next_seq ) {
-  $totalcount++;
-  if ( !exists $seqnames->{ $seq->id } ) {
-    $seqnames->{ $seq->id } = $seq->seq;
-    $uniqueidcount++;
-  }
-}
-
-my $sequences      = {};
-my $uniqueseqcount = 0;
-for my $id ( keys %{$seqnames} ) {
-  my $seq = $seqnames->{$id};
-  if ( !exists $sequences->{$seq} ) {
-    $sequences->{$seq} = $id;
-    $uniqueseqcount++;
-  }
-  else {
-    $sequences->{$seq} = $sequences->{$seq} . ";" . $id;
-  }
-}
-
-open( my $info, ">${trnaRmdupFasta}.info" ) or die "Cannot create ${trnaRmdupFasta}.info";
-print $info "Total entries\t$totalcount
-Unique id\t$uniqueidcount
-Unique sequence\t$uniqueseqcount";
-close($info);
-
-`cat ${trnaRmdupFasta}.info`;
-
-open( my $fasta, ">$trnaRmdupFasta" ) or die "Cannot create $trnaRmdupFasta";
-for my $seq ( keys %{$sequences} ) {
-  my $id = $sequences->{$seq};
-  print $fasta ">$id
-$seq
-";
-}
-close($fasta);
-1;
+exit(1);

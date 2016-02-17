@@ -2,5 +2,6 @@
 <includepath>
   <includepathentry path="../ngsperl/lib" />
   <includepathentry path="lib" />
+  <includepathentry path="E:\sqh\programs\perl\bioperl-live" />
 </includepath>
 
