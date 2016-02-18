@@ -5,7 +5,6 @@ use File::Basename;
 use LWP::Simple;
 use LWP::UserAgent;
 use POSIX qw(strftime);
-use Bio::SeqIO;
 
 my $datestring = strftime "%Y%m%d", localtime;
 my $trnafa = "GtRNAdb2." . $datestring . ".fa";
@@ -21,7 +20,7 @@ if ( !-e $trnafa ) {
   # Pass request to the user agent and get a response back
   my $res = $ua->request($req);
 
-  print $trnafa;
+  #print $res->content;
 
   if ( -e $trnafa ) {
     unlink($trnafa);
@@ -30,34 +29,34 @@ if ( !-e $trnafa ) {
   if ( $res->is_success ) {
     my $rescontent = $res->content;
 
-    while ( $rescontent =~ m/folder.gif" alt="\[DIR\]"> <a href="(.*?)"/g ) {
-      my $category = $1;
+    my @categories = ( $rescontent =~ m/folder.gif" alt="\[DIR\]"> <a href="(.*?)"/g );
+    foreach my $category (@categories) {
 
-      #print $category, "\n";
+      print $category, "\n";
 
       my $categoryurl     = $url . $category;
       my $categoryreq     = new HTTP::Request GET => $categoryurl;
       my $categoryres     = $ua->request($categoryreq);
       my $categorycontent = $categoryres->content;
-		
+
       my @species_array = $categorycontent =~ m/folder.gif" alt="\[DIR\]"> <a href="(.*?)"/g;
-	  
-	  foreach my $species (@species_array) {
+
+      foreach my $species (@species_array) {
         print $category, " : ", $species, "\n";
-        
-		#my $speciesurl     = $categoryurl . $species;
-        #my $speciesreq     = new HTTP::Request GET => $speciesurl;
-        #my $speciesres     = $ua->request($speciesreq);
-        #my $speciescontent = $speciesres->content;
+
+        my $speciesurl     = $categoryurl . $species;
+        my $speciesreq     = new HTTP::Request GET => $speciesurl;
+        my $speciesres     = $ua->request($speciesreq);
+        my $speciescontent = $speciesres->content;
 
         #print $speciescontent, "\n";
 
-        #if ( $speciescontent =~ /href="(.*?\.fa)">FASTA Seqs/ ) {
-        #  my $file  = $1;
-        #  my $faurl = $speciesurl . $1;
-         # print $faurl, "\n";
-        #  `wget $faurl; cat $file >> $trnafa; rm $file`;
-        #}
+        if ( $speciescontent =~ /href="(.*?\.fa)">FASTA Seqs/ ) {
+          my $file  = $1;
+          my $faurl = $speciesurl . $1;
+          print $faurl, "\n";
+          `wget $faurl; cat $file >> $trnafa; rm $file`;
+        }
       }
     }
   }
