@@ -39,24 +39,25 @@ if ( !-e $trnafa ) {
       my $categoryreq     = new HTTP::Request GET => $categoryurl;
       my $categoryres     = $ua->request($categoryreq);
       my $categorycontent = $categoryres->content;
-
-      while ( $categorycontent =~ m/folder.gif" alt="\[DIR\]"> <a href="(.*?)"/g ) {
-        my $species = $1;
-
-        #print $category, " : ", $species, "\n";
-        my $speciesurl     = $categoryurl . $species;
-        my $speciesreq     = new HTTP::Request GET => $speciesurl;
-        my $speciesres     = $ua->request($speciesreq);
-        my $speciescontent = $speciesres->content;
+		
+      my @species_array = $categorycontent =~ m/folder.gif" alt="\[DIR\]"> <a href="(.*?)"/g;
+	  
+	  foreach my $species (@species_array) {
+        print $category, " : ", $species, "\n";
+        
+		#my $speciesurl     = $categoryurl . $species;
+        #my $speciesreq     = new HTTP::Request GET => $speciesurl;
+        #my $speciesres     = $ua->request($speciesreq);
+        #my $speciescontent = $speciesres->content;
 
         #print $speciescontent, "\n";
 
-        if ( $speciescontent =~ /href="(.*?\.fa)">FASTA Seqs/ ) {
-          my $file  = $1;
-          my $faurl = $speciesurl . $1;
-          print $faurl, "\n";
-          `wget $faurl; cat $file >> $trnafa; rm $file`;
-        }
+        #if ( $speciescontent =~ /href="(.*?\.fa)">FASTA Seqs/ ) {
+        #  my $file  = $1;
+        #  my $faurl = $speciesurl . $1;
+         # print $faurl, "\n";
+        #  `wget $faurl; cat $file >> $trnafa; rm $file`;
+        #}
       }
     }
   }
