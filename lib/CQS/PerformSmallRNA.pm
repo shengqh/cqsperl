@@ -47,9 +47,9 @@ sub hg19_genome {
     {
       #genome database
       mirbase_count_option  => "-p hsa",
-      coordinate            => "/scratch/cqs/shengq1/references/smallrna/hg19_miRBase20_ucsc-tRNA_ensembl75.bed",
-      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/hg19_miRBase20_ucsc-tRNA_ensembl75.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq1/references/broad/bowtie_index_1.1.2/hg19_16569_MT",
+      coordinate            => "/scratch/cqs/shengq1/references/smallrna/hg19_miRBase21_GtRNAdb2_ensembl75.bed",
+      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/hg19_miRBase21_GtRNAdb2_ensembl75.bed.fa",
+      bowtie1_index         => "/scratch/cqs/shengq1/references/hg19_MT_ensembl/bowtie_index_1.1.2/hg19_MT_ensembl_v75",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/hg19_16569_MT/gsnap_index_k14_2015-06-23/",
       gsnap_index_name      => "hg19_16569_MT",
       star_index_directory  => "/scratch/cqs/shengq1/references/hg19_16569_MT/STAR_index_v37.75_2.4.2a_sjdb49"
@@ -61,7 +61,7 @@ sub hg19_3utr {
   return {
     search_3utr   => 1,
     bowtie1_index => hg19_genome()->{bowtie1_index},
-    fasta_file    => "/scratch/cqs/shengq1/references/broad/bowtie_index_1.1.2/hg19_16569_MT.fa",
+    fasta_file    => "/scratch/cqs/shengq1/references/hg19_MT_ensembl/bowtie_index_1.1.2/hg19_MT_ensembl_v75.fa",
     utr3_db       => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg19_refgene_3utr.bed",
     refgene_file  => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg19_refgene.tsv",
   };
