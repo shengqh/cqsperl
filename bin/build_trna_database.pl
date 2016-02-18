@@ -1,7 +1,7 @@
 #!/usr/local/bin/perl
 
 use strict;
-use Filename;
+use File::Basename;
 use LWP::Simple;
 use LWP::UserAgent;
 use POSIX qw(strftime);
