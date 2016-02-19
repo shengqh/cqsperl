@@ -81,7 +81,7 @@ for my $id ( keys %{$seqnames} ) {
     $uniqueseqcount++;
   }
   else {
-    $sequences->{$seq} = $sequences->{$seq} . ";" . $id;
+    #$sequences->{$seq} = $sequences->{$seq} . ";" . $id;
   }
 }
 
