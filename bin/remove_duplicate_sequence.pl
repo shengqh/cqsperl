@@ -76,7 +76,7 @@ my $uniqueseqcount = 0;
 for my $id ( keys %{$seqnames} ) {
   my $seq = $seqnames->{$id};
   if ( !exists $sequences->{$seq} ) {
-    $sequences->{$seq} = {$id};
+    $sequences->{$seq} = [$id];
     $uniqueseqcount++;
   }
   else {
