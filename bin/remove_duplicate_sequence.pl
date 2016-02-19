@@ -42,8 +42,19 @@ if ( defined $help ) {
   exit(1);
 }
 
-die "Input file not exists: " . $inputFile       if ( !-e $inputFile );
-die "Output file already exists: " . $outputFile if ( -e $outputFile );
+if ( !defined $inputFile ) {
+  die "Input file required";
+}
+else {
+  die "Input file not exists: " . $inputFile if ( !-e $inputFile );
+}
+
+if ( !defined $outputFile ) {
+  die "Output file required";
+}
+else {
+  die "Output file already exists: " . $outputFile if ( -e $outputFile );
+}
 
 my $seqio = Bio::SeqIO->new( -file => $inputFile, -format => 'fasta' );
 
@@ -55,8 +66,8 @@ while ( my $seq = $seqio->next_seq ) {
   $totalcount++;
   my $id = $seq->id;
   $id =~ s/\//_/g;
-  if ( !exists $seqnames->{ $id } ) {
-    $seqnames->{ $id } = $seq->seq;
+  if ( !exists $seqnames->{$id} ) {
+    $seqnames->{$id} = $seq->seq;
     $uniqueidcount++;
   }
 }
