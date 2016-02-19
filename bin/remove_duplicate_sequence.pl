@@ -94,8 +94,9 @@ close($info);
 
 system("cat ${outputFile}.info");
 
-open( my $fasta,   ">$outputFile" )         or die "Cannot create $outputFile";
-open( my $fastaid, ">${outputFile}.dupid" ) or die "Cannot create ${outputFile}.dupid";
+my $dupidfile = "${outputFile}.dupid";
+open( my $fasta,   ">$outputFile" ) or die "Cannot create $outputFile";
+open( my $fastaid, ">$dupidfile" )  or die "Cannot create $dupidfile";
 for my $seq ( keys %{$sequences} ) {
   my @ids = @{ $sequences->{$seq} };
   my $id  = $ids[0];
@@ -105,4 +106,5 @@ $seq
   print $fastaid, "$id\t", join( ";", @ids ), "\n";
 }
 close($fasta);
+close($fastaid);
 1;
