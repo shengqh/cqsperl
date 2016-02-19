@@ -65,7 +65,6 @@ my $uniqueidcount = 0;
 while ( my $seq = $seqio->next_seq ) {
   $totalcount++;
   my $id = $seq->id;
-  $id =~ s/\//_/g;
   if ( !exists $seqnames->{$id} ) {
     $seqnames->{$id} = $seq->seq;
     $uniqueidcount++;
@@ -77,11 +76,12 @@ my $uniqueseqcount = 0;
 for my $id ( keys %{$seqnames} ) {
   my $seq = $seqnames->{$id};
   if ( !exists $sequences->{$seq} ) {
-    $sequences->{$seq} = $id;
+    $sequences->{$seq} = {$id};
     $uniqueseqcount++;
   }
   else {
-    #$sequences->{$seq} = $sequences->{$seq} . ";" . $id;
+    my @ids = @{ $sequences->{$seq} };
+    push( @ids, $id );
   }
 }
 
@@ -94,12 +94,15 @@ close($info);
 
 system("cat ${outputFile}.info");
 
-open( my $fasta, ">$outputFile" ) or die "Cannot create $outputFile";
+open( my $fasta,   ">$outputFile" )         or die "Cannot create $outputFile";
+open( my $fastaid, ">${outputFile}.dupid" ) or die "Cannot create ${outputFile}.dupid";
 for my $seq ( keys %{$sequences} ) {
-  my $id = $sequences->{$seq};
+  my @ids = @{ $sequences->{$seq} };
+  my $id  = $ids[0];
   print $fasta ">$id
 $seq
 ";
+  print $fastaid, "$id\t", join( ";", @ids ), "\n";
 }
 close($fasta);
 1;
