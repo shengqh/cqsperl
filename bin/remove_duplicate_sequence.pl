@@ -53,8 +53,10 @@ my $uniqueidcount = 0;
 
 while ( my $seq = $seqio->next_seq ) {
   $totalcount++;
-  if ( !exists $seqnames->{ $seq->id } ) {
-    $seqnames->{ $seq->id } = $seq->seq;
+  my $id = $seq->id;
+  $id =~ s/\//_/g;
+  if ( !exists $seqnames->{ $id } ) {
+    $seqnames->{ $id } = $seq->seq;
     $uniqueidcount++;
   }
 }
