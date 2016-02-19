@@ -103,7 +103,7 @@ for my $seq ( keys %{$sequences} ) {
   print $fasta ">$id
 $seq
 ";
-  print $fastaid, "$id\t", join( ";", @ids ), "\n";
+  print $fastaid "$id\t" . join( ";", @ids ) . "\n";
 }
 close($fasta);
 close($fastaid);
