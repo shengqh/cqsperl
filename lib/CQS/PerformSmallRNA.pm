@@ -74,9 +74,9 @@ sub hg38_genome {
 
       #genome database
       mirbase_count_option  => "-p hsa",
-      coordinate            => "/scratch/cqs/shengq1/references/smallrna/hg20_miRBase21_ucsc-tRNA_ensembl78.bed",
-      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/hg20_miRBase21_ucsc-tRNA_ensembl78.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq1/references/hg38_MT/bowtie_index_1.1.2/hg38_MT",
+      coordinate            => "/scratch/cqs/shengq1/references/smallrna/hg38_miRBase21_GtRNAdb2_ensembl83.bed",
+      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/hg38_miRBase21_GtRNAdb2_ensembl83.bed.fa",
+      bowtie1_index         => "/scratch/cqs/shengq1/references/hg38_MT_ensembl/bowtie_index_1.1.2/hg38_MT_ensembl_v83",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/hg38_MT/gsnap_index_k14_2015-06-23/",
       gsnap_index_name      => "hg38_MT",
       star_index_directory  => "/scratch/cqs/shengq1/references/hg38_MT/STAR_index_v38.81_2.4.2a_sjdb49"
