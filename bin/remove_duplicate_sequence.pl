@@ -82,7 +82,7 @@ for my $id ( keys %{$seqnames} ) {
   else {
     my @ids = @{ $sequences->{$seq} };
     push( @ids, $id );
-    $sequences->{$seq} = @ids;
+    $sequences->{$seq} = \@ids;
   }
 }
 
