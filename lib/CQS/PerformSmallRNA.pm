@@ -49,7 +49,7 @@ sub hg19_genome {
       mirbase_count_option  => "-p hsa",
       coordinate            => "/scratch/cqs/shengq1/references/smallrna/hg19_miRBase21_GtRNAdb2_ensembl75.bed",
       coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/hg19_miRBase21_GtRNAdb2_ensembl75.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq1/references/hg19_MT_ensembl/bowtie_index_1.1.2/hg19_MT_ensembl_v75",
+      bowtie1_index         => "/scratch/cqs/shengq1/references/broad/hg19/bowtie_index_1.1.2/hg19_16569_MT",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/hg19_16569_MT/gsnap_index_k14_2015-06-23/",
       gsnap_index_name      => "hg19_16569_MT",
       star_index_directory  => "/scratch/cqs/shengq1/references/hg19_16569_MT/STAR_index_v37.75_2.4.2a_sjdb49"
@@ -61,7 +61,7 @@ sub hg19_3utr {
   return {
     search_3utr   => 1,
     bowtie1_index => hg19_genome()->{bowtie1_index},
-    fasta_file    => "/scratch/cqs/shengq1/references/hg19_MT_ensembl/bowtie_index_1.1.2/hg19_MT_ensembl_v75.fa",
+    fasta_file    => "/scratch/cqs/shengq1/references/broad/hg19/bowtie_index_1.1.2/hg19_16569_MT.fa",
     utr3_db       => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg19_refgene_3utr.bed",
     refgene_file  => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg19_refgene.tsv",
   };
@@ -76,7 +76,7 @@ sub hg38_genome {
       mirbase_count_option  => "-p hsa",
       coordinate            => "/scratch/cqs/shengq1/references/smallrna/hg38_miRBase21_GtRNAdb2_ensembl83.bed",
       coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/hg38_miRBase21_GtRNAdb2_ensembl83.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq1/references/hg38_MT_ensembl/bowtie_index_1.1.2/hg38_MT_ensembl_v83",
+      bowtie1_index         => "/scratch/cqs/shengq1/references/broad/hg38/bowtie_index_1.1.2/Homo_sapiens_assembly38",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/hg38_MT/gsnap_index_k14_2015-06-23/",
       gsnap_index_name      => "hg38_MT",
       star_index_directory  => "/scratch/cqs/shengq1/references/hg38_MT/STAR_index_v38.81_2.4.2a_sjdb49"
@@ -88,7 +88,7 @@ sub hg38_3utr {
   return {
     search_3utr   => 1,
     bowtie1_index => hg38_genome()->{bowtie1_index},
-    fasta_file    => "/scratch/cqs/shengq1/references/hg38_MT/hg38_MT.fa",
+    fasta_file    => "/scratch/cqs/shengq1/references/broad/hg38/bowtie_index_1.1.2/Homo_sapiens_assembly38.fa",
     utr3_db       => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg38_refgene_3utr.bed",
     refgene_file  => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg38_refgene.tsv",
   };
