@@ -47,8 +47,8 @@ sub hg19_genome {
     {
       #genome database
       mirbase_count_option  => "-p hsa",
-      coordinate            => "/scratch/cqs/shengq1/references/smallrna/hg19_miRBase21_GtRNAdb2_gencodeV19.bed",
-      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/hg19_miRBase21_GtRNAdb2_gencodeV19.bed.fa",
+      coordinate            => "/scratch/cqs/shengq1/references/smallrna/hg19_miRBase21_GtRNAdb2_gencodeV23.bed",
+      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/hg19_miRBase21_GtRNAdb2_gencodeV23.bed.fa",
       bowtie1_index         => "/scratch/cqs/shengq1/references/gencode/hg19/bowtie_index_1.1.2/GRCh37.p13.genome",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/hg19_16569_MT/gsnap_index_k14_2015-06-23/",
       gsnap_index_name      => "hg19_16569_MT",
