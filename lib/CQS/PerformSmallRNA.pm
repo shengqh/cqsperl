@@ -283,7 +283,7 @@ sub performSmallRNATask_hg19 {
 
 sub performSmallRNA_hg38 {
   my ( $userdef, $perform ) = @_;
-  my $def = getSmallRNADefinition( $userdef, hg20_genome() );
+  my $def = getSmallRNADefinition( $userdef, hg38_genome() );
 
   my $config = performSmallRNA( $def, $perform );
   return $config;
@@ -291,7 +291,7 @@ sub performSmallRNA_hg38 {
 
 sub performSmallRNATask_hg38 {
   my ( $userdef, $task ) = @_;
-  my $def = getSmallRNADefinition( $userdef, hg20_genome() );
+  my $def = getSmallRNADefinition( $userdef, hg38_genome() );
 
   performSmallRNATask( $def, $task );
 }
