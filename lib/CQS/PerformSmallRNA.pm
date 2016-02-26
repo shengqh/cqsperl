@@ -32,7 +32,7 @@ sub supplement_genome {
     bowtie1_rRNAS_index           => "/scratch/cqs/shengq1/references/rRNA/bowtie_index_1.1.2/SILVA_123_SSURef_Nr99_tax_silva.rmdup",
     bowtie1_rRNAL_index           => "/scratch/cqs/shengq1/references/rRNA/bowtie_index_1.1.2/SILVA_123_LSURef_tax_silva.rmdup",
     bowtie1_bacteria_group1_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/bacteriaDatabaseGroup1",
-    bacteria_group1_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20150902.log",
+    bacteria_group1_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20150902_group1.txt",
     bowtie1_bacteria_group2_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/bowtie_index_1.1.2/bacteriaDatabaseGroup2",
     bacteria_group2_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20160219.log",
     bowtie1_fungus_group4_index   => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/bowtie_index_1.1.2/group4",
