@@ -36,7 +36,7 @@ sub supplement_genome {
     bowtie1_bacteria_group2_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/bowtie_index_1.1.2/bacteriaDatabaseGroup2",
     bacteria_group2_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20160219.log",
     bowtie1_fungus_group4_index   => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/bowtie_index_1.1.2/group4",
-    trna_category_log             => "/scratch/cqs/shengq1/references/ucsc/GtRNAdb2/GtRNAdb2.20160311.fa.map",
+    trna_category_log             => "/scratch/cqs/shengq1/references/ucsc/GtRNAdb2/GtRNAdb2.20160216.fa.map",
     fungus_group4_log             => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/20160225_group4.txt",
   };
 }
