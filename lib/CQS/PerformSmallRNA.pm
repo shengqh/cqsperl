@@ -14,7 +14,7 @@ our %EXPORT_TAGS = (
   'all' => [
     qw(hg19_genome hg19_3utr hg38_genome mm10_genome mm10_3utr rn5_genome cel235_genome cfa3_genome performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg38 performSmallRNATask_hg38 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5
       performSmallRNA_cel235 performSmallRNATask_cel235 performSmallRNA_cfa3 performSmallRNATask_cfa3 performSmallRNA_bta8 performSmallRNATask_bta8 performSmallRNA_eca2 performSmallRNATask_eca2 performSmallRNA_ssc3 performSmallRNATask_ssc3 performSmallRNA_ocu2 performSmallRNATask_ocu2
-      performSmallRNA_oar3 performSmallRNATask_oar3 performSmallRNA_gga4 performSmallRNATask_gga4 performSmallRNA_fca6 performSmallRNATask_fca6 performSmallRNA_rheMac3 performSmallRNATask_rheMac3 supplement_genome)
+      performSmallRNA_oar3 performSmallRNATask_oar3 performSmallRNA_gga4 performSmallRNATask_gga4 performSmallRNA_fca6 performSmallRNATask_fca6 performSmallRNA_rheMac3 performSmallRNATask_rheMac3 performSmallRNA_chir1 performSmallRNATask_chir1 supplement_genome)
   ]
 );
 
@@ -311,6 +311,20 @@ sub rheMac3_genome {
   );
 }
 
+sub chir1_genome {
+  return merge(
+    supplement_genome(),
+    {
+      #genome database
+      mirbase_count_option => "-p chi",
+      coordinate           => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Capra_hircus/chir1_miRBase21.bed",
+      coordinate_fasta     => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Capra_hircus/chir1_miRBase21.bed.fa",
+
+      bowtie1_index => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Capra_hircus/bowtie_index_1.1.2/chi_ref_CHIR_1.0_All",
+   }
+  );
+}
+
 sub performSmallRNA_hg19 {
   my ( $userdef, $perform ) = @_;
   my $def = getSmallRNADefinition( $userdef, hg19_genome() );
@@ -517,6 +531,21 @@ sub performSmallRNA_rheMac3 {
 sub performSmallRNATask_rheMac3 {
   my ( $userdef, $task ) = @_;
   my $def = getSmallRNADefinition( $userdef, rheMac3_genome() );
+
+  performSmallRNATask( $def, $task );
+}
+
+sub performSmallRNA_chir1 {
+  my ( $userdef, $perform ) = @_;
+  my $def = getSmallRNADefinition( $userdef, chir1_genome() );
+
+  my $config = performSmallRNA( $def, $perform );
+  return $config;
+}
+
+sub performSmallRNATask_chir1 {
+  my ( $userdef, $task ) = @_;
+  my $def = getSmallRNADefinition( $userdef, chir1_genome() );
 
   performSmallRNATask( $def, $task );
 }

@@ -12,7 +12,7 @@ our %EXPORT_TAGS = (
     qw(performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg20 performSmallRNATask_hg20 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5
      performSmallRNA_cel235 performSmallRNATask_cel235 performSmallRNA_cfa3 performSmallRNATask_cfa3 performSmallRNA_bta8 performSmallRNATask_bta8 performSmallRNA_eca2 performSmallRNATask_eca2
       performSmallRNA_ssc3 performSmallRNATask_ssc3 performSmallRNA_ocu2 performSmallRNATask_ocu2 performSmallRNA_oar3 performSmallRNATask_oar3 performSmallRNA_gga4 performSmallRNATask_gga4
-       performSmallRNA_fca6 performSmallRNATask_fca6 performSmallRNA_rheMac3 performSmallRNATask_rheMac3)
+       performSmallRNA_fca6 performSmallRNATask_fca6 performSmallRNA_rheMac3 performSmallRNATask_rheMac3 performSmallRNA_chir1 performSmallRNATask_chir1)
   ]
 );
 
@@ -126,6 +126,14 @@ sub performSmallRNA_rheMac3 {
 
 sub performSmallRNATask_rheMac3 {
   CQS::PerformSmallRNA::performSmallRNATask_rheMac3(@_);
+}
+
+sub performSmallRNA_chir1 {
+  CQS::PerformSmallRNA::performSmallRNA_chir1(@_);
+}
+
+sub performSmallRNATask_chir1 {
+  CQS::PerformSmallRNA::performSmallRNATask_chir1(@_);
 }
 
 1;
