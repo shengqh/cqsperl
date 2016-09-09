@@ -31,12 +31,12 @@ sub supplement_genome {
     bowtie1_miRBase_index         => $mirBase21,
     
     #human microbime database
-    bowtie1_bacteria_group1_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/bacteriaDatabaseGroup1",
-    bacteria_group1_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20150902_group1.txt",
+    bowtie1_bacteria_group1_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/bowtie_index_1.1.2/bacteriaDatabaseGroup1",
+    bacteria_group1_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20160907_Group1SpeciesAll.txt.log",
     
     #human enviroment bacteria database 
     bowtie1_bacteria_group2_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/bowtie_index_1.1.2/bacteriaDatabaseGroup2",
-    bacteria_group2_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20160219.log",
+    bacteria_group2_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20160907_Group2SpeciesAll.txt.log",
     
     #fungus database
     bowtie1_fungus_group4_index   => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/bowtie_index_1.1.2/group4",
