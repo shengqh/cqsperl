@@ -27,19 +27,32 @@ my $mirBase21 = "/data/cqs/shengq1/reference/miRBase21/bowtie_index_1.1.1/mature
 
 sub supplement_genome {
   return {
+    #miRBase database
     bowtie1_miRBase_index         => $mirBase21,
-    bowtie1_tRNA_index            => "/scratch/cqs/shengq1/references/ucsc/GtRNAdb2/bowtie_index_1.1.2/GtRNAdb2.20160216.rmdup",
-    bowtie1_rRNAS_index           => "/scratch/cqs/shengq1/references/rRNA/bowtie_index_1.1.2/SILVA_123_SSURef_Nr99_tax_silva.rmdup",
-    bowtie1_rRNAL_index           => "/scratch/cqs/shengq1/references/rRNA/bowtie_index_1.1.2/SILVA_123_LSURef_tax_silva.rmdup",
+    
+    #human microbime database
     bowtie1_bacteria_group1_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/bacteriaDatabaseGroup1",
     bacteria_group1_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20150902_group1.txt",
+    
+    #human enviroment bacteria database 
     bowtie1_bacteria_group2_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/bowtie_index_1.1.2/bacteriaDatabaseGroup2",
     bacteria_group2_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20160219.log",
+    
+    #fungus database
     bowtie1_fungus_group4_index   => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/bowtie_index_1.1.2/group4",
-    trna_category_map             => "/scratch/cqs/shengq1/references/ucsc/GtRNAdb2/GtRNAdb2.20160216.category.map",
-    rrnaL_category_map            => "/scratch/cqs/shengq1/references/smallrna/SILVA_123_LSURef_tax_silva.category.map",
-    rrnaS_category_map            => "/scratch/cqs/shengq1/references/smallrna/SILVA_123_SSURef_Nr99_tax_silva.category.map",
     fungus_group4_log             => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/20160225_group4.txt",
+    
+    #UCSC tRNA database
+    bowtie1_tRNA_index            => "/scratch/cqs/shengq1/references/ucsc/GtRNAdb2/bowtie_index_1.1.2/GtRNAdb2.20160216.rmdup",
+    trna_category_map             => "/scratch/cqs/shengq1/references/ucsc/GtRNAdb2/GtRNAdb2.20160216.category.map",
+    
+    #SILVA rRNA database
+    bowtie1_rRNA_index           => "/scratch/cqs/shengq1/references/rRNA/bowtie_index_1.1.2/SILVA_123.rmdup",
+    rrna_category_map            => "/scratch/cqs/shengq1/references/rRNA/SILVA_123.category.map",
+#    bowtie1_rRNAS_index           => "/scratch/cqs/shengq1/references/rRNA/bowtie_index_1.1.2/SILVA_123_SSURef_Nr99_tax_silva.rmdup",
+#    bowtie1_rRNAL_index           => "/scratch/cqs/shengq1/references/rRNA/bowtie_index_1.1.2/SILVA_123_LSURef_tax_silva.rmdup",
+#    rrnaL_category_map            => "/scratch/cqs/shengq1/references/smallrna/SILVA_123_LSURef_tax_silva.category.map",
+#    rrnaS_category_map            => "/scratch/cqs/shengq1/references/smallrna/SILVA_123_SSURef_Nr99_tax_silva.category.map",
   };
 }
 
