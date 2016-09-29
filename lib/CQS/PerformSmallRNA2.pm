@@ -122,8 +122,8 @@ sub mm10_genome {
 
       #genome database
       mirbase_count_option  => "-p mmu",
-      coordinate            => "/scratch/cqs/shengq1/references/smallrna/v2/mm10_miRBase21_GtRNAdb2_ensembl85_SILVA.bed",
-      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/v2/mm10_miRBase21_GtRNAdb2_ensembl85_SILVA.bed.fa",
+      coordinate            => "/scratch/cqs/shengq1/references/smallrna/v2/mm10_miRBase21_GtRNAdb2_gencodeV10_SILVA.bed",
+      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/v2/mm10_miRBase21_GtRNAdb2_gencodeV10_SILVA.bed.fa",
       bowtie1_index         => "/scratch/cqs/shengq1/references/genome_rrna/mm10/bowtie_index_1.1.2/mm10_gencodeP4_SILVA",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/gencode/mm10/gsnap_index_k14_2016-08-08/",
       gsnap_index_name      => "GRCm38.p4.genome",
