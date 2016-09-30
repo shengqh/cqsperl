@@ -57,6 +57,7 @@ sub supplement_genome {
     #    bowtie1_rRNAL_index           => "/scratch/cqs/shengq1/references/rRNA/bowtie_index_1.1.2/SILVA_123_LSURef_tax_silva.rmdup",
     #    rrnaL_category_map            => "/scratch/cqs/shengq1/references/smallrna/SILVA_123_LSURef_tax_silva.category.map",
     #    rrnaS_category_map            => "/scratch/cqs/shengq1/references/smallrna/SILVA_123_SSURef_Nr99_tax_silva.category.map",
+    blast_localdb         => "/scratch/cqs/shengq1/references/blastdb",
   };
 }
 
