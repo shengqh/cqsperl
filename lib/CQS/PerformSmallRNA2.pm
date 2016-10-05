@@ -58,6 +58,10 @@ sub supplement_genome {
     #    rrnaL_category_map            => "/scratch/cqs/shengq1/references/smallrna/SILVA_123_LSURef_tax_silva.category.map",
     #    rrnaS_category_map            => "/scratch/cqs/shengq1/references/smallrna/SILVA_123_SSURef_Nr99_tax_silva.category.map",
     blast_localdb         => "/scratch/cqs/shengq1/references/blastdb",
+    
+    bowtie1_all_nonHost_index => "/scratch/cqs/zhaos/vickers/reference/AllNonHost/bowtie_index_1.1.2/AllNonHost",
+    all_nonHost_map  => "/scratch/cqs/zhaos/vickers/reference/AllNonHost/AllNonHost.map",
+    
   };
 }
 
