@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-package CQS::PerformSmallRNA2;
+package CQS::PerformSmallRNA3;
 
 use strict;
 use warnings;
@@ -22,12 +22,11 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
 our $VERSION = '0.01';
 
-my $mirBase20 = "/data/cqs/shengq1/reference/miRBase20/bowtie_index_1.1.1/mature.dna";
 my $mirBase21 = "/data/cqs/shengq1/reference/miRBase21/bowtie_index_1.1.1/mature.dna";
 
 sub supplement_genome {
   return {
-    version => 2,
+    version => 3,
     
     #miRBase database
     bowtie1_miRBase_index => $mirBase21,
@@ -48,22 +47,17 @@ sub supplement_genome {
     fungus_group4_species_map   => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/20160225_Group4SpeciesAll.species.map",
 
     #UCSC tRNA database
-    bowtie1_tRNA_index => "/scratch/cqs/shengq1/references/ucsc/GtRNAdb2/bowtie_index_1.1.2/GtRNAdb2.20160216.rmdup",
-    trna_category_map  => "/scratch/cqs/shengq1/references/ucsc/GtRNAdb2/GtRNAdb2.20160216.category.map",
+    bowtie1_tRNA_index => "/scratch/cqs/shengq1/references/smallrna/v3/GtRNAdb2/bowtie_index_1.1.2/GtRNAdb2.20161214.mature",
+    trna_category_map  => "/scratch/cqs/shengq1/references/smallrna/v3/GtRNAdb2/GtRNAdb2.20161214.category.map",
 
     #SILVA rRNA database
-    bowtie1_rRNA_index => "/scratch/cqs/shengq1/references/rRNA/bowtie_index_1.1.2/SILVA_123.rmdup",
-    rrna_category_map  => "/scratch/cqs/shengq1/references/rRNA/SILVA_123.category.map",
+    bowtie1_rRNA_index => "/scratch/cqs/shengq1/references/smallrna/v3/SILVA/bowtie_index_1.1.2/SILVA_128.rmdup",
+    rrna_category_map  => "/scratch/cqs/shengq1/references/smallrna/v3/SILVA/SILVA_128.rmdup.category.map",
 
-    #    bowtie1_rRNAS_index           => "/scratch/cqs/shengq1/references/rRNA/bowtie_index_1.1.2/SILVA_123_SSURef_Nr99_tax_silva.rmdup",
-    #    bowtie1_rRNAL_index           => "/scratch/cqs/shengq1/references/rRNA/bowtie_index_1.1.2/SILVA_123_LSURef_tax_silva.rmdup",
-    #    rrnaL_category_map            => "/scratch/cqs/shengq1/references/smallrna/SILVA_123_LSURef_tax_silva.category.map",
-    #    rrnaS_category_map            => "/scratch/cqs/shengq1/references/smallrna/SILVA_123_SSURef_Nr99_tax_silva.category.map",
-    blast_localdb         => "/scratch/cqs/shengq1/references/blastdb",
-    
-    bowtie1_all_nonHost_index => "/scratch/cqs/zhaos/vickers/reference/AllNonHost/bowtie_index_1.1.2/AllNonHost",
-    all_nonHost_map  => "/scratch/cqs/zhaos/vickers/reference/AllNonHost/AllNonHost.map",
-    
+    blast_localdb => "/scratch/cqs/shengq1/references/blastdb",
+
+    bowtie1_all_nonHost_index => "/scratch/cqs/shengq1/references/smallrna/v3/allnonhost/bowtie_index_1.1.2/AllNonHost",
+    all_nonHost_map           => "/scratch/cqs/shengq1/references/smallrna/v3/allnonhost/AllNonHost.map",
   };
 }
 
@@ -74,12 +68,12 @@ sub hg19_genome {
     {
       #genome database
       mirbase_count_option  => "-p hsa",
-      coordinate            => "/scratch/cqs/shengq1/references/smallrna/v2/hg19_miRBase21_GtRNAdb2_gencodeV25_SILVA.bed",
-      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/v2/hg19_miRBase21_GtRNAdb2_gencodeV25_SILVA.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq1/references/genome_rrna/hg19/bowtie_index_1.1.2/hg19_gencodeP13_SILVA",
+      coordinate            => "/scratch/cqs/shengq1/references/smallrna/v3/hg19_miRBase21_GtRNAdb2_gencode19_SILVA128.bed",
+      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/v3/hg19_miRBase21_GtRNAdb2_gencode19_SILVA128.bed.fa",
+      bowtie1_index         => "/scratch/cqs/shengq1/references/smallrna/v3/bowtie_index_1.1.2/hg19_miRBase21_GtRNAdb2_gencode19_SILVA128",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/gencode/hg19/gsnap_index_k14_2016-08-08/",
       gsnap_index_name      => "GRCh37.p13.genome",
-      star_index_directory  => "/scratch/cqs/shengq1/references/gencode/hg19/STAR_index_2.5.2b_gencodeV25_sjdb99"
+      star_index_directory  => "/scratch/cqs/shengq1/references/gencode/hg19/STAR_index_2.5.2b_gencodeV19_sjdb99"
     }
   );
 }
@@ -101,9 +95,9 @@ sub hg38_genome {
     {
       #genome database
       mirbase_count_option  => "-p hsa",
-      coordinate            => "/scratch/cqs/shengq1/references/smallrna/v2/hg38_miRBase21_GtRNAdb2_gencodeV25_SILVA.bed",
-      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/v2/hg38_miRBase21_GtRNAdb2_gencodeV25_SILVA.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq1/references/genome_rrna/hg38/bowtie_index_1.1.2/hg38_gencodeP5_SILVA",
+      coordinate            => "/scratch/cqs/shengq1/references/smallrna/v3/hg38_miRBase21_GtRNAdb2_gencode25_SILVA128.bed",
+      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/v3/hg38_miRBase21_GtRNAdb2_gencode25_SILVA128.bed.fa",
+      bowtie1_index         => "/scratch/cqs/shengq1/references/smallrna/v3/bowtie_index_1.1.2/hg38_miRBase21_GtRNAdb2_gencode25_SILVA128",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/gencode/hg38/gsnap_index_k14_2016-08-08",
       gsnap_index_name      => "GRCh38.p5.genome",
       star_index_directory  => "/scratch/cqs/shengq1/references/gencode/hg38/STAR_index_2.5.2b_gencodeV25_sjdb99"
@@ -129,12 +123,12 @@ sub mm10_genome {
 
       #genome database
       mirbase_count_option  => "-p mmu",
-      coordinate            => "/scratch/cqs/shengq1/references/smallrna/v2/mm10_miRBase21_GtRNAdb2_gencodeV10_SILVA.bed",
-      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/v2/mm10_miRBase21_GtRNAdb2_gencodeV10_SILVA.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq1/references/genome_rrna/mm10/bowtie_index_1.1.2/mm10_gencodeP4_SILVA",
+      coordinate            => "/scratch/cqs/shengq1/references/smallrna/v3/mm10_miRBase21_GtRNAdb2_gencode12_SILVA128.bed",
+      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/v3/mm10_miRBase21_GtRNAdb2_gencode12_SILVA128.bed.fa",
+      bowtie1_index         => "/scratch/cqs/shengq1/references/smallrna/v3/bowtie_index_1.1.2/mm10_miRBase21_GtRNAdb2_gencode12_SILVA128",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/gencode/mm10/gsnap_index_k14_2016-08-08/",
-      gsnap_index_name      => "GRCm38.p4.genome",
-      star_index_directory  => "/scratch/cqs/shengq1/references/gencode/mm10/STAR_index_2.5.2b_gencodeVM10_sjdb99"
+      gsnap_index_name      => "GRCm38.p5.genome",
+      star_index_directory  => "/scratch/cqs/shengq1/references/gencode/mm10/STAR_index_2.5.2b_gencodeVM12_sjdb99"
     }
   );
 }
@@ -157,9 +151,9 @@ sub rn5_genome {
 
       #genome database
       mirbase_count_option  => "-p rno",
-      coordinate            => "/scratch/cqs/shengq1/references/smallrna/v2/rn5_miRBase21_GtRNAdb2_ensembl79_SILVA.bed",
-      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/v2/rn5_miRBase21_GtRNAdb2_ensembl79_SILVA.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq1/references/genome_rrna/rn5/bowtie_index_1.1.2/rn5_SILVA",
+      coordinate            => "/scratch/cqs/shengq1/references/smallrna/v3/rn5_miRBase21_GtRNAdb2_ensembl79_SILVA128.bed",
+      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/v3/rn5_miRBase21_GtRNAdb2_ensembl79_SILVA128.bed.fa",
+      bowtie1_index         => "/scratch/cqs/shengq1/references/smallrna/v3/bowtie_index_1.1.2/rn5_miRBase21_GtRNAdb2_ensembl79_SILVA128",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/rn5/gsnap_index_k14_2016-08-08/",
       gsnap_index_name      => "rn5",
       star_index_directory  => "/scratch/cqs/shengq1/references/rn5/STAR_index_2.5.2b_ensemblV79_sjdb99"

@@ -27,6 +27,8 @@ my $mirBase21 = "/data/cqs/shengq1/reference/miRBase21/bowtie_index_1.1.1/mature
 
 sub supplement_genome {
   return {
+    version => 1,
+    
     #miRBase database
     bowtie1_miRBase_index         => $mirBase21,
     
