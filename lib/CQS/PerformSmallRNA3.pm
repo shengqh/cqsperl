@@ -73,7 +73,11 @@ sub hg19_genome {
       bowtie1_index         => "/scratch/cqs/shengq1/references/smallrna/v3/bowtie_index_1.1.2/hg19_miRBase21_GtRNAdb2_gencode19_SILVA128",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/gencode/hg19/gsnap_index_k14_2016-08-08/",
       gsnap_index_name      => "GRCh37.p13.genome",
-      star_index_directory  => "/scratch/cqs/shengq1/references/gencode/hg19/STAR_index_2.5.2b_gencodeV19_sjdb99"
+      star_index_directory  => "/scratch/cqs/shengq1/references/gencode/hg19/STAR_index_2.5.2b_gencodeV19_sjdb99",
+      
+      tDRmapper=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
+      tDRmapper_fasta=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/hg19_mature_and_pre.fa"
+      
     }
   );
 }
@@ -128,7 +132,10 @@ sub mm10_genome {
       bowtie1_index         => "/scratch/cqs/shengq1/references/smallrna/v3/bowtie_index_1.1.2/mm10_miRBase21_GtRNAdb2_gencode12_SILVA128",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/gencode/mm10/gsnap_index_k14_2016-08-08/",
       gsnap_index_name      => "GRCm38.p5.genome",
-      star_index_directory  => "/scratch/cqs/shengq1/references/gencode/mm10/STAR_index_2.5.2b_gencodeVM12_sjdb99"
+      star_index_directory  => "/scratch/cqs/shengq1/references/gencode/mm10/STAR_index_2.5.2b_gencodeVM12_sjdb99",
+      
+      tDRmapper=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
+      tDRmapper_fasta=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/mm10_mature_pre_for_tdrMapper.fa"
     }
   );
 }
