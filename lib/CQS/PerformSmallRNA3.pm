@@ -76,8 +76,9 @@ sub hg19_genome {
       star_index_directory  => "/scratch/cqs/shengq1/references/gencode/hg19/STAR_index_2.5.2b_gencodeV19_sjdb99",
       
       tDRmapper=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
-      tDRmapper_fasta=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/hg19_mature_and_pre.fa"
+      tDRmapper_fasta=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/hg19_mature_and_pre.fa",
       
+      hasYRNA => 1,
     }
   );
 }
@@ -105,6 +106,8 @@ sub hg38_genome {
       gsnap_index_directory => "/scratch/cqs/shengq1/references/gencode/hg38/gsnap_index_k14_2016-08-08",
       gsnap_index_name      => "GRCh38.p5.genome",
       star_index_directory  => "/scratch/cqs/shengq1/references/gencode/hg38/STAR_index_2.5.2b_gencodeV25_sjdb99"
+
+      hasYRNA => 1,
     }
   );
 }
