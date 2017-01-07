@@ -105,8 +105,7 @@ sub hg38_genome {
       bowtie1_index         => "/scratch/cqs/shengq1/references/smallrna/v3/bowtie_index_1.1.2/hg38_miRBase21_GtRNAdb2_gencode25_SILVA128",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/gencode/hg38/gsnap_index_k14_2016-08-08",
       gsnap_index_name      => "GRCh38.p5.genome",
-      star_index_directory  => "/scratch/cqs/shengq1/references/gencode/hg38/STAR_index_2.5.2b_gencodeV25_sjdb99"
-
+      star_index_directory  => "/scratch/cqs/shengq1/references/gencode/hg38/STAR_index_2.5.2b_gencodeV25_sjdb99",
       hasYRNA => 1,
     }
   );
