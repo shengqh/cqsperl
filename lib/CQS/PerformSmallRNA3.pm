@@ -68,8 +68,8 @@ sub hg19_genome {
     {
       #genome database
       mirbase_count_option  => "-p hsa",
-      coordinate            => "/scratch/cqs/shengq1/references/smallrna/v3/hg19_miRBase21_GtRNAdb2_gencode19_SILVA128.bed",
-      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/v3/hg19_miRBase21_GtRNAdb2_gencode19_SILVA128.bed.fa",
+      coordinate            => "/scratch/cqs/shengq1/references/smallrna/v3/hg19_miRBase21_GtRNAdb2_gencode19_ncbi.bed",
+      coordinate_fasta      => "/scratch/cqs/shengq1/references/smallrna/v3/hg19_miRBase21_GtRNAdb2_gencode19_ncbi.bed.fa",
       bowtie1_index         => "/scratch/cqs/shengq1/references/smallrna/v3/bowtie_index_1.1.2/hg19_miRBase21_GtRNAdb2_gencode19_ncbi",
       gsnap_index_directory => "/scratch/cqs/shengq1/references/gencode/hg19/gsnap_index_k14_2016-08-08/",
       gsnap_index_name      => "GRCh37.p13.genome",
@@ -88,7 +88,7 @@ sub hg19_3utr {
   return {
     search_3utr   => 1,
     bowtie1_index => $bowtie1,
-    fasta_file    => $bowtie1 . ".fa",
+    fasta_file    => $bowtie1 . ".fasta",
     utr3_db       => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg19_refgene_3utr.bed",
     refgene_file  => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg19_refgene.tsv",
   };
@@ -116,7 +116,7 @@ sub hg38_3utr {
   return {
     search_3utr   => 1,
     bowtie1_index => $bowtie1,
-    fasta_file    => $bowtie1 . ".fa",
+    fasta_file    => $bowtie1 . ".fasta",
     utr3_db       => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg38_refgene_3utr.bed",
     refgene_file  => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_hg38_refgene.tsv",
   };
@@ -147,7 +147,7 @@ sub mm10_3utr {
   return {
     search_3utr   => 1,
     bowtie1_index => $bowtie1,
-    fasta_file    => $bowtie1 . ".fa",
+    fasta_file    => $bowtie1 . ".fasta",
     utr3_db       => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_mm10_refgene_3utr.bed",
     refgene_file  => "/scratch/cqs/shengq1/references/3utr/20151218_ucsc_mm10_refgene.tsv",
   };
