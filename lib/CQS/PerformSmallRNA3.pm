@@ -34,7 +34,7 @@ sub supplement_genome {
     #human microbime database
     bowtie1_bacteria_group1_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/bowtie_index_1.1.2/bacteriaDatabaseGroup1",
     bacteria_group1_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20160907_Group1SpeciesAll.txt.log",
-    bacteria_group1_species_map   => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20160907_Group1SpeciesAll.species.map",
+    bacteria_group1_species_map   => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20170206_Group1SpeciesAll.species.map",
 
     #human enviroment bacteria database
     bowtie1_bacteria_group2_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/bowtie_index_1.1.2/bacteriaDatabaseGroup2",
