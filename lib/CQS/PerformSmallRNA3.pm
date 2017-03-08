@@ -14,7 +14,7 @@ our %EXPORT_TAGS = (
   'all' => [
     qw(hg19_genome hg19_3utr hg38_genome mm10_genome mm10_3utr rn5_genome cel235_genome cfa3_genome performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg38 performSmallRNATask_hg38 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5
       performSmallRNA_cel235 performSmallRNATask_cel235 performSmallRNA_cfa3 performSmallRNATask_cfa3 performSmallRNA_bta8 performSmallRNATask_bta8 performSmallRNA_eca2 performSmallRNATask_eca2 performSmallRNA_ssc3 performSmallRNATask_ssc3 performSmallRNA_ocu2 performSmallRNATask_ocu2
-      performSmallRNA_oar3 performSmallRNATask_oar3 performSmallRNA_gga4 performSmallRNATask_gga4 performSmallRNA_fca6 performSmallRNATask_fca6 performSmallRNA_rheMac3 performSmallRNATask_rheMac3 performSmallRNA_chir1 performSmallRNATask_chir1 supplement_genome)
+      performSmallRNA_oar3 performSmallRNATask_oar3 performSmallRNA_gga4 performSmallRNATask_gga4 performSmallRNA_fca6 performSmallRNATask_fca6 performSmallRNA_rheMac8 performSmallRNATask_rheMac8 performSmallRNA_chir1 performSmallRNATask_chir1 supplement_genome)
   ]
 );
 
@@ -79,6 +79,8 @@ sub hg19_genome {
       tDRmapper_fasta=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/hg19_mature_and_pre.fa",
       
       hasYRNA => 1,
+      hasSnRNA => 1,
+      hasSnoRNA => 1,
     }
   );
 }
@@ -107,6 +109,8 @@ sub hg38_genome {
       gsnap_index_name      => "GRCh38.p5.genome",
       star_index_directory  => "/scratch/cqs/shengq1/references/gencode/hg38/STAR_index_2.5.2b_gencodeV25_sjdb99",
       hasYRNA => 1,
+      hasSnRNA => 1,
+      hasSnoRNA => 1,
     }
   );
 }
@@ -137,7 +141,10 @@ sub mm10_genome {
       star_index_directory  => "/scratch/cqs/shengq1/references/gencode/mm10/STAR_index_2.5.2b_gencodeVM12_sjdb99",
       
       tDRmapper=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
-      tDRmapper_fasta=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/mm10_mature_pre_for_tdrMapper.fa"
+      tDRmapper_fasta=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/mm10_mature_pre_for_tdrMapper.fa",
+      
+      hasSnRNA => 1,
+      hasSnoRNA => 1,
     }
   );
 }
@@ -326,16 +333,16 @@ sub fca6_genome {
   );
 }
 
-sub rheMac3_genome {
+sub rheMac8_genome {
   return merge(
     supplement_genome(),
     {
       #genome database
       mirbase_count_option => "-p mml",
-      coordinate           => "/scratch/cqs/zhaos/vickers/reference/Macaca_mulatta/rheMac3_miRBase21_ucsc-tRNA.bed",
-      coordinate_fasta     => "/scratch/cqs/zhaos/vickers/reference/Macaca_mulatta/rheMac3_miRBase21_ucsc-tRNA.bed.fa",
+      coordinate           => "/scratch/cqs/shengq1/references/smallrna/v3/rheMac8_miRBase21_GtRNAdb2_ensembl87.bed",
+      coordinate_fasta     => "/scratch/cqs/shengq1/references/smallrna/v3/rheMac8_miRBase21_GtRNAdb2_ensembl87.bed.fa",
 
-      bowtie1_index => "/scratch/cqs/zhaos/vickers/reference/Macaca_mulatta/bowtie_index_1.1.2/rheMac3",
+      bowtie1_index => "/scratch/cqs/shengq1/references/smallrna/v3/bowtie_index_1.1.2/rheMac8",
     }
   );
 }
@@ -549,17 +556,17 @@ sub performSmallRNATask_fca6 {
   performSmallRNATask( $def, $task );
 }
 
-sub performSmallRNA_rheMac3 {
+sub performSmallRNA_rheMac8 {
   my ( $userdef, $perform ) = @_;
-  my $def = getSmallRNADefinition( $userdef, rheMac3_genome() );
+  my $def = getSmallRNADefinition( $userdef, rheMac8_genome() );
 
   my $config = performSmallRNA( $def, $perform );
   return $config;
 }
 
-sub performSmallRNATask_rheMac3 {
+sub performSmallRNATask_rheMac8 {
   my ( $userdef, $task ) = @_;
-  my $def = getSmallRNADefinition( $userdef, rheMac3_genome() );
+  my $def = getSmallRNADefinition( $userdef, rheMac8_genome() );
 
   performSmallRNATask( $def, $task );
 }
