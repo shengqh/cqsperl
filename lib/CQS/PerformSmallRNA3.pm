@@ -26,25 +26,29 @@ my $mirBase21 = "/data/cqs/shengq1/reference/miRBase21/bowtie_index_1.1.1/mature
 
 sub supplement_genome {
   return {
-    version => 3,
-    
+    version    => 3,
+    constraint => "haswell",
+
     #miRBase database
     bowtie1_miRBase_index => $mirBase21,
 
     #human microbime database
     bowtie1_bacteria_group1_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/bowtie_index_1.1.2/bacteriaDatabaseGroup1",
+
     #bacteria_group1_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20160907_Group1SpeciesAll.txt.log",
-    bacteria_group1_species_map   => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20170206_Group1SpeciesAll.species.map",
+    bacteria_group1_species_map => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20170206_Group1SpeciesAll.species.map",
 
     #human enviroment bacteria database
     bowtie1_bacteria_group2_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/bowtie_index_1.1.2/bacteriaDatabaseGroup2",
+
     #bacteria_group2_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20160907_Group2SpeciesAll.txt.log",
-    bacteria_group2_species_map   => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20160907_Group2SpeciesAll.species.map",
+    bacteria_group2_species_map => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20160907_Group2SpeciesAll.species.map",
 
     #fungus database
     bowtie1_fungus_group4_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/bowtie_index_1.1.2/group4",
+
     #fungus_group4_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/20160225_group4.txt",
-    fungus_group4_species_map   => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/20160225_Group4SpeciesAll.species.map",
+    fungus_group4_species_map => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/20160225_Group4SpeciesAll.species.map",
 
     #UCSC tRNA database
     bowtie1_tRNA_index => "/scratch/cqs/shengq1/references/smallrna/v3/GtRNAdb2/bowtie_index_1.1.2/GtRNAdb2.20161214.mature",
@@ -74,12 +78,12 @@ sub hg19_genome {
       gsnap_index_directory => "/scratch/cqs/shengq1/references/gencode/hg19/gsnap_index_k14_2016-08-08/",
       gsnap_index_name      => "GRCh37.p13.genome",
       star_index_directory  => "/scratch/cqs/shengq1/references/gencode/hg19/STAR_index_2.5.2b_gencodeV19_sjdb99",
-      
-      tDRmapper=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
-      tDRmapper_fasta=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/hg19_mature_and_pre.fa",
-      
-      hasYRNA => 1,
-      hasSnRNA => 1,
+
+      tDRmapper       => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
+      tDRmapper_fasta => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/hg19_mature_and_pre.fa",
+
+      hasYRNA   => 1,
+      hasSnRNA  => 1,
       hasSnoRNA => 1,
     }
   );
@@ -108,9 +112,9 @@ sub hg38_genome {
       gsnap_index_directory => "/scratch/cqs/shengq1/references/gencode/hg38/gsnap_index_k14_2016-08-08",
       gsnap_index_name      => "GRCh38.p5.genome",
       star_index_directory  => "/scratch/cqs/shengq1/references/gencode/hg38/STAR_index_2.5.2b_gencodeV25_sjdb99",
-      hasYRNA => 1,
-      hasSnRNA => 1,
-      hasSnoRNA => 1,
+      hasYRNA               => 1,
+      hasSnRNA              => 1,
+      hasSnoRNA             => 1,
     }
   );
 }
@@ -139,11 +143,11 @@ sub mm10_genome {
       gsnap_index_directory => "/scratch/cqs/shengq1/references/gencode/mm10/gsnap_index_k14_2016-08-08/",
       gsnap_index_name      => "GRCm38.p5.genome",
       star_index_directory  => "/scratch/cqs/shengq1/references/gencode/mm10/STAR_index_2.5.2b_gencodeVM12_sjdb99",
-      
-      tDRmapper=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
-      tDRmapper_fasta=> "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/mm10_mature_pre_for_tdrMapper.fa",
-      
-      hasSnRNA => 1,
+
+      tDRmapper       => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
+      tDRmapper_fasta => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/mm10_mature_pre_for_tdrMapper.fa",
+
+      hasSnRNA  => 1,
       hasSnoRNA => 1,
     }
   );
