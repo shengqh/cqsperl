@@ -77,18 +77,19 @@ sub getAGOConfig {
   else {
     $alignmentTask = "bowtie1";
     $config->{$alignmentTask} = {
-      'class'                 => 'Alignment::Bowtie1',
-      'source_ref'            => $source_ref,
-      'fasta_file'            => '/scratch/cqs/zhaos/vickers/reference/hg19ForAgo/bowtie_index_1.1.2/GRCh37.p13.genome.AddAC009948.fa',
-      'sh_direct'             => 0,
-      'perform'               => 1,
-      mappedonly              => 1,
-      output_to_same_folder   => 1,
-      chromosome_grep_pattern => "chrlnc",
-      'bowtie1_index'         => '/scratch/cqs/zhaos/vickers/reference/hg19ForAgo/bowtie_index_1.1.2/GRCh37.p13.genome.AddAC009948',
-      'option'                => '-v 2 -m 100 -a --best --strata',
-      'target_dir'            => $def->{target_dir} . '/bowtie1',
-      'pbs'                   => {
+      'class'               => 'Alignment::Bowtie1',
+      'source_ref'          => $source_ref,
+      'fasta_file'          => '/scratch/cqs/zhaos/vickers/reference/hg19ForAgo/bowtie_index_1.1.2/GRCh37.p13.genome.AddAC009948.fa',
+      'sh_direct'           => 0,
+      'perform'             => 1,
+      mappedonly            => 1,
+      output_to_same_folder => 1,
+
+      #chromosome_grep_pattern => "chrlnc",
+      'bowtie1_index' => '/scratch/cqs/zhaos/vickers/reference/hg19ForAgo/bowtie_index_1.1.2/GRCh37.p13.genome.AddAC009948',
+      'option'        => '-v 2 -m 100 -a --best --strata',
+      'target_dir'    => $def->{target_dir} . '/bowtie1',
+      'pbs'           => {
         'email'    => $def->{email},
         'walltime' => '72',
         'mem'      => '40gb',
@@ -116,10 +117,51 @@ sub getAGOConfig {
     push @$summary,    "bowtie1_summary";
   }
 
-  $config->{count} = {
+  $config->{smallrna_count} = {
+    'pbs' => {
+      'email'     => 'quanhu.sheng@vanderbilt.edu',
+      'walltime'  => '72',
+      'emailType' => undef,
+      'mem'       => '40gb',
+      'nodes'     => '1:ppn=1'
+    },
+    'cluster'         => 'slurm',
+    'fasta_file'      => '/scratch/cqs/shengq1/references/smallrna/v3/mm10_miRBase21_GtRNAdb2_gencode12_ncbi.bed.fa',
+    'sh_direct'       => 1,
+    'perform'         => 1,
+    'target_dir'      => $def->{target_dir} . "/smallrna_count",
+    'fastq_files_ref' => $source_ref,
+    'coordinate_file' => '/scratch/cqs/shengq1/references/smallrna/v3/hg19_miRBase21_GtRNAdb2_gencode19_ncbi.bed',
+    'source_ref'      => $alignmentTask,
+    'cqs_tools'       => '/home/shengq1/cqstools/cqstools.exe',
+    'class'           => 'CQS::SmallRNACount',
+    'option'          => ''
+  };
+
+  $config->{smallrna_table} = {
+    'pbs' => {
+      'email'     => 'quanhu.sheng@vanderbilt.edu',
+      'walltime'  => '10',
+      'emailType' => undef,
+      'mem'       => '10gb',
+      'nodes'     => '1:ppn=1'
+    },
+    'cluster'    => 'slurm',
+    'sh_direct'  => 1,
+    'hasYRNA'    => 0,
+    'perform'    => 1,
+    'target_dir' => $def->{target_dir} . "/smallrna_table",
+    'source_ref' => [ 'smallrna_count', '.mapped.xml' ],
+    'cqs_tools'  => '/home/shengq1/cqstools/cqstools.exe',
+    'class'      => 'CQS::SmallRNATable',
+    'option'     => '',
+    'prefix'     => 'smallRNA_2mm_'
+  };
+
+  $config->{chrlnc_count} = {
     class      => "CQS::CQSChromosomeCount",
     perform    => 1,
-    target_dir => $def->{target_dir} . "/count",
+    target_dir => $def->{target_dir} . "/chrlnc_count",
     option     => "",
     source_ref => $alignmentTask,
     cqs_tools  => $def->{cqstools},
@@ -134,12 +176,12 @@ sub getAGOConfig {
     },
   };
 
-  $config->{count_table} = {
+  $config->{chrlnc_table} = {
     class      => "CQS::CQSChromosomeTable",
     perform    => 1,
-    target_dir => $def->{target_dir} . "/count_table",
+    target_dir => $def->{target_dir} . "/chrlnc_table",
     option     => "",
-    source_ref => [ "count", ".xml" ],
+    source_ref => [ "chrlnc_count", ".xml" ],
     cqs_tools  => $def->{cqstools},
     sh_direct  => 1,
     cluster    => $def->{cluster},
@@ -151,8 +193,8 @@ sub getAGOConfig {
       "mem"       => "10gb"
     },
   };
-  push @$individual, "count";
-  push @$summary,    "count_table";
+  push @$individual, ( "smallrna_count", "chrlnc_count" );
+  push @$summary,    ( "smallrna_table", "chrlnc_table" );
 
   #push( @$summary,    "bamplot" );
   if ( $def->{perform_bamplot} ) {
