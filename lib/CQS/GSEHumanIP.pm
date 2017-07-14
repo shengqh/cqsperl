@@ -20,7 +20,7 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
 sub initializeDefaultOptions {
   my $def = shift;
-  initDefaultValue( $def, "cutadapt_option", "-m 20 --trim-n" );
+  initDefaultValue( $def, "cutadapt_option", "-m 20 --trim-n -q 20" );
   initDefaultValue( $def, "cqstools",        "/home/shengq1/cqstools/cqstools.exe" );
   initDefaultValue( $def, "star_index",      "/scratch/cqs/shengq1/references/vickers_lincRNA/STAR_index_2.5.2b_v19_sjdb99" );
   initDefaultValue( $def, "bamplot_gff",     "/scratch/cqs/shengq1/vickers/20170314_smallRNA_GSE_human/document/lincRNAchr.gff" );

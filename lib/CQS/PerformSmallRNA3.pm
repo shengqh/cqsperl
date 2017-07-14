@@ -22,7 +22,7 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
 our $VERSION = '0.01';
 
-my $mirBase21 = "/data/cqs/shengq1/reference/miRBase21/bowtie_index_1.1.1/mature.dna";
+my $mirBase21 = "/scratch/cqs/shengq1/references/miRBase21/bowtie_index_1.1.1/mature.dna";
 
 sub supplement_genome {
   return {
