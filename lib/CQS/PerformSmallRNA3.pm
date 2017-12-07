@@ -53,6 +53,7 @@ sub supplement_genome {
     #UCSC tRNA database
     bowtie1_tRNA_index => "/scratch/cqs/shengq2/references/smallrna/v3/GtRNAdb2/bowtie_index_1.1.2/GtRNAdb2.20161214.mature",
     trna_category_map  => "/scratch/cqs/shengq2/references/smallrna/v3/GtRNAdb2/GtRNAdb2.20161214.category.map",
+    trna_map  => "/scratch/cqs/shengq2/references/smallrna/v3/GtRNAdb2/GtRNAdb2.20161214.map",
 
     #SILVA rRNA database
     bowtie1_rRNA_index => "/scratch/cqs/shengq2/references/smallrna/v3/SILVA/bowtie_index_1.1.2/SILVA_128.rmdup",
