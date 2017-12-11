@@ -11,8 +11,16 @@ our @ISA = qw(Exporter);
 
 our %EXPORT_TAGS = (
   'all' => [
-    qw(gencode_hg19_genome performRNASeq_gencode_hg19  performRNASeqTask_gencode_hg19
-      gatk_b37_genome performRNASeq_gatk_b37 performRNASeqTask_gatk_b37)
+    qw(gencode_hg19_genome
+      performRNASeq_gencode_hg19
+      performRNASeqTask_gencode_hg19
+      gatk_b37_genome
+      performRNASeq_gatk_b37
+      performRNASeqTask_gatk_b37
+      gencode_mm10_genome
+      performRNASeq_gencode_mm10
+      performRNASeqTask_gencode_mm10
+      )
   ]
 );
 
@@ -67,6 +75,29 @@ sub gatk_b37_genome {
   );
 }
 
+sub common_mm10_genome() {
+  return {
+    webgestalt_organism => "mmusculus",
+    dbsnp               => "/scratch/cqs/shengq2/references/dbsnp/mm10/mouse_GRCm38_v142_M.vcf",
+    annovar_param       => "-protocol refGene -operation g --remove",
+    annovar_db          => "/scratch/cqs/shengq2/references/annovar/mm10db/",
+    perform_gsea        => 0,
+  };
+}
+
+sub gencode_mm10_genome {
+  return merge(
+    merge( global_definition(), common_mm10_genome() ),
+    {
+      #genome database
+      fasta_file     => "/scratch/cqs/shengq2/references/gencode/mm10/GRCm38.p5.genome.fa",
+      star_index     => "/scratch/cqs/shengq2/references/gencode/mm10/STAR_index_2.5.3a_vM15_sjdb100",
+      transcript_gtf => "/scratch/cqs/shengq2/references/gencode/mm10/gencode.vM15.chr_patch_hapl_scaff.annotation.gtf",
+      name_map_file  => "/scratch/cqs/shengq2/references/gencode/mm10/gencode.vM15.chr_patch_hapl_scaff.annotation.map",
+    }
+  );
+}
+
 sub performRNASeq_gencode_hg19 {
   my ( $userdef, $perform ) = @_;
   my $def = merge( $userdef, gencode_hg19_genome() );
@@ -92,4 +123,18 @@ sub performRNASeqTask_gatk_b37 {
   my $def = merge( $userdef, gatk_b37_genome() );
   performRNASeqTask( $def, $task );
 }
+
+sub performRNASeq_gencode_mm10 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge( $userdef, gencode_mm10_genome() );
+  my $config = performRNASeq( $def, $perform );
+  return $config;
+}
+
+sub performRNASeqTask_gencode_mm10 {
+  my ( $userdef, $task ) = @_;
+  my $def = merge( $userdef, gencode_mm10_genome() );
+  performRNASeqTask( $def, $task );
+}
+
 1;
