@@ -20,6 +20,9 @@ our %EXPORT_TAGS = (
       gencode_mm10_genome
       performRNASeq_gencode_mm10
       performRNASeqTask_gencode_mm10
+      ensembl_Mmul1_genome
+      performRNASeq_ensembl_Mmul1
+      performRNASeqTask_ensembl_Mmul1
       )
   ]
 );
@@ -98,6 +101,20 @@ sub gencode_mm10_genome {
   );
 }
 
+sub ensembl_Mmul1_genome {
+  return merge(
+    global_definition(),
+    {
+      perform_gsea        => 0,
+      #genome database
+      fasta_file     => "/scratch/cqs/shengq2/references/illumina/Mmul_1/Sequence/WholeGenomeFasta/genome.fa",
+      star_index     => "/scratch/cqs/shengq2/references/illumina/Mmul_1/Sequence/WholeGenomeFasta/STAR_index_2.5.3a_ensembl_Mmul_1_sjdb99",
+      transcript_gtf => "/scratch/cqs/shengq2/references/illumina/Mmul_1/Sequence/WholeGenomeFasta/genes.gtf",
+      name_map_file  => "/scratch/cqs/shengq2/references/illumina/Mmul_1/Sequence/WholeGenomeFasta/genes.map",
+    }
+  );
+}
+
 sub performRNASeq_gencode_hg19 {
   my ( $userdef, $perform ) = @_;
   my $def = merge( $userdef, gencode_hg19_genome() );
@@ -134,6 +151,19 @@ sub performRNASeq_gencode_mm10 {
 sub performRNASeqTask_gencode_mm10 {
   my ( $userdef, $task ) = @_;
   my $def = merge( $userdef, gencode_mm10_genome() );
+  performRNASeqTask( $def, $task );
+}
+
+sub performRNASeq_ensembl_Mmul1 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge( $userdef, ensembl_Mmul1_genome() );
+  my $config = performRNASeq( $def, $perform );
+  return $config;
+}
+
+sub performRNASeqTask_ensembl_Mmul1 {
+  my ( $userdef, $task ) = @_;
+  my $def = merge( $userdef, ensembl_Mmul1_genome() );
   performRNASeqTask( $def, $task );
 }
 
