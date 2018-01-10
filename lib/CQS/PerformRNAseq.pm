@@ -48,7 +48,8 @@ sub common_hg19_genome() {
     annovar_param       => "-protocol refGene,avsnp147,cosmic70 -operation g,f,f --remove",
     annovar_db          => "/scratch/cqs/shengq2/references/annovar/humandb/",
     gsea_jar            => "/home/zhaos/bin/gsea-3.0.jar",
-    gsea_db             => "/scratch/cqs/zhaos/reference/GSEA/human/V60",
+    gsea_db             => "/scratch/cqs/shengq2/references/GSEA/v6.1",
+    gsea_categories     => "'h.all.v6.1.symbols.gmt', 'c2.all.v6.1.symbols.gmt', 'c5.all.v6.1.symbols.gmt', 'c6.all.v6.1.symbols.gmt', 'c7.all.v6.1.symbols.gmt'",
   };
 }
 
@@ -105,7 +106,8 @@ sub ensembl_Mmul1_genome {
   return merge(
     global_definition(),
     {
-      perform_gsea        => 0,
+      perform_gsea => 0,
+
       #genome database
       fasta_file     => "/scratch/cqs/shengq2/references/illumina/Mmul_1/Sequence/WholeGenomeFasta/genome.fa",
       star_index     => "/scratch/cqs/shengq2/references/illumina/Mmul_1/Sequence/WholeGenomeFasta/STAR_index_2.5.3a_ensembl_Mmul_1_sjdb99",
