@@ -46,6 +46,7 @@ sub common_hg19_genome() {
     webgestalt_organism => "hsapiens",
     dbsnp               => "/scratch/cqs/shengq2/references/gatk/b37/dbsnp_150.b37.vcf",
     annovar_param       => "-protocol refGene,avsnp147,cosmic70 -operation g,f,f --remove",
+    annovar_buildver    => "hg19",
     annovar_db          => "/scratch/cqs/shengq2/references/annovar/humandb/",
     gsea_jar            => "/home/zhaos/bin/gsea-3.0.jar",
     gsea_db             => "/scratch/cqs/shengq2/references/GSEA/v6.1",
@@ -83,6 +84,7 @@ sub common_mm10_genome() {
   return {
     webgestalt_organism => "mmusculus",
     dbsnp               => "/scratch/cqs/shengq2/references/dbsnp/mm10/mouse_GRCm38_v142_M.vcf",
+    annovar_buildver    => "mm10",
     annovar_param       => "-protocol refGene -operation g --remove",
     annovar_db          => "/scratch/cqs/shengq2/references/annovar/mm10db/",
     perform_gsea        => 0,
