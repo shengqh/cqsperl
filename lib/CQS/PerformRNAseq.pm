@@ -44,12 +44,12 @@ sub global_definition {
 sub common_hg19_genome() {
   return {
     webgestalt_organism => "hsapiens",
-    dbsnp               => "/scratch/cqs/shengq2/references/gatk/b37/dbsnp_150.b37.vcf",
+    dbsnp               => "/scratch/cqs/references/human/b37/dbsnp_150.b37.vcf",
     annovar_param       => "-protocol refGene,avsnp147,cosmic70 -operation g,f,f --remove",
     annovar_buildver    => "hg19",
     annovar_db          => "/scratch/cqs/shengq2/references/annovar/humandb/",
     gsea_jar            => "/home/zhaos/bin/gsea-3.0.jar",
-    gsea_db             => "/scratch/cqs/shengq2/references/GSEA/v6.1",
+    gsea_db             => "/scratch/cqs/references/GSEA/v6.1/v6.1",
     gsea_categories     => "'h.all.v6.1.symbols.gmt', 'c2.all.v6.1.symbols.gmt', 'c5.all.v6.1.symbols.gmt', 'c6.all.v6.1.symbols.gmt', 'c7.all.v6.1.symbols.gmt'",
   };
 }
@@ -59,10 +59,10 @@ sub gencode_hg19_genome {
     merge( global_definition(), common_hg19_genome() ),
     {
       #genome database
-      fasta_file     => "/scratch/cqs/shengq2/references/gencode/hg19/GRCh37.p13.genome.fa",
-      star_index     => "/scratch/cqs/shengq2/references/gencode/hg19/STAR_index_2.5.2b_gencodeV19_sjdb99",
-      transcript_gtf => "/scratch/cqs/shengq2/references/gencode/hg19/gencode.v19.chr_patch_hapl_scaff.annotation.gtf",
-      name_map_file  => "/scratch/cqs/shengq2/references/gencode/hg19/gencode.v19.chr_patch_hapl_scaff.annotation.map",
+      fasta_file     => "/scratch/cqs/references/human/hg19/GRCh37.p13.genome.fa",
+      star_index     => "/scratch/cqs/references/human/hg19/STAR_index_2.5.2b_gencodeV19_sjdb99",
+      transcript_gtf => "/scratch/cqs/references/human/hg19/gencode.v19.chr_patch_hapl_scaff.annotation.gtf",
+      name_map_file  => "/scratch/cqs/references/human/hg19/gencode.v19.chr_patch_hapl_scaff.annotation.map",
     }
   );
 }
@@ -72,10 +72,10 @@ sub gatk_b37_genome {
     merge( global_definition(), common_hg19_genome() ),
     {
       #genome database
-      fasta_file     => "/scratch/cqs/shengq2/references/gatk/b37/human_g1k_v37.fasta",
-      star_index     => "/scratch/cqs/shengq2/references/gatk/b37/STAR_index_2.5.3a_ensembl_v75_sjdb99",
-      transcript_gtf => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.75.MT.gtf",
-      name_map_file  => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.75.MT.map",
+      fasta_file     => "/scratch/cqs/references/human/b37/human_g1k_v37.fasta",
+      star_index     => "/scratch/cqs/references/human/b37/STAR_index_2.5.3a_ensembl_v75_sjdb99",
+      transcript_gtf => "/scratch/cqs/references/human/b37/Homo_sapiens.GRCh37.75.MT.gtf",
+      name_map_file  => "/scratch/cqs/references/human/b37/Homo_sapiens.GRCh37.75.MT.map",
     }
   );
 }
@@ -96,10 +96,10 @@ sub gencode_mm10_genome {
     merge( global_definition(), common_mm10_genome() ),
     {
       #genome database
-      fasta_file     => "/scratch/cqs/shengq2/references/gencode/mm10/GRCm38.p5.genome.fa",
-      star_index     => "/scratch/cqs/shengq2/references/gencode/mm10/STAR_index_2.5.3a_vM15_sjdb100",
-      transcript_gtf => "/scratch/cqs/shengq2/references/gencode/mm10/gencode.vM15.chr_patch_hapl_scaff.annotation.gtf",
-      name_map_file  => "/scratch/cqs/shengq2/references/gencode/mm10/gencode.vM15.chr_patch_hapl_scaff.annotation.map",
+      fasta_file     => "/scratch/cqs/references/mouse/mm10/GRCm38.p5.genome.fa",
+      star_index     => "/scratch/cqs/references/mouse/mm10/STAR_index_2.5.3a_vM15_sjdb100",
+      transcript_gtf => "/scratch/cqs/references/mouse/mm10/gencode.vM15.chr_patch_hapl_scaff.annotation.gtf",
+      name_map_file  => "/scratch/cqs/references/mouse/mm10/gencode.vM15.chr_patch_hapl_scaff.annotation.map",
     }
   );
 }
