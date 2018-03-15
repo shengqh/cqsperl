@@ -23,6 +23,9 @@ our %EXPORT_TAGS = (
       ensembl_Mmul1_genome
       performRNASeq_ensembl_Mmul1
       performRNASeqTask_ensembl_Mmul1
+      ncbi_UMD311_genome
+      performRNASeq_ncbi_UMD311
+      performRNASeqTask_ncbi_UMD311
       )
   ]
 );
@@ -119,6 +122,22 @@ sub ensembl_Mmul1_genome {
   );
 }
 
+sub ncbi_UMD311_genome {
+  return merge(
+    global_definition(),
+    {
+      perform_gsea => 0,
+
+      #genome database
+      fasta_file     => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/genome.fa",
+      star_index     => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/STAR_index_2.5.3a_ncbi_UMD_3_1_1_sjdb99",
+      transcript_gtf => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/genes.gtf",
+      name_map_file  => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/genes.map",
+      featureCount_option => "-g gene_name"
+    }
+  );
+}
+
 sub performRNASeq_gencode_hg19 {
   my ( $userdef, $perform ) = @_;
   my $def = merge( $userdef, gencode_hg19_genome() );
@@ -168,6 +187,19 @@ sub performRNASeq_ensembl_Mmul1 {
 sub performRNASeqTask_ensembl_Mmul1 {
   my ( $userdef, $task ) = @_;
   my $def = merge( $userdef, ensembl_Mmul1_genome() );
+  performRNASeqTask( $def, $task );
+}
+
+sub performRNASeq_ncbi_UMD311 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge( $userdef, ncbi_UMD311_genome() );
+  my $config = performRNASeq( $def, $perform );
+  return $config;
+}
+
+sub performRNASeqTask_ncbi_UMD311 {
+  my ( $userdef, $task ) = @_;
+  my $def = merge( $userdef, ncbi_UMD311_genome() );
   performRNASeqTask( $def, $task );
 }
 
