@@ -14,7 +14,7 @@ our %EXPORT_TAGS = (
   'all' => [
     qw(hg19_genome hg19_3utr hg38_genome mm10_genome mm10_3utr rn5_genome cel235_genome cfa3_genome performSmallRNA_hg19 performSmallRNATask_hg19 performSmallRNA_hg38 performSmallRNATask_hg38 performSmallRNA_mm10 performSmallRNATask_mm10 performSmallRNA_rn5 performSmallRNATask_rn5
       performSmallRNA_cel235 performSmallRNATask_cel235 performSmallRNA_cfa3 performSmallRNATask_cfa3 performSmallRNA_bta8 performSmallRNATask_bta8 performSmallRNA_eca2 performSmallRNATask_eca2 performSmallRNA_ssc3 performSmallRNATask_ssc3 performSmallRNA_ocu2 performSmallRNATask_ocu2
-      performSmallRNA_oar3 performSmallRNATask_oar3 performSmallRNA_gga4 performSmallRNATask_gga4 performSmallRNA_fca6 performSmallRNATask_fca6 performSmallRNA_rheMac8 performSmallRNATask_rheMac8 performSmallRNA_chir1 performSmallRNATask_chir1 supplement_genome)
+      performSmallRNA_oar3 performSmallRNATask_oar3 performSmallRNA_gga4 performSmallRNATask_gga4 performSmallRNA_fca6 performSmallRNATask_fca6 performSmallRNA_rheMac8 performSmallRNATask_rheMac8 performSmallRNA_chir1 performSmallRNATask_chir1 performSmallRNA_ecoliK12MG1655 performSmallRNATask_ecoliK12MG1655 supplement_genome)
   ]
 );
 
@@ -278,10 +278,10 @@ sub ocu2_genome {
     {
       #genome database
       mirbase_count_option => "-p ocu",
-      coordinate           => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Oryctolagus_cuniculus/ocu2_miRBase21_ucsc-tRNA_ensembl83.bed",
-      coordinate_fasta     => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Oryctolagus_cuniculus/ocu2_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
+      coordinate           => "/scratch/cqs/zhaos/vickers/reference/Oryctolagus_cuniculus/ocu2_miRBase21_ucsc-tRNA_ensembl83.bed",
+      coordinate_fasta     => "/scratch/cqs/zhaos/vickers/reference/Oryctolagus_cuniculus/ocu2_miRBase21_ucsc-tRNA_ensembl83.bed.fa",
 
-      bowtie1_index => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Oryctolagus_cuniculus/bowtie_index_1.1.2/oryCun2",
+      bowtie1_index => "/scratch/cqs/zhaos/vickers/reference/Oryctolagus_cuniculus/bowtie_index_1.1.2/oryCun2",
 
       #      gsnap_index_directory => "/scratch/cqs/zhaos/vickers/reference/Equus_caballus/gsnap_index_k14_2015-06-23",
       #      gsnap_index_name      => "equCab2",
@@ -358,10 +358,24 @@ sub chir1_genome {
     {
       #genome database
       mirbase_count_option => "-p chi",
-      coordinate           => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Capra_hircus/chir1_miRBase21.bed",
-      coordinate_fasta     => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Capra_hircus/chir1_miRBase21.bed.fa",
+      coordinate           => "/scratch/cqs/zhaos/vickers/reference/Capra_hircus/chir1_miRBase21.bed",
+      coordinate_fasta     => "/scratch/cqs/zhaos/vickers/reference/Capra_hircus/chir1_miRBase21.bed.fa",
 
-      bowtie1_index => "/gpfs21/scratch/cqs/zhaos/vickers/reference/Capra_hircus/bowtie_index_1.1.2/chi_ref_CHIR_1.0_All",
+      bowtie1_index => "/scratch/cqs/zhaos/vickers/reference/Capra_hircus/bowtie_index_1.1.2/chi_ref_CHIR_1.0_All",
+    }
+  );
+}
+
+sub ecoliK12MG1655_genome {
+  return merge(
+    supplement_genome(),
+    {
+      #genome database
+      mirbase_count_option => "-p ecoliK12MG1655",  #Make it very unique so that nothing can be found in miRbase
+      coordinate           => "/scratch/cqs/zhaos/vickers/reference/Esch_coli_K_12_MG1655/Esch_coli_K_12_MG1655_ucsc_tRNA_ensembl39.bed",
+      coordinate_fasta     => "/scratch/cqs/zhaos/vickers/reference/Esch_coli_K_12_MG1655/Esch_coli_K_12_MG1655_ucsc_tRNA_ensembl39.bed.fa",
+
+      bowtie1_index => "/scratch/cqs/zhaos/vickers/reference/Esch_coli_K_12_MG1655/bowtie_index_1.2.2/Escherichia_coli_str_k_12_substr_mg1655.ASM584v2.dna.chromosome.Chromosome",
     }
   );
 }
@@ -587,6 +601,21 @@ sub performSmallRNA_chir1 {
 sub performSmallRNATask_chir1 {
   my ( $userdef, $task ) = @_;
   my $def = getSmallRNADefinition( $userdef, chir1_genome() );
+
+  performSmallRNATask( $def, $task );
+}
+
+sub performSmallRNA_ecoliK12MG1655 {
+  my ( $userdef, $perform ) = @_;
+  my $def = getSmallRNADefinition( $userdef, ecoliK12MG1655_genome() );
+
+  my $config = performSmallRNA( $def, $perform );
+  return $config;
+}
+
+sub performSmallRNATask_ecoliK12MG1655 {
+  my ( $userdef, $task ) = @_;
+  my $def = getSmallRNADefinition( $userdef, ecoliK12MG1655_genome() );
 
   performSmallRNATask( $def, $task );
 }
