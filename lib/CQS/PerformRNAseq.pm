@@ -52,8 +52,10 @@ sub common_hg19_genome() {
     annovar_buildver    => "hg19",
     annovar_db          => "/scratch/cqs/shengq2/references/annovar/humandb/",
     gsea_jar            => "/home/zhaos/bin/gsea-3.0.jar",
-    gsea_db             => "/scratch/cqs/references/GSEA/v6.1/v6.1",
+    gsea_db             => "/scratch/cqs/references/GSEA/v6.1",
     gsea_categories     => "'h.all.v6.1.symbols.gmt', 'c2.all.v6.1.symbols.gmt', 'c5.all.v6.1.symbols.gmt', 'c6.all.v6.1.symbols.gmt', 'c7.all.v6.1.symbols.gmt'",
+    perform_webgestalt  => 1,
+    perform_gsea        => 1,
   };
 }
 
@@ -129,10 +131,10 @@ sub ncbi_UMD311_genome {
       perform_gsea => 0,
 
       #genome database
-      fasta_file     => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/genome.fa",
-      star_index     => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/STAR_index_2.5.3a_ncbi_UMD_3_1_1_sjdb99",
-      transcript_gtf => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/genes.gtf",
-      name_map_file  => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/genes.map",
+      fasta_file          => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/genome.fa",
+      star_index          => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/STAR_index_2.5.3a_ncbi_UMD_3_1_1_sjdb99",
+      transcript_gtf      => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/genes.gtf",
+      name_map_file       => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/genes.map",
       featureCount_option => "-g gene_name"
     }
   );
