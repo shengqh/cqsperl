@@ -51,13 +51,14 @@ sub supplement_genome {
     fungus_group4_species_map => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/20160225_Group4SpeciesAll.species.map",
 
     #UCSC tRNA database
-    bowtie1_tRNA_index => "/scratch/cqs/shengq2/references/smallrna/v3/GtRNAdb2/bowtie_index_1.1.2/GtRNAdb2.20161214.mature",
-    trna_category_map  => "/scratch/cqs/shengq2/references/smallrna/v3/GtRNAdb2/GtRNAdb2.20161214.category.map",
+    bowtie1_tRNA_index => "/scratch/cqs/references/smallrna/GtRNAdb2.20161214.mature",
+    trna_category_map  => "/scratch/cqs/references/smallrna/GtRNAdb2.20161214.category.map",
+   #This file is broken, need to be re-uploaded
     trna_map           => "/scratch/cqs/shengq2/references/smallrna/v3/GtRNAdb2/GtRNAdb2.20161214.map",
 
     #SILVA rRNA database
-    bowtie1_rRNA_index => "/scratch/cqs/shengq2/references/smallrna/v3/SILVA/bowtie_index_1.1.2/SILVA_128.rmdup",
-    rrna_category_map  => "/scratch/cqs/shengq2/references/smallrna/v3/SILVA/SILVA_128.rmdup.category.map",
+    bowtie1_rRNA_index => "/scratch/cqs/references/smallrna/SILVA_128.rmdup",
+    rrna_category_map  => "/scratch/cqs/references/smallrna/SILVA_128.rmdup.category.map",
 
     blast_localdb => "/scratch/cqs/shengq2/references/blastdb",
 
@@ -73,12 +74,12 @@ sub hg19_genome {
     {
       #genome database
       mirbase_count_option  => "-p hsa",
-      coordinate            => "/scratch/cqs/shengq2/references/smallrna/v3/hg19_miRBase21_GtRNAdb2_gencode19_ncbi.bed",
-      coordinate_fasta      => "/scratch/cqs/shengq2/references/smallrna/v3/hg19_miRBase21_GtRNAdb2_gencode19_ncbi.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq2/references/smallrna/v3/bowtie_index_1.1.2/hg19_miRBase21_GtRNAdb2_gencode19_ncbi",
-      gsnap_index_directory => "/scratch/cqs/shengq2/references/gencode/hg19/gsnap_index_k14_2016-08-08/",
-      gsnap_index_name      => "GRCh37.p13.genome",
-      star_index_directory  => "/scratch/cqs/shengq2/references/gencode/hg19/STAR_index_2.5.2b_gencodeV19_sjdb99",
+      coordinate            => "/scratch/cqs/references/smallrna/hg19_miRBase21_GtRNAdb2_gencode19_ncbi.bed",
+      coordinate_fasta      => "/scratch/cqs/references/smallrna/hg19_miRBase21_GtRNAdb2_gencode19_ncbi.bed.fa",
+      bowtie1_index         => "/scratch/cqs/references/smallrna/hg19_miRBase21_GtRNAdb2_gencode19_ncbi",
+#      gsnap_index_directory => "/scratch/cqs/shengq2/references/gencode/hg19/gsnap_index_k14_2016-08-08/",
+#      gsnap_index_name      => "GRCh37.p13.genome",
+#      star_index_directory  => "/scratch/cqs/shengq2/references/gencode/hg19/STAR_index_2.5.2b_gencodeV19_sjdb99",
 
       tDRmapper       => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
       tDRmapper_fasta => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/hg19_mature_and_pre.fa",
@@ -107,12 +108,12 @@ sub hg38_genome {
     {
       #genome database
       mirbase_count_option  => "-p hsa",
-      coordinate            => "/scratch/cqs/shengq2/references/smallrna/v3/hg38_miRBase21_GtRNAdb2_gencode25_ncbi.bed",
-      coordinate_fasta      => "/scratch/cqs/shengq2/references/smallrna/v3/hg38_miRBase21_GtRNAdb2_gencode25_ncbi.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq2/references/smallrna/v3/bowtie_index_1.1.2/hg38_miRBase21_GtRNAdb2_gencode25_ncbi",
-      gsnap_index_directory => "/scratch/cqs/shengq2/references/gencode/hg38/gsnap_index_k14_2016-08-08",
-      gsnap_index_name      => "GRCh38.p5.genome",
-      star_index_directory  => "/scratch/cqs/shengq2/references/gencode/hg38/STAR_index_2.5.2b_gencodeV25_sjdb99",
+      coordinate            => "/scratch/cqs/references/smallrna/hg38_miRBase21_GtRNAdb2_gencode25_ncbi.bed",
+      coordinate_fasta      => "/scratch/cqs/references/smallrna/hg38_miRBase21_GtRNAdb2_gencode25_ncbi.bed.fa",
+      bowtie1_index         => "/scratch/cqs/references/smallrna/hg38_miRBase21_GtRNAdb2_gencode25_ncbi",
+#      gsnap_index_directory => "/scratch/cqs/shengq2/references/gencode/hg38/gsnap_index_k14_2016-08-08",
+#      gsnap_index_name      => "GRCh38.p5.genome",
+#      star_index_directory  => "/scratch/cqs/shengq2/references/gencode/hg38/STAR_index_2.5.2b_gencodeV25_sjdb99",
       hasYRNA               => 1,
       hasSnRNA              => 1,
       hasSnoRNA             => 1,
@@ -138,12 +139,12 @@ sub mm10_genome {
 
       #genome database
       mirbase_count_option  => "-p mmu",
-      coordinate            => "/scratch/cqs/shengq2/references/smallrna/v3/mm10_miRBase21_GtRNAdb2_gencode12_ncbi.bed",
-      coordinate_fasta      => "/scratch/cqs/shengq2/references/smallrna/v3/mm10_miRBase21_GtRNAdb2_gencode12_ncbi.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq2/references/smallrna/v3/bowtie_index_1.1.2/mm10_miRBase21_GtRNAdb2_gencode12_ncbi",
-      gsnap_index_directory => "/scratch/cqs/shengq2/references/gencode/mm10/gsnap_index_k14_2016-08-08/",
-      gsnap_index_name      => "GRCm38.p5.genome",
-      star_index_directory  => "/scratch/cqs/shengq2/references/gencode/mm10/STAR_index_2.5.2b_gencodeVM12_sjdb99",
+      coordinate            => "/scratch/cqs/references/smallrna/mm10_miRBase21_GtRNAdb2_gencode12_ncbi.bed",
+      coordinate_fasta      => "/scratch/cqs/references/smallrna/mm10_miRBase21_GtRNAdb2_gencode12_ncbi.bed.fa",
+      bowtie1_index         => "/scratch/cqs/references/smallrna/mm10_miRBase21_GtRNAdb2_gencode12_ncbi",
+#      gsnap_index_directory => "/scratch/cqs/shengq2/references/gencode/mm10/gsnap_index_k14_2016-08-08/",
+#      gsnap_index_name      => "GRCm38.p5.genome",
+#      star_index_directory  => "/scratch/cqs/shengq2/references/gencode/mm10/STAR_index_2.5.2b_gencodeVM12_sjdb99",
 
       tDRmapper       => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
       tDRmapper_fasta => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/mm10_mature_pre_for_tdrMapper.fa",
@@ -172,12 +173,12 @@ sub rn5_genome {
 
       #genome database
       mirbase_count_option  => "-p rno",
-      coordinate            => "/scratch/cqs/shengq2/references/smallrna/v3/rn5_miRBase21_GtRNAdb2_ensembl79_ncbi.bed",
-      coordinate_fasta      => "/scratch/cqs/shengq2/references/smallrna/v3/rn5_miRBase21_GtRNAdb2_ensembl79_ncbi.bed.fa",
-      bowtie1_index         => "/scratch/cqs/shengq2/references/smallrna/v3/bowtie_index_1.1.2/rn5_miRBase21_GtRNAdb2_ensembl79_ncbi",
-      gsnap_index_directory => "/scratch/cqs/shengq2/references/rn5/gsnap_index_k14_2016-08-08/",
-      gsnap_index_name      => "rn5",
-      star_index_directory  => "/scratch/cqs/shengq2/references/rn5/STAR_index_2.5.2b_ensemblV79_sjdb99"
+      coordinate            => "/scratch/cqs/references/smallrna/rn5_miRBase21_GtRNAdb2_ensembl79_ncbi.bed",
+      coordinate_fasta      => "/scratch/cqs/references/smallrna/rn5_miRBase21_GtRNAdb2_ensembl79_ncbi.bed.fa",
+      bowtie1_index         => "/scratch/cqs/references/smallrna/rn5_miRBase21_GtRNAdb2_ensembl79_ncbi",
+#      gsnap_index_directory => "/scratch/cqs/shengq2/references/rn5/gsnap_index_k14_2016-08-08/",
+#      gsnap_index_name      => "rn5",
+#      star_index_directory  => "/scratch/cqs/shengq2/references/rn5/STAR_index_2.5.2b_ensemblV79_sjdb99"
     }
   );
 }
