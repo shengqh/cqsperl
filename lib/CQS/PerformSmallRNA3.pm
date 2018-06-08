@@ -33,28 +33,29 @@ sub supplement_genome {
     bowtie1_miRBase_index => $mirBase21,
 
     #human microbime database
-    bowtie1_bacteria_group1_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/bowtie_index_1.1.2/bacteriaDatabaseGroup1",
-
+    #bowtie1_bacteria_group1_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/bowtie_index_1.1.2/bacteriaDatabaseGroup1",
+    bowtie1_bacteria_group1_index => "/scratch/cqs/references/smallrna/20170206_Group1SpeciesAll",
+    
     #bacteria_group1_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20160907_Group1SpeciesAll.txt.log",
-    bacteria_group1_species_map => "/scratch/cqs/zhaos/vickers/reference/bacteria/group1/20170206_Group1SpeciesAll.species.map",
+    bacteria_group1_species_map => "/scratch/cqs/references/smallrna/20170206_Group1SpeciesAll.species.map",
 
     #human enviroment bacteria database
-    bowtie1_bacteria_group2_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/bowtie_index_1.1.2/bacteriaDatabaseGroup2",
+    bowtie1_bacteria_group2_index => "/scratch/cqs/references/smallrna/20160907_Group2SpeciesAll",
 
     #bacteria_group2_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20160907_Group2SpeciesAll.txt.log",
-    bacteria_group2_species_map => "/scratch/cqs/zhaos/vickers/reference/bacteria/group2/20160907_Group2SpeciesAll.species.map",
+    bacteria_group2_species_map => "/scratch/cqs/references/smallrna/20160907_Group2SpeciesAll.species.map",
 
     #fungus database
-    bowtie1_fungus_group4_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/bowtie_index_1.1.2/group4",
+    #bowtie1_fungus_group4_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/bowtie_index_1.1.2/group4",
+    bowtie1_fungus_group4_index => "/scratch/cqs/references/smallrna/20160225_Group4SpeciesAll",
 
     #fungus_group4_log           => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/20160225_group4.txt",
-    fungus_group4_species_map => "/scratch/cqs/zhaos/vickers/reference/bacteria/group4/20160225_Group4SpeciesAll.species.map",
+    fungus_group4_species_map => "/scratch/cqs/references/smallrna/20160225_Group4SpeciesAll.species.map",
 
     #UCSC tRNA database
     bowtie1_tRNA_index => "/scratch/cqs/references/smallrna/GtRNAdb2.20161214.mature",
     trna_category_map  => "/scratch/cqs/references/smallrna/GtRNAdb2.20161214.category.map",
-   #This file is broken, need to be re-uploaded
-    trna_map           => "/scratch/cqs/shengq2/references/smallrna/v3/GtRNAdb2/GtRNAdb2.20161214.map",
+    trna_map           => "/scratch/cqs/references/smallrna/GtRNAdb2.20161214.map",
 
     #SILVA rRNA database
     bowtie1_rRNA_index => "/scratch/cqs/references/smallrna/SILVA_128.rmdup",
