@@ -102,9 +102,9 @@ sub gencode_mm10_genome {
     {
       #genome database
       fasta_file     => "/scratch/cqs/references/mouse/mm10/GRCm38.p5.genome.fa",
-      star_index     => "/scratch/cqs/references/mouse/mm10/STAR_index_2.5.3a_vM15_sjdb100",
-      transcript_gtf => "/scratch/cqs/references/mouse/mm10/gencode.vM15.chr_patch_hapl_scaff.annotation.gtf",
-      name_map_file  => "/scratch/cqs/references/mouse/mm10/gencode.vM15.chr_patch_hapl_scaff.annotation.map",
+      star_index     => "/scratch/cqs/references/mouse/mm10/STAR_index_2.5.3a_gencodeVM16_sjdb99",
+      transcript_gtf => "/scratch/cqs/references/mouse/mm10/gencode.vM16.chr_patch_hapl_scaff.annotation.gtf",
+      name_map_file  => "/scratch/cqs/references/mouse/mm10/gencode.vM16.chr_patch_hapl_scaff.annotation.map",
     }
   );
 }
