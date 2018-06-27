@@ -106,13 +106,13 @@ sub ucsc_hg19_options {
 sub common_mm10_options() {
   return {
     #clean option
-    blacklist_file => "/scratch/cqs/shengq2/references/mappable_region/mm10/mm10.blacklist.bed",
+    blacklist_file => "/scratch/cqs/references/mappable_region/mm10/mm10.blacklist.bed",
 
     #macs2
     macs2_genome => "mm",
 
     #enhancer
-    enhancer_cpg_path => "/scratch/cqs/shengq2/references/ucsc/mm10_cpg_islands.bed",
+    enhancer_cpg_path => "/scratch/cqs/references/ucsc/mm10_cpg_islands.bed",
 
     #chipqc
     chipqc_genome      => "mm10",
@@ -143,13 +143,13 @@ sub ucsc_mm10_options {
     merge( common_options(), common_mm10_options() ),
     {
       #aligner database
-      bowtie2_index => "/scratch/cqs/shengq2/references/ucsc/illumina/mm10/Sequence/Bowtie2Index/genome",
-      bowtie1_fasta => "/scratch/cqs/shengq2/references/ucsc/illumina/mm10/Sequence/BowtieIndex/genome.fa",
-      bowtie1_index => "/scratch/cqs/shengq2/references/ucsc/illumina/mm10/Sequence/BowtieIndex/genome",
-      bwa_fasta     => "/scratch/cqs/shengq2/references/ucsc/illumina/mm10/Sequence/BWAIndex/genome.fa",
+      bowtie2_index => "/scratch/cqs/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/Bowtie2Index/genome",
+      bowtie1_fasta => "/scratch/cqs/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/BowtieIndex/genome.fa",
+      bowtie1_index => "/scratch/cqs/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/BowtieIndex/genome",
+      bwa_fasta     => "/scratch/cqs/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa",
 
       #enhancer
-      enhancer_genome_path => "/scratch/cqs/shengq2/references/ucsc/illumina/mm10/Sequence/Chromosomes/",
+      enhancer_genome_path => "/scratch/cqs/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/Chromosomes/",
     }
   );
 }

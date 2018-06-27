@@ -47,10 +47,10 @@ sub global_definition {
 sub common_hg19_genome() {
   return {
     webgestalt_organism => "hsapiens",
-    dbsnp               => "/scratch/cqs/references/human/b37/dbsnp_150.b37.vcf",
+    dbsnp               => "/scratch/cqs/references/human/b37/dbsnp_150.b37.vcf.gz",
     annovar_param       => "-protocol refGene,avsnp147,cosmic70 -operation g,f,f --remove",
     annovar_buildver    => "hg19",
-    annovar_db          => "/scratch/cqs/shengq2/references/annovar/humandb/",
+    annovar_db          => "/scratch/cqs/references/annovar/humandb/",
     gsea_jar            => "/home/zhaos/bin/gsea-3.0.jar",
     gsea_db             => "/scratch/cqs/references/GSEA/v6.1",
     gsea_categories     => "'h.all.v6.1.symbols.gmt', 'c2.all.v6.1.symbols.gmt', 'c5.all.v6.1.symbols.gmt', 'c6.all.v6.1.symbols.gmt', 'c7.all.v6.1.symbols.gmt'",
@@ -88,7 +88,7 @@ sub gatk_b37_genome {
 sub common_mm10_genome() {
   return {
     webgestalt_organism => "mmusculus",
-    dbsnp               => "/scratch/cqs/shengq2/references/dbsnp/mm10/mouse_GRCm38_v142_M.vcf",
+    dbsnp               => "/scratch/cqs/references/dbsnp/mouse_10090_b150_GRCm38p4.vcf.gz",
     annovar_buildver    => "mm10",
     annovar_param       => "-protocol refGene -operation g --remove",
     annovar_db          => "/scratch/cqs/shengq2/references/annovar/mm10db/",
@@ -102,7 +102,7 @@ sub gencode_mm10_genome {
     {
       #genome database
       fasta_file     => "/scratch/cqs/references/mouse/mm10/GRCm38.p5.genome.fa",
-      star_index     => "/scratch/cqs/references/mouse/mm10/STAR_index_2.5.3a_gencodeVM16_sjdb99",
+      star_index     => "/scratch/cqs/references/mouse/mm10/STAR_index_2.5.3a_vM16_sjdb100",
       transcript_gtf => "/scratch/cqs/references/mouse/mm10/gencode.vM16.chr_patch_hapl_scaff.annotation.gtf",
       name_map_file  => "/scratch/cqs/references/mouse/mm10/gencode.vM16.chr_patch_hapl_scaff.annotation.map",
     }
