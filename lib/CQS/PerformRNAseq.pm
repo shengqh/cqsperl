@@ -65,7 +65,7 @@ sub gencode_hg19_genome {
     {
       #genome database
       fasta_file     => "/scratch/cqs/references/human/hg19/GRCh37.p13.genome.fa",
-      star_index     => "/scratch/cqs/references/human/hg19/STAR_index_2.5.2b_gencodeV19_sjdb99",
+      star_index     => "/scratch/cqs/references/human/hg19/STAR_index_2.5.3a_gencodeV19_sjdb99",
       transcript_gtf => "/scratch/cqs/references/human/hg19/gencode.v19.chr_patch_hapl_scaff.annotation.gtf",
       name_map_file  => "/scratch/cqs/references/human/hg19/gencode.v19.chr_patch_hapl_scaff.annotation.map",
     }
