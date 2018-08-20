@@ -110,6 +110,9 @@ sub yan_hg38_genome() {
       star_index     => "/scratch/h_vangard_1/guoy1/reference/hg38/star_index",
       transcript_gtf => "/scratch/h_vangard_1/guoy1/reference/annotation3/hg38/Homo_sapiens.GRCh38.86_chr1-22-X-Y-MT.gtf",
       name_map_file  => "/scratch/h_vangard_1/guoy1/reference/annotation3/hg38/Homo_sapiens.GRCh38.86_chr1-22-X-Y-MT.gtf.map",
+      
+      #software
+      star_location => "/scratch/cqs/shengq2/tools/STAR-2.5.2a/bin/Linux_x86_64_static/STAR",
     }
   );
 }
@@ -148,6 +151,9 @@ sub yan_mm10_genome {
       star_index     => "/scratch/h_vangard_1/guoy1/reference/mm10/star_index",
       transcript_gtf => "/scratch/h_vangard_1/guoy1/reference/annotation3/mm10/Mus_musculus.GRCm38.82_chr1-19-X-Y-M.gtf",
       name_map_file  => "/scratch/h_vangard_1/guoy1/reference/annotation3/mm10/Mus_musculus.GRCm38.82_chr1-19-X-Y-M.gtf.map",
+      
+      #software
+      star_location => "/scratch/cqs/shengq2/tools/STAR-2.5.2a/bin/Linux_x86_64_static/STAR",
     }
   );
 }
