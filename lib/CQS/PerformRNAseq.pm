@@ -17,9 +17,15 @@ our %EXPORT_TAGS = (
       gatk_b37_genome
       performRNASeq_gatk_b37
       performRNASeqTask_gatk_b37
+      yan_hg38_genome
+      performRNASeq_yan_hg38
+      performRNASeqTask_yan_hg38
       gencode_mm10_genome
       performRNASeq_gencode_mm10
       performRNASeqTask_gencode_mm10
+      yan_mm10_genome
+      performRNASeq_yan_mm10
+      performRNASeqTask_yan_mm10
       ensembl_Mmul1_genome
       performRNASeq_ensembl_Mmul1
       performRNASeqTask_ensembl_Mmul1
@@ -85,6 +91,29 @@ sub gatk_b37_genome {
   );
 }
 
+sub yan_hg38_genome() {
+  return merge(
+    global_definition(),
+    {
+      webgestalt_organism => "hsapiens",
+      annovar_param       => "-protocol refGene,avsnp147,cosmic70 -operation g,f,f --remove",
+      annovar_buildver    => "hg38",
+      annovar_db          => "/scratch/cqs/references/annovar/humandb/",
+      gsea_jar            => "/home/zhaos/bin/gsea-3.0.jar",
+      gsea_db             => "/scratch/cqs/references/GSEA/v6.1",
+      gsea_categories     => "'h.all.v6.1.symbols.gmt', 'c2.all.v6.1.symbols.gmt', 'c5.all.v6.1.symbols.gmt', 'c6.all.v6.1.symbols.gmt', 'c7.all.v6.1.symbols.gmt'",
+      perform_webgestalt  => 1,
+      perform_gsea        => 1,
+
+      #genome database
+      fasta_file     => "/scratch/h_vangard_1/guoy1/reference/hg38/hg38chr.fa",
+      star_index     => "/scratch/h_vangard_1/guoy1/reference/hg38/star_index",
+      transcript_gtf => "/scratch/h_vangard_1/guoy1/reference/annotation3/hg38/Homo_sapiens.GRCh38.86_chr1-22-X-Y-MT.gtf",
+      name_map_file  => "/scratch/h_vangard_1/guoy1/reference/annotation3/hg38/Homo_sapiens.GRCh38.86_chr1-22-X-Y-MT.gtf.map",
+    }
+  );
+}
+
 sub common_mm10_genome() {
   return {
     webgestalt_organism => "mmusculus",
@@ -105,6 +134,20 @@ sub gencode_mm10_genome {
       star_index     => "/scratch/cqs/references/mouse/mm10/STAR_index_2.5.3a_gencodeVM16_sjdb99",
       transcript_gtf => "/scratch/cqs/references/mouse/mm10/gencode.vM16.chr_patch_hapl_scaff.annotation.gtf",
       name_map_file  => "/scratch/cqs/references/mouse/mm10/gencode.vM16.chr_patch_hapl_scaff.annotation.map",
+    }
+  );
+}
+
+
+sub yan_mm10_genome {
+  return merge(
+    merge( global_definition(), common_mm10_genome() ),
+    {
+      #genome database
+      fasta_file     => "/scratch/h_vangard_1/guoy1/reference/mm10/star_index/mm10.fa",
+      star_index     => "/scratch/h_vangard_1/guoy1/reference/mm10/star_index",
+      transcript_gtf => "/scratch/h_vangard_1/guoy1/reference/annotation3/mm10/Mus_musculus.GRCm38.82_chr1-19-X-Y-M.gtf",
+      name_map_file  => "/scratch/h_vangard_1/guoy1/reference/annotation3/mm10/Mus_musculus.GRCm38.82_chr1-19-X-Y-M.gtf.map",
     }
   );
 }
@@ -166,6 +209,19 @@ sub performRNASeqTask_gatk_b37 {
   performRNASeqTask( $def, $task );
 }
 
+sub performRNASeq_yan_hg38 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge( $userdef, yan_hg38_genome() );
+  my $config = performRNASeq( $def, $perform );
+  return $config;
+}
+
+sub performRNASeqTask_yan_hg38 {
+  my ( $userdef, $task ) = @_;
+  my $def = merge( $userdef, yan_hg38_genome() );
+  performRNASeqTask( $def, $task );
+}
+
 sub performRNASeq_gencode_mm10 {
   my ( $userdef, $perform ) = @_;
   my $def = merge( $userdef, gencode_mm10_genome() );
@@ -176,6 +232,19 @@ sub performRNASeq_gencode_mm10 {
 sub performRNASeqTask_gencode_mm10 {
   my ( $userdef, $task ) = @_;
   my $def = merge( $userdef, gencode_mm10_genome() );
+  performRNASeqTask( $def, $task );
+}
+
+sub performRNASeq_yan_mm10 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge( $userdef, yan_mm10_genome() );
+  my $config = performRNASeq( $def, $perform );
+  return $config;
+}
+
+sub performRNASeqTask_yan_mm10 {
+  my ( $userdef, $task ) = @_;
+  my $def = merge( $userdef, yan_mm10_genome() );
   performRNASeqTask( $def, $task );
 }
 
