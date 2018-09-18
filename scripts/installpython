@@ -1,0 +1,8 @@
+#!/bin/bash
+
+osversion="$(cat /etc/centos-release | cut -d' ' -f4 | cut -d '.' -f1)"
+if [ $osversion != '7' ]; then
+  osversion='6'
+fi
+pip install --install-option="--prefix=/scratch/cqs/shengq2/pythonlib_os$osversion" --ignore-installed $1 $2 $3 $4 $5
+

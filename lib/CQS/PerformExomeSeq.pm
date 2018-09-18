@@ -3,13 +3,13 @@ package CQS::PerformExomeSeq;
 
 use strict;
 use warnings;
-use Pipeline::RNASeq;
+use Pipeline::ExomeSeq;
 use Hash::Merge qw( merge );
 
 require Exporter;
 our @ISA = qw(Exporter);
 
-our %EXPORT_TAGS = ( 'all' => [ qw(gatk_b37_genome performRNASeq_gatk_b37) ] );
+our %EXPORT_TAGS = ( 'all' => [qw(gatk_b37_genome performExomeSeq_gatk_b37)] );
 
 our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
@@ -30,27 +30,33 @@ sub gatk_b37_genome {
     global_definition(),
     {
       #genome database
-      transcript_gtf => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.gtf",
-      name_map_file  => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.map",
-      star_index     => "/scratch/cqs/shengq2/references/gatk/b37/STAR_index_2.5.2b_ensembl_v82_sjdb99",
-      fasta_file     => "/scratch/cqs/shengq2/references/gatk/b37/STAR_index_2.5.2b_ensembl_v82_sjdb99/human_g1k_v37.fasta",
-      dbsnp          => "/scratch/cqs/shengq2/references/gatk/b37/dbsnp_150.b37.vcf",
-      annovar_param  => "-protocol refGene,avsnp147,cosmic70 -operation g,f,f --remove",
-      annovar_db     => "/scratch/cqs/shengq2/references/annovar/humandb/"
+      bwa_fasta        => "/scratch/cqs/shengq2/references/gatk/b37/bwa_index_0.7.17/human_g1k_v37.fasta",
+      transcript_gtf   => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.gtf",
+      name_map_file    => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.map",
+      dbsnp            => "/scratch/cqs/shengq2/references/gatk/b37/dbsnp_150.b37.vcf.gz",
+      hapmap           => "/scratch/cqs/shengq2/references/gatk/b37/hapmap_3.3.b37.vcf",
+      omni             => "/scratch/cqs/shengq2/references/gatk/b37/1000G_omni2.5.b37.vcf",
+      g1000            => "/scratch/cqs/shengq2/references/gatk/b37/1000G_phase1.snps.high_confidence.b37.vcf",
+      mills            => "/scratch/cqs/shengq2/references/gatk/b37/Mills_and_1000G_gold_standard.indels.b37.vcf",
+      cosmic           => "/scratch/cqs/shengq2/references/cosmic/cosmic_v71_hg19_16569_MT.vcf",
+      perform_annovar  => 1,
+      annovar_buildver => "hg19",
+      annovar_param    => "-protocol refGene,avsnp147,cosmic70,exac03 -operation g,f,f,f --remove",
+      annovar_db       => "/scratch/cqs/shengq2/references/annovar/humandb/",
     }
   );
 }
 
-sub performRNASeq_gatk_b37 {
+sub performExomeSeq_gatk_b37 {
   my ( $userdef, $perform ) = @_;
   my $def = merge( $userdef, gatk_b37_genome() );
-  my $config = performRNASeq( $def, $perform );
+  my $config = performExomeSeq( $def, $perform );
   return $config;
 }
 
-sub performRNASeqTask_gatk_b37 {
+sub performExomeSeqTask_gatk_b37 {
   my ( $userdef, $task ) = @_;
   my $def = merge( $userdef, gatk_b37_genome() );
-  performRNASeqTask( $def, $task );
+  performExomeSeq( $def, $task );
 }
 1;
