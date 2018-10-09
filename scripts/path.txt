@@ -195,3 +195,8 @@ fi
 
 ulimit -s 102400
 alias r="$MY_RSTUDIO_BIN/rstudio"
+
+export VEP_PATH=/scratch/cqs/softwares/ensembl-vep
+export VEP_DATA=/scratch/cqs/references/vep_data
+export PERL5LIB=$VEP_PATH:$PERL5LIB
+export PATH=$VEP_PATH/htslib:$PATH

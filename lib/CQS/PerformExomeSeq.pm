@@ -21,6 +21,9 @@ sub global_definition {
     gatk_jar   => "/scratch/cqs/shengq2/local/bin/gatk/GenomeAnalysisTK.jar",
     picard_jar => "/scratch/cqs/shengq2/local/bin/picard/picard.jar",
     cqstools   => "/home/shengq2/cqstools/cqstools.exe",
+    vcf2maf_pl => "/scratch/cqs/softwares/mskcc-vcf2maf/vcf2maf.pl",
+    vep_path   => "/scratch/cqs/softwares/ensembl-vep",
+    vep_data   => "/scratch/cqs/references/vep_cache",
   };
 }
 
@@ -43,6 +46,8 @@ sub gatk_b37_genome {
       annovar_buildver => "hg19",
       annovar_param    => "-protocol refGene,avsnp147,cosmic70,exac03 -operation g,f,f,f --remove",
       annovar_db       => "/scratch/cqs/shengq2/references/annovar/humandb/",
+      species    => "homo_sapiens",
+      ncbi_build => "GRCh37",
     }
   );
 }
