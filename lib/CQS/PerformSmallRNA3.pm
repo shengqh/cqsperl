@@ -75,6 +75,7 @@ sub hg19_genome {
     {
       #genome database
       mirbase_count_option  => "-p hsa",
+      miRNA_coordinate            => "/scratch/cqs/references/smallrna/hg19_miRBase21_GtRNAdb2_gencode19_ncbi.miRNA.bed",
       coordinate            => "/scratch/cqs/references/smallrna/hg19_miRBase21_GtRNAdb2_gencode19_ncbi.bed",
       coordinate_fasta      => "/scratch/cqs/references/smallrna/hg19_miRBase21_GtRNAdb2_gencode19_ncbi.bed.fa",
       bowtie1_index         => "/scratch/cqs/references/smallrna/hg19_miRBase21_GtRNAdb2_gencode19_ncbi",
@@ -110,6 +111,7 @@ sub hg38_genome {
     {
       #genome database
       mirbase_count_option  => "-p hsa",
+      miRNA_coordinate            => "/scratch/cqs/references/smallrna/hg38_miRBase21_GtRNAdb2_gencode25_ncbi.miRNA.bed",
       coordinate            => "/scratch/cqs/references/smallrna/hg38_miRBase21_GtRNAdb2_gencode25_ncbi.bed",
       coordinate_fasta      => "/scratch/cqs/references/smallrna/hg38_miRBase21_GtRNAdb2_gencode25_ncbi.bed.fa",
       bowtie1_index         => "/scratch/cqs/references/smallrna/hg38_miRBase21_GtRNAdb2_gencode25_ncbi",
@@ -141,6 +143,7 @@ sub mm10_genome {
 
       #genome database
       mirbase_count_option  => "-p mmu",
+      miRNA_coordinate            => "/scratch/cqs/references/smallrna/mm10_miRBase21_GtRNAdb2_gencode12_ncbi.miRNA.bed",
       coordinate            => "/scratch/cqs/references/smallrna/mm10_miRBase21_GtRNAdb2_gencode12_ncbi.bed",
       coordinate_fasta      => "/scratch/cqs/references/smallrna/mm10_miRBase21_GtRNAdb2_gencode12_ncbi.bed.fa",
       bowtie1_index         => "/scratch/cqs/references/smallrna/mm10_miRBase21_GtRNAdb2_gencode12_ncbi",
@@ -175,6 +178,7 @@ sub rn5_genome {
 
       #genome database
       mirbase_count_option  => "-p rno",
+      miRNA_coordinate            => "/scratch/cqs/references/smallrna/rn5_miRBase21_GtRNAdb2_ensembl79_ncbi.miRNA.bed",
       coordinate            => "/scratch/cqs/references/smallrna/rn5_miRBase21_GtRNAdb2_ensembl79_ncbi.bed",
       coordinate_fasta      => "/scratch/cqs/references/smallrna/rn5_miRBase21_GtRNAdb2_ensembl79_ncbi.bed.fa",
       bowtie1_index         => "/scratch/cqs/references/smallrna/rn5_miRBase21_GtRNAdb2_ensembl79_ncbi",

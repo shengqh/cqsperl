@@ -44,7 +44,7 @@ sub gatk_b37_genome {
       cosmic           => "/scratch/cqs/shengq2/references/cosmic/cosmic_v71_hg19_16569_MT.vcf",
       perform_annovar  => 1,
       annovar_buildver => "hg19",
-      annovar_param    => "-protocol refGene,avsnp147,cosmic70,exac03 -operation g,f,f,f --remove",
+      annovar_param    => "-protocol refGene,avsnp147,cosmic70,exac03,clinvar_20180603 -operation g,f,f,f,f --remove",
       annovar_db       => "/scratch/cqs/shengq2/references/annovar/humandb/",
       species    => "homo_sapiens",
       ncbi_build => "GRCh37",

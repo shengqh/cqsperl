@@ -30,6 +30,7 @@ module load zlib/.1.2.8
 #module load bzip2/.1.0.6
 #module load cairo/.1.14.6
 #module load Pango/.1.40.3
+module load Gdk-Pixbuf/.2.36.0
 
 #module load MUSCLE/3.8.31
 
@@ -56,6 +57,8 @@ if [ $osversion == '7' ]; then
 
   #gsnap
   #MY_GSNAP_BIN=/scratch/cqs/softwares/gsnap_os7/bin
+
+  export PATH=/scratch/cqs/softwares/firefox:$PATH
 else
   osversion='6'
   module load ScaLAPACK/2.0.2-OpenBLAS-0.2.18-LAPACK-3.6.1
