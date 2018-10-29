@@ -19,6 +19,11 @@ my $def = {
   #target dir which will be automatically created and used to save code and result
   target_dir => "/scratch/cqs/shengq2/temp/RNAseq_mouse",
 
+  #adapter trimming
+  perform_cutadapt => 0,
+  cutadapt_option  => "-a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT",
+  min_read_length  => 30,
+
   #source files
   files => {
     "729_AF_7" =>

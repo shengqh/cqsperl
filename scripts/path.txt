@@ -59,6 +59,10 @@ if [ $osversion == '7' ]; then
   #MY_GSNAP_BIN=/scratch/cqs/softwares/gsnap_os7/bin
 
   export PATH=/scratch/cqs/softwares/firefox:$PATH
+
+  export SINGULARITY_TMPDIR=/scratch/cqs/softwares/singularity/temp
+  export SINGULARITY_CACHE=/scratch/cqs/softwares/singularity/cache
+
 else
   osversion='6'
   module load ScaLAPACK/2.0.2-OpenBLAS-0.2.18-LAPACK-3.6.1
