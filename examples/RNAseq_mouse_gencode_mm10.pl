@@ -21,7 +21,7 @@ my $def = {
 
   #adapter trimming
   perform_cutadapt => 0,
-  cutadapt_option  => "-a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT",
+  cutadapt_option  => "-q 20 -a AGATCGGAAGAGCACACGTC -A AGATCGGAAGAGCGTCGTGT",
   min_read_length  => 30,
 
   #source files

@@ -105,7 +105,7 @@ CUFFLINKS=/home/shengq2/local/bin/cufflinks
 
 BWA=/scratch/cqs/shengq2/local/bin/bwa
 
-BOWTIE=/scratch/cqs/shengq2/local/bin/bowtie
+BOWTIE=/scratch/cqs/softwares/bowtie-1.2.2-linux-x86_64
 BOWTIE2=/scratch/cqs/shengq2/local/bin/bowtie2:/scratch/cqs/shengq2/local/bin/bowtie2/scripts
 
 TOPHAT2=/scratch/cqs/shengq2/local/bin/tophat2
