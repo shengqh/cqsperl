@@ -5,13 +5,13 @@ use warnings;
 use CQS::PerformRNAseq;
 use CQS::ClassFactory;
 
-#cqstools file_def -i /scratch/cqs/shengq2/brown/data/1112_1442/ -f gz -m samplename.txt -n \(.+ZF.\\d+\)
+#cqstools file_def -i /scratch/cqs/pipeline_example/rnaseq_data -n \(sample.\)
 my $def = {
 
   #General options
-  task_name  => "zf_1112_1142_3685",
+  task_name  => "rnaseq_example",
   email      => "quanhu.sheng.1\@vumc.org",
-  target_dir => "/scratch/cqs/shengq2/temp/20181023_rnaseq_zf_1112_1142_3685_human",
+  target_dir => "/scratch/cqs/shengq2/temp/rnaseq_example",
   max_thread => 8,
 
   is_paired => 1,
@@ -21,34 +21,27 @@ my $def = {
   min_read_length  => 30,
 
   files => {
-    "DM_EC4" =>
-      [ "/scratch/cqs/shengq2/brown/data/1112_1442/1112-ZF-7-ATTACTCG-TATAGCCT_S1_R1_001.fastq.gz", "/scratch/cqs/shengq2/brown/data/1112_1442/1112-ZF-7-ATTACTCG-TATAGCCT_S1_R2_001.fastq.gz" ],
-    "DM_EC6" =>
-      [ "/scratch/cqs/shengq2/brown/data/1112_1442/1112-ZF-11-CGCTCATT-TATAGCCT_S3_R1_001.fastq.gz", "/scratch/cqs/shengq2/brown/data/1112_1442/1112-ZF-11-CGCTCATT-TATAGCCT_S3_R2_001.fastq.gz" ],
-    "DM_EC7" =>
-      [ "/scratch/cqs/shengq2/brown/data/1112_1442/1442-ZF-1-GAGATTCC-TAATCTTA_S59_R1_001.fastq.gz", "/scratch/cqs/shengq2/brown/data/1112_1442/1442-ZF-1-GAGATTCC-TAATCTTA_S59_R2_001.fastq.gz" ],
-    "DM_WBC4" =>
-      [ "/scratch/cqs/shengq2/brown/data/1112_1442/1112-ZF-8-TCCGGAGA-TATAGCCT_S2_R1_001.fastq.gz", "/scratch/cqs/shengq2/brown/data/1112_1442/1112-ZF-8-TCCGGAGA-TATAGCCT_S2_R2_001.fastq.gz" ],
-    "DM_WBC6" =>
-      [ "/scratch/cqs/shengq2/brown/data/1112_1442/1112-ZF-12-GAGATTCC-TATAGCCT_S4_R1_001.fastq.gz", "/scratch/cqs/shengq2/brown/data/1112_1442/1112-ZF-12-GAGATTCC-TATAGCCT_S4_R2_001.fastq.gz" ],
-    "DM_WBC7" =>
-      [ "/scratch/cqs/shengq2/brown/data/1112_1442/1442-ZF-2-ATTCAGAA-TAATCTTA_S60_R1_001.fastq.gz", "/scratch/cqs/shengq2/brown/data/1112_1442/1442-ZF-2-ATTCAGAA-TAATCTTA_S60_R2_001.fastq.gz" ]
-    ,
-    "HUVEC_11" => [ "/scratch/cqs/shengq2/brown/data/3685/3685-JDB-11_S11_R1_001.fastq.gz", "/scratch/cqs/shengq2/brown/data/3685/3685-JDB-11_S11_R2_001.fastq.gz" ],
-    "HUVEC_12" => [ "/scratch/cqs/shengq2/brown/data/3685/3685-JDB-12_S12_R1_001.fastq.gz", "/scratch/cqs/shengq2/brown/data/3685/3685-JDB-12_S12_R2_001.fastq.gz" ],
-    "HUVEC_13" => [ "/scratch/cqs/shengq2/brown/data/3685/3685-JDB-13_S13_R1_001.fastq.gz", "/scratch/cqs/shengq2/brown/data/3685/3685-JDB-13_S13_R2_001.fastq.gz" ],
+    "sample1" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample1_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample1_R2.fastq.gz"],
+    "sample2" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample2_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample2_R2.fastq.gz"],
+    "sample3" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample3_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample3_R2.fastq.gz"],
+    "sample4" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample4_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample4_R2.fastq.gz"],
+    "sample5" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample5_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample5_R2.fastq.gz"],
+    "sample6" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample6_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample6_R2.fastq.gz"],
+    "sample7" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample7_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample7_R2.fastq.gz"],
+    "sample8" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample8_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample8_R2.fastq.gz"],
+    "sample9" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample9_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample9_R2.fastq.gz"],
   },
   groups => {
-    "Diabetic_EC"  => [ "DM_EC4",   "DM_EC6",   "DM_EC7" ],
-    "Diabetic_WBC" => [ "DM_WBC4",  "DM_WBC6",  "DM_WBC7" ],
-    "HUVEC"        => [ "HUVEC_11", "HUVEC_12", "HUVEC_13" ],
+    "Group1" => [ "sample1", "sample2", "sample3" ],
+    "Group2" => [ "sample4", "sample5", "sample6" ],
+    "Group3" => [ "sample7", "sample8", "sample9" ],
   },
   pairs => {
-    "DM_EC_vs_DM_WBC" => {
-      groups => [ "Diabetic_WBC", "Diabetic_EC" ],
-      paired => [ "DM_4",         "DM_6", "DM_7", "DM_4", "DM_6", "DM_7" ],
+    "Group2_vs_Group1" => {
+      groups => [ "Group1", "Group2" ],
+      paired => [ "Patient1", "Patient2", "Patient3", "Patient1", "Patient2", "Patient3" ],
     },
-    "DM_EC_vs_HUVEC" => [ "HUVEC", "Diabetic_EC" ],
+    "Group3_vs_Group1" => [ "Group1", "Group3" ],
   },
   perform_proteincoding_gene => 1,
   outputPdf                  => 1,
