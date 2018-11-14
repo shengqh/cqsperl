@@ -2,13 +2,13 @@
 
 |Task|Software|
 |-|-|
-|QC|FastqQC|
-|Adapter trimming|Cutadapt (Optional)|
-|Mapping|STAR|
-|Counting|FeatureCount|
-|Differential analysis|DESeq2|
-|Gene Ontology and Pathway analysis|WebGestalt|
-|Gene Enrichment Set Analysis|GSEA|
+|QC|[FastqQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)|
+|Adapter trimming|[Cutadapt](https://cutadapt.readthedocs.io/en/stable/) (Optional)|
+|Mapping|[STAR](https://github.com/alexdobin/STAR)|
+|Counting|[featureCounts](http://bioinf.wehi.edu.au/featureCounts/)|
+|Differential analysis|[DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)|
+|Gene Ontology and Pathway analysis|[WebGestaltR](https://cran.r-project.org/web/packages/WebGestaltR/index.html)|
+|Gene Enrichment Set Analysis|[GSEA](http://software.broadinstitute.org/gsea/index.jsp)|
 |Report||
 
 <hr>
