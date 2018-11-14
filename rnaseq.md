@@ -38,7 +38,7 @@
 
 <hr>
 
-* Configuration file
+* [Configuration file](https://raw.githubusercontent.com/shengqh/cqsperl/master/examples/RNAseq_human_gatk_b37.pl)
 
 ```
 #!/usr/bin/perl
@@ -120,7 +120,7 @@ Now let's generate the slurm scripts:
 cd /scratch/cqs/YOURNAME
 mkdir pipelinetest
 cd pipelinetest
-cp /home/shengq2/program/cqsperl/examples/RNAseq_human_gatk_b37.pl .
+wget https://raw.githubusercontent.com/shengqh/cqsperl/master/examples/RNAseq_human_gatk_b37.pl
 vi RNAseq_human_gatk_b37.pl
 	#replace email 
 	#replace target_dir with /scratch/cqs/YOURNAME/pipelinetest/rnaseq
