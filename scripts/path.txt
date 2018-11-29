@@ -22,8 +22,6 @@ module load libpng/.1.6.24
 
 module load CMake/3.7.1
 
-#module load Python/2.7.12
-
 module load zlib/.1.2.8
 
 #module load X11/.20160819
@@ -31,6 +29,8 @@ module load zlib/.1.2.8
 #module load cairo/.1.14.6
 #module load Pango/.1.40.3
 module load Gdk-Pixbuf/.2.36.0
+
+module load BioPerl/1.7.1
 
 #module load MUSCLE/3.8.31
 
@@ -45,8 +45,9 @@ if [ $osversion == '7' ]; then
 
   module load GST-plugins-base/.0.10.36
 
-  #SYSPYTHONBIN=/accre/arch/easybuild/software/Compiler/GCC/5.4.0-2.26/Python/2.7.12/bin
-  SYSPYTHONBIN=/scratch/cqs/softwares/Python-2.7.12/bin
+  module load Python/2.7.12
+
+  #SYSPYTHONBIN=/scratch/cqs/softwares/Python-2.7.12/bin
 
   MY_R_BIN=/scratch/cqs/shengq2/R-3.5.1-os7/bin
   MY_R_LIBS=/scratch/cqs/shengq2/Rlibrary-os7
@@ -72,6 +73,7 @@ else
   module load Aspera-CLI/3.7.2
 
   SYSPYTHONBIN=/opt/easybuild/software/Compiler/GCC/5.4.0-2.26/Python/2.7.12/bin
+  export PATH=$SYSPYTHONBIN:$PATH
 
   MY_R_BIN=/scratch/cqs/shengq2/R-3.5.1-os6/bin
   MY_R_LIBS=/scratch/cqs/shengq2/Rlibrary-os6
@@ -93,7 +95,7 @@ fi
 SQH_PYTHON_LIB=/scratch/cqs/shengq2/pythonlib_os$osversion
 
 PYTHONBIN=$SQH_PYTHON_LIB/bin
-MYBIN=/scratch/cqs/shengq2/tools/pandoc-2.2.3.2/bin:/scratch/cqs/shengq2/tools/quality_scope:/scratch/cqs/shengq2/R3/lib64/R/bin:/home/shengq2/proteomicstools:/home/shengq2/cqstools:/scratch/cqs/shengq2/source/hisat2-2.1.0:/scratch/cqs/shengq2/local/bin/bedtools2/bin:/scratch/cqs/shengq2/local/bin/bbmap:/scratch/cqs/shengq2/tools/mirdeep2_0_0_8/bin:/scratch/cqs/shengq2/local/bin/subread/bin::/scratch/cqs/shengq2/local/bin:/home/shengq2/perl5/bin:/home/shengq2/local/bin:/home/shengq2/program/perl/bin:/scratch/cqs/shengq2/local/bin/bedops:/scratch/cqs/shengq2/local/bin/bradnerlab
+MYBIN=/scratch/cqs/softwares/ensembl-git-tools/bin:/scratch/cqs/shengq2/tools/pandoc-2.2.3.2/bin:/scratch/cqs/shengq2/tools/quality_scope:/scratch/cqs/shengq2/R3/lib64/R/bin:/home/shengq2/proteomicstools:/home/shengq2/cqstools:/scratch/cqs/shengq2/source/hisat2-2.1.0:/scratch/cqs/shengq2/local/bin/bedtools2/bin:/scratch/cqs/shengq2/local/bin/bbmap:/scratch/cqs/shengq2/tools/mirdeep2_0_0_8/bin:/scratch/cqs/shengq2/local/bin/subread/bin::/scratch/cqs/shengq2/local/bin:/home/shengq2/perl5/bin:/home/shengq2/local/bin:/home/shengq2/program/perl/bin:/scratch/cqs/shengq2/local/bin/bedops:/scratch/cqs/shengq2/local/bin/bradnerlab
 
 HTMLDOC=/home/shengq2/bin/htmldoc-1.8.27/htmldoc
 
@@ -132,10 +134,11 @@ FUSIONCATCHER=/scratch/cqs/shengq2/local/bin/fusioncatcher/bin
 export SHRIMP_FOLDER=/scratch/cqs/shengq2/local/bin/SHRiMP
 SHRiMP=$SHRIMP_FOLDER/bin:$SHRIMP_FOLDER/utils
 
-#export PATH=$MY_GSNAP_BIN:$MY_R_BIN:$SYSPYTHONBIN:/scratch/cqs/shengq2/local/bin/weblogo:$FUSIONCATCHER:/scratch/cqs/shengq2/local/bin/PARalyzer:/scratch/cqs/shengq2/local/bin/ncbi-blast/bin:$MYBIN:$FASTQC:$BWA:$SRA:$ACT:$FASTA:$BOWTIE:$BOWTIE2:$TOPHAT2:$CUFFLINKS:$PYTHONBIN:$HTMLDOC:$ANNOVAR:$HOMER:$NOVOALIGN:$SHRiMP:$PATH
-export PATH=$MY_R_BIN:$SYSPYTHONBIN:/scratch/cqs/shengq2/local/bin/weblogo:$FUSIONCATCHER:/scratch/cqs/shengq2/local/bin/PARalyzer:/scratch/cqs/shengq2/local/bin/ncbi-blast/bin:$MYBIN:$FASTQC:$BWA:$SRA:$ACT:$FASTA:$BOWTIE:$BOWTIE2:$TOPHAT2:$CUFFLINKS:$PYTHONBIN:$HTMLDOC:$ANNOVAR:$HOMER:$NOVOALIGN:$SHRiMP:$PATH
+#export PATH=$MY_GSNAP_BIN:$MY_R_BIN:/scratch/cqs/shengq2/local/bin/weblogo:$FUSIONCATCHER:/scratch/cqs/shengq2/local/bin/PARalyzer:/scratch/cqs/shengq2/local/bin/ncbi-blast/bin:$MYBIN:$FASTQC:$BWA:$SRA:$ACT:$FASTA:$BOWTIE:$BOWTIE2:$TOPHAT2:$CUFFLINKS:$PYTHONBIN:$HTMLDOC:$ANNOVAR:$HOMER:$NOVOALIGN:$SHRiMP:$PATH
+export PATH=$MY_R_BIN:/scratch/cqs/shengq2/local/bin/weblogo:$FUSIONCATCHER:/scratch/cqs/shengq2/local/bin/PARalyzer:/scratch/cqs/shengq2/local/bin/ncbi-blast/bin:$MYBIN:$FASTQC:$BWA:$SRA:$ACT:$FASTA:$BOWTIE:$BOWTIE2:$TOPHAT2:$CUFFLINKS:$PYTHONBIN:$HTMLDOC:$ANNOVAR:$HOMER:$NOVOALIGN:$SHRiMP:$PATH
 
-SQHPERLLIB=/scratch/cqs/shengq2/tools/mirdeep2_0_0_8/lib/perl5:/home/shengq2/program/ngsperl/lib/:/home/shengq2/program/cqsperl/lib/:/scratch/cqs/shengq2/source/bioperl-live/:/home/shengq2/perl5/lib/perl5/:/scratch/cqs/shengq2/local/share/perl5
+SQHPERLLIB=/scratch/cqs/shengq2/tools/mirdeep2_0_0_8/lib/perl5:/home/shengq2/program/ngsperl/lib/:/home/shengq2/program/cqsperl/lib/:/home/shengq2/perl5/lib/perl5/:/scratch/cqs/shengq2/local/share/perl5
+#SQHPERLLIB=/scratch/cqs/shengq2/tools/mirdeep2_0_0_8/lib/perl5:/home/shengq2/program/ngsperl/lib/:/home/shengq2/program/cqsperl/lib/:/scratch/cqs/shengq2/source/bioperl-live/:/home/shengq2/perl5/lib/perl5/:/scratch/cqs/shengq2/local/share/perl5
 if [ -z "$PERL5LIB" ]
 then
   export PERL5LIB=$SQHPERLLIB
@@ -205,5 +208,5 @@ alias r="$MY_RSTUDIO_BIN/rstudio"
 
 export VEP_PATH=/scratch/cqs/softwares/ensembl-vep
 export VEP_DATA=/scratch/cqs/references/vep_data
-export PERL5LIB=$VEP_PATH:$PERL5LIB
+export PERL5LIB=/scratch/cqs/softwares/ensembl-io/modules:/scratch/cqs/softwares/ensembl-compara/modules:/scratch/cqs/softwares/ensembl-funcgen/modules:/scratch/cqs/softwares/ensembl-variation/modules:/scratch/cqs/softwares/ensembl/modules:$VEP_PATH:$PERL5LIB
 export PATH=$VEP_PATH/htslib:$PATH
