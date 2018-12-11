@@ -25,7 +25,7 @@ sub global_definition {
     cqstools          => "/home/shengq2/cqstools/cqstools.exe",
     vcf2maf_pl        => "/scratch/cqs/softwares/mskcc-vcf2maf/vcf2maf.pl",
     vep_path          => "/scratch/cqs/softwares/ensembl-vep",
-    vep_data          => "/scratch/cqs/references/vep_cache",
+    vep_data          => "/scratch/cqs/references/vep_data",
   };
 }
 
@@ -53,6 +53,7 @@ sub gatk_b37_genome {
       annovar_db                => "/scratch/cqs/shengq2/references/annovar/humandb/",
       species                   => "homo_sapiens",
       ncbi_build                => "GRCh37",
+      vep_filter_vcf => "/scratch/cqs/references/board/ExAC.r1.sites.vep.vcf.gz"
     }
   );
 }
