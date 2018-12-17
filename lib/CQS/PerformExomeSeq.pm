@@ -9,7 +9,7 @@ use Hash::Merge qw( merge );
 require Exporter;
 our @ISA = qw(Exporter);
 
-our %EXPORT_TAGS = ( 'all' => [qw(gatk_b37_genome performExomeSeq_gatk_b37)] );
+our %EXPORT_TAGS = ( 'all' => [qw(gatk_b37_genome performExomeSeq_gatk_b37 performExomeSeq_gencode_mm10)] );
 
 our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
@@ -29,7 +29,6 @@ sub global_definition {
   };
 }
 
-#for miRBase analysis, we use the most recent version (corresponding to hg38) since the coordinates are not used in analysis.
 sub gatk_b37_genome {
   return merge(
     global_definition(),
@@ -58,6 +57,29 @@ sub gatk_b37_genome {
   );
 }
 
+sub gencode_mm10_genome {
+  return merge(
+    global_definition(),
+    {
+      #genome database
+      ref_fasta_dict            => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/GRCm38.p6.genome.dict",
+      ref_fasta                 => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/GRCm38.p6.genome.fa",
+      bwa_fasta                 => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/bwa_index_0.7.17/GRCm38.p6.genome.fa",
+      transcript_gtf            => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/gencode.vM19.chr_patch_hapl_scaff.annotation.gtf",
+      name_map_file             => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/gencode.vM19.chr_patch_hapl_scaff.annotation.gtf.map",
+      dbsnp                     => "/scratch/cqs/references/dbsnp/mouse_10090_b150_GRCm38p4.vcf.gz",
+      perform_annovar           => 1,
+      annovar_buildver          => "mm10",
+      annovar_param             => "-protocol refGene -operation g --remove",
+      annovar_db                => "/scratch/cqs/references/annovar/mousedb_20181217/",
+      #species                   => "homo_sapiens",
+      ncbi_build                => "GRCm38",
+      perform_vep => 0,
+      perform_cnv_gatk4_cohort  => 0,
+    }
+  );
+}
+
 sub performExomeSeq_gatk_b37 {
   my ( $userdef, $perform ) = @_;
   my $def = merge( $userdef, gatk_b37_genome() );
@@ -65,9 +87,11 @@ sub performExomeSeq_gatk_b37 {
   return $config;
 }
 
-sub performExomeSeqTask_gatk_b37 {
-  my ( $userdef, $task ) = @_;
-  my $def = merge( $userdef, gatk_b37_genome() );
-  performExomeSeq( $def, $task );
+sub performExomeSeq_gencode_mm10 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge( $userdef, gencode_mm10_genome() );
+  my $config = performExomeSeq( $def, $perform );
+  return $config;
 }
+
 1;
