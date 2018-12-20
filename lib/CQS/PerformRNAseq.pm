@@ -93,7 +93,7 @@ sub common_hg38_genome() {
     annovar_param       => "-protocol refGene,avsnp147,cosmic70 -operation g,f,f --remove",
     annovar_buildver    => "hg38",
     annovar_db          => "/scratch/cqs/references/annovar/humandb/",
-    gsea_jar            => "/home/zhaos/bin/gsea-3.0.jar",
+    gsea_jar            => "/scratch/cqs/softwares/gsea-3.0.jar",
     gsea_db             => "/scratch/cqs/references/GSEA/v6.1",
     gsea_categories     => "'h.all.v6.1.symbols.gmt', 'c2.all.v6.1.symbols.gmt', 'c5.all.v6.1.symbols.gmt', 'c6.all.v6.1.symbols.gmt', 'c7.all.v6.1.symbols.gmt'",
     perform_webgestalt  => 1,
