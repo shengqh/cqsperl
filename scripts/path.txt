@@ -102,7 +102,7 @@ FASTA=/home/shengq2/local/bin/FASTA/
 
 ACT=/scratch/cqs/shengq2/local/bin/ACT
 
-SRA=/scratch/cqs/shengq2/local/bin/sratoolkit/bin
+SRA=/scratch/cqs/softwares/local/bin/sratoolkit/bin
 
 FASTQC=/scratch/cqs/shengq2/local/bin/FastQC
 
