@@ -37,7 +37,7 @@ sub gatk_b37_genome {
       ref_fasta_dict            => "/scratch/cqs/shengq2/references/gatk/b37/human_g1k_v37.dict",
       ref_fasta                 => "/scratch/cqs/shengq2/references/gatk/b37/human_g1k_v37.fasta",
       bwa_fasta                 => "/scratch/cqs/shengq2/references/gatk/b37/bwa_index_0.7.17/human_g1k_v37.fasta",
-      contig_ploidy_priors_file => "/scratch/cqs/references/board/contig_ploidy_priors_homo_sapiens.tsv",
+      contig_ploidy_priors_file => "/scratch/cqs/references/broad/contig_ploidy_priors_homo_sapiens.tsv",
       transcript_gtf            => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.gtf",
       name_map_file             => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.map",
       dbsnp                     => "/scratch/cqs/shengq2/references/gatk/b37/dbsnp_150.b37.vcf.gz",
@@ -45,7 +45,7 @@ sub gatk_b37_genome {
       omni                      => "/scratch/cqs/shengq2/references/gatk/b37/1000G_omni2.5.b37.vcf",
       g1000                     => "/scratch/cqs/shengq2/references/gatk/b37/1000G_phase1.snps.high_confidence.b37.vcf",
       mills                     => "/scratch/cqs/shengq2/references/gatk/b37/Mills_and_1000G_gold_standard.indels.b37.vcf",
-      axiomPoly                 => "/scratch/cqs/references/board/hg19/v0/Axiom_Exome_Plus.genotypes.all_populations.poly.vcf.gz",
+      axiomPoly                 => "/scratch/cqs/references/broad/hg19/v0/Axiom_Exome_Plus.genotypes.all_populations.poly.vcf.gz",
       cosmic                    => "/scratch/cqs/shengq2/references/cosmic/cosmic_v71_hg19_16569_MT.vcf",
       perform_annovar           => 1,
       annovar_buildver          => "hg19",
@@ -53,7 +53,7 @@ sub gatk_b37_genome {
       annovar_db                => "/scratch/cqs/references/annovar/humandb/",
       species                   => "homo_sapiens",
       ncbi_build                => "GRCh37",
-      vep_filter_vcf => "/scratch/cqs/references/board/ExAC.r1.sites.vep.vcf.gz"
+      vep_filter_vcf => "/scratch/cqs/references/broad/ExAC.r1.sites.vep.vcf.gz"
     }
   );
 }
