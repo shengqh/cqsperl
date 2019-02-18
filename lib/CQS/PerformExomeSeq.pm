@@ -20,7 +20,7 @@ sub global_definition {
     constraint        => "haswell",
     gatk3_jar         => "/scratch/cqs/softwares/gatk3.jar",
     gatk4_jar         => "/scratch/cqs/softwares/gatk4.jar",
-    gatk4_singularity => "/scratch/cqs/softwares/singularity/gatk.4.0.12.0.simg",
+    gatk4_singularity => "/scratch/cqs/softwares/singularity/gatk.4.1.0.0.simg",
     picard_jar        => "/scratch/cqs/shengq2/local/bin/picard/picard.jar",
     cqstools          => "/home/shengq2/cqstools/cqstools.exe",
     vcf2maf_pl        => "/scratch/cqs/softwares/mskcc-vcf2maf/vcf2maf.pl",
