@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-package CQS::PerformExomeSeq;
+package CQS::PerformExomeSeq_singapore;
 
 use strict;
 use warnings;
