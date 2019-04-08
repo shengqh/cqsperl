@@ -25,8 +25,12 @@ our %EXPORT_TAGS = (
       performRNASeq_yan_mm10
       ensembl_Mmul1_genome
       performRNASeq_ensembl_Mmul1
+      ensembl_Mmul8_genome
+      performRNASeq_ensembl_Mmul8
       ncbi_UMD311_genome
       performRNASeq_ncbi_UMD311
+      ensembl_CanFam3_1_genome
+      performRNASeq_ensembl_CanFam3_1
       )
   ]
 );
@@ -189,6 +193,21 @@ sub ensembl_Mmul1_genome {
   );
 }
 
+sub ensembl_Mmul8_genome {
+  return merge(
+    global_definition(),
+    {
+      perform_gsea => 0,
+
+      #genome database
+      fasta_file     => "/scratch/cqs/references/macaca_mulatta/Macaca_mulatta.Mmul_8.0.1.dna.toplevel.fa",
+      star_index     => "/scratch/cqs/references/macaca_mulatta/STAR_index_2.5.3a_v8.0.1.95_sjdb100",
+      transcript_gtf => "/scratch/cqs/references/macaca_mulatta/Macaca_mulatta.Mmul_8.0.1.95.gtf",
+      name_map_file  => "/scratch/cqs/references/macaca_mulatta/Macaca_mulatta.Mmul_8.0.1.95.gtf.map",
+    }
+  );
+}
+
 sub ncbi_UMD311_genome {
   return merge(
     global_definition(),
@@ -200,6 +219,22 @@ sub ncbi_UMD311_genome {
       star_index          => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/STAR_index_2.5.3a_ncbi_UMD_3_1_1_sjdb99",
       transcript_gtf      => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/genes.gtf",
       name_map_file       => "/scratch/cqs/references/Bos_taurus/NCBI/UMD_3.1.1/Sequence/WholeGenomeFasta/genes.map",
+      featureCount_option => "-g gene_name"
+    }
+  );
+}
+
+sub ensembl_CanFam3_1_genome {
+  return merge(
+    global_definition(),
+    {
+      perform_gsea => 0,
+
+      #genome database
+      fasta_file          => "/scratch/cqs/references/canis_familiaris/Canis_familiaris.CanFam3.1.dna.toplevel.fa",
+      star_index          => "/scratch/cqs/references/canis_familiaris/STAR_index_2.5.3a_v3.1.96_sjdb100",
+      transcript_gtf      => "/scratch/cqs/references/canis_familiaris/Canis_familiaris.CanFam3.1.96.gtf",
+      name_map_file       => "/scratch/cqs/references/canis_familiaris/Canis_familiaris.CanFam3.1.96.gtf.map",
       featureCount_option => "-g gene_name"
     }
   );
@@ -254,9 +289,23 @@ sub performRNASeq_ensembl_Mmul1 {
   return $config;
 }
 
+sub performRNASeq_ensembl_Mmul8 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge( $userdef, ensembl_Mmul8_genome() );
+  my $config = performRNASeq( $def, $perform );
+  return $config;
+}
+
 sub performRNASeq_ncbi_UMD311 {
   my ( $userdef, $perform ) = @_;
   my $def = merge( $userdef, ncbi_UMD311_genome() );
+  my $config = performRNASeq( $def, $perform );
+  return $config;
+}
+
+sub performRNASeq_ensembl_CanFam3_1 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge( $userdef, ensembl_CanFam3_1_genome() );
   my $config = performRNASeq( $def, $perform );
   return $config;
 }
