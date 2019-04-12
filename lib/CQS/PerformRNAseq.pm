@@ -235,7 +235,6 @@ sub ensembl_CanFam3_1_genome {
       star_index          => "/scratch/cqs/references/canis_familiaris/STAR_index_2.5.3a_v3.1.96_sjdb100",
       transcript_gtf      => "/scratch/cqs/references/canis_familiaris/Canis_familiaris.CanFam3.1.96.gtf",
       name_map_file       => "/scratch/cqs/references/canis_familiaris/Canis_familiaris.CanFam3.1.96.gtf.map",
-      featureCount_option => "-g gene_name"
     }
   );
 }
