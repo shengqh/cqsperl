@@ -39,7 +39,7 @@ sub gatk_hg38_genome {
 #      contig_ploidy_priors_file => "/scratch/cqs/references/broad/contig_ploidy_priors_homo_sapiens.tsv",
       transcript_gtf            => "/scratch/cqs/references/broad/hg38/v0/gencode.v27.primary_assembly.annotation.gtf",
 #      name_map_file             => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.map",
-      dbsnp                     => "/scratch/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf",
+      dbsnp                     => "/scratch/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcfgz",
       hapmap                    => "/scratch/cqs/references/broad/hg38/v0/hapmap_3.3.hg38.vcf.gz",
       omni                      => "/scratch/cqs/references/broad/hg38/v0/1000G_omni2.5.hg38.vcf.gz",
       g1000                     => "/scratch/cqs/references/broad/hg38/v0/1000G_phase1.snps.high_confidence.hg38.vcf.gz",
