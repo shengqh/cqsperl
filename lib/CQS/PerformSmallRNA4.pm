@@ -52,6 +52,10 @@ sub supplement_genome {
     bowtie1_fungus_group4_index => "/scratch/cqs/references/smallrna/20160225_Group4SpeciesAll",
     fungus_group4_species_map   => "/scratch/cqs/references/smallrna/20160225_Group4SpeciesAll.species.map",
 
+    #virus database
+    bowtie1_virus_group6_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group6/bowtie_index_1.2.2/20190424_Group6SpeciesAll.species",
+    virus_group6_species_map   => "/scratch/cqs/zhaos/vickers/reference/bacteria/group6/20190424_Group6SpeciesAll.species.map",
+
     #UCSC tRNA database
     bowtie1_tRNA_index => "/scratch/cqs/references/smallrna/GtRNAdb2.20161214.mature",
     trna_category_map  => "/scratch/cqs/references/smallrna/GtRNAdb2.20161214.category.map",

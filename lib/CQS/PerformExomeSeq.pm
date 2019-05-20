@@ -26,6 +26,7 @@ sub global_definition {
     vcf2maf_pl        => "/scratch/cqs/softwares/mskcc-vcf2maf/vcf2maf.pl",
     vep_path          => "/scratch/cqs/softwares/ensembl-vep",
     vep_data          => "/scratch/cqs/references/vep_data",
+    cluster           => "slurm",
   };
 }
 sub gatk_hg38_genome {
