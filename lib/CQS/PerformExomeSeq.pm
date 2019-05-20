@@ -44,7 +44,7 @@ sub gatk_hg38_genome {
       omni                      => "/scratch/cqs/references/broad/hg38/v0/1000G_omni2.5.hg38.vcf.gz",
       g1000                     => "/scratch/cqs/references/broad/hg38/v0/1000G_phase1.snps.high_confidence.hg38.vcf.gz",
       mills                     => "/scratch/cqs/references/broad/hg38/v0/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz",
-      axiomPoly                 => "/scratch/cqs/references/broad/hg38/v0Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz",
+      axiomPoly                 => "/scratch/cqs/references/broad/hg38/v0/Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz",
       perform_annovar           => 1,
       annovar_buildver          => "hg38",
       annovar_param             => "-protocol refGene,avsnp147,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad_genome,clinvar_20180603 -operation g,f,f,f,f,f,f,f,f,f,f,f --remove",
