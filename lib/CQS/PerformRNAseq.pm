@@ -70,7 +70,7 @@ sub gencode_hg19_genome {
     {
       #genome database
       fasta_file     => "/scratch/cqs/references/human/gencode_GRCh37.p13/GRCh37.p13.genome.fa",
-      star_index     => "/scratch/cqs/references/human/gencode_GRCh37.p13/STAR_index_2.5.3a_gencodeV19_sjdb99",
+      star_index     => "/scratch/cqs/references/human/gencode_GRCh37.p13/STAR_index_2.7.1a_gencodeV19_sjdb100",
       transcript_gtf => "/scratch/cqs/references/human/gencode_GRCh37.p13/gencode.v19.chr_patch_hapl_scaff.annotation.gtf",
       name_map_file  => "/scratch/cqs/references/human/gencode_GRCh37.p13/gencode.v19.chr_patch_hapl_scaff.annotation.map",
     }
@@ -83,7 +83,7 @@ sub gatk_b37_genome {
     {
       #genome database
       fasta_file     => "/scratch/cqs/references/human/b37/human_g1k_v37.fasta",
-      star_index     => "/scratch/cqs/references/human/b37/STAR_index_2.5.3a_ensembl_v75_sjdb99",
+      star_index     => "/scratch/cqs/references/human/b37/STAR_index_2.7.1a_ensembl_v75_sjdb100",
       transcript_gtf => "/scratch/cqs/references/human/b37/Homo_sapiens.GRCh37.75.MT.gtf",
       name_map_file  => "/scratch/cqs/references/human/b37/Homo_sapiens.GRCh37.75.MT.map",
     }
@@ -111,7 +111,7 @@ sub gencode_hg38_genome() {
     {
       #genome database
       fasta_file     => "/scratch/cqs/references/human/gencode_GRCh38.p12/GRCh38.p12.genome.fa",
-      star_index     => "/scratch/cqs/references/human/gencode_GRCh38.p12/STAR_index_2.5.3a_v29_sjdb99",
+      star_index     => "/scratch/cqs/references/human/gencode_GRCh38.p12/STAR_index_2.7.1a_gencodeV29_sjdb100",
       transcript_gtf => "/scratch/cqs/references/human/gencode_GRCh38.p12/gencode.v29.chr_patch_hapl_scaff.annotation.gtf",
       name_map_file  => "/scratch/cqs/references/human/gencode_GRCh38.p12/gencode.v29.chr_patch_hapl_scaff.annotation.gtf.map",
     }
@@ -152,10 +152,10 @@ sub gencode_mm10_genome {
     merge( global_definition(), common_mm10_genome() ),
     {
       #genome database
-      fasta_file     => "/scratch/cqs/references/mouse/gencode_GRCm38.p5/GRCm38.p5.genome.fa",
-      star_index     => "/scratch/cqs/references/mouse/gencode_GRCm38.p5/STAR_index_2.5.3a_gencodeVM16_sjdb99",
-      transcript_gtf => "/scratch/cqs/references/mouse/gencode_GRCm38.p5/gencode.vM16.chr_patch_hapl_scaff.annotation.gtf",
-      name_map_file  => "/scratch/cqs/references/mouse/gencode_GRCm38.p5/gencode.vM16.chr_patch_hapl_scaff.annotation.map",
+      fasta_file     => "/scratch/cqs/references/mouse/mm10/GRCm38.p6.genome.fa",
+      star_index     => "/scratch/cqs/references/mouse/mm10/STAR_index_2.7.1a_gencodeVM19_sjdb100",
+      transcript_gtf => "/scratch/cqs/references/mouse/mm10/gencode.vM19.chr_patch_hapl_scaff.annotation.gtf",
+      name_map_file  => "/scratch/cqs/references/mouse/mm10/gencode.vM19.chr_patch_hapl_scaff.annotation.gtf.map",
     }
   );
 }

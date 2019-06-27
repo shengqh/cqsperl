@@ -78,7 +78,11 @@ sub gatk_b37_genome {
       annovar_db                => "/scratch/cqs/references/annovar/humandb/",
       species                   => "homo_sapiens",
       ncbi_build                => "GRCh37",
-      vep_filter_vcf => "/scratch/cqs/references/broad/ExAC.r1.sites.vep.vcf.gz"
+      vep_filter_vcf            => "/scratch/cqs/references/broad/ExAC.r1.sites.vep.vcf.gz",
+      plotCNVGenes              => 1,
+      biomart_host              => "grch37.ensembl.org",
+      biomart_dataset           => "hsapiens_gene_ensembl",
+      biomart_symbolKey         => "hgnc_symbol",
     }
   );
 }
