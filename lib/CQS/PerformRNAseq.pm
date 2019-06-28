@@ -65,15 +65,15 @@ sub common_hg19_genome() {
 }
 
 sub gencode_hg19_genome {
-  my $root_dir = "";
+  my $root_dir = "/home/users/industry/vanderbiltuniversity/shengq2/scratch/references/human/gencode_GRCh37.p13/";
   return merge(
     merge( global_definition(), common_hg19_genome() ),
     {
       #genome database
-      fasta_file     => "/scratch/cqs/references/human/gencode_GRCh37.p13/GRCh37.p13.genome.fa",
-      star_index     => "/scratch/cqs/references/human/gencode_GRCh37.p13/STAR_index_2.7.1a_gencodeV19_sjdb100",
-      transcript_gtf => "/scratch/cqs/references/human/gencode_GRCh37.p13/gencode.v19.chr_patch_hapl_scaff.annotation.gtf",
-      name_map_file  => "/scratch/cqs/references/human/gencode_GRCh37.p13/gencode.v19.chr_patch_hapl_scaff.annotation.map",
+      fasta_file     => $root_dir . "GRCh37.p13.genome.fa",
+      star_index     => $root_dir . "STAR_index_2.7.1a_gencodeV19_sjdb100",
+      transcript_gtf => $root_dir . "gencode.v19.chr_patch_hapl_scaff.annotation.gtf",
+      name_map_file  => $root_dir . "gencode.v19.chr_patch_hapl_scaff.annotation.map",
     }
   );
 }
