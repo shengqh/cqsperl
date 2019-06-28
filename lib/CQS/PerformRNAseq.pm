@@ -65,6 +65,7 @@ sub common_hg19_genome() {
 }
 
 sub gencode_hg19_genome {
+  my $root_dir = "";
   return merge(
     merge( global_definition(), common_hg19_genome() ),
     {
@@ -148,14 +149,15 @@ sub common_mm10_genome() {
 }
 
 sub gencode_mm10_genome {
+  my $root_dir = "/home/users/industry/vanderbiltuniversity/shengq2/scratch/references/mouse/mm10/";
   return merge(
     merge( global_definition(), common_mm10_genome() ),
     {
       #genome database
-      fasta_file     => "/scratch/cqs/references/mouse/mm10/GRCm38.p6.genome.fa",
-      star_index     => "/scratch/cqs/references/mouse/mm10/STAR_index_2.7.1a_gencodeVM19_sjdb100",
-      transcript_gtf => "/scratch/cqs/references/mouse/mm10/gencode.vM19.chr_patch_hapl_scaff.annotation.gtf",
-      name_map_file  => "/scratch/cqs/references/mouse/mm10/gencode.vM19.chr_patch_hapl_scaff.annotation.gtf.map",
+      fasta_file     => $root_dir . "GRCm38.p6.genome.fa",
+      star_index     => $root_dir . "STAR_index_2.7.1a_gencodeVM19_sjdb100",
+      transcript_gtf => $root_dir . "gencode.vM19.chr_patch_hapl_scaff.annotation.gtf",
+      name_map_file  => $root_dir . "gencode.vM19.chr_patch_hapl_scaff.annotation.gtf.map",
     }
   );
 }
