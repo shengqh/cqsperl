@@ -41,7 +41,7 @@ our $VERSION = '0.01';
 
 sub global_definition {
   return {
-    constraint                => "haswell",
+    cluster                   => "torqueSingapore",
     gatk_jar                  => "/scratch/cqs/shengq2/local/bin/gatk/GenomeAnalysisTK.jar",
     picard_jar                => "/scratch/cqs/shengq2/local/bin/picard/picard.jar",
     cqstools                  => "/opt/cqstools.1.8.1/cqstools.exe", 
