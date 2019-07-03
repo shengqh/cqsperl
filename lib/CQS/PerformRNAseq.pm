@@ -44,7 +44,6 @@ sub global_definition {
     constraint                => "haswell",
     gatk_jar                  => "/scratch/cqs/shengq2/local/bin/gatk/GenomeAnalysisTK.jar",
     picard_jar                => "/scratch/cqs/shengq2/local/bin/picard/picard.jar",
-    cqstools                  => "/home/shengq2/cqstools/cqstools.exe",
     perform_star_featurecount => 1,
   };
 }
