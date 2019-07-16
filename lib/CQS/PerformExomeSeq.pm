@@ -21,7 +21,7 @@ sub global_definition {
     gatk3_jar  => "/scratch/cqs/softwares/gatk3.jar",
     picard_jar => "/scratch/cqs/softwares/picard.jar",
 
-    gatk4_docker_command => "singularity exec /scratch/cqs/softwares/singularity/gatk.4.1.0.0.simg ",
+    gatk4_docker_command => "singularity exec /scratch/cqs/softwares/singularity/gatk.4.1.2.0.simg ",
     gatk4_docker_init    => "source activate gatk  ",
     docker_command       => "singularity exec /scratch/cqs/softwares/singularity/cqs-exomeseq.simg ",
     docker_init          => "",
