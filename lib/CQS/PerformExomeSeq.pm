@@ -18,13 +18,14 @@ our $VERSION = '0.01';
 sub global_definition {
   return {
     constraint => "haswell",
-    gatk3_jar  => "/scratch/cqs/softwares/gatk3.jar",
-    picard_jar => "/scratch/cqs/softwares/picard.jar",
 
-    gatk4_docker_command => "singularity exec /scratch/cqs/softwares/singularity/gatk.4.1.2.0.simg ",
+    gatk4_docker_command => "singularity exec /scratch/cqs/softwares/singularity/cqs-gatk4.simg ",
     gatk4_docker_init    => "source activate gatk  ",
-    docker_command       => "singularity exec /scratch/cqs/softwares/singularity/cqs-exomeseq.simg ",
-    docker_init          => "",
+
+    docker_command => "singularity exec /scratch/cqs/softwares/singularity/cqs-exomeseq.simg ",
+    docker_init    => "",
+    gatk3_jar      => "/opt/gatk3.jar",
+    picard_jar     => "/opt/picard.jar",
 
     vcf2maf_pl => "/scratch/cqs/softwares/mskcc-vcf2maf/vcf2maf.pl",
     vep_path   => "/scratch/cqs/softwares/ensembl-vep",
