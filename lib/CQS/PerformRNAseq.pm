@@ -47,22 +47,17 @@ sub global_definition {
 }
 
 sub no_docker {
-  return { gsea_jar => "/scratch/cqs/software/gsea-3.0.jar", };
+  return { gsea_jar => "/scratch/cqs/software/gsea-3.0.jar" };
 }
 
 sub common_human_genome {
   my ($userdef) = @_;
 
-  my $gseaJar = "/opt/gsea-3.0.jar";
-  if ( ( defined $userdef ) and $userdef->{ignore_docker} ) {
-    $gseaJar = "/scratch/cqs/softwares/gsea-3.0.jar";
-  }
-
-  return merge(
-    global_definition($userdef),
+  my $result = merge(
+    global_definition(),
     {
       webgestalt_organism => "hsapiens",
-      gsea_jar            => $gseaJar,
+      gsea_jar            => "/opt/gsea-3.0.jar",
       docker_command      => "singularity exec /scratch/cqs/softwares/singularity/cqs-rnaseq.simg ",
       annovar_param       => "-protocol refGene,avsnp147,cosmic70 -operation g,f,f --remove",
       annovar_db          => "/scratch/cqs/references/annovar/humandb/",
@@ -72,6 +67,12 @@ sub common_human_genome {
       perform_gsea        => 1,
     }
   );
+
+  if ( ( defined $userdef ) and $userdef->{ignore_docker} ) {
+    $result = merge( $result, no_docker() );
+  }
+
+  return ($result);
 }
 
 sub common_hg19_genome {
