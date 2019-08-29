@@ -29,6 +29,7 @@ sub common_options {
     constraint => "haswell",
 
     docker_command => "singularity exec /scratch/cqs_share/softwares/singularity/cqs-chipseq.simg ",
+    picard_jar     => "/opt/picard.jar",
 
     perform_cutadapt => 0,
 
@@ -118,6 +119,10 @@ sub common_mm10_options() {
     chipqc_chromosomes => 'chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,chr19',
 
     homer_genome => "mm10",
+
+    biomart_host      => "www.ensembl.org",
+    biomart_dataset   => "mmusculus_gene_ensembl",
+    biomart_symbolKey => "mgi_symbol",
   };
 }
 

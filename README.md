@@ -41,7 +41,7 @@ my $def = {
   #target dir which will be automatically created and used to save code and result
   target_dir => "/scratch/cqs/shengq2/vickers/20171207_rnaseq_1048_carrie_human",
 
-  pairend => 1,
+  is_paired_end => 1,
 
   #source files
   files => {
