@@ -38,11 +38,11 @@ sub gatk_hg38_genome {
   return merge(
     global_definition(),
     {
-      ref_fasta_dict => "/scratch/cqs/baiy7/Tim_proj/Family_WGS/genome/hg38/Homo_sapiens_assembly38.dict",
-      ref_fasta      => "/scratch/cqs/baiy7/Tim_proj/Family_WGS/genome/hg38/Homo_sapiens_assembly38.fasta",
-      bwa_fasta      => "/scratch/cqs/baiy7/Tim_proj/Family_WGS/genome/hg38/Homo_sapiens_assembly38.fasta",
+      ref_fasta_dict => "/scratch/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dict",
+      ref_fasta      => "/scratch/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
+      bwa_fasta      => "/scratch/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
 
-      #      contig_ploidy_priors_file => "/scratch/cqs/references/broad/contig_ploidy_priors_homo_sapiens.tsv",
+      contig_ploidy_priors_file => "/scratch/cqs/references/broad/contig_ploidy_priors_homo_sapiens.hg38.tsv",
       transcript_gtf => "/scratch/cqs/references/broad/hg38/v0/gencode.v27.primary_assembly.annotation.gtf",
 
       #      name_map_file             => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.map",
@@ -59,6 +59,10 @@ sub gatk_hg38_genome {
       annovar_db => "/scratch/cqs/references/annovar/humandb/",
       species    => "homo_sapiens",
       ncbi_build => "GRCh38",
+      plotCNVGenes      => 1,
+      biomart_host      => "www.ensembl.org",
+      biomart_dataset   => "hsapiens_gene_ensembl",
+      biomart_symbolKey => "hgnc_symbol",
     }
   );
 }
