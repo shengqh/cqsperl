@@ -43,6 +43,8 @@ sub global_definition {
   return {
     constraint                => "haswell",
     perform_star_featurecount => 1,
+    perform_qc3bam            => 0,
+    qc3_perl                  => "/scratch/cqs_share/softwares/QC3/qc3.pl",
   };
 }
 
@@ -65,7 +67,7 @@ sub common_human_genome {
       gsea_categories     => "'h.all.v6.1.symbols.gmt', 'c2.all.v6.1.symbols.gmt', 'c5.all.v6.1.symbols.gmt', 'c6.all.v6.1.symbols.gmt', 'c7.all.v6.1.symbols.gmt'",
       perform_webgestalt  => 1,
       perform_gsea        => 1,
-      
+
       software_version => {
         "GSEA" => ["v3.0"],
       }
