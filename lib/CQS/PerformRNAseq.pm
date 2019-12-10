@@ -45,6 +45,7 @@ sub global_definition {
     perform_star_featurecount => 1,
     perform_qc3bam            => 0,
     qc3_perl                  => "/scratch/cqs_share/softwares/QC3/qc3.pl",
+    docker_command      => "singularity exec /scratch/cqs/softwares/singularity/cqs-rnaseq.simg ",
   };
 }
 
@@ -60,7 +61,6 @@ sub common_human_genome {
     {
       webgestalt_organism => "hsapiens",
       gsea_jar            => "/opt/gsea-3.0.jar",
-      docker_command      => "singularity exec /scratch/cqs/softwares/singularity/cqs-rnaseq.simg ",
       annovar_param       => "-protocol refGene,avsnp147,cosmic70 -operation g,f,f --remove",
       annovar_db          => "/scratch/cqs/references/annovar/humandb/",
       gsea_db             => "/scratch/cqs/references/GSEA/v6.1",

@@ -36,7 +36,7 @@ sub supplement_genome {
     version    => 4,
     constraint => "haswell",
     #cqstools   => "/home/shengq2/cqstools/cqstools.exe",
-    docker_command => "singularity exec /scratch/cqs/softwares/singularity/cqs-smallRNA.simg ",
+    docker_command => "singularity exec -e /scratch/cqs/softwares/singularity/cqs-smallRNA.simg ",
 
     #miRBase database
     bowtie1_miRBase_index => "/scratch/cqs/references/mirbase/v22/bowtie_index_1.2.2/mature.dna",

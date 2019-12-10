@@ -2,14 +2,9 @@ module load Java/1.8.0_92
 
 module load GCC/5.4.0-2.26
 module load OpenMPI/1.10.3
-#module load R/3.3.3-X11-20160819
-#module load GSL/2.1
 module load OpenBLAS/0.2.18-LAPACK-3.6.1
 
 module load HDF5/1.8.17-serial
-#module load HISAT2/2.0.4
-#module load IMPUTE2/2.3.2_x86_64_static
-#module load ImageMagick/7.0.3-1
 module load Mono/4.6.2.7
 #module load Octave/4.2.1
 module load Perl/5.24.0
@@ -27,22 +22,17 @@ module load zlib/.1.2.8
 
 #module load X11/.20160819
 #module load bzip2/.1.0.6
-#module load cairo/.1.14.6
+module load cairo/.1.14.6
 #module load Pango/.1.40.3
-module load Gdk-Pixbuf/.2.36.0
 
 module load BioPerl/1.7.1
 module load SQLite/3.13.0
 
-#module load MUSCLE/3.8.31
-
 module load ScaLAPACK/2.0.2
 
-module load Qt5/.5.7.0
-module load MySQL-client/5.7.17
+#module load Qt5/.5.7.0
+#module load MySQL-client/5.7.17
 module load Aspera-CLI/3.7.7
-
-module load GST-plugins-base/.0.10.36
 
 module load IMPUTE2/2.3.2
 
@@ -77,7 +67,7 @@ else
 fi
 
 
-MYBIN=$MY_PYTHON_BIN:/scratch/cqs/softwares/edirect:/scratch/cqs/softwares/local/bin:/scratch/cqs/softwares/subread/bin:/scratch/cqs/softwares/gatk4:/scratch/cqs/shengq2/gcloud/open_wdl/runners/cromwell_on_google/monitoring_tools:/scratch/cqs/softwares/ensembl-git-tools/bin:/scratch/cqs/shengq2/tools/pandoc-2.2.3.2/bin:/scratch/cqs/shengq2/tools/quality_scope:/scratch/cqs/shengq2/R3/lib64/R/bin:/home/shengq2/proteomicstools:/home/shengq2/cqstools:/scratch/cqs/shengq2/source/hisat2-2.1.0:/scratch/cqs/shengq2/local/bin/bedtools2/bin:/scratch/cqs/shengq2/local/bin/bbmap:/scratch/cqs/shengq2/tools/mirdeep2_0_0_8/bin:/scratch/cqs/shengq2/local/bin:/home/shengq2/perl5/bin:/home/shengq2/local/bin:/home/shengq2/program/perl/bin:/scratch/cqs/shengq2/local/bin/bedops:/scratch/cqs/shengq2/local/bin/bradnerlab
+MYBIN=$MY_PYTHON_BIN:/scratch/cqs/softwares/10x/cellranger-3.1.0:/scratch/cqs/softwares/edirect:/scratch/cqs/softwares/local/bin:/scratch/cqs/softwares/subread/bin:/scratch/cqs/softwares/gatk4:/scratch/cqs/shengq2/gcloud/open_wdl/runners/cromwell_on_google/monitoring_tools:/scratch/cqs/softwares/ensembl-git-tools/bin:/scratch/cqs/shengq2/tools/pandoc-2.2.3.2/bin:/scratch/cqs/shengq2/tools/quality_scope:/scratch/cqs/shengq2/R3/lib64/R/bin:/home/shengq2/proteomicstools:/home/shengq2/cqstools:/scratch/cqs/shengq2/source/hisat2-2.1.0:/scratch/cqs/shengq2/local/bin/bedtools2/bin:/scratch/cqs/shengq2/local/bin/bbmap:/scratch/cqs/shengq2/tools/mirdeep2_0_0_8/bin:/scratch/cqs/shengq2/local/bin:/home/shengq2/perl5_python2/bin:/home/shengq2/local/bin:/home/shengq2/program/perl/bin:/scratch/cqs/shengq2/local/bin/bedops:/scratch/cqs/shengq2/local/bin/bradnerlab
 
 HTMLDOC=/home/shengq2/bin/htmldoc-1.8.27/htmldoc
 
@@ -118,7 +108,7 @@ SHRiMP=$SHRIMP_FOLDER/bin:$SHRIMP_FOLDER/utils
 
 export PATH=$MY_R_BIN:/scratch/cqs/shengq2/local/bin/weblogo:$FUSIONCATCHER:/scratch/cqs/shengq2/local/bin/PARalyzer:/scratch/cqs/shengq2/local/bin/ncbi-blast/bin:$MYBIN:$FASTQC:$BWA:$SRA:$ACT:$FASTA:$BOWTIE:$BOWTIE2:$TOPHAT2:$CUFFLINKS:$HTMLDOC:$ANNOVAR:$HOMER:$NOVOALIGN:$SHRiMP:$PATH
 
-SQHPERLLIB=/scratch/cqs/shengq2/tools/mirdeep2_0_0_8/lib/perl5:/scratch/cqs_share/softwares/ngsperl/lib/:/scratch/cqs_share/softwares/cqsperl/lib/:/home/shengq2/perl5/lib/perl5/:/scratch/cqs/shengq2/local/share/perl5
+SQHPERLLIB=/scratch/cqs/shengq2/tools/mirdeep2_0_0_8/lib/perl5:/scratch/cqs_share/softwares/ngsperl/lib/:/scratch/cqs_share/softwares/cqsperl/lib/:/home/shengq2/perl5_python2/lib/perl5/:/scratch/cqs/shengq2/local/share/perl5
 if [ -z "$PERL5LIB" ]
 then
   export PERL5LIB=$SQHPERLLIB

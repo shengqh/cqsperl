@@ -19,10 +19,11 @@ sub global_definition {
   return {
     constraint => "haswell",
 
-    gatk4_docker_command => "singularity exec /scratch/cqs/softwares/singularity/cqs-gatk4.simg ",
+    gatk4_docker_command => "singularity exec -e /scratch/cqs/softwares/singularity/cqs-gatk4.simg ",
     gatk4_docker_init    => "source activate gatk  ",
 
-    docker_command => "singularity exec /scratch/cqs/softwares/singularity/cqs-exomeseq.simg ",
+    docker_command => "singularity exec -e /scratch/cqs/softwares/singularity/cqs-exomeseq.simg ",
+    bamplot_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/bamplot.simg ",
     docker_init    => "",
     gatk3_jar      => "/opt/gatk3.jar",
     picard_jar     => "/opt/picard.jar",
@@ -42,6 +43,8 @@ sub gatk_hg38_genome {
       ref_fasta      => "/scratch/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
       bwa_fasta      => "/scratch/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
 
+      has_chr_in_chromosome_name => 1,
+
       contig_ploidy_priors_file => "/scratch/cqs/references/broad/contig_ploidy_priors_homo_sapiens.hg38.tsv",
       transcript_gtf => "/scratch/cqs/references/broad/hg38/v0/gencode.v27.primary_assembly.annotation.gtf",
 
@@ -55,7 +58,7 @@ sub gatk_hg38_genome {
       perform_annovar  => 1,
       annovar_buildver => "hg38",
       annovar_param =>
-"-protocol refGene,avsnp147,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad_genome,clinvar_20180603 -operation g,f,f,f,f,f,f,f,f,f,f,f --remove",
+"-protocol refGene,avsnp147,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad_genome,clinvar_20180603,topmed05 -operation g,f,f,f,f,f,f,f,f,f,f,f,f --remove",
       annovar_db => "/scratch/cqs/references/annovar/humandb/",
       species    => "homo_sapiens",
       ncbi_build => "GRCh38",
@@ -75,6 +78,9 @@ sub gatk_b37_genome {
       ref_fasta_dict            => "/scratch/cqs/shengq2/references/gatk/b37/human_g1k_v37.dict",
       ref_fasta                 => "/scratch/cqs/shengq2/references/gatk/b37/human_g1k_v37.fasta",
       bwa_fasta                 => "/scratch/cqs/shengq2/references/gatk/b37/bwa_index_0.7.17/human_g1k_v37.fasta",
+
+      has_chr_in_chromosome_name => 0,
+
       contig_ploidy_priors_file => "/scratch/cqs/references/broad/contig_ploidy_priors_homo_sapiens.tsv",
       transcript_gtf            => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.gtf",
       name_map_file             => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.map",
@@ -109,6 +115,9 @@ sub gencode_mm10_genome {
       ref_fasta_dict   => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/GRCm38.p6.genome.dict",
       ref_fasta        => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/GRCm38.p6.genome.fa",
       bwa_fasta        => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/bwa_index_0.7.17/GRCm38.p6.genome.fa",
+
+      has_chr_in_chromosome_name => 1,
+
       transcript_gtf   => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/gencode.vM19.chr_patch_hapl_scaff.annotation.gtf",
       name_map_file    => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/gencode.vM19.chr_patch_hapl_scaff.annotation.gtf.map",
       dbsnp            => "/scratch/cqs/references/dbsnp/mouse_10090_b150_GRCm38p4.vcf.gz",

@@ -30,6 +30,7 @@ sub common_options {
 
     cqstools   => "/home/shengq2/cqstools/cqstools.exe",
     picard_jar => "/scratch/cqs/shengq2/local/bin/picard/picard.jar",
+    bamplot_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/bamplot.simg ",
 
     perform_cutadapt => 0,
 
