@@ -1,0 +1,2 @@
+alias lftp="singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-smallRNA.simg lftp "
+alias dropest="singularity exec -e /scratch/cqs_share/softwares/singularity/dropest.simg dropest "
