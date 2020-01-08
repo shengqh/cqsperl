@@ -12,7 +12,7 @@ my $def = {
   task_name => "tcga_brca",
 
   email      => "quanhu.sheng.1\@vumc.org",
-  target_dir => create_directory_or_die("/scratch/cqs/shengq2/jennifer/20190510_johanna_tcga_brca_deseq2"),
+  target_dir => create_directory_or_die("/scratch/cqs/shengq2/temp/20190510_johanna_tcga_brca_deseq2"),
 
   perform_preprocessing => 0,
   perform_mapping => 0,

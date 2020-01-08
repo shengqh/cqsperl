@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#
+#SBATCH -J __MRO_JOB_NAME__
+#SBATCH --nodes=1 
+#SBATCH --ntasks=__MRO_THREADS__
+#SBATCH --mem=__MRO_MEM_GB__G
+#SBATCH -o __MRO_STDOUT__
+#SBATCH -e __MRO_STDERR__
+#SBATCH -t 24:00:00
+#SBATCH --constraint=haswell
+
+
+__MRO_CMD__

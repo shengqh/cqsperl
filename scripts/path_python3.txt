@@ -40,8 +40,9 @@ else
 fi
 
 MY_ENCODE_BIN=/scratch/cqs_share/softwares/encode/chip-seq-pipeline2/src
+MY_CELLRANGER_BIN=/scratch/cqs/softwares/10x/cellranger-3.1.0
 
-MYBIN=$MY_ENCODE_BIN:$MY_PYTHON_BIN:/scratch/cqs/softwares/edirect:/scratch/cqs/softwares/local/bin:/scratch/cqs/softwares/subread/bin:/scratch/cqs/softwares/gatk4:/scratch/cqs/shengq2/gcloud/open_wdl/runners/cromwell_on_google/monitoring_tools:/scratch/cqs/softwares/ensembl-git-tools/bin:/scratch/cqs/shengq2/tools/pandoc-2.2.3.2/bin:/scratch/cqs/shengq2/tools/quality_scope:/scratch/cqs/shengq2/R3/lib64/R/bin:/home/shengq2/proteomicstools:/home/shengq2/cqstools:/scratch/cqs/shengq2/source/hisat2-2.1.0:/scratch/cqs/shengq2/local/bin/bedtools2/bin:/scratch/cqs/shengq2/local/bin/bbmap:/scratch/cqs/shengq2/tools/mirdeep2_0_0_8/bin:/scratch/cqs/shengq2/local/bin:/home/shengq2/local/bin:/home/shengq2/program/perl/bin:/scratch/cqs/shengq2/local/bin/bedops:/scratch/cqs/shengq2/local/bin/bradnerlab
+MYBIN=$MY_CELLRANGER_BIN:$MY_ENCODE_BIN:$MY_PYTHON_BIN:/scratch/cqs/softwares/edirect:/scratch/cqs/softwares/local/bin:/scratch/cqs/softwares/subread/bin:/scratch/cqs/softwares/gatk4:/scratch/cqs/shengq2/gcloud/open_wdl/runners/cromwell_on_google/monitoring_tools:/scratch/cqs/softwares/ensembl-git-tools/bin:/scratch/cqs/shengq2/tools/pandoc-2.2.3.2/bin:/scratch/cqs/shengq2/tools/quality_scope:/scratch/cqs/shengq2/R3/lib64/R/bin:/home/shengq2/proteomicstools:/home/shengq2/cqstools:/scratch/cqs/shengq2/source/hisat2-2.1.0:/scratch/cqs/shengq2/local/bin/bedtools2/bin:/scratch/cqs/shengq2/local/bin/bbmap:/scratch/cqs/shengq2/tools/mirdeep2_0_0_8/bin:/scratch/cqs/shengq2/local/bin:/home/shengq2/local/bin:/home/shengq2/program/perl/bin:/scratch/cqs/shengq2/local/bin/bedops:/scratch/cqs/shengq2/local/bin/bradnerlab
 
 HTMLDOC=/home/shengq2/bin/htmldoc-1.8.27/htmldoc
 
@@ -135,3 +136,6 @@ if [ -f '/scratch/cqs/softwares/google-cloud-sdk/completion.bash.inc' ]; then . 
 
 source /home/shengq2/program/cqsperl/scripts/path_alias.txt
 
+alias cqstools='singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-smallRNA.simg cqstools'
+#alias perl='singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-smallRNA.simg perl'
+alias fastqc='singularity exec /scratch/cqs_share/softwares/singularity/cqs-chipseq.simg fastqc'
