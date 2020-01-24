@@ -30,13 +30,13 @@ my $def = {
   
   #source files
   files => {
-    "VPM150_5mM_cell"   => [ "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-AAGAGG_S1_R1_001.fastq.gz", "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-AAGAGG_S1_R2_001.fastq.gz" ],
-    "VPM150_metaC_cell" => [ "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-GGAGAA_S2_R1_001.fastq.gz", "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-GGAGAA_S2_R2_001.fastq.gz" ],
-    "VPM153_5mM_cell"   => [ "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-AGCATG_S3_R1_001.fastq.gz", "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-AGCATG_S3_R2_001.fastq.gz" ],
-    "VPM153_metaC_cell" => [ "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-GAGTCA_S4_R1_001.fastq.gz", "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-GAGTCA_S4_R2_001.fastq.gz" ],
-    "VPM154_5mM_cell"   => [ "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-CGTAGA_S5_R1_001.fastq.gz", "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-CGTAGA_S5_R2_001.fastq.gz" ],
-    "VPM154_metaC_cell" => [ "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-TCAGAG_S6_R1_001.fastq.gz", "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-TCAGAG_S6_R2_001.fastq.gz" ],
-    "H2O"               => [ "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-CACAGT_S7_R1_001.fastq.gz", "/data/cqs/kasey_vickers_data/20171120_948-WZ-1/948-WZ-1-CACAGT_S7_R2_001.fastq.gz" ],
+    "VPM150_5mM_cell"   => [ "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AAGAGG_S1_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AAGAGG_S1_R2_001.fastq.gz" ],
+    "VPM150_metaC_cell" => [ "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GGAGAA_S2_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GGAGAA_S2_R2_001.fastq.gz" ],
+    "VPM153_5mM_cell"   => [ "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AGCATG_S3_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AGCATG_S3_R2_001.fastq.gz" ],
+    "VPM153_metaC_cell" => [ "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GAGTCA_S4_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GAGTCA_S4_R2_001.fastq.gz" ],
+    "VPM154_5mM_cell"   => [ "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CGTAGA_S5_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CGTAGA_S5_R2_001.fastq.gz" ],
+    "VPM154_metaC_cell" => [ "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-TCAGAG_S6_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-TCAGAG_S6_R2_001.fastq.gz" ],
+    "H2O"               => [ "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CACAGT_S7_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CACAGT_S7_R2_001.fastq.gz" ],
   },
 
   groups => {
