@@ -46,7 +46,7 @@ MYBIN=$MY_CELLRANGER_BIN:$MY_ENCODE_BIN:$MY_PYTHON_BIN:/scratch/cqs/softwares/ed
 
 HTMLDOC=/home/shengq2/bin/htmldoc-1.8.27/htmldoc
 
-ANNOVAR=/scratch/cqs/shengq2/local/bin/annovar
+ANNOVAR=/scratch/cqs_share/softwares/annovar
 
 HOMER=/scratch/cqs/softwares/homer2/bin
 
