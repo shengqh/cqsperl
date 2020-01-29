@@ -9,7 +9,7 @@ use Hash::Merge qw( merge );
 require Exporter;
 our @ISA = qw(Exporter);
 
-our %EXPORT_TAGS = ( 'all' => [qw(gatk_hg38_genome performExomeSeq_gatk_hg38 gatk_b37_genome performExomeSeq_gatk_b37 performExomeSeq_gencode_mm10)] );
+our %EXPORT_TAGS = ( 'all' => [qw(gatk_hg38_genome performExomeSeq_gatk_hg38 gatk_hg19_genome performExomeSeq_gatk_hg19 performExomeSeq_gencode_mm10)] );
 
 our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
@@ -19,10 +19,10 @@ sub global_definition {
   return {
     constraint => "haswell",
 
-    gatk4_docker_command => "singularity exec -e /scratch/cqs/softwares/singularity/cqs-gatk4.simg ",
+    gatk4_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-gatk4.simg ",
     gatk4_docker_init    => "source activate gatk  ",
 
-    docker_command => "singularity exec -e /scratch/cqs/softwares/singularity/cqs-exomeseq.simg ",
+    docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
     bamplot_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/bamplot.simg ",
     docker_init    => "",
     gatk3_jar      => "/opt/gatk3.jar",
@@ -39,27 +39,26 @@ sub gatk_hg38_genome {
   return merge(
     global_definition(),
     {
-      ref_fasta_dict => "/scratch/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dict",
-      ref_fasta      => "/scratch/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
-      bwa_fasta      => "/scratch/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
+      ref_fasta_dict => "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.dict",
+      ref_fasta      => "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
+      bwa_fasta      => "/scratch/cqs_share/references/broad/hg38/v0/bwa_index_0.7.17/Homo_sapiens_assembly38.fasta",
 
       has_chr_in_chromosome_name => 1,
 
-      contig_ploidy_priors_file => "/scratch/cqs/references/broad/contig_ploidy_priors_homo_sapiens.hg38.tsv",
-      transcript_gtf => "/scratch/cqs/references/broad/hg38/v0/gencode.v27.primary_assembly.annotation.gtf",
+      contig_ploidy_priors_file => "/scratch/cqs_share/references/broad/contig_ploidy_priors_homo_sapiens.chr.tsv",
+      transcript_gtf => "/scratch/cqs_share/references/broad/hg38/v0/gencode.v27.primary_assembly.annotation.gtf",
 
-      #      name_map_file             => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.map",
-      dbsnp            => "/scratch/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf.gz",
-      hapmap           => "/scratch/cqs/references/broad/hg38/v0/hapmap_3.3.hg38.vcf.gz",
-      omni             => "/scratch/cqs/references/broad/hg38/v0/1000G_omni2.5.hg38.vcf.gz",
-      g1000            => "/scratch/cqs/references/broad/hg38/v0/1000G_phase1.snps.high_confidence.hg38.vcf.gz",
-      mills            => "/scratch/cqs/references/broad/hg38/v0/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz",
-      axiomPoly        => "/scratch/cqs/references/broad/hg38/v0/Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz",
+      dbsnp            => "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf.gz",
+      hapmap           => "/scratch/cqs_share/references/broad/hg38/v0/hapmap_3.3.hg38.vcf.gz",
+      omni             => "/scratch/cqs_share/references/broad/hg38/v0/1000G_omni2.5.hg38.vcf.gz",
+      g1000            => "/scratch/cqs_share/references/broad/hg38/v0/1000G_phase1.snps.high_confidence.hg38.vcf.gz",
+      mills            => "/scratch/cqs_share/references/broad/hg38/v0/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz",
+      axiomPoly        => "/scratch/cqs_share/references/broad/hg38/v0/Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz",
       perform_annovar  => 1,
       annovar_buildver => "hg38",
       annovar_param =>
-"-protocol refGene,avsnp147,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad_genome,clinvar_20180603,topmed05 -operation g,f,f,f,f,f,f,f,f,f,f,f,f --remove",
-      annovar_db => "/scratch/cqs/references/annovar/humandb/",
+"-protocol refGene,avsnp150,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad211_genome,clinvar_20190305,topmed05 -operation g,f,f,f,f,f,f,f,f,f,f,f,f --remove",
+      annovar_db => "/scratch/cqs_share/references/annovar/humandb/",
       species    => "homo_sapiens",
       ncbi_build => "GRCh38",
       plotCNVGenes      => 1,
@@ -70,35 +69,33 @@ sub gatk_hg38_genome {
   );
 }
 
-sub gatk_b37_genome {
+sub gatk_hg19_genome {
   return merge(
     global_definition(),
     {
-      #genome database
-      ref_fasta_dict            => "/scratch/cqs/shengq2/references/gatk/b37/human_g1k_v37.dict",
-      ref_fasta                 => "/scratch/cqs/shengq2/references/gatk/b37/human_g1k_v37.fasta",
-      bwa_fasta                 => "/scratch/cqs/shengq2/references/gatk/b37/bwa_index_0.7.17/human_g1k_v37.fasta",
+      ref_fasta_dict => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens_assembly19.dict",
+      ref_fasta      => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens_assembly19.fasta",
+      bwa_fasta      => "/scratch/cqs_share/references/broad/hg19/v0/bwa_index_0.7.17/Homo_sapiens_assembly19.fasta",
 
       has_chr_in_chromosome_name => 0,
 
-      contig_ploidy_priors_file => "/scratch/cqs/references/broad/contig_ploidy_priors_homo_sapiens.tsv",
-      transcript_gtf            => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.gtf",
-      name_map_file             => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.map",
-      dbsnp                     => "/scratch/cqs/shengq2/references/gatk/b37/dbsnp_150.b37.vcf.gz",
-      hapmap                    => "/scratch/cqs/shengq2/references/gatk/b37/hapmap_3.3.b37.vcf",
-      omni                      => "/scratch/cqs/shengq2/references/gatk/b37/1000G_omni2.5.b37.vcf",
-      g1000                     => "/scratch/cqs/shengq2/references/gatk/b37/1000G_phase1.snps.high_confidence.b37.vcf",
-      mills                     => "/scratch/cqs/shengq2/references/gatk/b37/Mills_and_1000G_gold_standard.indels.b37.vcf",
-      axiomPoly                 => "/scratch/cqs/references/broad/hg19/v0/Axiom_Exome_Plus.genotypes.all_populations.poly.vcf.gz",
-      cosmic                    => "/scratch/cqs/shengq2/references/cosmic/cosmic_v71_hg19_16569_MT.vcf",
-      perform_annovar           => 1,
-      annovar_buildver          => "hg19",
+      contig_ploidy_priors_file => "/scratch/cqs_share/references/broad/contig_ploidy_priors_homo_sapiens.noChr.tsv",
+      transcript_gtf => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.MT.gtf",
+      name_map_file  => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.MT.gtf.map",
+
+      dbsnp            => "/scratch/cqs_share/references/broad/hg19/v0/dbsnp_138.b37.vcf.gz",
+      hapmap           => "/scratch/cqs_share/references/broad/hg19/v0/hapmap_3.3.b37.vcf.gz",
+      mills            => "/scratch/cqs_share/references/broad/hg19/v0/Mills_and_1000G_gold_standard.indels.b37.vcf.gz",
+      omni             => "/scratch/cqs_share/references/broad/hg19/v0/1000G_omni2.5.b37.vcf.gz",
+      g1000            => "/scratch/cqs_share/references/broad/hg19/v0/1000G_phase1.snps.high_confidence.b37.vcf.gz",
+      axiomPoly        => "/scratch/cqs_share/references/broad/hg19/v0/Axiom_Exome_Plus.genotypes.all_populations.poly.vcf.gz",
+      perform_annovar  => 1,
+      annovar_buildver => "hg19",
       annovar_param =>
-"-protocol refGene,avsnp147,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad_genome,clinvar_20180603 -operation g,f,f,f,f,f,f,f,f,f,f,f --remove",
-      annovar_db        => "/scratch/cqs/references/annovar/humandb/",
-      species           => "homo_sapiens",
-      ncbi_build        => "GRCh37",
-      vep_filter_vcf    => "/scratch/cqs/references/broad/ExAC.r1.sites.vep.vcf.gz",
+"-protocol refGene,avsnp150,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad211_genome,clinvar_20190305,topmed03 -operation g,f,f,f,f,f,f,f,f,f,f,f,f --remove",
+      annovar_db => "/scratch/cqs_share/references/annovar/humandb/",
+      species    => "homo_sapiens",
+      ncbi_build => "GRCh37",
       plotCNVGenes      => 1,
       biomart_host      => "grch37.ensembl.org",
       biomart_dataset   => "hsapiens_gene_ensembl",
@@ -107,7 +104,46 @@ sub gatk_b37_genome {
   );
 }
 
+#sub gatk_b37_genome {
+#  return merge(
+#    global_definition(),
+#    {
+#      #genome database
+#      ref_fasta_dict            => "/scratch/cqs/shengq2/references/gatk/b37/human_g1k_v37.dict",
+#      ref_fasta                 => "/scratch/cqs/shengq2/references/gatk/b37/human_g1k_v37.fasta",
+#      bwa_fasta                 => "/scratch/cqs/shengq2/references/gatk/b37/bwa_index_0.7.17/human_g1k_v37.fasta",
+#
+#      has_chr_in_chromosome_name => 0,
+#
+#      contig_ploidy_priors_file => "/scratch/cqs/references/broad/contig_ploidy_priors_homo_sapiens.tsv",
+#      transcript_gtf            => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.gtf",
+#      name_map_file             => "/scratch/cqs/shengq2/references/gatk/b37/Homo_sapiens.GRCh37.82.MT.map",
+#      dbsnp                     => "/scratch/cqs/shengq2/references/gatk/b37/dbsnp_150.b37.vcf.gz",
+#      hapmap                    => "/scratch/cqs/shengq2/references/gatk/b37/hapmap_3.3.b37.vcf",
+#      omni                      => "/scratch/cqs/shengq2/references/gatk/b37/1000G_omni2.5.b37.vcf",
+#      g1000                     => "/scratch/cqs/shengq2/references/gatk/b37/1000G_phase1.snps.high_confidence.b37.vcf",
+#      mills                     => "/scratch/cqs/shengq2/references/gatk/b37/Mills_and_1000G_gold_standard.indels.b37.vcf",
+#      axiomPoly                 => "/scratch/cqs/references/broad/hg19/v0/Axiom_Exome_Plus.genotypes.all_populations.poly.vcf.gz",
+#      cosmic                    => "/scratch/cqs/shengq2/references/cosmic/cosmic_v71_hg19_16569_MT.vcf",
+#      perform_annovar           => 1,
+#      annovar_buildver          => "hg19",
+#      annovar_param =>
+#"-protocol refGene,avsnp147,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad_genome,clinvar_20180603 -operation g,f,f,f,f,f,f,f,f,f,f,f --remove",
+#      annovar_db        => "/scratch/cqs/references/annovar/humandb/",
+#      species           => "homo_sapiens",
+#      ncbi_build        => "GRCh37",
+#      vep_filter_vcf    => "/scratch/cqs/references/broad/ExAC.r1.sites.vep.vcf.gz",
+#      plotCNVGenes      => 1,
+#      biomart_host      => "grch37.ensembl.org",
+#      biomart_dataset   => "hsapiens_gene_ensembl",
+#      biomart_symbolKey => "hgnc_symbol",
+#    }
+#  );
+#}
+
 sub gencode_mm10_genome {
+  die "damaged, waiting for repair";
+  
   return merge(
     global_definition(),
     {
@@ -141,13 +177,20 @@ sub performExomeSeq_gatk_hg38 {
   return $config;
 }
 
-sub performExomeSeq_gatk_b37 {
+sub performExomeSeq_gatk_hg19 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, gatk_b37_genome() );
+  my $def = merge( $userdef, gatk_hg19_genome() );
   my $config = performExomeSeq( $def, $perform );
   return $config;
 }
 
+#sub performExomeSeq_gatk_b37 {
+#  my ( $userdef, $perform ) = @_;
+#  my $def = merge( $userdef, gatk_b37_genome() );
+#  my $config = performExomeSeq( $def, $perform );
+#  return $config;
+#}
+#
 sub performExomeSeq_gencode_mm10 {
   my ( $userdef, $perform ) = @_;
   my $def = merge( $userdef, gencode_mm10_genome() );
