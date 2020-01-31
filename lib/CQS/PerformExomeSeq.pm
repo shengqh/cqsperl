@@ -80,8 +80,8 @@ sub gatk_hg19_genome {
       has_chr_in_chromosome_name => 0,
 
       contig_ploidy_priors_file => "/scratch/cqs_share/references/broad/contig_ploidy_priors_homo_sapiens.noChr.tsv",
-      transcript_gtf => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.MT.gtf",
-      name_map_file  => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.MT.gtf.map",
+      transcript_gtf => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.gtf",
+      name_map_file  => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.gtf.map",
 
       dbsnp            => "/scratch/cqs_share/references/broad/hg19/v0/dbsnp_138.b37.vcf.gz",
       hapmap           => "/scratch/cqs_share/references/broad/hg19/v0/hapmap_3.3.b37.vcf.gz",
@@ -160,7 +160,7 @@ sub gencode_mm10_genome {
       perform_annovar  => 1,
       annovar_buildver => "mm10",
       annovar_param    => "-protocol refGene -operation g --remove",
-      annovar_db       => "/scratch/cqs/references/annovar/mousedb_20181217/",
+      annovar_db       => "/scratch/cqs_share/references/annovar/mousedb/",
 
       #species                   => "homo_sapiens",
       ncbi_build               => "GRCm38",

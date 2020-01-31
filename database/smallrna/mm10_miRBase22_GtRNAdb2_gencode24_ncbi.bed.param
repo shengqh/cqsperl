@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <param name="miRNAFile" value="/scratch/cqs_share/references/mirbase/v22/mmu.gff3" />
+  <param name="miRNAKey" value="miRNA" />
+  <param name="tRNAFile" value="/home/shengq2/program/cqsperl/database/smallrna/mm10_GtRNAdb2_tRNAs.bed" />
+  <param name="matureTRNAFile" value="/home/shengq2/program/cqsperl/database/smallrna/mm10_GtRNAdb2_tRNAs.mature.fa" />
+  <param name="rRNAFile" value="/home/shengq2/program/cqsperl/database/smallrna/mouse_rRNA.fasta" />
+  <param name="ensemblFile" value="/scratch/cqs_share/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf" />
+  <param name="fastaFile" value="/scratch/cqs_share/references/gencode/GRCm38.p6/GRCm38.primary_assembly.genome.fa" />
+  <param name="outputFile" value="mm10_miRBase22_GtRNAdb2_gencode24_ncbi.bed" />
+</Root>

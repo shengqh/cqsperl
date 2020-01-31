@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <param name="miRNAFile" value="/scratch/cqs_share/references/mirbase/v22/rno.gff3" />
+  <param name="miRNAKey" value="miRNA" />
+  <param name="tRNAFile" value="/home/shengq2/program/cqsperl/database/smallrna/rn6_GtRNAdb2_tRNAs-liftOver.bed" />
+  <param name="matureTRNAFile" value="/home/shengq2/program/cqsperl/database/smallrna/rn5_GtRNAdb2_tRNAs.mature.fa" />
+  <param name="rRNAFile" value="/home/shengq2/program/cqsperl/database/smallrna/rat_rRNA.fasta" />
+  <param name="ensemblFile" value="/scratch/cqs_share/references/ensembl/Rnor_6.0/Rattus_norvegicus.Rnor_6.0.99.gtf" />
+  <param name="fastaFile" value="/scratch/cqs_share/references/ensembl/Rnor_6.0/Rattus_norvegicus.Rnor_6.0.dna.toplevel.fa" />
+  <param name="outputFile" value="rn6_miRBase22_GtRNAdb2_ensembl99_ncbi.bed" />
+</Root>

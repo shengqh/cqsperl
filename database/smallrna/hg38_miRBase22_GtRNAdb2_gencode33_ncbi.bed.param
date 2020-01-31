@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <param name="miRNAFile" value="/scratch/cqs_share/references/mirbase/v22/hsa.gff3" />
+  <param name="miRNAKey" value="miRNA" />
+  <param name="tRNAFile" value="/home/shengq2/program/cqsperl/database/smallrna/hg38_GtRNAdb2_tRNAs.bed" />
+  <param name="matureTRNAFile" value="/home/shengq2/program/cqsperl/database/smallrna/hg38_GtRNAdb2_tRNAs.mature.fa" />
+  <param name="rRNAFile" value="/home/shengq2/program/cqsperl/database/smallrna/human_rRNA.fasta" />
+  <param name="ensemblFile" value="/scratch/cqs_share/references/gencode/GRCh38.p13/gencode.v33.annotation.gtf" />
+  <param name="fastaFile" value="/scratch/cqs_share/references/gencode/GRCh38.p13/GRCh38.primary_assembly.genome.fa" />
+  <param name="outputFile" value="hg38_miRBase22_GtRNAdb2_gencode33_ncbi.bed" />
+</Root>

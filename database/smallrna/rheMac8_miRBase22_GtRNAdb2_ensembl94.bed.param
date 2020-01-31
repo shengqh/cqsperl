@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <param name="miRNAFile" value="/scratch/cqs/references/smallrna/v4/rheMac8/mml.gff3" />
+  <param name="miRNAKey" value="miRNA" />
+  <param name="tRNAFile" value="/scratch/cqs/references/smallrna/v4/rheMac8/rheMac8-tRNAs.liftOver.bed" />
+  <param name="matureTRNAFile" value="" />
+  <param name="rRNAFile" value="" />
+  <param name="ensemblFile" value="/scratch/cqs/references/smallrna/v4/rheMac8/Macaca_mulatta.Mmul_8.0.1.94.gtf" />
+  <param name="fastaFile" value="/scratch/cqs/references/smallrna/v4/rheMac8/Macaca_mulatta.Mmul_8.0.1.dna.toplevel.fa" />
+  <param name="outputFile" value="rheMac8_miRBase22_GtRNAdb2_ensembl94.bed" />
+</Root>
