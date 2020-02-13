@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-package CQS::PerformSmallRNA4;
+package CQS::PerformSmallRNA;
 
 use strict;
 use warnings;
@@ -33,13 +33,13 @@ our $VERSION = '5.0';
 
 sub supplement_genome {
   return {
-    version    => 4,
+    version    => 5,
     constraint => "haswell",
     #cqstools   => "/home/shengq2/cqstools/cqstools.exe",
     docker_command => "singularity exec -e /scratch/cqs/softwares/singularity/cqs-smallRNA.simg ",
 
     #miRBase database
-    bowtie1_miRBase_index => "/scratch/cqs_share/references/smallrna/mature.dna",
+    bowtie1_miRBase_index => "/scratch/cqs_share/references/mirbase/v22/bowtie_index_1.2.3/mature.dna",
 
     #human microbime database
     bowtie1_bacteria_group1_index => "/scratch/cqs_share/references/smallrna/20170206_Group1SpeciesAll",
@@ -54,8 +54,8 @@ sub supplement_genome {
     fungus_group4_species_map   => "/scratch/cqs_share/references/smallrna/20160225_Group4SpeciesAll.species.map",
 
     #virus database
-    #bowtie1_virus_group6_index => "/scratch/cqs/zhaos/vickers/reference/bacteria/group6/bowtie_index_1.2.2/20190424_Group6SpeciesAll.species",
-    #virus_group6_species_map   => "/scratch/cqs/zhaos/vickers/reference/bacteria/group6/20190424_Group6SpeciesAll.species.map",
+    bowtie1_virus_group6_index => "/scratch/cqs_share/references/smallrna/20190424_Group6SpeciesAll.species",
+    virus_group6_species_map   => "/scratch/cqs_share/references/smallrna/20190424_Group6SpeciesAll.species.map",
 
     #UCSC tRNA database
     bowtie1_tRNA_index => "/scratch/cqs_share/references/smallrna/GtRNAdb2.20161214.mature",

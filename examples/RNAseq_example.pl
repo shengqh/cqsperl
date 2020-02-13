@@ -27,6 +27,8 @@ my $def = {
   cutadapt_option  => "-O 1 -q 20 -a AGATCGGAAGAGCACACGTC -A AGATCGGAAGAGCGTCGTGT -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT",
   min_read_length  => 30,
   pairend => 1,
+
+  perform_call_variants => 1,
   
   #source files
   files => {

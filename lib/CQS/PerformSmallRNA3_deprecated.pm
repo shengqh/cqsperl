@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-package CQS::PerformSmallRNA3;
+package CQS::PerformSmallRNA_v3_deprecated;
 
 use strict;
 use warnings;

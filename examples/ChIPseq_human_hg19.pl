@@ -8,7 +8,7 @@ use CQS::PerformChIPSeq;
 
 my $def = {
   task_name        => "Bill_April_ChIPseq_public",
-  email            => "xiaozhuan.dai\@vumc.org",
+  email            => "quanhu.sheng.1\@vumc.org",
   emailType        => "FAIL",
   target_dir       => create_directory_or_die("/scratch/cqs/shengq2/temp/20191213_April-ChIP_public_byDXZ"),
 
@@ -72,6 +72,7 @@ my $def = {
   perform_multiqc => 1,
 };
 
-my $config = performChIPSeq_ucsc_hg19($def, 1);
+my $config = performChIPSeq_gencode_hg19($def, 1);
+#my $config = performChIPSeq_gencode_mm10($def, 1);
 
 1;

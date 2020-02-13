@@ -11,11 +11,10 @@ our @ISA = qw(Exporter);
 
 our %EXPORT_TAGS = (
   'all' => [
-    qw(
-      performChIPSeq_gencode_hg19
-      performChIPSeq_gencode_mm10
-      performChIPSeq_ucsc_hg19
-      performChIPSeq_ucsc_mm10)
+      "performChIPSeq_gencode_hg19",
+      "performChIPSeq_gencode_mm10",
+      #"performChIPSeq_ucsc_hg19",
+      #"performChIPSeq_ucsc_mm10"
   ]
 );
 
@@ -43,11 +42,11 @@ sub common_options {
     peak_caller => "macs",
 
     perform_enhancer   => 0,
-    enhancer_folder    => "/scratch/cqs/shengq2/local/bin/linlabpipeline",
-    enhancer_gsea_path => "/scratch/cqs/shengq2/tools/gsea/gsea2-2.2.3.jar",
-    enhancer_gmx_path  => "/scratch/cqs/shengq2/tools/gsea/c2.all.v5.2.symbols.gmt",
+    enhancer_folder    => "/scratch/cqs_share/local/bin/linlabpipeline",
+    enhancer_gsea_path => "/scratch/cqs_share/tools/gsea/gsea2-2.2.3.jar",
+    enhancer_gmx_path  => "/scratch/cqs_share/tools/gsea/c2.all.v5.2.symbols.gmt",
 
-    rose_folder => "/scratch/cqs/shengq2/local/bin/bradnerlab",
+    rose_folder => "/scratch/cqs_share/local/bin/bradnerlab",
 
     perform_chipqc => 1,
 
@@ -79,32 +78,32 @@ sub gencode_hg19_options {
     merge( common_options(), common_hg19_options() ),
     {
       #aligner database
-      bowtie2_index => "/scratch/cqs/shengq2/references/gencode/GRCh37.p13/bowtie2_index_2.2.6/GRCh37.p13.genome",
-      bowtie1_fasta => "/scratch/cqs/shengq2/references/gencode/GRCh37.p13/bowtie_index_1.1.2/GRCh37.p13.genome.fa",
-      bowtie1_index => "/scratch/cqs/shengq2/references/gencode/GRCh37.p13/bowtie_index_1.1.2/GRCh37.p13.genome",
-      bwa_fasta     => "/scratch/cqs/shengq2/references/gencode/GRCh37.p13/bwa_index_0.7.12/GRCh37.p13.genome.fa",
+      bowtie2_index => "/scratch/cqs_share/references/gencode/GRCh37.p13/bowtie2_index_2.3.5.1/GRCh37.p13.genome",
+      bowtie1_fasta => "/scratch/cqs_share/references/gencode/GRCh37.p13/bowtie_index_1.2.3/GRCh37.p13.genome.fa",
+      bowtie1_index => "/scratch/cqs_share/references/gencode/GRCh37.p13/bowtie_index_1.2.3/GRCh37.p13.genome",
+      bwa_fasta     => "/scratch/cqs_share/references/gencode/GRCh37.p13/bwa_index_0.7.17/GRCh37.p13.genome.fa",
 
       #enhancer
-      enhancer_genome_path => "/scratch/cqs/shengq2/references/gencode/GRCh37.p13/GRCh37.p13.chromosomes/",
+      #enhancer_genome_path => "/scratch/cqs_share/references/gencode/GRCh37.p13/GRCh37.p13.chromosomes/",
     }
   );
 }
 
-sub ucsc_hg19_options {
-  return merge(
-    merge( common_options(), common_hg19_options() ),
-    {
-      #aligner database
-      bowtie2_index => "/scratch/cqs_share/references/illumina_iGenomes/Homo_sapiens/UCSC/hg19/Sequence/Bowtie2Index/genome",
-      bowtie1_fasta => "/scratch/cqs_share/references/illumina_iGenomes/Homo_sapiens/UCSC/hg19/Sequence/BowtieIndex/genome.fa",
-      bowtie1_index => "/scratch/cqs_share/references/illumina_iGenomes/Homo_sapiens/UCSC/hg19/Sequence/BowtieIndex/genome",
-      bwa_fasta     => "/scratch/cqs_share/references/illumina_iGenomes/Homo_sapiens/UCSC/hg19/Sequence/BWAIndex/genome.fa",
+# sub ucsc_hg19_options {
+#   return merge(
+#     merge( common_options(), common_hg19_options() ),
+#     {
+#       #aligner database
+#       bowtie2_index => "/scratch/cqs_share/references/illumina_iGenomes/Homo_sapiens/UCSC/hg19/Sequence/Bowtie2Index/genome",
+#       bowtie1_fasta => "/scratch/cqs_share/references/illumina_iGenomes/Homo_sapiens/UCSC/hg19/Sequence/BowtieIndex/genome.fa",
+#       bowtie1_index => "/scratch/cqs_share/references/illumina_iGenomes/Homo_sapiens/UCSC/hg19/Sequence/BowtieIndex/genome",
+#       bwa_fasta     => "/scratch/cqs_share/references/illumina_iGenomes/Homo_sapiens/UCSC/hg19/Sequence/BWAIndex/genome.fa",
 
-      #enhancer
-      enhancer_genome_path => "/scratch/cqs_share/references/illumina_iGenomes/Homo_sapiens/UCSC/hg19/Sequence/Chromosomes/",
-    }
-  );
-}
+#       #enhancer
+#       enhancer_genome_path => "/scratch/cqs_share/references/illumina_iGenomes/Homo_sapiens/UCSC/hg19/Sequence/Chromosomes/",
+#     }
+#   );
+# }
 
 sub common_mm10_options() {
   return {
@@ -136,32 +135,32 @@ sub gencode_mm10_options {
     merge( common_options(), common_mm10_options() ),
     {
       #aligner database
-      bowtie2_index => "/scratch/cqs/shengq2/references/gencode/mm10/bowtie2_index_2.2.6/GRCm38.p5.genome",
-      bowtie1_fasta => "/scratch/cqs/shengq2/references/gencode/mm10/bowtie_index_1.1.2/GRCm38.p5.genome.fa",
-      bowtie1_index => "/scratch/cqs/shengq2/references/gencode/mm10/bowtie_index_1.1.2/GRCm38.p5.genome",
-      bwa_fasta     => "/scratch/cqs/shengq2/references/gencode/mm10/bwa_index_0.7.17/GRCm38.p5.genome.fa",
+      bowtie2_index => "/scratch/cqs_share/references/gencode/GRCm38.p6/bowtie2_index_2.3.5.1/GRCm38.p6.genome",
+      bowtie1_fasta => "/scratch/cqs_share/references/gencode/GRCm38.p6/bowtie_index_1.2.3/GRCm38.p6.genome.fa",
+      bowtie1_index => "/scratch/cqs_share/references/gencode/GRCm38.p6/bowtie_index_1.2.3/GRCm38.p6.genome",
+      bwa_fasta     => "/scratch/cqs_share/references/gencode/GRCm38.p6/bwa_index_0.7.17/GRCm38.p6.genome.fa",
 
       #enhancer
-      enhancer_genome_path => "/scratch/cqs/shengq2/references/gencode/mm10/GRCm38.p5.chromosomes",
+      #enhancer_genome_path => "/scratch/cqs_share/references/gencode/mm10/GRCm38.p5.chromosomes",
     }
   );
 }
 
-sub ucsc_mm10_options {
-  return merge(
-    merge( common_options(), common_mm10_options() ),
-    {
-      #aligner database
-      bowtie2_index => "/scratch/cqs_share/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/Bowtie2Index/genome",
-      bowtie1_fasta => "/scratch/cqs_share/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/BowtieIndex/genome.fa",
-      bowtie1_index => "/scratch/cqs_share/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/BowtieIndex/genome",
-      bwa_fasta     => "/scratch/cqs_share/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa",
+# sub ucsc_mm10_options {
+#   return merge(
+#     merge( common_options(), common_mm10_options() ),
+#     {
+#       #aligner database
+#       bowtie2_index => "/scratch/cqs_share/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/Bowtie2Index/genome",
+#       bowtie1_fasta => "/scratch/cqs_share/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/BowtieIndex/genome.fa",
+#       bowtie1_index => "/scratch/cqs_share/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/BowtieIndex/genome",
+#       bwa_fasta     => "/scratch/cqs_share/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa",
 
-      #enhancer
-      enhancer_genome_path => "/scratch/cqs_share/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/Chromosomes/",
-    }
-  );
-}
+#       #enhancer
+#       enhancer_genome_path => "/scratch/cqs_share/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/Chromosomes/",
+#     }
+#   );
+# }
 
 sub performChIPSeq_gencode_hg19 {
   my ( $userdef, $perform ) = @_;
@@ -179,20 +178,20 @@ sub performChIPSeq_gencode_mm10 {
   return $config;
 }
 
-sub performChIPSeq_ucsc_hg19 {
-  my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, ucsc_hg19_options() );
+# sub performChIPSeq_ucsc_hg19 {
+#   my ( $userdef, $perform ) = @_;
+#   my $def = merge( $userdef, ucsc_hg19_options() );
 
-  my $config = performChIPSeq( $def, $perform );
-  return $config;
-}
+#   my $config = performChIPSeq( $def, $perform );
+#   return $config;
+# }
 
-sub performChIPSeq_ucsc_mm10 {
-  my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, ucsc_mm10_options() );
+# sub performChIPSeq_ucsc_mm10 {
+#   my ( $userdef, $perform ) = @_;
+#   my $def = merge( $userdef, ucsc_mm10_options() );
 
-  my $config = performChIPSeq( $def, $perform );
-  return $config;
-}
+#   my $config = performChIPSeq( $def, $perform );
+#   return $config;
+# }
 
 1;

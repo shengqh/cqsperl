@@ -1,6 +1,7 @@
 module purge
 
 module load GCCcore/.8.2.0
+module load CMake/3.13.3
 module load Python/3.7.2
 
 module load GCC/8.2.0  
@@ -18,8 +19,8 @@ MY_RSTUDIO_BIN=/scratch/cqs/shengq2/tools/rstudio-1.1.456/bin
 
 export PATH=/scratch/cqs/softwares/firefox:$PATH
 
-export SINGULARITY_TMPDIR=/scratch/cqs/softwares/singularity/temp
-export SINGULARITY_CACHE=/scratch/cqs/softwares/singularity/cache
+export SINGULARITY_TMPDIR=/scratch/cqs_share/softwares/singularity/temp
+export SINGULARITY_CACHE=/scratch/cqs_share/softwares/singularity/cache
 
 if [ -z "$R_LIBS" ]
 then
@@ -73,7 +74,8 @@ else
   export PERL5LIB=$MY_PERL_LIB:$PERL5LIB
 fi
 
-export PATH=$MY_PERL_BIN:/scratch/cqs/shengq2/local/bin/ncbi-blast/bin:$MYBIN:$FASTQC:$BOWTIE:$BOWTIE2:$HTMLDOC:$ANNOVAR:$HOMER:$PATH
+MY_BLAST_BIN=/scratch/cqs_share/softwares/ncbi-blast/bin
+export PATH=$MY_PERL_BIN:$MY_BLAST_BIN:$MYBIN:$FASTQC:$BOWTIE:$BOWTIE2:$HTMLDOC:$ANNOVAR:$HOMER:$PATH
 
 MYINCLUDE=/scratch/cqs/softwares/local/include:/scratch/cqs/shengq2/local/include:/home/shengq2/local/include:/scratch/cqs/shengq2/source/bzip2-1.0.6
 if [ -z "$C_INCLUDE_PATH" ]

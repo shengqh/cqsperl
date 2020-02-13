@@ -27,6 +27,8 @@ sub global_definition {
     docker_init    => "",
     gatk3_jar      => "/opt/gatk3.jar",
     picard_jar     => "/opt/picard.jar",
+    mutect_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/mutect.simg ",
+    muTect_jar     => "/opt/mutect-1.1.7.jar",
 
     vcf2maf_pl => "/scratch/cqs/softwares/mskcc-vcf2maf/vcf2maf.pl",
     vep_path   => "/scratch/cqs/softwares/ensembl-vep",
@@ -59,6 +61,7 @@ sub gatk_hg38_genome {
       annovar_param =>
 "-protocol refGene,avsnp150,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad211_genome,clinvar_20190305,topmed05 -operation g,f,f,f,f,f,f,f,f,f,f,f,f --remove",
       annovar_db => "/scratch/cqs_share/references/annovar/humandb/",
+      annovar_filter => "--exac_key ExAC_ALL --g1000_key 1000g2015aug_all --gnomad_key AF --topmed_key TOPMed",
       species    => "homo_sapiens",
       ncbi_build => "GRCh38",
       plotCNVGenes      => 1,
@@ -94,6 +97,7 @@ sub gatk_hg19_genome {
       annovar_param =>
 "-protocol refGene,avsnp150,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad211_genome,clinvar_20190305,topmed03 -operation g,f,f,f,f,f,f,f,f,f,f,f,f --remove",
       annovar_db => "/scratch/cqs_share/references/annovar/humandb/",
+      annovar_filter => "--exac_key ExAC_ALL --g1000_key 1000g2015aug_all --gnomad_key AF --topmed_key TOPMed",
       species    => "homo_sapiens",
       ncbi_build => "GRCh37",
       plotCNVGenes      => 1,

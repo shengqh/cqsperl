@@ -57,11 +57,13 @@ sub global_definition {
     perform_qc3bam            => 0,
     qc3_perl                  => "/scratch/cqs_share/softwares/QC3/qc3.pl",
     docker_command            => "singularity exec /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
+    gatk_jar                  => "/opt/gatk3.jar",
+    picard_jar                => "/opt/picard.jar",
   };
 }
 
 sub no_docker {
-  return { gsea_jar => "/scratch/cqs_share/softwares/gsea-3.0.jar" };
+  return { gsea_jar => "gsea-cli.sh" };
 }
 
 sub common_human_genome {
@@ -71,16 +73,19 @@ sub common_human_genome {
     global_definition(),
     {
       webgestalt_organism => "hsapiens",
-      gsea_jar            => "/opt/gsea-3.0.jar",
+      gsea_jar            => "gsea-cli.sh",
+      #gsea_jar            => "/opt/gsea3.jar",
       annovar_param       => "-protocol refGene,avsnp150,cosmic70 -operation g,f,f --remove",
       annovar_db          => "/scratch/cqs_share/references/annovar/humandb/",
       gsea_db             => "/scratch/cqs_share/references/gsea/v7.0",
       gsea_categories     => "'h.all.v7.0.symbols.gmt', 'c2.all.v7.0.symbols.gmt', 'c5.all.v7.0.symbols.gmt', 'c6.all.v7.0.symbols.gmt', 'c7.all.v7.0.symbols.gmt'",
       perform_webgestalt  => 1,
+      has_gsea            => 1,
       perform_gsea        => 1,
 
       software_version => {
-        "GSEA" => ["v3.0"],
+        #"GSEA" => ["v4"],
+        "GSEA" => ["v3"],
       }
     }
   );
