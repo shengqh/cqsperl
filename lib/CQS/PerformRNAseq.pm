@@ -56,7 +56,7 @@ sub global_definition {
     perform_star_featurecount => 1,
     perform_qc3bam            => 0,
     qc3_perl                  => "/scratch/cqs_share/softwares/QC3/qc3.pl",
-    docker_command            => "singularity exec /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
+    docker_command            => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
     gatk_jar                  => "/opt/gatk3.jar",
     picard_jar                => "/opt/picard.jar",
   };
@@ -84,8 +84,8 @@ sub common_human_genome {
       perform_gsea        => 1,
 
       software_version => {
-        #"GSEA" => ["v4"],
-        "GSEA" => ["v3"],
+        "GSEA" => ["v4"],
+        #"GSEA" => ["v3"],
       }
     }
   );
@@ -114,10 +114,10 @@ sub gencode_hg19_genome {
     common_hg19_genome($userdef),
     {
       #genome database
-      fasta_file     => "/scratch/cqs_share/references/gencode/GRCh37.p13/GRCh37.p13.genome.fa",
+      fasta_file     => "/scratch/cqs_share/references/gencode/GRCh37.p13/Homo_sapiens_assembly19.fasta",
       star_index     => "/scratch/cqs_share/references/gencode/GRCh37.p13/STAR_index_2.7.1a_v19_sjdb100",
-      transcript_gtf => "/scratch/cqs_share/references/gencode/GRCh37.p13/gencode.v19.chr_patch_hapl_scaff.annotation.gtf",
-      name_map_file  => "/scratch/cqs_share/references/gencode/GRCh37.p13/gencode.v19.chr_patch_hapl_scaff.annotation.gtf.map",
+      transcript_gtf => "/scratch/cqs_share/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf",
+      name_map_file  => "/scratch/cqs_share/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf.map",
     }
   );
 }
@@ -166,7 +166,7 @@ sub gencode_hg38_genome {
     common_hg38_genome($userdef),
     {
       #genome database
-      fasta_file     => "/scratch/cqs_share/references/gencode/GRCh38.p13/GRCh38.p13.genome.fa",
+      fasta_file     => "/scratch/cqs_share/references/gencode/GRCh38.p13/GRCh38.primary_assembly.genome.fa",
       star_index     => "/scratch/cqs_share/references/gencode/GRCh38.p13/STAR_index_2.7.1a_v33_sjdb100",
       transcript_gtf => "/scratch/cqs_share/references/gencode/GRCh38.p13/gencode.v33.annotation.gtf",
       name_map_file  => "/scratch/cqs_share/references/gencode/GRCh38.p13/gencode.v33.annotation.gtf.map",
@@ -272,10 +272,10 @@ sub ensembl_Mmul10_genome {
     {
       perform_gsea => 0,
 
-      fasta_file => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.dna.toplevel.fa",
+      fasta_file => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.dna.primary_assembly.fa",
       star_index     => "/scratch/cqs_share/references/ensembl/Mmul_10/STAR_index_2.7.1a_v99_sjdb100",
-      transcript_gtf => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.99.gtf",
-      name_map_file  => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.99.gtf.map",
+      transcript_gtf => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.99.chr.gtf",
+      name_map_file  => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.99.chr.gtf.map",
     }
   );
 }

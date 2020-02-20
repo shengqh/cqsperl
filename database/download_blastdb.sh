@@ -1,5 +1,9 @@
 cd /scratch/cqs_share/references/blastdb
 
-wget https://raw.githubusercontent.com/jrherr/bioinformatics_scripts/master/perl_scripts/update_blastdb.pl
+#gsutil ls gs://blast-db/
 
-perl update_blastdb.pl nt
+gsutil -m cp gs://blast-db/2020-02-15-09-34-58/nt.* .
+
+#wget https://raw.githubusercontent.com/jrherr/bioinformatics_scripts/master/perl_scripts/update_blastdb.pl
+
+#perl update_blastdb.pl nt

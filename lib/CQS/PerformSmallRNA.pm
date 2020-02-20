@@ -57,6 +57,10 @@ sub supplement_genome {
     bowtie1_virus_group6_index => "/scratch/cqs_share/references/smallrna/20190424_Group6SpeciesAll.species",
     virus_group6_species_map   => "/scratch/cqs_share/references/smallrna/20190424_Group6SpeciesAll.species.map",
 
+    #algae database
+    bowtie1_algae_group5_index => "/scratch/cqs_share/references/smallrna/20200214_AlgaeSpeciesAll.species",
+    algae_group5_species_map   => "/scratch/cqs_share/references/smallrna/20200214_AlgaeSpeciesAll.species.map",
+
     #UCSC tRNA database
     bowtie1_tRNA_index => "/scratch/cqs_share/references/smallrna/GtRNAdb2.20161214.mature",
     trna_category_map  => "/scratch/cqs_share/references/smallrna/GtRNAdb2.20161214.category.map",
@@ -66,7 +70,7 @@ sub supplement_genome {
     bowtie1_rRNA_index => "/scratch/cqs_share/references/smallrna/SILVA_128.rmdup",
     rrna_category_map  => "/scratch/cqs_share/references/smallrna/SILVA_128.rmdup.category.map",
 
-    #blast_localdb => "/scratch/cqs_share/references/blastdb",
+    blast_localdb => "/scratch/cqs_share/references/blastdb",
 
     #bowtie1_all_nonHost_index => "/scratch/cqs_share/references/smallrna/v4/allnonhost/bowtie_index_1.1.2/AllNonHost",
     #all_nonHost_map           => "/scratch/cqs_share/references/smallrna/v4/allnonhost/AllNonHost.map",

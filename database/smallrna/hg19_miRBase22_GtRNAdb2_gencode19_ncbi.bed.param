@@ -5,7 +5,7 @@
   <param name="tRNAFile" value="/home/shengq2/program/cqsperl/database/smallrna/hg19_GtRNAdb2_tRNAs.bed" />
   <param name="matureTRNAFile" value="/home/shengq2/program/cqsperl/database/smallrna/hg19_GtRNAdb2_tRNAs.mature.fa" />
   <param name="rRNAFile" value="/home/shengq2/program/cqsperl/database/smallrna/human_rRNA.fasta" />
-  <param name="ensemblFile" value="/scratch/cqs_share/references/gencode/GRCh37.p13/gencode.v19.chr_patch_hapl_scaff.annotation.gtf" />
-  <param name="fastaFile" value="/scratch/cqs_share/references/gencode/GRCh37.p13/GRCh37.p13.genome.fa" />
+  <param name="ensemblFile" value="/scratch/cqs_share/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf" />
+  <param name="fastaFile" value="/scratch/cqs_share/references/gencode/GRCh37.p13/Homo_sapiens_assembly19.fasta" />
   <param name="outputFile" value="hg19_miRBase22_GtRNAdb2_gencode19_ncbi.bed" />
 </Root>

@@ -7,7 +7,10 @@ buildindex.pl -f Homo_sapiens_assembly38.fasta -b -w -B -s --sjdbGTFfile gencode
 
 aws2 s3 cp s3://broad-references/hg19/ ./ --recursive
 
-wget ftp://ftp.ensembl.org/pub/release-75/gtf/homo_sapiens/Homo_sapiens.GRCh37.75.gtf.gz
-gunzip Homo_sapiens.GRCh37.75.gtf.gz
-cqstools gtf_buildmap -i Homo_sapiens.GRCh37.75.gtf -o Homo_sapiens.GRCh37.75.gtf.map
-buildindex.pl -f Homo_sapiens_assembly19.fasta -b -w -B -s --sjdbGTFfile Homo_sapiens.GRCh37.75.gtf --sjdbGTFfileVersion GRCh37v75 --thread 16
+wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz
+gunzip gencode.v19.annotation.gtf.gz
+mv gencode.v19.annotation.gtf.tmp
+sed 's/^chr//; s/^M/MT/' gencode.v19.annotation.gtf.tmp > gencode.v19.annotation.gtf
+rm gencode.v19.annotation.gtf.tmp
+cqstools gtf_buildmap -i gencode.v19.annotation.gtf -o gencode.v19.annotation.gtf.map
+buildindex.pl -f Homo_sapiens_assembly19.fasta -b -w -B -s --sjdbGTFfile gencode.v19.annotation.gtf --sjdbGTFfileVersion gencodeV19 --thread 16
