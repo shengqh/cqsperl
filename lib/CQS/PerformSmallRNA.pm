@@ -54,8 +54,10 @@ sub supplement_genome {
     fungus_group4_species_map   => "/scratch/cqs_share/references/smallrna/20160225_Group4SpeciesAll.species.map",
 
     #virus database
-    bowtie1_virus_group6_index => "/scratch/cqs_share/references/smallrna/20190424_Group6SpeciesAll.species",
-    virus_group6_species_map   => "/scratch/cqs_share/references/smallrna/20190424_Group6SpeciesAll.species.map",
+    #bowtie1_virus_group6_index => "/scratch/cqs_share/references/smallrna/20190424_Group6SpeciesAll.species",
+    #virus_group6_species_map   => "/scratch/cqs_share/references/smallrna/20190424_Group6SpeciesAll.species.map",
+    bowtie1_virus_group6_index => "/scratch/cqs_share/references/refseq/viral/20200305_viral_genomes",
+    virus_group6_species_map   => "/scratch/cqs_share/references/refseq/viral/20200305_viral_genomes.map",
 
     #algae database
     bowtie1_algae_group5_index => "/scratch/cqs_share/references/smallrna/20200214_AlgaeSpeciesAll.species",

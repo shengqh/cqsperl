@@ -78,10 +78,10 @@ sub gencode_hg19_options {
     merge( common_options(), common_hg19_options() ),
     {
       #aligner database
-      bowtie2_index => "/scratch/cqs_share/references/gencode/GRCh37.p13/bowtie2_index_2.3.5.1/GRCh37.p13.genome",
-      bowtie1_fasta => "/scratch/cqs_share/references/gencode/GRCh37.p13/bowtie_index_1.2.3/GRCh37.p13.genome.fa",
-      bowtie1_index => "/scratch/cqs_share/references/gencode/GRCh37.p13/bowtie_index_1.2.3/GRCh37.p13.genome",
-      bwa_fasta     => "/scratch/cqs_share/references/gencode/GRCh37.p13/bwa_index_0.7.17/GRCh37.p13.genome.fa",
+      bowtie2_index => "/scratch/cqs_share/references/gencode/GRCh37.p13/bowtie2_index_2.3.5.1/Homo_sapiens_assembly19",
+      bowtie1_fasta => "/scratch/cqs_share/references/gencode/GRCh37.p13/bowtie_index_1.2.3/Homo_sapiens_assembly19.fa",
+      bowtie1_index => "/scratch/cqs_share/references/gencode/GRCh37.p13/bowtie_index_1.2.3/Homo_sapiens_assembly19",
+      bwa_fasta     => "/scratch/cqs_share/references/gencode/GRCh37.p13/bwa_index_0.7.17/Homo_sapiens_assembly19.fa",
 
       #enhancer
       #enhancer_genome_path => "/scratch/cqs_share/references/gencode/GRCh37.p13/GRCh37.p13.chromosomes/",
@@ -135,10 +135,10 @@ sub gencode_mm10_options {
     merge( common_options(), common_mm10_options() ),
     {
       #aligner database
-      bowtie2_index => "/scratch/cqs_share/references/gencode/GRCm38.p6/bowtie2_index_2.3.5.1/GRCm38.p6.genome",
-      bowtie1_fasta => "/scratch/cqs_share/references/gencode/GRCm38.p6/bowtie_index_1.2.3/GRCm38.p6.genome.fa",
-      bowtie1_index => "/scratch/cqs_share/references/gencode/GRCm38.p6/bowtie_index_1.2.3/GRCm38.p6.genome",
-      bwa_fasta     => "/scratch/cqs_share/references/gencode/GRCm38.p6/bwa_index_0.7.17/GRCm38.p6.genome.fa",
+      bowtie2_index => "/scratch/cqs_share/references/gencode/GRCm38.p6/bowtie2_index_2.3.5.1/GRCm38.primary_assembly.genome",
+      bowtie1_fasta => "/scratch/cqs_share/references/gencode/GRCm38.p6/bowtie_index_1.2.3/GRCm38.primary_assembly.genome.fa",
+      bowtie1_index => "/scratch/cqs_share/references/gencode/GRCm38.p6/bowtie_index_1.2.3/GRCm38.primary_assembly.genome",
+      bwa_fasta     => "/scratch/cqs_share/references/gencode/GRCm38.p6/bwa_index_0.7.17/GRCm38.primary_assembly.genome.fa",
 
       #enhancer
       #enhancer_genome_path => "/scratch/cqs_share/references/gencode/mm10/GRCm38.p5.chromosomes",
