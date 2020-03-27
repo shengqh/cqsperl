@@ -41,6 +41,9 @@ sub supplement_genome {
     #miRBase database
     bowtie1_miRBase_index => "/scratch/cqs_share/references/mirbase/v22/bowtie_index_1.2.3/mature.dna",
 
+    bowtie_bacteria_index_list_file => "/scratch/cqs_share/references/refseq/bacteria/20200321_assembly_summary.txt.files.list",
+    bowtie_viruses_index_list_file => "/scratch/cqs_share/references/refseq/viruses/20200326_assembly_summary.txt.files.list",
+
     #human microbime database
     bowtie1_bacteria_group1_index => "/scratch/cqs_share/references/smallrna/20170206_Group1SpeciesAll",
     bacteria_group1_species_map   => "/scratch/cqs_share/references/smallrna/20170206_Group1SpeciesAll.species.map",
