@@ -9,7 +9,12 @@ use Hash::Merge qw( merge );
 require Exporter;
 our @ISA = qw(Exporter);
 
-our %EXPORT_TAGS = ( 'all' => [qw(gatk_hg38_genome performExomeSeq_gatk_hg38 gatk_hg19_genome performExomeSeq_gatk_hg19 performExomeSeq_gencode_mm10)] );
+our %EXPORT_TAGS = ( 'all' => [qw(gatk_hg38_genome 
+  performExomeSeq_gatk_hg38 
+  gatk_hg19_genome 
+  performExomeSeq_gatk_hg19 
+  gencode_mm10_genome
+  performExomeSeq_gencode_mm10)] );
 
 our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
@@ -146,27 +151,25 @@ sub gatk_hg19_genome {
 #}
 
 sub gencode_mm10_genome {
-  die "damaged, waiting for repair";
-  
   return merge(
     global_definition(),
     {
       #genome database
-      ref_fasta_dict   => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/GRCm38.p6.genome.dict",
-      ref_fasta        => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/GRCm38.p6.genome.fa",
-      bwa_fasta        => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/bwa_index_0.7.17/GRCm38.p6.genome.fa",
+      ref_fasta_dict   => "/scratch/cqs_share/references/gencode/GRCm38.p6/GRCm38.primary_assembly.genome.dict",
+      ref_fasta        => "/scratch/cqs_share/references/gencode/GRCm38.p6/GRCm38.primary_assembly.genome.fa",
+      bwa_fasta        => "/scratch/cqs_share/references/gencode/GRCm38.p6/bwa_index_0.7.17/GRCm38.primary_assembly.genome.fa",
 
       has_chr_in_chromosome_name => 1,
 
-      transcript_gtf   => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/gencode.vM19.chr_patch_hapl_scaff.annotation.gtf",
-      name_map_file    => "/scratch/cqs/references/mouse/gencode_GRCm38.p6/gencode.vM19.chr_patch_hapl_scaff.annotation.gtf.map",
-      dbsnp            => "/scratch/cqs/references/dbsnp/mouse_10090_b150_GRCm38p4.vcf.gz",
+      transcript_gtf   => "/scratch/cqs_share/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf",
+      name_map_file    => "/scratch/cqs_share/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf.map",
+      dbsnp            => "/scratch/cqs_share/references/dbsnp/mouse_10090_b150_GRCm38.p4.vcf.gz",
       perform_annovar  => 1,
       annovar_buildver => "mm10",
       annovar_param    => "-protocol refGene -operation g --remove",
       annovar_db       => "/scratch/cqs_share/references/annovar/mousedb/",
 
-      #species                   => "homo_sapiens",
+      species    => "mus_musculus",
       ncbi_build               => "GRCm38",
       perform_vep              => 0,
       perform_cnv_gatk4_cohort => 0,
