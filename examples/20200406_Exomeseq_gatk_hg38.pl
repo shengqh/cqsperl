@@ -9,9 +9,9 @@ use CQS::ClassFactory;
 use CQS::PerformExomeSeq;
 
 my $def = {
-  task_name => "Exomeseq_human_gatk_b37",
+  task_name => "gatk_hg38",
 
-  target_dir => "/scratch/cqs/shengq2/temp/Exomeseq_human_gatk_b37",
+  target_dir => "/scratch/cqs/shengq2/temp/ExomeSeq_gatk_hg38",
   email      => "quanhu.sheng.1\@vumc.org",
   files      => {
     "sample1" => [ "/gpfs23/scratch/cqs/pipeline_example/dnaseq_data/human/sample1_R1.fastq.gz", "/gpfs23/scratch/cqs/pipeline_example/dnaseq_data/human/sample1_R2.fastq.gz" ],
@@ -25,9 +25,9 @@ my $def = {
   adapter          => "AGATCGGAAGAGC",
   min_read_length  => 30,
 
-  covered_bed                 => "/scratch/cqs/references/exomeseq/IDT/xgen-exome-research-panel-targetsae255a1532796e2eaa53ff00001c1b3c.nochr.bed",
+  covered_bed                 => "/scratch/cqs_share/references/exomeseq/IDT/Exome-IDT-xGen-hg19-v1-slop50-nochr.bed",
   perform_gatk_callvariants   => 1,
-  gatk_callvariants_vqsr_mode => 0,
+  gatk_callvariants_vqsr_mode => 1,
 
   filter_variants_by_allele_frequency            => 0,
   filter_variants_by_allele_frequency_percentage => 0.9,
@@ -44,6 +44,6 @@ my $def = {
   perform_cnv_xhmm              => 0,
 };
 
-my $config = performExomeSeq_gatk_b37( $def, 1 );
+my $config = performExomeSeq_gatk_hg38( $def, 1 );
 1;
 
