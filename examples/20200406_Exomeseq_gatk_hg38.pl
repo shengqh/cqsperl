@@ -20,25 +20,25 @@ my $def = {
   },
   merge_fastq => 0,
 
-  is_paired        => 1,
-  perform_cutadapt => 1,
-  adapter          => "AGATCGGAAGAGC",
+  is_paired_end    => 1,
+  perform_cutadapt => 0,
+  cutadapt_option  => "-n 2 -O 1 -q 20 -a AGATCGGAAGAGCACACGTC -A AGATCGGAAGAGCGTCGTGT",
   min_read_length  => 30,
 
   covered_bed                 => "/scratch/cqs_share/references/exomeseq/IDT/Exome-IDT-xGen-hg19-v1-slop50-nochr.bed",
+
   perform_gatk_callvariants   => 1,
   gatk_callvariants_vqsr_mode => 1,
 
-  filter_variants_by_allele_frequency            => 0,
+  filter_variants_by_allele_frequency            => 1,
   filter_variants_by_allele_frequency_percentage => 0.9,
   filter_variants_by_allele_frequency_maf        => 0.3,
 
   #annotation_genes            => "LDLR APOB PCSK9 LDLRAP1 STAP1 LIPA ABCG5 ABCGB APOE LPA PNPLA5 CH25H INSIG2 SIRT1",
 
-  perform_vep        => 1,
-
   perform_cnv_gatk4_cohort => 1,
 
+  perform_vep        => 0,
   perform_cnv_cnMOPs => 0,
   cnv_xhmm_preprocess_intervals => 0,
   perform_cnv_xhmm              => 0,
