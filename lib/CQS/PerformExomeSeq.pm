@@ -55,6 +55,8 @@ sub gatk_hg38_genome {
       contig_ploidy_priors_file => "/scratch/cqs_share/references/broad/contig_ploidy_priors_homo_sapiens.chr.tsv",
       transcript_gtf => "/scratch/cqs_share/references/broad/hg38/v0/gencode.v27.primary_assembly.annotation.gtf",
 
+      blacklist_file => "/scratch/cqs_share/references/blacklist_files/hg38-blacklist.v2.bed",
+
       dbsnp            => "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf.gz",
       hapmap           => "/scratch/cqs_share/references/broad/hg38/v0/hapmap_3.3.hg38.vcf.gz",
       omni             => "/scratch/cqs_share/references/broad/hg38/v0/1000G_omni2.5.hg38.vcf.gz",
@@ -90,6 +92,8 @@ sub gatk_hg19_genome {
       contig_ploidy_priors_file => "/scratch/cqs_share/references/broad/contig_ploidy_priors_homo_sapiens.noChr.tsv",
       transcript_gtf => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.gtf",
       name_map_file  => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.gtf.map",
+
+      blacklist_file => "/scratch/cqs_share/references/blacklist_files/hg19-blacklist.v2.bed",
 
       dbsnp            => "/scratch/cqs_share/references/broad/hg19/v0/dbsnp_138.b37.vcf.gz",
       hapmap           => "/scratch/cqs_share/references/broad/hg19/v0/hapmap_3.3.b37.vcf.gz",
@@ -163,6 +167,9 @@ sub gencode_mm10_genome {
 
       transcript_gtf   => "/scratch/cqs_share/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf",
       name_map_file    => "/scratch/cqs_share/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf.map",
+
+      blacklist_file => "/scratch/cqs_share/references/blacklist_files/mm10-blacklist.v2.bed",
+
       dbsnp            => "/scratch/cqs_share/references/dbsnp/mouse_10090_b150_GRCm38.p4.vcf.gz",
       perform_annovar  => 1,
       annovar_buildver => "mm10",
