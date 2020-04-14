@@ -93,7 +93,7 @@ sub gatk_hg19_genome {
       transcript_gtf => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.gtf",
       name_map_file  => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.gtf.map",
 
-      blacklist_file => "/scratch/cqs_share/references/blacklist_files/hg19-blacklist.v2.bed",
+      blacklist_file => "/scratch/cqs_share/references/blacklist_files/hg19-blacklist.v2.nochr.bed",
 
       dbsnp            => "/scratch/cqs_share/references/broad/hg19/v0/dbsnp_138.b37.vcf.gz",
       hapmap           => "/scratch/cqs_share/references/broad/hg19/v0/hapmap_3.3.b37.vcf.gz",
