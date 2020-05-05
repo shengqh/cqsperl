@@ -77,6 +77,10 @@ sub supplement_genome {
 
     blast_localdb => "/scratch/cqs_share/references/blastdb",
 
+    #bug database
+    bowtie1_bug_custom_index => "/scratch/cqs_share/references/smallrna/20200415_BugsAll.species",
+    bug_custom_species_map => "/scratch/cqs_share/references/smallrna/20200415_BugsAll.species.map",
+
     #bowtie1_all_nonHost_index => "/scratch/cqs_share/references/smallrna/v4/allnonhost/bowtie_index_1.1.2/AllNonHost",
     #all_nonHost_map           => "/scratch/cqs_share/references/smallrna/v4/allnonhost/AllNonHost.map",
   };
