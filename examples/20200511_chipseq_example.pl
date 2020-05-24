@@ -14,6 +14,8 @@ my $def = {
   target_dir => create_directory_or_die("/scratch/cqs/shengq2/temp/20200511_chip-seq"),
   constraint => "haswell",
 
+  is_paired_end => 0,
+
   #add_folder_index => 1,
 
   perform_cutadapt => 0,
@@ -149,6 +151,7 @@ my $def = {
   chipqc_chromosomes      => 'chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,chr19,chr20,chr21,chr22',
   
   perform_diffbind        => 1,
+  MinOverlap => 1,
   design_table            => {
     "h3k27ac" => {
       Factor           => "h3k27ac",
@@ -192,6 +195,12 @@ my $def = {
         [ "R175H_vs_NULL",  "NULL",  "R175H" ],
         [ "R273H_vs_NULL",  "NULL",  "R273H" ],
       ],
+      "MinOverlap" => {
+         "NULL" => 2,
+         "WT" => 2,
+         "R175H" => 2,
+         "R273H" => 2,
+      },
     },
     "h3k4me3" => {
       Factor           => "h3k4me3",
@@ -235,6 +244,12 @@ my $def = {
         [ "R175H_vs_NULL",  "NULL",  "R175H" ],
         [ "R273H_vs_NULL",  "NULL",  "R273H" ],
       ],
+      "MinOverlap" => {
+         "NULL" => 2,
+         "WT" => 2,
+         "R175H" => 2,
+         "R273H" => 2,
+      },
     },
     "h3k4me1" => {
       Factor           => "h3k4me1",
@@ -278,6 +293,12 @@ my $def = {
         [ "R175H_vs_NULL",  "NULL",  "R175H" ],
         [ "R273H_vs_NULL",  "NULL",  "R273H" ],
       ],
+      "MinOverlap" => {
+         "NULL" => 2,
+         "WT" => 2,
+         "R175H" => 2,
+         "R273H" => 2,
+      },
     },
     "rnapolii" => {
       Factor            => "rnapolii",
@@ -321,6 +342,12 @@ my $def = {
         [ "R175H_vs_NULL",  "NULL",  "R175H" ],
         [ "R273H_vs_NULL",  "NULL",  "R273H" ],
       ],
+      "MinOverlap" => {
+         "NULL" => 2,
+         "WT" => 2,
+         "R175H" => 2,
+         "R273H" => 2,
+      },
     },
   },
 
