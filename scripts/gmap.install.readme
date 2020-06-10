@@ -1,0 +1,1 @@
+./configure --prefix=/scratch/cqs/shengq1/local --enable-builtin-popcount=no --disable-sse4.1 --disable-sse2
