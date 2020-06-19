@@ -4,7 +4,7 @@ cqsperl is a library including predefined pipelines for CQS users in ACCRE. It i
 
 In order to use ngsperl and cqsperl library, and neccessory tools in ACCRE, you need to add following line into your .bashrc file:
 ```
-source /home/shengq2/local/bin/path.txt
+source /scratch/cqs_share/softwares/cqsperl/scripts/path.txt
 ```
 
 # 2 Step-by-step Introduction
@@ -236,74 +236,3 @@ If we want to introduce covariance in comparison, we can define the pairs as fol
   },
 ```
 
-# smallRNASeq
-
-We provide following functions for predefined databases. Human, mouse and rat are three most complehensive databases we prepared so far.
-
-* performSmallRNA_hg19 
-* performSmallRNA_hg38
-* performSmallRNA_mm10
-* performSmallRNA_rn5
-* performSmallRNA_cel235
-* performSmallRNA_cfa3
-* performSmallRNA_bta8
-* performSmallRNA_eca2
-* performSmallRNA_ssc3
-* performSmallRNA_ocu2
-* performSmallRNA_oar3
-* performSmallRNA_gga4
-* performSmallRNA_fca6
-* performSmallRNA_rheMac8
-* performSmallRNA_chir1
-
-For example, if you want to perform smallRNAseq data using mm10 database, write perl script as following example and run the scripts to generate pbs scripts which can be either submit to cluster or run directly. Remember to change the task_name, email and target_dir before you have a try:
-
-```
-#!/usr/bin/perl
-use strict;
-use warnings;
-
-use CQS::PerformSmallRNA3;
-use CQS::ClassFactory;
-use CQS::StringUtils;
-
-my $email = "quanhu.sheng.1\@vanderbilt.edu";
-
-my $def = {
-
-  #General options
-  task_name        => "KCV_3018_77_78_79",
-  email            => $email,
-
-  target_dir                => "/scratch/cqs/shengq2/vickers/20180410_smallRNA_3018-KCV-77_78_79_mouse_v3",
-  max_thread                => 8,
-
-  #preprocessing
-  run_cutadapt                => 1,
-  adapter                     => "TGGAATTCTCGGGTGCCAAGG",
-  fastq_remove_random         => 4,                                   #next flex
-
-  #Data
-  files => {
-    "APOB_WT_01"     => ['/scratch/cqs/zhaos/vickers/data/3018/3018-KCV-77/3018/3018-KCV-77-i42_S19_R1_001.fastq.gz'],
-    "APOB_WT_03"     => ['/scratch/cqs/zhaos/vickers/data/3018/3018-KCV-77/3018/3018-KCV-77-i44_S21_R1_001.fastq.gz'],
-    "APOB_WT_05"     => ['/scratch/cqs/zhaos/vickers/data/3018/3018-KCV-78/3018/3018-KCV-78-i46_S20_R1_001.fastq.gz'],
-    "APOB_SRBIKO_02" => ['/scratch/cqs/zhaos/vickers/data/3018/3018-KCV-77/3018/3018-KCV-77-i43_S20_R1_001.fastq.gz'],
-    "APOB_SRBIKO_04" => ['/scratch/cqs/zhaos/vickers/data/3018/3018-KCV-77/3018/3018-KCV-77-i45_S22_R1_001.fastq.gz'],
-    "APOB_SRBIKO_06" => ['/scratch/cqs/zhaos/vickers/data/3018/3018-KCV-78/3018/3018-KCV-78-i47_S21_R1_001.fastq.gz'],
-  },
-
-  groups => {
-    "APOB_WT"      => [ "APOB_WT_01",      "APOB_WT_03",      "APOB_WT_05" ],
-    "APOB_SRBIKO"  => [ "APOB_SRBIKO_02",  "APOB_SRBIKO_04",  "APOB_SRBIKO_06" ],
-  },
-  pairs => {
-    "APOB_SRBIKO_vs_WT" =>  [ "APOB_WT", "APOB_SRBIKO" ],
-  },
-};
-
-my $config = performSmallRNA_mm10( $def, 1 );
-
-1;
-
-```
