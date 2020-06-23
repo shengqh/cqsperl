@@ -141,7 +141,7 @@ We provide four functions for predefined databases:
 * performRNASeq_gencode_mm10
 * performRNASeq_ensembl_Mmul10
 
-We have an example for [RNAseq_example.pl](examples/RNAseq_example.pl).
+We have an example for [20200619_RNAseq_gencode_hg19.pl](examples/20200619_RNAseq_gencode_hg19.pl).
 
 ## 3.1 Template 
 
