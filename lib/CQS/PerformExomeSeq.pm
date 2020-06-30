@@ -39,6 +39,19 @@ sub global_definition {
     vep_path   => "/scratch/cqs/softwares/ensembl-vep",
     vep_data   => "/scratch/cqs/references/vep_data",
     cluster    => "slurm",
+
+    #cromwell
+    singularity_image_files=> {
+      "broadinstitute.gatk.4.1.4.1.simg" => "/scratch/cqs_share/softwares/singularity/gatk.4.1.4.1.simg",
+      "broadinstitute.gatk.latest.simg" => "/scratch/cqs_share/softwares/singularity/gatk.latest.simg",
+      "broadinstitute.gotc.latest.simg" => "/scratch/cqs_share/softwares/singularity/gotc.latest.simg",
+      "python.latest.simg" => "/scratch/cqs_share/softwares/singularity/python.latest.simg",
+    },
+    "cromwell_jar" => "/scratch/cqs_share/softwares/cromwell-51.jar",
+    "cromwell_config_file" => {
+      local => "/scratch/cqs_share/softwares/cromwell/cromwell.examples.local.conf",
+    },
+    "cromwell_option_file" => "/scratch/cqs_share/softwares/cromwell/cromwell.options.json",
   };
 }
 
@@ -46,8 +59,8 @@ sub gatk_hg38_genome {
   return merge(
     global_definition(),
     {
-      ref_fasta_dict => "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.dict",
       ref_fasta      => "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
+      ref_fasta_dict => "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.dict",
       bwa_fasta      => "/scratch/cqs_share/references/broad/hg38/v0/bwa_index_0.7.17/Homo_sapiens_assembly38.fasta",
 
       has_chr_in_chromosome_name => 1,
@@ -75,6 +88,20 @@ sub gatk_hg38_genome {
       biomart_host      => "www.ensembl.org",
       biomart_dataset   => "hsapiens_gene_ensembl",
       biomart_symbolKey => "hgnc_symbol",
+
+      wdl => {
+        local => {
+          "mutect2" => {
+            perform_mutect2_pon => 0,
+            "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2.wdl",
+            "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2.inputs.hg38.json",
+          },
+          "mutect2_pon" => {
+            "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2_pon.wdl",
+            "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.hg38.json",
+          },
+        }
+      }
     }
   );
 }
@@ -83,8 +110,8 @@ sub gatk_hg19_genome {
   return merge(
     global_definition(),
     {
-      ref_fasta_dict => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens_assembly19.dict",
       ref_fasta      => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens_assembly19.fasta",
+      ref_fasta_dict => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens_assembly19.dict",
       bwa_fasta      => "/scratch/cqs_share/references/broad/hg19/v0/bwa_index_0.7.17/Homo_sapiens_assembly19.fasta",
 
       has_chr_in_chromosome_name => 0,
@@ -113,6 +140,20 @@ sub gatk_hg19_genome {
       biomart_host      => "grch37.ensembl.org",
       biomart_dataset   => "hsapiens_gene_ensembl",
       biomart_symbolKey => "hgnc_symbol",
+
+      wdl => {
+        local => {
+          "mutect2" => {
+            perform_mutect2_pon => 0,
+            "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2.wdl",
+            "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2.inputs.hg19.json",
+          },
+          "mutect2_pon" => {
+            "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2_pon.wdl",
+            "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.hg19.json",
+          },
+        }
+      }
     }
   );
 }
@@ -159,8 +200,8 @@ sub gencode_mm10_genome {
     global_definition(),
     {
       #genome database
-      ref_fasta_dict   => "/scratch/cqs_share/references/gencode/GRCm38.p6/GRCm38.primary_assembly.genome.dict",
       ref_fasta        => "/scratch/cqs_share/references/gencode/GRCm38.p6/GRCm38.primary_assembly.genome.fa",
+      ref_fasta_dict   => "/scratch/cqs_share/references/gencode/GRCm38.p6/GRCm38.primary_assembly.genome.dict",
       bwa_fasta        => "/scratch/cqs_share/references/gencode/GRCm38.p6/bwa_index_0.7.17/GRCm38.primary_assembly.genome.fa",
 
       has_chr_in_chromosome_name => 1,
@@ -180,6 +221,20 @@ sub gencode_mm10_genome {
       ncbi_build               => "GRCm38",
       perform_vep              => 0,
       perform_cnv_gatk4_cohort => 0,
+
+      wdl => {
+        local => {
+          "mutect2" => {
+            perform_mutect2_pon => 1,
+            "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2.wdl",
+            "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2.inputs.mm10.json",
+          },
+          "mutect2_pon" => {
+            "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2_pon.no_gnomad.wdl",
+            "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.mm10.json",
+          },
+        }
+      }
     }
   );
 }
