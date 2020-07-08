@@ -29,7 +29,7 @@ First of all, we copy the template to our local folder.
 ```bash
 mkdir ~/pipeline
 cd ~/pipeline
-cp /scratch/cqs_share/softwares/cqsperl/examples/20200619_RNAseq_gencode_hg19.pl .
+cp /scratch/cqs_share/softwares/cqsperl/examples/20200619_RNAseq_gencode_hg19.pl RNAseq_example.pl
 
 ```
 
