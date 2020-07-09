@@ -269,7 +269,8 @@ workflow Mutect2 {
                 gga_vcf_idx = gga_vcf_idx,
                 gatk_override = gatk_override,
                 gatk_docker = gatk_docker,
-                disk_space = m2_per_scatter_size
+                disk_space = m2_per_scatter_size,
+                mem=20
         }
     }
 
@@ -542,7 +543,7 @@ task M2 {
     String output_stats = output_vcf + ".stats"
 
     # Mem is in units of GB but our command and memory runtime values are in MB
-    Int machine_mem = if defined(mem) then mem * 1000 else 3500
+    Int machine_mem = if defined(mem) then mem * 1000 else 4000
     Int command_mem = machine_mem - 500
 
     parameter_meta{
