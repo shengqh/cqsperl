@@ -32,7 +32,7 @@ my $def = {
   perform_gsea       => 1,
 
   #If we need to trim the adapter from reads. Set to 0 if you don't find adapter in raw data.
-  perform_cutadapt => 1,
+  perform_cutadapt => 0,
 
   #If you find adapter through FastQC report, you need to specify adapter here.
   cutadapt_option  => "-O 1 -q 20 -a AGATCGGAAGAGCACACGTC -A AGATCGGAAGAGCGTCGTGT -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT",

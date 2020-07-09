@@ -3,18 +3,23 @@ package CQS::PerformExomeSeq;
 
 use strict;
 use warnings;
+use Storable qw(dclone);
+use CQS::StringUtils;
 use Pipeline::ExomeSeq;
 use Hash::Merge qw( merge );
 
 require Exporter;
 our @ISA = qw(Exporter);
 
-our %EXPORT_TAGS = ( 'all' => [qw(gatk_hg38_genome 
+our %EXPORT_TAGS = ( 'all' => [qw(
+  global_definition
+  gatk_hg38_genome 
   performExomeSeq_gatk_hg38 
   gatk_hg19_genome 
   performExomeSeq_gatk_hg19 
   gencode_mm10_genome
-  performExomeSeq_gencode_mm10)] );
+  performExomeSeq_gencode_mm10
+  )] );
 
 our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
@@ -47,11 +52,26 @@ sub global_definition {
       "broadinstitute.gotc.latest.simg" => "/scratch/cqs_share/softwares/singularity/gotc.latest.simg",
       "python.latest.simg" => "/scratch/cqs_share/softwares/singularity/python.latest.simg",
     },
-    "cromwell_jar" => "/scratch/cqs_share/softwares/cromwell-51.jar",
-    "cromwell_config_file" => {
-      local => "/scratch/cqs_share/softwares/cromwell/cromwell.examples.local.conf",
-    },
-    "cromwell_option_file" => "/scratch/cqs_share/softwares/cromwell/cromwell.options.json",
+
+    wdl => {
+      "cromwell_jar" => "/scratch/cqs_share/softwares/cromwell-51.jar",
+      "cromwell_option_file" => "/scratch/cqs_share/softwares/cromwell/cromwell.options.json",
+      "local" => {
+        "cromwell_config_file" => "/scratch/cqs_share/softwares/cromwell/cromwell.examples.local.conf",
+        "mutect2" => {
+          "perform_mutect2_pon" => 0,
+          "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2.wdl",
+        },
+        "mutect2_pon" => {
+          "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2_pon.wdl",
+        },
+        "paired_fastq_to_unmapped_bam" => {
+          "wdl_file" => "/scratch/cqs_share/softwares/gatk-workflows/seq-format-conversion/paired-fastq-to-unmapped-bam.wdl",
+          "input_file" => "/scratch/cqs_share/softwares/gatk-workflows/seq-format-conversion/paired-fastq-to-unmapped-bam.inputs.json",
+        }
+      }
+    }
+
   };
 }
 
@@ -92,12 +112,9 @@ sub gatk_hg38_genome {
       wdl => {
         local => {
           "mutect2" => {
-            perform_mutect2_pon => 0,
-            "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2.wdl",
             "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2.inputs.hg38.json",
           },
           "mutect2_pon" => {
-            "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2_pon.wdl",
             "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.hg38.json",
           },
         }
@@ -144,12 +161,9 @@ sub gatk_hg19_genome {
       wdl => {
         local => {
           "mutect2" => {
-            perform_mutect2_pon => 0,
-            "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2.wdl",
             "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2.inputs.hg19.json",
           },
           "mutect2_pon" => {
-            "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2_pon.wdl",
             "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.hg19.json",
           },
         }
@@ -226,7 +240,6 @@ sub gencode_mm10_genome {
         local => {
           "mutect2" => {
             perform_mutect2_pon => 1,
-            "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2.wdl",
             "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2.inputs.mm10.json",
           },
           "mutect2_pon" => {
