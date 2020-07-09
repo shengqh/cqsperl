@@ -51,6 +51,8 @@ sub global_definition {
       "broadinstitute.gatk.latest.simg" => "/scratch/cqs_share/softwares/singularity/gatk.latest.simg",
       "broadinstitute.gotc.latest.simg" => "/scratch/cqs_share/softwares/singularity/gotc.latest.simg",
       "python.latest.simg" => "/scratch/cqs_share/softwares/singularity/python.latest.simg",
+      "gatk.latest.simg"=>"/scratch/cqs_share/softwares/singularity/gatk.latest.simg",
+      "gotc.latest.simg"=>"/scratch/cqs_share/softwares/singularity/gotc.latest.simg",
     },
 
     wdl => {
