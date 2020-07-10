@@ -70,6 +70,9 @@ sub global_definition {
         "paired_fastq_to_unmapped_bam" => {
           "wdl_file" => "/scratch/cqs_share/softwares/gatk-workflows/seq-format-conversion/paired-fastq-to-unmapped-bam.wdl",
           "input_file" => "/scratch/cqs_share/softwares/gatk-workflows/seq-format-conversion/paired-fastq-to-unmapped-bam.inputs.json",
+        },
+        "paired_fastq_to_processed_bam" => {
+          "wdl_file" => "/home/zhaos/source/perl_cqs/workflow/gatk4-data-processing/processing-for-variant-discovery-gatk4-fromPairEndFastq.wdl",
         }
       }
     }
@@ -118,6 +121,9 @@ sub gatk_hg38_genome {
           },
           "mutect2_pon" => {
             "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.hg38.json",
+          },
+          "paired_fastq_to_processed_bam" => {
+            "input_file" => "/home/zhaos/source/perl_cqs/workflow/gatk4-data-processing/processing-for-variant-discovery-gatk4.hg38.wgs.inputs.json",
           },
         }
       }
