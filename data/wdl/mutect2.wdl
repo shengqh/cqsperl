@@ -830,13 +830,16 @@ task CalculateContamination {
       Runtime runtime_params
     }
 
+    String output_contamination = basename(tumor_pileups,".tsv") + ".contamination.table"
+    String output_segments = basename(tumor_pileups,".tsv") + ".segments.table"
+
     command {
         set -e
 
         export GATK_LOCAL_JAR=~{default="/gatk/gatk.jar" runtime_params.gatk_override}
 
         gatk --java-options "-Xmx~{runtime_params.command_mem}m" CalculateContamination -I ~{tumor_pileups} \
-        -O contamination.table --tumor-segmentation segments.table ~{"-matched " + normal_pileups}
+        -O ~{output_contamination} --tumor-segmentation ~{output_segments} ~{"-matched " + normal_pileups}
     }
 
     runtime {
@@ -850,8 +853,8 @@ task CalculateContamination {
     }
 
     output {
-        File contamination_table = "contamination.table"
-        File maf_segments = "segments.table"
+        File contamination_table = "~{output_contamination}"
+        File maf_segments = "~{output_segments}"
     }
 }
 
