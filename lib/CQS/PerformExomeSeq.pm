@@ -119,6 +119,9 @@ sub gatk_hg38_genome {
           "mutect2_pon" => {
             "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.hg38.json",
           },
+          paired_fastq_to_processed_bam => {
+            "input_file" => "missing",
+          }
         }
       }
     }
@@ -168,6 +171,9 @@ sub gatk_hg19_genome {
           "mutect2_pon" => {
             "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.hg19.json",
           },
+          paired_fastq_to_processed_bam => {
+            "input_file" => "missing",
+          }
         }
       }
     }
@@ -248,6 +254,9 @@ sub gencode_mm10_genome {
             "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2_pon.no_gnomad.wdl",
             "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.mm10.json",
           },
+          paired_fastq_to_processed_bam => {
+            "input_file" => "missing",
+          }
         }
       }
     }
