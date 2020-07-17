@@ -1,5 +1,6 @@
 version 1.0
 
+## Changes: 1. use unzipped data_sources_tar_gz and gnomad file in funco. So data_sources_tar_gz needs to be a unzipped folder. And no need to set funco_use_gnomad_AF. 
 ## Copyright Broad Institute, 2017
 ##
 ## This WDL workflow runs GATK4 Mutect 2 on a single tumor-normal pair or on a single tumor sample,
@@ -830,13 +831,16 @@ task CalculateContamination {
       Runtime runtime_params
     }
 
+    String output_contamination = basename(tumor_pileups,".tsv") + ".contamination.table"
+    String output_segments = basename(tumor_pileups,".tsv") + ".segments.table"
+
     command {
         set -e
 
         export GATK_LOCAL_JAR=~{default="/gatk/gatk.jar" runtime_params.gatk_override}
 
         gatk --java-options "-Xmx~{runtime_params.command_mem}m" CalculateContamination -I ~{tumor_pileups} \
-        -O contamination.table --tumor-segmentation segments.table ~{"-matched " + normal_pileups}
+        -O ~{output_contamination} --tumor-segmentation ~{output_segments} ~{"-matched " + normal_pileups}
     }
 
     runtime {
@@ -850,8 +854,8 @@ task CalculateContamination {
     }
 
     output {
-        File contamination_table = "contamination.table"
-        File maf_segments = "segments.table"
+        File contamination_table = "~{output_contamination}"
+        File maf_segments = "~{output_segments}"
     }
 }
 
@@ -1043,26 +1047,27 @@ task Funcotate {
          set -e
          export GATK_LOCAL_JAR=~{default="/gatk/gatk.jar" runtime_params.gatk_override}
 
-         # Extract our data sources:
-         echo "Extracting data sources zip file..."
-         mkdir datasources_dir
-         tar zxvf ~{data_sources_tar_gz} -C datasources_dir --strip-components 1
-         DATA_SOURCES_FOLDER="$PWD/datasources_dir"
+        #  # Extract our data sources:
+        #  echo "Extracting data sources zip file..."
+        #  mkdir datasources_dir
+        #  tar zxvf ~{data_sources_tar_gz} -C datasources_dir --strip-components 1
+        #  DATA_SOURCES_FOLDER="$PWD/datasources_dir"
 
-         # Handle gnomAD:
-         if ~{use_gnomad} ; then
-             echo "Enabling gnomAD..."
-             for potential_gnomad_gz in gnomAD_exome.tar.gz gnomAD_genome.tar.gz ; do
-                 if [[ -f ~{dollar}{DATA_SOURCES_FOLDER}/~{dollar}{potential_gnomad_gz} ]] ; then
-                     cd ~{dollar}{DATA_SOURCES_FOLDER}
-                     tar -zvxf ~{dollar}{potential_gnomad_gz}
-                     cd -
-                 else
-                     echo "ERROR: Cannot find gnomAD folder: ~{dollar}{potential_gnomad_gz}" 1>&2
-                     false
-                 fi
-             done
-         fi
+        #  # Handle gnomAD:
+        #  if ~{use_gnomad} ; then
+        #      echo "Enabling gnomAD..."
+        #      for potential_gnomad_gz in gnomAD_exome.tar.gz gnomAD_genome.tar.gz ; do
+        #          if [[ -f ~{dollar}{DATA_SOURCES_FOLDER}/~{dollar}{potential_gnomad_gz} ]] ; then
+        #              cd ~{dollar}{DATA_SOURCES_FOLDER}
+        #              tar -zvxf ~{dollar}{potential_gnomad_gz}
+        #              cd -
+        #          else
+        #              echo "ERROR: Cannot find gnomAD folder: ~{dollar}{potential_gnomad_gz}" 1>&2
+        #              false
+        #          fi
+        #      done
+        #  fi
+        DATA_SOURCES_FOLDER=~{data_sources_tar_gz}
 
          # Run Funcotator:
          gatk --java-options "-Xmx~{runtime_params.command_mem}m" Funcotator \
