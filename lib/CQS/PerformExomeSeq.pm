@@ -47,7 +47,7 @@ sub global_definition {
 
     #cromwell
     singularity_image_files=> {
-      "broadinstitute.gatk.4.1.4.1.simg" => "/scratch/cqs_share/softwares/singularity/gatk.4.1.4.1.simg",
+#      "broadinstitute.gatk.4.1.4.1.simg" => "/scratch/cqs_share/softwares/singularity/gatk.4.1.4.1.simg",
       "broadinstitute.gatk.latest.simg" => "/scratch/cqs_share/softwares/singularity/gatk.latest.simg",
       "broadinstitute.gotc.latest.simg" => "/scratch/cqs_share/softwares/singularity/gotc.latest.simg",
       "python.latest.simg" => "/scratch/cqs_share/softwares/singularity/python.latest.simg",
@@ -73,6 +73,12 @@ sub global_definition {
         },
         "paired_fastq_to_processed_bam" => {
           "wdl_file" => "/home/zhaos/source/perl_cqs/workflow/gatk4-data-processing/processing-for-variant-discovery-gatk4-fromPairEndFastq.wdl",
+        },
+        "somaticCNV_pon" => {
+          "wdl_file" => "/scratch/cqs/zhaos/tools/gatk/scripts/cnv_wdl/somatic/cnv_somatic_panel_workflow.wdl"
+        },
+        "somaticCNV" => {
+          "wdl_file" => "/scratch/cqs/zhaos/tools/gatk/scripts/cnv_wdl/somatic/cnv_somatic_pair_workflow.wdl"
         }
       }
     }
@@ -125,6 +131,12 @@ sub gatk_hg38_genome {
           "paired_fastq_to_processed_bam" => {
             "input_file" => "/home/zhaos/source/perl_cqs/workflow/gatk4-data-processing/processing-for-variant-discovery-gatk4.hg38.wgs.inputs.json",
           },
+          "somaticCNV_pon" => {
+            "input_file" => "/home/zhaos/source/perl_cqs/workflow/gatk-scripts-cnv_wdl-somatic/cnv_somatic_panel_workflow.wdl.json",
+          },
+          "somaticCNV" => {
+            "input_file" => "/home/zhaos/source/perl_cqs/workflow/gatk-scripts-cnv_wdl-somatic/cnv_somatic_pair_workflow.wdl.json",
+          }
         }
       }
     }

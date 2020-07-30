@@ -1,5 +1,5 @@
 {
-  "Mutect2.gatk_docker": "broadinstitute/gatk:4.1.4.1",
+  "Mutect2.gatk_docker": "gatk.latest",
 
   "Mutect2.scatter_count": 14,
   "Mutect2.m2_extra_args": "--downsampling-stride 20 --max-reads-per-alignment-start 6 --max-suspicious-reads-per-alignment-start 6",
