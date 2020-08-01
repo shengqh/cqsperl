@@ -14,6 +14,5 @@
   "Mutect2_Panel.gnomad": "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-b37/af-only-gnomad.raw.sites.vcf",
   "Mutect2_Panel.gnomad_idx": "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-b37/af-only-gnomad.raw.sites.vcf.idx",
 
-	"Mutect2_Panel.gatk_docker":"broadinstitute/gatk:4.1.4.1",
-	"Mutect2_Panel.gatk_override":"/gatk/gatk.jar"
+  "Mutect2_Panel.gatk_docker":"gatk.latest"
 }
