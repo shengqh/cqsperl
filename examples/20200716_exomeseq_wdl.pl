@@ -26,35 +26,21 @@ my $def = {
   perform_muTect2 => 1,
   perform_cnv_gatk4_cohort => 0,
 
-covered_bed  => "/scratch/cqs_share/references/exomeseq/IDT/Exome-IDT-xGen-hg19-v1-slop50-nochr.bed",
+  covered_bed  => "/scratch/cqs_share/references/exomeseq/IDT/Exome-IDT-xGen-hg19-v1-slop50-nochr.bed",
 
-files => {
-"Normal_06-18798" => ["/data/cqs/ramirema/ciombor_kristen_data/Plate_1_2/2585-KL-122-GCAATATT-GACTGAGT_S68_R1_001.fastq.gz", "/data/cqs/ramirema/ciombor_kristen_data/Plate_1_2/2585-KL-122-GCAATATT-GACTGAGT_S68_R2_001.fastq.gz"],
-"Tumor_06-18798" => ["/data/cqs/ramirema/ciombor_kristen_data/Plate_1_2/2585-KL-30-CCGGTTCC-TCCATTGC_S1_L001_R1.fastq.gz", "/data/cqs/ramirema/ciombor_kristen_data/Plate_1_2/2585-KL-30-CCGGTTCC-TCCATTGC_S1_L001_R2.fastq.gz"],
-},
+  files => {
+    "Normal_06-18798" => ["/data/cqs/ramirema/ciombor_kristen_data/Plate_1_2/2585-KL-122-GCAATATT-GACTGAGT_S68_R1_001.fastq.gz", "/data/cqs/ramirema/ciombor_kristen_data/Plate_1_2/2585-KL-122-GCAATATT-GACTGAGT_S68_R2_001.fastq.gz"],
+    "Tumor_06-18798" => ["/data/cqs/ramirema/ciombor_kristen_data/Plate_1_2/2585-KL-30-CCGGTTCC-TCCATTGC_S1_L001_R1.fastq.gz", "/data/cqs/ramirema/ciombor_kristen_data/Plate_1_2/2585-KL-30-CCGGTTCC-TCCATTGC_S1_L001_R2.fastq.gz"],
+  },
 
-groups => {
-"ID_06-18798" => ["Normal_06-18798", "Tumor_06-18798"],
-
-},
+  groups => {
+    "ID_06-18798" => ["Normal_06-18798", "Tumor_06-18798"],
+  },
 
   perform_IBS => 1,
 
 };
 
 my $config = performExomeSeq_gatk_hg38( $def, 1 );
-# performTask($config, "bwa_refine_gatk4_SNV_03_filterMAF");
-# performTask($config, "bwa_refine_gatk4_SNV_04_annovar");
-# performTask($config, "bwa_refine_gatk4_SNV_05_filter");
-# performTask($config, "bwa_refine_gatk4_SNV_06_toMAF");
-# performTask($config, "bwa_refine_gatk4_SNV_07_report");
-# performTask($config, "bwa_refine_gatk4_SNV_08_IBS");
-#performTask($config, "bwa_refine_muTect_01_call");
-#performTask($config, "bwa_refine_muTect_02_merge");
-#performTask($config, "bwa_refine_muTect_03_filterDepth");
-#performTask($config, "bwa_refine_muTect_04_annovar");
-#performTask($config, "bwa_refine_muTect_05_filter");
-#performTask($config, "bwa_refine_muTect_06_toMAF");
-#performTask($config, "bwa_refine_muTect2_01_pon");
-#performTask($config, "bwa_refine_muTect_07_report");
+
 1;
