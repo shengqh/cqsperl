@@ -1,6 +1,6 @@
 {
   "Mutect2.gatk_docker": "gatk.latest",
-  "Mutect2_Panel.gatk_override":"/scratch/cqs_share/softwares/gatk-4.1.8.1/gatk-package-4.1.8.1-local.jar",
+  "Mutect2.gatk_override":"/scratch/cqs_share/softwares/gatk-4.1.8.1/gatk-package-4.1.8.1-local.jar",
   
   "Mutect2.scatter_count": 14,
   "Mutect2.m2_extra_args": "--downsampling-stride 20 --max-reads-per-alignment-start 6 --max-suspicious-reads-per-alignment-start 6",
@@ -24,6 +24,6 @@
 
   "Mutect2.run_funcotator": "true",
   "Mutect2.funco_reference_version": "hg38",
-  "Mutect2.funco_data_sources_tar_gz": "/data/h_vangard_1/references/broad/broad-public-datasets/funcotator/funcotator_dataSources.v1.6.20190124s",
+  "Mutect2.funco_data_sources_tar_gz": "/data/h_vangard_1/references/broad/broad-public-datasets/funcotator/funcotator_dataSources.v1.6.20190124s.tar.gz",
   "Mutect2.funco_transcript_selection_list": "/data/h_vangard_1/references/broad/broad-public-datasets/funcotator/transcriptList.exact_uniprot_matches.AKT1_CRLF2_FGFR1.txt"
 }
