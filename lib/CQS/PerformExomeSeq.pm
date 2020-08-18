@@ -59,7 +59,8 @@ sub global_definition {
       "cromwell_jar" => "/scratch/cqs_share/softwares/cromwell-51.jar",
       "cromwell_option_file" => "/scratch/cqs_share/softwares/cromwell/cromwell.options.json",
       "local" => {
-        "cromwell_config_file" => "/scratch/cqs_share/softwares/cromwell/cromwell.examples.local.conf",
+        #"cromwell_config_file" => "/scratch/cqs_share/softwares/cromwell/cromwell.examples.local.conf",
+        "cromwell_config_file" => "/home/zhaos/source/perl_cqs/test/cromwell/cromwell.examples.local.conf",
         "mutect2" => {
           "perform_mutect2_pon" => 0,
           "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2.wdl",
