@@ -31,6 +31,8 @@ sub common_options {
     cqstools   => "/home/shengq2/cqstools/cqstools.exe",
     picard_jar => "/scratch/cqs/shengq2/local/bin/picard/picard.jar",
     bamplot_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/bamplot.simg ",
+    docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-chipseq.simg ",
+    BWA_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
 
     perform_cutadapt => 0,
 
@@ -113,13 +115,13 @@ sub gencode_mm10_options {
     merge( common_options(), common_mm10_options() ),
     {
       #aligner database
-      bowtie2_index => "/scratch/cqs/shengq2/references/gencode/mm10/bowtie2_index_2.2.6/GRCm38.p5.genome",
-      bowtie1_fasta => "/scratch/cqs/shengq2/references/gencode/mm10/bowtie_index_1.1.2/GRCm38.p5.genome.fa",
-      bowtie1_index => "/scratch/cqs/shengq2/references/gencode/mm10/bowtie_index_1.1.2/GRCm38.p5.genome",
-      bwa_fasta     => "/scratch/cqs/shengq2/references/gencode/mm10/bwa_index_0.7.17/GRCm38.p5.genome.fa",
+      bowtie2_index => "/scratch/cqs_share/references/gencode/GRCm38.p6/bowtie2_index_2.3.5.1/GRCm38.primary_assembly.genome",
+      bowtie1_fasta => "/scratch/cqs_share/references/gencode/GRCm38.p6/bowtie_index_1.2.3/GRCm38.primary_assembly.genome.fa",
+      bowtie1_index => "/scratch/cqs_share/references/gencode/GRCm38.p6/bowtie_index_1.2.3/GRCm38.primary_assembly.genome",
+      bwa_fasta     => "/scratch/cqs_share/references/gencode/GRCm38.p6/bwa_index_0.7.17/GRCm38.primary_assembly.genome.fa",
 
       #enhancer
-      enhancer_genome_path => "/scratch/cqs/shengq2/references/gencode/mm10/GRCm38.p5.chromosomes",
+      enhancer_genome_path => "/scratch/cqs_share/references/gencode/GRCm38.p6/chromosomes",
     }
   );
 }
