@@ -50,7 +50,7 @@ my $bamfilter = sub {
 sub tcga_download {
   my ( $config, $section ) = @_;
 
-  my ( $task_name, $path_file, $pbs_description, $target_dir, $log_dir, $pbs_dir, $result_dir, $option ) = get_parameter( $config, $section );
+  my ( $task_name, $path_file, $pbs_description, $target_dir, $log_dir, $pbs_dir, $result_dir, $option ) = $self->init_parameter( $config, $section );
 
   my $idfile = get_param_file( $config->{$section}{idfile}, "analysis id file", 1 );
 
@@ -149,7 +149,7 @@ sub tcga_download {
 sub tcga_get_coordinate {
   my ( $config, $section ) = @_;
 
-  my ( $task_name, $path_file, $pbs_description, $target_dir, $log_dir, $pbs_dir, $result_dir, $option ) = get_parameter( $config, $section );
+  my ( $task_name, $path_file, $pbs_description, $target_dir, $log_dir, $pbs_dir, $result_dir, $option ) = $self->init_parameter( $config, $section );
 
   my $idfile = get_param_file( $config->{$section}{idfile}, "analysis id file", 1 );
 
