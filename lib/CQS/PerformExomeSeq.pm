@@ -29,15 +29,15 @@ sub global_definition {
   return {
     constraint => "haswell",
 
-    gatk4_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-gatk4.simg ",
+    gatk4_docker_command => "singularity exec -e -H /scratch/cqs/singularity_home /scratch/cqs_share/softwares/singularity/cqs-gatk4.simg ",
     gatk4_docker_init    => "source activate gatk  ",
 
-    docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
-    bamplot_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/bamplot.simg ",
+    docker_command => "singularity exec -e -H /scratch/cqs/singularity_home /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
+    bamplot_docker_command => "singularity exec -e -H /scratch/cqs/singularity_home /scratch/cqs_share/softwares/singularity/bamplot.simg ",
     docker_init    => "",
     gatk3_jar      => "/opt/gatk3.jar",
     picard_jar     => "/opt/picard.jar",
-    mutect_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/mutect.simg ",
+    mutect_docker_command => "singularity exec -e -H /scratch/cqs/singularity_home /scratch/cqs_share/softwares/singularity/mutect.simg ",
     muTect_jar     => "/opt/mutect-1.1.7.jar",
 
     vcf2maf_pl => "/scratch/cqs/softwares/mskcc-vcf2maf/vcf2maf.pl",
@@ -110,8 +110,7 @@ sub gatk_hg38_genome {
       axiomPoly        => "/scratch/cqs_share/references/broad/hg38/v0/Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz",
       perform_annovar  => 1,
       annovar_buildver => "hg38",
-      annovar_param =>
-"-protocol refGene,avsnp150,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad211_genome,clinvar_20190305,topmed05 -operation g,f,f,f,f,f,f,f,f,f,f,f,f --remove",
+      annovar_param => "-protocol refGene,avsnp150,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad211_genome,clinvar_20190305,topmed05 -operation g,f,f,f,f,f,f,f,f,f,f,f,f --remove",
       annovar_db => "/scratch/cqs_share/references/annovar/humandb/",
       annovar_filter => "--exac_key ExAC_ALL --g1000_key 1000g2015aug_all --gnomad_key AF --topmed_key TOPMed",
       species    => "homo_sapiens",
@@ -168,8 +167,7 @@ sub gatk_hg19_genome {
       axiomPoly        => "/scratch/cqs_share/references/broad/hg19/v0/Axiom_Exome_Plus.genotypes.all_populations.poly.vcf.gz",
       perform_annovar  => 1,
       annovar_buildver => "hg19",
-      annovar_param =>
-"-protocol refGene,avsnp150,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad211_genome,clinvar_20190305,topmed03 -operation g,f,f,f,f,f,f,f,f,f,f,f,f --remove",
+      annovar_param => "-protocol refGene,avsnp150,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad211_genome,clinvar_20190305,topmed03 -operation g,f,f,f,f,f,f,f,f,f,f,f,f --remove",
       annovar_db => "/scratch/cqs_share/references/annovar/humandb/",
       annovar_filter => "--exac_key ExAC_ALL --g1000_key 1000g2015aug_all --gnomad_key AF --topmed_key TOPMed",
       species    => "homo_sapiens",

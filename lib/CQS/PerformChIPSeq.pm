@@ -27,8 +27,8 @@ sub common_options {
     version    => 1,
     constraint => "haswell",
 
-    docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-chipseq.simg ",
-    bamplot_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/bamplot.simg ",
+    docker_command => "singularity exec -e -H /scratch/cqs/singularity_home /scratch/cqs_share/softwares/singularity/cqs-chipseq.simg ",
+    bamplot_docker_command => "singularity exec -H /scratch/cqs/singularity_home -e /scratch/cqs_share/softwares/singularity/bamplot.simg ",
     picard_jar     => "/opt/picard.jar",
 
     perform_cutadapt => 0,

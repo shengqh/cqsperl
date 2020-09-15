@@ -56,7 +56,7 @@ sub global_definition {
     perform_star_featurecount => 1,
     perform_qc3bam            => 0,
     qc3_perl                  => "/scratch/cqs_share/softwares/QC3/qc3.pl",
-    docker_command            => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
+    docker_command            => "singularity exec -e -H /scratch/cqs/singularity_home /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
     gatk_jar                  => "/opt/gatk3.jar",
     picard_jar                => "/opt/picard.jar",
   };
