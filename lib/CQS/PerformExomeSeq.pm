@@ -29,15 +29,15 @@ sub global_definition {
   return {
     constraint => "haswell",
 
-    gatk4_docker_command => "singularity exec -e -H /scratch/cqs/singularity_home /scratch/cqs_share/softwares/singularity/cqs-gatk4.simg ",
+    gatk4_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-gatk4.simg ",
     gatk4_docker_init    => "source activate gatk  ",
 
-    docker_command => "singularity exec -e -H /scratch/cqs/singularity_home /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
-    bamplot_docker_command => "singularity exec -e -H /scratch/cqs/singularity_home /scratch/cqs_share/softwares/singularity/bamplot.simg ",
+    docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
+    bamplot_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/bamplot.simg ",
     docker_init    => "",
     gatk3_jar      => "/opt/gatk3.jar",
     picard_jar     => "/opt/picard.jar",
-    mutect_docker_command => "singularity exec -e -H /scratch/cqs/singularity_home /scratch/cqs_share/softwares/singularity/mutect.simg ",
+    mutect_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/mutect.simg ",
     muTect_jar     => "/opt/mutect-1.1.7.jar",
 
     vcf2maf_pl => "/scratch/cqs/softwares/mskcc-vcf2maf/vcf2maf.pl",
