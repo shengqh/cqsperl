@@ -4,6 +4,7 @@ package CQS::PerformRNAseq;
 use strict;
 use warnings;
 use Pipeline::RNASeq;
+use CQS::Global;
 use Hash::Merge qw( merge );
 
 require Exporter;
@@ -51,7 +52,7 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '0.01';
 
 sub global_definition {
-  return {
+  return merge(global_options(), {
     constraint                => "haswell",
     perform_star_featurecount => 1,
     perform_qc3bam            => 0,
@@ -59,7 +60,7 @@ sub global_definition {
     docker_command            => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
     gatk_jar                  => "/opt/gatk3.jar",
     picard_jar                => "/opt/picard.jar",
-  };
+  });
 }
 
 sub no_docker {

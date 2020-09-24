@@ -3,6 +3,7 @@ package CQS::PerformSmallRNA;
 
 use strict;
 use warnings;
+use CQS::Global;
 use Pipeline::SmallRNA;
 use Pipeline::SmallRNAUtils;
 use Hash::Merge qw( merge );
@@ -32,7 +33,7 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '5.0';
 
 sub supplement_genome {
-  return {
+  return merge(global_options(), {
     version    => 5,
     constraint => "haswell",
     #cqstools   => "/home/shengq2/cqstools/cqstools.exe",
@@ -87,7 +88,7 @@ sub supplement_genome {
         species_map => "/scratch/cqs/ramirema/other_projects/20200520_lupusbugs_db/20200528_lupusbug.map",
       },
     },
-  };
+  });
 }
 
 sub hg19_genome {

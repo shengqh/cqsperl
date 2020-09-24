@@ -6,6 +6,7 @@ use warnings;
 use Storable qw(dclone);
 use CQS::StringUtils;
 use Pipeline::ExomeSeq;
+use CQS::Global;
 use Hash::Merge qw( merge );
 
 require Exporter;
@@ -26,14 +27,13 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '0.01';
 
 sub global_definition {
-  return {
+  return merge(global_options(), {
     constraint => "haswell",
 
     gatk4_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-gatk4.simg ",
     gatk4_docker_init    => "source activate gatk  ",
 
     docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
-    bamplot_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/bamplot.simg ",
     docker_init    => "",
     gatk3_jar      => "/opt/gatk3.jar",
     picard_jar     => "/opt/picard.jar",
@@ -73,7 +73,10 @@ sub global_definition {
           "input_file" => "/scratch/cqs_share/softwares/gatk-workflows/seq-format-conversion/paired-fastq-to-unmapped-bam.inputs.json",
         },
         "paired_fastq_to_processed_bam" => {
-          "wdl_file" => "/home/zhaos/source/perl_cqs/workflow/gatk4-data-processing/processing-for-variant-discovery-gatk4-fromPairEndFastq.wdl",
+          "wdl_file" => "/scratch/cqs_share/softwares/workflow/gatk4-data-processing/processing-for-variant-discovery-gatk4-fromPairEndFastq.wdl",
+        },
+        "haplotypecaller" => {
+          "wdl_file" => "/scratch/cqs_share/softwares/gatk-workflows/gatk4-germline-snps-indels/haplotypecaller-gvcf-gatk4.wdl",
         },
         "somaticCNV_pon" => {
           "wdl_file" => "/scratch/cqs/zhaos/tools/gatk/scripts/cnv_wdl/somatic/cnv_somatic_panel_workflow.wdl"
@@ -84,7 +87,7 @@ sub global_definition {
       }
     }
 
-  };
+  });
 }
 
 sub gatk_hg38_genome {
@@ -187,6 +190,9 @@ sub gatk_hg19_genome {
           },
           paired_fastq_to_processed_bam => {
             "input_file" => "missing",
+          },
+          "haplotypecaller" => {
+            "input_file" => "/scratch/cqs_share/softwares/gatk-workflows/gatk4-germline-snps-indels/haplotypecaller-gvcf-gatk4.wdl",
           }
         }
       }
