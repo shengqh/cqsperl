@@ -32,6 +32,7 @@ sub global_definition {
 
     gatk4_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-gatk4.simg ",
     gatk4_docker_init    => "source activate gatk  ",
+    gotc_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/gotc.latest.simg ",
 
     docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
     docker_init    => "",
@@ -104,6 +105,7 @@ sub gatk_hg38_genome {
       transcript_gtf => "/scratch/cqs_share/references/broad/hg38/v0/gencode.v27.primary_assembly.annotation.gtf",
 
       blacklist_file => "/scratch/cqs_share/references/blacklist_files/hg38-blacklist.v2.bed",
+      interval_list_file => "/scratch/cqs_share/references/broad/hg38/v0/scattered_calling_intervals/hg38.intervals_list",
 
       dbsnp            => "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf.gz",
       hapmap           => "/scratch/cqs_share/references/broad/hg38/v0/hapmap_3.3.hg38.vcf.gz",
