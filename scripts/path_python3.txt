@@ -17,7 +17,7 @@ MY_R_LIBS=/scratch/cqs/shengq2/Rlibrary
 export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
 MY_RSTUDIO_BIN=/scratch/cqs/shengq2/tools/rstudio-1.1.456/bin
 
-export PATH=/scratch/cqs_share/softwares/strelka/bin:/scratch/cqs/softwares/firefox:$PATH
+export PATH=/scratch/cqs_share/softwares/supernova:/scratch/cqs_share/softwares/strelka/bin:/scratch/cqs/softwares/firefox:$PATH
 
 export SINGULARITY_TMPDIR=/scratch/cqs_share/softwares/singularity/temp
 export SINGULARITY_CACHE=/scratch/cqs_share/softwares/singularity/cache
@@ -142,6 +142,7 @@ alias cqstools='singularity exec -e /scratch/cqs_share/softwares/singularity/cqs
 alias lcqstools='singularity exec -e /scratch/cqs_share/softwares/singularity/mono5.simg mono /home/shengq2/cqstools/cqstools.exe'
 #alias perl='singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-smallRNA.simg perl'
 alias fastqc='singularity exec /scratch/cqs_share/softwares/singularity/cqs-chipseq.simg fastqc'
+alias qd='scontrol show jobid -dd '
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/scratch/cqs_share/softwares/google-cloud-sdk/path.bash.inc' ]; then . '/scratch/cqs_share/softwares/google-cloud-sdk/path.bash.inc'; fi
