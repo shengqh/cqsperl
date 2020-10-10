@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Pipeline::RNASeq;
 use CQS::Global;
-use Hash::Merge qw( merge );
+use CQS::ConfigUtils;
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -52,7 +52,7 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '0.01';
 
 sub global_definition {
-  return merge(global_options(), {
+  return merge_hash_right_precedent(global_options(), {
     constraint                => "haswell",
     perform_star_featurecount => 1,
     perform_qc3bam            => 0,
@@ -70,7 +70,7 @@ sub no_docker {
 sub common_human_genome {
   my ($userdef) = @_;
 
-  my $result = merge(
+  my $result = merge_hash_right_precedent(
     global_definition(),
     {
       webgestalt_organism => "hsapiens",
@@ -92,7 +92,7 @@ sub common_human_genome {
   );
 
   if ( ( defined $userdef ) and $userdef->{ignore_docker} ) {
-    $result = merge( $result, no_docker() );
+    $result = merge_hash_right_precedent( $result, no_docker() );
   }
 
   return ($result);
@@ -100,7 +100,7 @@ sub common_human_genome {
 
 sub common_hg19_genome {
   my ($userdef) = @_;
-  return merge(
+  return merge_hash_right_precedent(
     common_human_genome($userdef),
     {
       dbsnp            => "/scratch/cqs/references/human/b37/dbsnp_150.b37.vcf.gz",
@@ -111,7 +111,7 @@ sub common_hg19_genome {
 
 sub gencode_hg19_genome {
   my ($userdef) = @_;
-  return merge(
+  return merge_hash_right_precedent(
     common_hg19_genome($userdef),
     {
       #genome database
@@ -125,7 +125,7 @@ sub gencode_hg19_genome {
 
 # sub gatk_b37_genome {
 #   my ($userdef) = @_;
-#   return merge(
+#   return merge_hash_right_precedent(
 #     common_hg19_genome($userdef),
 #     {
 #       #genome database
@@ -139,7 +139,7 @@ sub gencode_hg19_genome {
 
 sub common_hg38_genome {
   my ($userdef) = @_;
-  return merge(
+  return merge_hash_right_precedent(
     common_human_genome($userdef),
     {
       annovar_buildver => "hg38",
@@ -149,7 +149,7 @@ sub common_hg38_genome {
 
 # sub gatk_hg38_genome {
 #   my ($userdef) = @_;
-#   return merge(
+#   return merge_hash_right_precedent(
 #     common_hg38_genome($userdef),
 #     {
 #       #genome database
@@ -163,7 +163,7 @@ sub common_hg38_genome {
 
 sub gencode_hg38_genome {
   my ($userdef) = @_;
-  return merge(
+  return merge_hash_right_precedent(
     common_hg38_genome($userdef),
     {
       #genome database
@@ -176,8 +176,8 @@ sub gencode_hg38_genome {
 }
 
 # sub yan_hg38_genome() {
-#   return merge(
-#     merge( global_definition(), common_hg38_genome() ),
+#   return merge_hash_right_precedent(
+#     merge_hash_right_precedent( global_definition(), common_hg38_genome() ),
 #     {
 #       #genome database
 #       fasta_file     => "/scratch/h_vangard_1/guoy1/reference/hg38/hg38chr.fa",
@@ -205,8 +205,8 @@ sub common_mm10_genome() {
 }
 
 sub gencode_mm10_genome {
-  return merge(
-    merge( global_definition(), common_mm10_genome() ),
+  return merge_hash_right_precedent(
+    merge_hash_right_precedent( global_definition(), common_mm10_genome() ),
     {
       #genome database
       fasta_file     => "/scratch/cqs_share/references/gencode/GRCm38.p6/GRCm38.p6.genome.fa",
@@ -218,8 +218,8 @@ sub gencode_mm10_genome {
 }
 
 # sub yan_mm10_genome {
-#   return merge(
-#     merge( global_definition(), common_mm10_genome() ),
+#   return merge_hash_right_precedent(
+#     merge_hash_right_precedent( global_definition(), common_mm10_genome() ),
 #     {
 #       #genome database
 #       fasta_file     => "/scratch/h_vangard_1/guoy1/reference/mm10/star_index/mm10.fa",
@@ -236,7 +236,7 @@ sub gencode_mm10_genome {
 # }
 
 # sub ensembl_Mmul1_genome {
-#   return merge(
+#   return merge_hash_right_precedent(
 #     global_definition(),
 #     {
 #       perform_gsea => 0,
@@ -252,7 +252,7 @@ sub gencode_mm10_genome {
 # }
 
 # sub ensembl_Mmul8_genome {
-#   return merge(
+#   return merge_hash_right_precedent(
 #     global_definition(),
 #     {
 #       perform_gsea => 0,
@@ -268,7 +268,7 @@ sub gencode_mm10_genome {
 # }
 
 sub ensembl_Mmul10_genome {
-  return merge(
+  return merge_hash_right_precedent(
     global_definition(),
     {
       perform_gsea => 0,
@@ -282,7 +282,7 @@ sub ensembl_Mmul10_genome {
 }
 
 # sub ncbi_UMD311_genome {
-#   return merge(
+#   return merge_hash_right_precedent(
 #     global_definition(),
 #     {
 #       perform_gsea => 0,
@@ -299,7 +299,7 @@ sub ensembl_Mmul10_genome {
 # }
 
 # sub ensembl_CanFam3_1_genome {
-#   return merge(
+#   return merge_hash_right_precedent(
 #     global_definition(),
 #     {
 #       perform_gsea => 0,
@@ -316,63 +316,63 @@ sub ensembl_Mmul10_genome {
 
 sub performRNASeq_gencode_hg19 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, gencode_hg19_genome($userdef) );
+  my $def = merge_hash_left_precedent( $userdef, gencode_hg19_genome($userdef) );
   my $config = performRNASeq( $def, $perform );
   return $config;
 }
 
 # sub performRNASeq_gatk_b37 {
 #   my ( $userdef, $perform ) = @_;
-#   my $def = merge( $userdef, gatk_b37_genome($userdef) );
+#   my $def = merge_hash_left_precedent( $userdef, gatk_b37_genome($userdef) );
 #   my $config = performRNASeq( $def, $perform );
 #   return $config;
 # }
 
 sub performRNASeq_gencode_hg38 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, gencode_hg38_genome($userdef) );
+  my $def = merge_hash_left_precedent( $userdef, gencode_hg38_genome($userdef) );
   my $config = performRNASeq( $def, $perform );
   return $config;
 }
 
 # sub performRNASeq_yan_hg38 {
 #   my ( $userdef, $perform ) = @_;
-#   my $def = merge( $userdef, yan_hg38_genome() );
+#   my $def = merge_hash_left_precedent( $userdef, yan_hg38_genome() );
 #   my $config = performRNASeq( $def, $perform );
 #   return $config;
 # }
 
 sub performRNASeq_gencode_mm10 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, gencode_mm10_genome() );
+  my $def = merge_hash_left_precedent( $userdef, gencode_mm10_genome() );
   my $config = performRNASeq( $def, $perform );
   return $config;
 }
 
 # sub performRNASeq_yan_mm10 {
 #   my ( $userdef, $perform ) = @_;
-#   my $def = merge( $userdef, yan_mm10_genome() );
+#   my $def = merge_hash_left_precedent( $userdef, yan_mm10_genome() );
 #   my $config = performRNASeq( $def, $perform );
 #   return $config;
 # }
 
 # sub performRNASeq_ensembl_Mmul1 {
 #   my ( $userdef, $perform ) = @_;
-#   my $def = merge( $userdef, ensembl_Mmul1_genome() );
+#   my $def = merge_hash_left_precedent( $userdef, ensembl_Mmul1_genome() );
 #   my $config = performRNASeq( $def, $perform );
 #   return $config;
 # }
 
 # sub performRNASeq_ensembl_Mmul8 {
 #   my ( $userdef, $perform ) = @_;
-#   my $def = merge( $userdef, ensembl_Mmul8_genome() );
+#   my $def = merge_hash_left_precedent( $userdef, ensembl_Mmul8_genome() );
 #   my $config = performRNASeq( $def, $perform );
 #   return $config;
 # }
 
 sub performRNASeq_ensembl_Mmul10 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, ensembl_Mmul10_genome() );
+  my $def = merge_hash_left_precedent( $userdef, ensembl_Mmul10_genome() );
   my $config = performRNASeq( $def, $perform );
   return $config;
 }
@@ -380,14 +380,14 @@ sub performRNASeq_ensembl_Mmul10 {
 
 # sub performRNASeq_ncbi_UMD311 {
 #   my ( $userdef, $perform ) = @_;
-#   my $def = merge( $userdef, ncbi_UMD311_genome() );
+#   my $def = merge_hash_left_precedent( $userdef, ncbi_UMD311_genome() );
 #   my $config = performRNASeq( $def, $perform );
 #   return $config;
 # }
 
 # sub performRNASeq_ensembl_CanFam3_1 {
 #   my ( $userdef, $perform ) = @_;
-#   my $def = merge( $userdef, ensembl_CanFam3_1_genome() );
+#   my $def = merge_hash_left_precedent( $userdef, ensembl_CanFam3_1_genome() );
 #   my $config = performRNASeq( $def, $perform );
 #   return $config;
 # }

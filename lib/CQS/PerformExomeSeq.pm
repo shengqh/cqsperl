@@ -7,7 +7,7 @@ use Storable qw(dclone);
 use CQS::StringUtils;
 use Pipeline::ExomeSeq;
 use CQS::Global;
-use Hash::Merge qw( merge );
+use CQS::ConfigUtils;
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -27,7 +27,7 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '0.01';
 
 sub global_definition {
-  return merge(global_options(), {
+  return merge_hash_right_precedent(global_options(), {
     constraint => "haswell",
 
     gatk4_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-gatk4.simg ",
@@ -92,7 +92,7 @@ sub global_definition {
 }
 
 sub gatk_hg38_genome {
-  return merge(
+  return merge_hash_right_precedent(
     global_definition(),
     {
       ref_fasta      => "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
@@ -149,7 +149,7 @@ sub gatk_hg38_genome {
 }
 
 sub gatk_hg19_genome {
-  return merge(
+  return merge_hash_right_precedent(
     global_definition(),
     {
       ref_fasta      => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens_assembly19.fasta",
@@ -203,7 +203,7 @@ sub gatk_hg19_genome {
 }
 
 #sub gatk_b37_genome {
-#  return merge(
+#  return merge_hash_right_precedent(
 #    global_definition(),
 #    {
 #      #genome database
@@ -240,7 +240,7 @@ sub gatk_hg19_genome {
 #}
 
 sub gencode_mm10_genome {
-  return merge(
+  return merge_hash_right_precedent(
     global_definition(),
     {
       #genome database
@@ -287,28 +287,28 @@ sub gencode_mm10_genome {
 
 sub performExomeSeq_gatk_hg38 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, gatk_hg38_genome() );
+  my $def = merge_hash_left_precedent( $userdef, gatk_hg38_genome() );
   my $config = performExomeSeq( $def, $perform );
   return $config;
 }
 
 sub performExomeSeq_gatk_hg19 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, gatk_hg19_genome() );
+  my $def = merge_hash_left_precedent( $userdef, gatk_hg19_genome() );
   my $config = performExomeSeq( $def, $perform );
   return $config;
 }
 
 #sub performExomeSeq_gatk_b37 {
 #  my ( $userdef, $perform ) = @_;
-#  my $def = merge( $userdef, gatk_b37_genome() );
+#  my $def = merge_hash_left_precedent( $userdef, gatk_b37_genome() );
 #  my $config = performExomeSeq( $def, $perform );
 #  return $config;
 #}
 #
 sub performExomeSeq_gencode_mm10 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, gencode_mm10_genome() );
+  my $def = merge_hash_left_precedent( $userdef, gencode_mm10_genome() );
   my $config = performExomeSeq( $def, $perform );
   return $config;
 }

@@ -4,7 +4,7 @@ package CQS::PerformChIPSeq;
 use strict;
 use warnings;
 use Pipeline::ChIPSeq;
-use Hash::Merge qw( merge );
+use CQS::ConfigUtils;
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -74,8 +74,8 @@ sub common_hg19_options {
 }
 
 sub gencode_hg19_options {
-  return merge(
-    merge( common_options(), common_hg19_options() ),
+  return merge_hash_right_precedent(
+    merge_hash_right_precedent( common_options(), common_hg19_options() ),
     {
       #aligner database
       bowtie2_index => "/scratch/cqs_share/references/gencode/GRCh37.p13/bowtie2_index_2.3.5.1/Homo_sapiens_assembly19",
@@ -90,8 +90,8 @@ sub gencode_hg19_options {
 }
 
 # sub ucsc_hg19_options {
-#   return merge(
-#     merge( common_options(), common_hg19_options() ),
+#   return merge_hash_right_precedent(
+#     merge_hash_right_precedent( common_options(), common_hg19_options() ),
 #     {
 #       #aligner database
 #       bowtie2_index => "/scratch/cqs_share/references/illumina_iGenomes/Homo_sapiens/UCSC/hg19/Sequence/Bowtie2Index/genome",
@@ -131,8 +131,8 @@ sub common_mm10_options() {
 }
 
 sub gencode_mm10_options {
-  return merge(
-    merge( common_options(), common_mm10_options() ),
+  return merge_hash_right_precedent(
+    merge_hash_right_precedent( common_options(), common_mm10_options() ),
     {
       #aligner database
       bowtie2_index => "/scratch/cqs_share/references/gencode/GRCm38.p6/bowtie2_index_2.3.5.1/GRCm38.primary_assembly.genome",
@@ -147,8 +147,8 @@ sub gencode_mm10_options {
 }
 
 # sub ucsc_mm10_options {
-#   return merge(
-#     merge( common_options(), common_mm10_options() ),
+#   return merge_hash_right_precedent(
+#     merge_hash_right_precedent( common_options(), common_mm10_options() ),
 #     {
 #       #aligner database
 #       bowtie2_index => "/scratch/cqs_share/references/illumina_iGenomes/Mus_musculus/UCSC/mm10/Sequence/Bowtie2Index/genome",
@@ -164,7 +164,7 @@ sub gencode_mm10_options {
 
 sub performChIPSeq_gencode_hg19 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, gencode_hg19_options() );
+  my $def = merge_hash_left_precedent( $userdef, gencode_hg19_options() );
 
   my $config = performChIPSeq( $def, $perform );
   return $config;
@@ -172,7 +172,7 @@ sub performChIPSeq_gencode_hg19 {
 
 sub performChIPSeq_gencode_mm10 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, gencode_mm10_options() );
+  my $def = merge_hash_left_precedent( $userdef, gencode_mm10_options() );
 
   my $config = performChIPSeq( $def, $perform );
   return $config;
@@ -180,7 +180,7 @@ sub performChIPSeq_gencode_mm10 {
 
 # sub performChIPSeq_ucsc_hg19 {
 #   my ( $userdef, $perform ) = @_;
-#   my $def = merge( $userdef, ucsc_hg19_options() );
+#   my $def = merge_hash_left_precedent( $userdef, ucsc_hg19_options() );
 
 #   my $config = performChIPSeq( $def, $perform );
 #   return $config;
@@ -188,7 +188,7 @@ sub performChIPSeq_gencode_mm10 {
 
 # sub performChIPSeq_ucsc_mm10 {
 #   my ( $userdef, $perform ) = @_;
-#   my $def = merge( $userdef, ucsc_mm10_options() );
+#   my $def = merge_hash_left_precedent( $userdef, ucsc_mm10_options() );
 
 #   my $config = performChIPSeq( $def, $perform );
 #   return $config;

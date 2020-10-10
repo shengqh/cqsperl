@@ -3,8 +3,8 @@ package CQS::PerformATACSeq;
 
 use strict;
 use warnings;
+use CQS::ConfigUtils;
 use Pipeline::ATACSeq;
-use Hash::Merge qw( merge );
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -60,8 +60,8 @@ sub common_hg19_options {
 }
 
 sub gencode_hg19_options {
-  return merge(
-    merge( common_options(), common_hg19_options() ),
+  return merge_hash_right_precedent(
+    merge_hash_right_precedent( common_options(), common_hg19_options() ),
     {
       #aligner database
       bowtie2_index => "/scratch/cqs/shengq2/references/gencode/GRCh37.p13/bowtie2_index_2.2.6/GRCh37.p13.genome",
@@ -76,8 +76,8 @@ sub gencode_hg19_options {
 }
 
 sub ucsc_hg19_options {
-  return merge(
-    merge( common_options(), common_hg19_options() ),
+  return merge_hash_right_precedent(
+    merge_hash_right_precedent( common_options(), common_hg19_options() ),
     {
       #aligner database
       bowtie2_index => "/scratch/cqs/shengq2/references/ucsc/illumina/hg19/Sequence/Bowtie2Index/genome",
@@ -111,7 +111,7 @@ sub common_mm10_options() {
 }
 
 sub gencode_mm10_options {
-  return merge(
+  return merge_hash_right_precedent(
     merge( common_options(), common_mm10_options() ),
     {
       #aligner database
@@ -127,7 +127,7 @@ sub gencode_mm10_options {
 }
 
 sub ucsc_mm10_options {
-  return merge(
+  return merge_hash_right_precedent(
     merge( common_options(), common_mm10_options() ),
     {
       #aligner database
@@ -144,7 +144,7 @@ sub ucsc_mm10_options {
 
 sub performATACSeq_gencode_hg19 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, gencode_hg19_options() );
+  my $def = merge_hash_left_precedent( $userdef, gencode_hg19_options() );
 
   my $config = performATACSeq( $def, $perform );
   return $config;
@@ -152,7 +152,7 @@ sub performATACSeq_gencode_hg19 {
 
 sub performATACSeq_gencode_mm10 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, gencode_mm10_options() );
+  my $def = merge_hash_left_precedent( $userdef, gencode_mm10_options() );
 
   my $config = performATACSeq( $def, $perform );
   return $config;
@@ -160,7 +160,7 @@ sub performATACSeq_gencode_mm10 {
 
 sub performATACSeq_ucsc_hg19 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, ucsc_hg19_options() );
+  my $def = merge_hash_left_precedent( $userdef, ucsc_hg19_options() );
 
   my $config = performATACSeq( $def, $perform );
   return $config;
@@ -168,7 +168,7 @@ sub performATACSeq_ucsc_hg19 {
 
 sub performATACSeq_ucsc_mm10 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge( $userdef, ucsc_mm10_options() );
+  my $def = merge_hash_left_precedent( $userdef, ucsc_mm10_options() );
 
   my $config = performATACSeq( $def, $perform );
   return $config;
