@@ -35,6 +35,7 @@ sub global_definition {
     gotc_docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/gotc.latest.simg ",
 
     docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
+    mafreport_docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/mafreport.simg ",
     docker_init    => "",
     gatk3_jar      => "/opt/gatk3.jar",
     picard_jar     => "/opt/picard.jar",
