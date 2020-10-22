@@ -128,7 +128,7 @@ In this example, we introduce covariance "gender" in pairs, everything else is s
 
 [rnaseq_example_03_covariance_file](https://github.com/shengqh/cqsperl/raw/master/examples/rnaseq_example_03_covariance_file.pl)
 
-Some time, there are too many covariances values need to be input handly. Once we change the group definition, the covariance values have to be updated too. We introduce a covariance file in definition as below. The covariance file is tab-delimited file with first column indicates sample name and all the following columns are covariances.
+Some time, there are too many covariances values need to be input handly. Once we change the group definition, the covariance values have to be updated too. We introduce a [covariance file](https://github.com/shengqh/cqsperl/raw/master/examples/rnaseq_example_covariance_file.txt) in definition as below. The covariance file is tab-delimited file with first column indicates sample name and all the following columns are covariances.
 
 ```perl
   covariance_file => "/scratch/cqs/pipeline_example/rnaseq_data/covariance.txt",
@@ -177,157 +177,84 @@ In this example, we rename the sample with proper name which includes both group
 ## Practice in ACCRE
 
 Add following line to your .bashrc
-```
+```bash
 alias sq='squeue -u USERNAME -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R"'
-source /home/shengq2/local/bin/path.txt
+source /scratch/cqs_share/softwares/cqsperl/scripts/path.txt
 ```
 
 Run the command to refresh the change
-```
+```bash
 source .bashrc
 ```
 
 Now let's generate the slurm scripts:
-```
+```bash
 cd /scratch/cqs/YOURNAME
 mkdir pipelinetest
 cd pipelinetest
-wget https://raw.githubusercontent.com/shengqh/cqsperl/master/examples/RNAseq_human_gatk_b37.pl
-vi RNAseq_human_gatk_b37.pl
+wget https://github.com/shengqh/cqsperl/raw/master/examples/rnaseq_example_01_simple.pl
+vi rnaseq_example_01_simple.pl
 	#replace email 
 	#replace target_dir with /scratch/cqs/YOURNAME/pipelinetest/rnaseq
-perl RNAseq_human_gatk_b37.pl
+perl rnaseq_example_01_simple.pl
 cd rnaseq
 ls -la
 ```
 
 The expect result should be similar to:
-```
-drwxr-xr-x  5 shengq2 h_vangard_1  4096 Nov 13 13:49 cutadapt
-drwxr-xr-x  5 shengq2 h_vangard_1  4096 Nov 13 13:49 deseq2_proteincoding_genetable
-drwxr-xr-x  5 shengq2 h_vangard_1  4096 Nov 13 13:49 deseq2_proteincoding_genetable_GSEA
-drwxr-xr-x  5 shengq2 h_vangard_1  4096 Nov 13 13:49 deseq2_proteincoding_genetable_WebGestalt
-drwxr-xr-x  5 shengq2 h_vangard_1  4096 Nov 13 13:49 fastqc_post_trim
-drwxr-xr-x  5 shengq2 h_vangard_1  4096 Nov 13 13:49 fastqc_raw
-drwxr-xr-x  5 shengq2 h_vangard_1  4096 Nov 13 13:49 fastq_len
-drwxr-xr-x  5 shengq2 h_vangard_1  4096 Nov 13 13:49 genetable
-drwxr-xr-x  5 shengq2 h_vangard_1  4096 Nov 13 13:49 multiqc
-drwxr-xr-x  5 shengq2 h_vangard_1  4096 Nov 13 13:49 report
--rw-r--r--  1 shengq2 h_vangard_1 41404 Nov 13 13:49 rnaseq_example.config
--rw-r--r--  1 shengq2 h_vangard_1  8014 Nov 13 13:49 rnaseq_example.def
-drwxr-xr-x  5 shengq2 h_vangard_1  4096 Nov 13 13:49 sequencetask
-drwxr-xr-x  5 shengq2 h_vangard_1  4096 Nov 13 13:49 star_featurecount
+```bash
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 cutadapt
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 deseq2_proteincoding_genetable
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 deseq2_proteincoding_genetable_GSEA
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 deseq2_proteincoding_genetable_WebGestalt
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 deseq2_proteincoding_genetable_WebGestalt_link_deseq2
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 fastqc_post_trim
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 fastqc_post_trim_summary
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 fastqc_raw
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 fastqc_raw_summary
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 fastq_len
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 genetable
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 report
+-rw-r--r--   1 shengq2 h_cqs         2251 Oct 22 11:02 rnaseq_example_01_simple.pl
+-rw-r--r--   1 shengq2 h_cqs        52427 Oct 22 11:02 rnaseq_example.config
+-rw-r--r--   1 shengq2 h_cqs         7555 Oct 22 11:02 rnaseq_example.def
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 sequencetask
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 star_featurecount
+drwxr-xr-x   5 shengq2 h_cqs         4096 Oct 22 11:02 star_featurecount_summary
 ```
 
 Now let's look at the overall tasks
-```
+
+```bash
 cd sequencetask/pbs
 ls -la
 ```
+
 The result should be similar to:
-```
--rwxr-xr-x 1 shengq2 h_vangard_1  5659 Nov 13 13:49 rnaseq_example_pipeline_st.pbs
--rwxr-xr-x 1 shengq2 h_vangard_1  8095 Nov 13 13:49 rnaseq_example_pipeline_st.pbs.submit
--rwxr-xr-x 1 shengq2 h_vangard_1   742 Nov 13 13:49 rnaseq_example_report_st.pbs
--rwxr-xr-x 1 shengq2 h_vangard_1 11280 Nov 13 13:49 rnaseq_example_step2_st_clear.sh
--rwxr-xr-x 1 shengq2 h_vangard_1  1643 Nov 13 13:49 rnaseq_example_step2_st.pbs
--rwxr-xr-x 1 shengq2 h_vangard_1  2140 Nov 13 13:49 rnaseq_example_step2_st.pbs.submit
--rwxr-xr-x 1 shengq2 h_vangard_1   633 Nov 13 13:49 rnaseq_example_summary_st.pbs
--rwxr-xr-x 1 shengq2 h_vangard_1  1091 Nov 13 13:49 sample1_step1_st_clear.sh
--rwxr-xr-x 1 shengq2 h_vangard_1   913 Nov 13 13:49 sample1_step1_st.pbs
--rwxr-xr-x 1 shengq2 h_vangard_1   629 Nov 13 13:49 sample1_step1_st.pbs.submit
--rwxr-xr-x 1 shengq2 h_vangard_1  1091 Nov 13 13:49 sample2_step1_st_clear.sh
--rwxr-xr-x 1 shengq2 h_vangard_1   913 Nov 13 13:49 sample2_step1_st.pbs
--rwxr-xr-x 1 shengq2 h_vangard_1   629 Nov 13 13:49 sample2_step1_st.pbs.submit
--rwxr-xr-x 1 shengq2 h_vangard_1  1091 Nov 13 13:49 sample3_step1_st_clear.sh
--rwxr-xr-x 1 shengq2 h_vangard_1   913 Nov 13 13:49 sample3_step1_st.pbs
--rwxr-xr-x 1 shengq2 h_vangard_1   629 Nov 13 13:49 sample3_step1_st.pbs.submit
--rwxr-xr-x 1 shengq2 h_vangard_1  1091 Nov 13 13:49 sample4_step1_st_clear.sh
--rwxr-xr-x 1 shengq2 h_vangard_1   913 Nov 13 13:49 sample4_step1_st.pbs
--rwxr-xr-x 1 shengq2 h_vangard_1   629 Nov 13 13:49 sample4_step1_st.pbs.submit
--rwxr-xr-x 1 shengq2 h_vangard_1  1091 Nov 13 13:49 sample5_step1_st_clear.sh
--rwxr-xr-x 1 shengq2 h_vangard_1   913 Nov 13 13:49 sample5_step1_st.pbs
--rwxr-xr-x 1 shengq2 h_vangard_1   629 Nov 13 13:49 sample5_step1_st.pbs.submit
--rwxr-xr-x 1 shengq2 h_vangard_1  1091 Nov 13 13:49 sample6_step1_st_clear.sh
--rwxr-xr-x 1 shengq2 h_vangard_1   913 Nov 13 13:49 sample6_step1_st.pbs
--rwxr-xr-x 1 shengq2 h_vangard_1   629 Nov 13 13:49 sample6_step1_st.pbs.submit
--rwxr-xr-x 1 shengq2 h_vangard_1  1091 Nov 13 13:49 sample7_step1_st_clear.sh
--rwxr-xr-x 1 shengq2 h_vangard_1   913 Nov 13 13:49 sample7_step1_st.pbs
--rwxr-xr-x 1 shengq2 h_vangard_1   629 Nov 13 13:49 sample7_step1_st.pbs.submit
--rwxr-xr-x 1 shengq2 h_vangard_1  1091 Nov 13 13:49 sample8_step1_st_clear.sh
--rwxr-xr-x 1 shengq2 h_vangard_1   913 Nov 13 13:49 sample8_step1_st.pbs
--rwxr-xr-x 1 shengq2 h_vangard_1   629 Nov 13 13:49 sample8_step1_st.pbs.submit
--rwxr-xr-x 1 shengq2 h_vangard_1  1091 Nov 13 13:49 sample9_step1_st_clear.sh
--rwxr-xr-x 1 shengq2 h_vangard_1   913 Nov 13 13:49 sample9_step1_st.pbs
--rwxr-xr-x 1 shengq2 h_vangard_1   629 Nov 13 13:49 sample9_step1_st.pbs.submit
--rwxr-xr-x 1 shengq2 h_vangard_1   331 Nov 13 13:49 step1_st.submit
--rwxr-xr-x 1 shengq2 h_vangard_1    50 Nov 13 13:49 step2_st.submit
+
+```bash
+-rw-r--r-- 1 shengq2 h_cqs  5359 Oct 22 11:02 rnaseq_example_pipeline_st.pbs
+-rwxr-xr-x 1 shengq2 h_cqs 19240 Oct 22 11:02 rnaseq_example_pipeline_st.pbs.submit
+-rw-r--r-- 1 shengq2 h_cqs   935 Oct 22 11:02 rnaseq_example_report_st.pbs
+-rw-r--r-- 1 shengq2 h_cqs   316 Oct 22 11:02 rnaseq_example_report_st.pbs.sh
 ```
 
 Then we can submit job to cluster:
-```
+
+```bash
 sh rnaseq_example_pipeline_st.pbs.submit
 ```
+
 or run the job directly
-```
+
+```bash
 sh rnaseq_example_pipeline_st.pbs
 ```
 
 If we submit the tasks to cluster, we can use command sq to check the status:
-```
+
+```bash
 sq
-```
-The result should be like:
-```
-      JOBID PARTITION                                    NAME       USER ST       TIME  NODES NODELIST(REASON)
-    3497884 productio                          sample1_fq.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497885 productio                          sample2_fq.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497886 productio                          sample3_fq.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497887 productio                          sample4_fq.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497888 productio                          sample5_fq.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497889 productio                          sample6_fq.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497890 productio                          sample7_fq.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497891 productio                          sample8_fq.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497892 productio                          sample9_fq.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497893 productio                        sample1_flen.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497894 productio                        sample2_flen.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497895 productio                        sample3_flen.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497896 productio                        sample4_flen.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497897 productio                        sample5_flen.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497898 productio                        sample6_flen.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497899 productio                        sample7_flen.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497900 productio                        sample8_flen.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497901 productio                        sample9_flen.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497902 productio                          sample1_sf.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497903 productio                          sample2_sf.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497904 productio                          sample3_sf.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497905 productio                          sample4_sf.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497906 productio                          sample5_sf.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497907 productio                          sample6_sf.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497908 productio                          sample7_sf.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497909 productio                          sample8_sf.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497910 productio                          sample9_sf.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497912 productio                  rnaseq_example_fqs.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497913 productio              rnaseq_example_uniqueR.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497914 productio              rnaseq_example_uniqueR.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497915 productio                   rnaseq_example_ss.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497916 productio                   rnaseq_example_tb.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497917 productio          rnaseq_example_cor_uniqueR.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497918 productio                  rnaseq_example_de2.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497919 productio                   rnaseq_example_wr.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497920 productio              rnaseq_example_uniqueR.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497921 productio                  rnaseq_example_mqc.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497922 productio                   rnaseq_example_br.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497923 productio            rnaseq_example_report_st.pbs    shengq2 PD       0:00      1 (Dependency)
-    3497875 productio                         sample1_cut.pbs    shengq2  R      31:03      1 cn1374
-    3497876 productio                         sample2_cut.pbs    shengq2  R      31:03      1 cn1374
-    3497877 productio                         sample3_cut.pbs    shengq2  R      31:03      1 cn1229
-    3497878 productio                         sample4_cut.pbs    shengq2  R      31:03      1 cn1229
-    3497879 productio                         sample5_cut.pbs    shengq2  R      31:03      1 cn1228
-    3497880 productio                         sample6_cut.pbs    shengq2  R      31:03      1 cn1228
-    3497881 productio                         sample7_cut.pbs    shengq2  R      31:03      1 cn1228
-    3497882 productio                         sample8_cut.pbs    shengq2  R      31:03      1 cn1206
-    3497883 productio                         sample9_cut.pbs    shengq2  R      31:03      1 cn1206
 ```
 
 Now we can wait until all jobs done automatically.
