@@ -128,7 +128,7 @@ In this example, we introduce covariance "gender" in pairs, everything else is s
 
 [rnaseq_example_03_covariance_file](https://github.com/shengqh/cqsperl/raw/master/examples/rnaseq_example_03_covariance_file.pl)
 
-Some time, there are too many covariances values need to be input handly. Once we change the group definition, the covariance values have to be updated too. We introduce a [covariance file](https://github.com/shengqh/cqsperl/raw/master/examples/rnaseq_example_covariance_file.txt) in definition as below. The covariance file is tab-delimited file with first column indicates sample name and all the following columns are covariances.
+Some time, there are too many covariances values need to be input handly. Once we change the group definition, the covariance values have to be updated too. We introduce a [covariance file](https://github.com/shengqh/cqsperl/raw/master/examples/rnaseq_example_covariance.txt) in definition as below. The covariance file is tab-delimited file with first column indicates sample name and all the following columns are covariances.
 
 ```perl
   covariance_file => "/scratch/cqs/pipeline_example/rnaseq_data/covariance.txt",
