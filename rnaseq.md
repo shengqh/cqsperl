@@ -48,6 +48,8 @@ Our RNASeq pipeline is NGSPERL-based which can be downloaded from https://github
 
 ### Simple comparison
 
+[rnaseq_example_01_simple](https://github.com/shengqh/cqsperl/raw/master/examples/rnaseq_example_01_simple.pl)
+
 In this basic "treatment vs control" example, we defined files, groups and pairs. 
 
 ```perl
@@ -107,6 +109,8 @@ my $config = performRNASeq_gatk_b37( $def, 1 );
 
 ### Comparison with covariance
 
+[rnaseq_example_02_covariance](https://github.com/shengqh/cqsperl/raw/master/examples/rnaseq_example_02_covariance.pl)
+
 In this example, we introduce covariance "gender" in pairs, everything else is same as simple comparison. The "gender" values should be matched with groups. In this case, the first three "gender" values are from Control group and the next four "gender" values are from Treatment group. You can define multiple covariances in each comparison.
 
 ```perl
@@ -121,6 +125,8 @@ In this example, we introduce covariance "gender" in pairs, everything else is s
 <br>
 
 ### Comparison with covariance file
+
+[rnaseq_example_03_covariance_file](https://github.com/shengqh/cqsperl/raw/master/examples/rnaseq_example_03_covariance_file.pl)
 
 Some time, there are too many covariances values need to be input handly. Once we change the group definition, the covariance values have to be updated too. We introduce a covariance file in definition as below. The covariance file is tab-delimited file with first column indicates sample name and all the following columns are covariances.
 
@@ -137,6 +143,8 @@ Some time, there are too many covariances values need to be input handly. Once w
 <br>
 
 ### Define group and covariance using regex pattern
+
+[rnaseq_example_04_regex](https://github.com/shengqh/cqsperl/raw/master/examples/rnaseq_example_04_regex.pl)
 
 In this example, we rename the sample with proper name which includes both group and gender information. Then we can use regex pattern to extract group and gender information. groups_pattern will be used to generate groups definition in fly and covariance_patterns will be used to generate covariance file. Please remember that groups_pattern and covariance_patterns can be used independently.
 
