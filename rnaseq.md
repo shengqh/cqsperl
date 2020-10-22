@@ -6,6 +6,7 @@
   - [Examples](#examples)
     - [Simple comparison](#simple-comparison)
     - [Comparison with covariance](#comparison-with-covariance)
+    - [Comparison with covariance file](#comparison-with-covariance-file)
     - [Define group and covariance using regex pattern](#define-group-and-covariance-using-regex-pattern)
   - [Practice in ACCRE](#practice-in-accre)
 
@@ -57,7 +58,7 @@ use warnings;
 use CQS::PerformRNAseq;
 use CQS::ClassFactory;
 
-#cqstools file_def -i /scratch/cqs/pipeline_example/rnaseq_data -n \(S.\)
+#cqstools file_def -i /scratch/cqs/pipeline_example/rnaseq_data -n \(S.\) -f gz
 my $def = {
 
   #General options
@@ -119,9 +120,25 @@ In this example, we introduce covariance "gender" in pairs, everything else is s
 
 <br>
 
+### Comparison with covariance file
+
+Some time, there are too many covariances values need to be input handly. Once we change the group definition, the covariance values have to be updated too. We introduce a covariance file in definition as below. The covariance file is tab-delimited file with first column indicates sample name and all the following columns are covariances.
+
+```perl
+  covariance_file => "/scratch/cqs/pipeline_example/rnaseq_data/covariance.txt",
+  pairs => {
+    "Treatment_vs_Control" => {
+      groups => [ "Control", "Treatment" ], 
+      covariances => ["gender"]
+    }
+  },
+```
+
+<br>
+
 ### Define group and covariance using regex pattern
 
-In this example, we rename the sample with proper name which includes both group and gender information. Then we can use regex pattern to extract group and gender information. groups_pattern and covariance_patterns can be used independently.
+In this example, we rename the sample with proper name which includes both group and gender information. Then we can use regex pattern to extract group and gender information. groups_pattern will be used to generate groups definition in fly and covariance_patterns will be used to generate covariance file. Please remember that groups_pattern and covariance_patterns can be used independently.
 
 ```perl
 
