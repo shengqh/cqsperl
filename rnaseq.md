@@ -1,4 +1,17 @@
-* RNASeq pipeline
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+  - [Workflow](#workflow)
+  - [NGSPERL Framework](#ngsperl-framework)
+  - [Examples](#examples)
+    - [Simple comparison](#simple-comparison)
+    - [Comparison with covariance](#comparison-with-covariance)
+    - [Define group and covariance using regex pattern](#define-group-and-covariance-using-regex-pattern)
+  - [Practice in ACCRE](#practice-in-accre)
+
+<hr>
+
+## Workflow
 
 |Task|Software|
 |-|-|
@@ -13,7 +26,10 @@
 
 <hr>
 
-* NGSPERL Framework
+## NGSPERL Framework
+
+Our RNASeq pipeline is NGSPERL-based which can be downloaded from https://github.com/shengqh/ngsperl.
+
   * Implemented using object perl 
   * Module based
     * Three key functions in each module:
@@ -27,20 +43,13 @@
   
 <hr>
 
-* RNAseq example data
-  * /scratch/cqs/pipeline_example/rnaseq_data
-  * Human patient samples
-  * 9 pair-end samples
-  * Sample 1,2,3 from group1 group
-  * Sample 4,5,6 from group2 group
-  * Sample 5,6,7 from group3 group
-  * Group1 and group2 were paired sample
+## Examples
 
-<hr>
+### Simple comparison
 
-* [Configuration file](https://raw.githubusercontent.com/shengqh/cqsperl/master/examples/RNAseq_human_gatk_b37.pl)
+In this basic "treatment vs control" example, we defined files, groups and pairs. 
 
-```
+```perl
 #!/usr/bin/perl
 use strict;
 use warnings;
@@ -48,7 +57,7 @@ use warnings;
 use CQS::PerformRNAseq;
 use CQS::ClassFactory;
 
-#cqstools file_def -i /scratch/cqs/pipeline_example/rnaseq_data -n \(sample.\)
+#cqstools file_def -i /scratch/cqs/pipeline_example/rnaseq_data -n \(S.\)
 my $def = {
 
   #General options
@@ -64,27 +73,20 @@ my $def = {
   min_read_length  => 30,
 
   files => {
-    "sample1" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample1_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample1_R2.fastq.gz"],
-    "sample2" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample2_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample2_R2.fastq.gz"],
-    "sample3" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample3_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample3_R2.fastq.gz"],
-    "sample4" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample4_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample4_R2.fastq.gz"],
-    "sample5" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample5_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample5_R2.fastq.gz"],
-    "sample6" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample6_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample6_R2.fastq.gz"],
-    "sample7" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample7_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample7_R2.fastq.gz"],
-    "sample8" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample8_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample8_R2.fastq.gz"],
-    "sample9" => ["/scratch/cqs/pipeline_example/rnaseq_data/sample9_R1.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/sample9_R2.fastq.gz"],
+    "S1" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AAGAGG_S1_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AAGAGG_S1_R2_001.fastq.gz"],
+    "S2" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GGAGAA_S2_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GGAGAA_S2_R2_001.fastq.gz"],
+    "S3" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AGCATG_S3_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AGCATG_S3_R2_001.fastq.gz"],
+    "S4" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GAGTCA_S4_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GAGTCA_S4_R2_001.fastq.gz"],
+    "S5" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CGTAGA_S5_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CGTAGA_S5_R2_001.fastq.gz"],
+    "S6" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-TCAGAG_S6_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-TCAGAG_S6_R2_001.fastq.gz"],
+    "S7" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CACAGT_S7_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CACAGT_S7_R2_001.fastq.gz"],
   },
   groups => {
-    "Group1" => [ "sample1", "sample2", "sample3" ],
-    "Group2" => [ "sample4", "sample5", "sample6" ],
-    "Group3" => [ "sample7", "sample8", "sample9" ],
+    "Control" => [ "S1", "S2", "S3" ],
+    "Treatment" => [ "S4", "S5", "S6", "S7" ]
   },
   pairs => {
-    "Group2_vs_Group1" => {
-      groups => [ "Group1", "Group2" ],
-      paired => [ "Patient1", "Patient2", "Patient3", "Patient1", "Patient2", "Patient3" ],
-    },
-    "Group3_vs_Group1" => [ "Group1", "Group3" ],
+    "Treatment_vs_Control" => [ "Control", "Treatment" ], 
   },
   perform_proteincoding_gene => 1,
   outputPdf                  => 1,
@@ -102,7 +104,52 @@ my $config = performRNASeq_gatk_b37( $def, 1 );
 
 <hr>
 
-* Practice in ACCRE
+### Comparison with covariance
+
+In this example, we introduce covariance "gender" in pairs, everything else is same as simple comparison. The "gender" values should be matched with groups. In this case, the first three "gender" values are from Control group and the next four "gender" values are from Treatment group. You can define multiple covariances in each comparison.
+
+```perl
+  pairs => {
+    "Treatment_vs_Control" => {
+      groups => [ "Control", "Treatment" ], 
+      gender => ["M", "F", "M", "M", "F", "F", "F"]
+    }
+  },
+```
+
+<br>
+
+### Define group and covariance using regex pattern
+
+In this example, we rename the sample with proper name which includes both group and gender information. Then we can use regex pattern to extract group and gender information. groups_pattern and covariance_patterns can be used independently.
+
+```perl
+
+  files => {
+    "Control_M_S1" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AAGAGG_S1_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AAGAGG_S1_R2_001.fastq.gz"],
+    "Control_F_S2" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GGAGAA_S2_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GGAGAA_S2_R2_001.fastq.gz"],
+    "Control_M_S3" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AGCATG_S3_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AGCATG_S3_R2_001.fastq.gz"],
+    "Treatment_M_S4" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GAGTCA_S4_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GAGTCA_S4_R2_001.fastq.gz"],
+    "Treatment_F_S5" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CGTAGA_S5_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CGTAGA_S5_R2_001.fastq.gz"],
+    "Treatment_F_S6" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-TCAGAG_S6_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-TCAGAG_S6_R2_001.fastq.gz"],
+    "Treatment_F_S7" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CACAGT_S7_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CACAGT_S7_R2_001.fastq.gz"],
+  },
+  groups_pattern => "(.+?)_",
+  covariance_patterns => {
+    gender => {
+      pattern => "_(.)_",
+      prefix => "GENDER_"
+    }
+  },
+  pairs => {
+    "Treatment_vs_Control" => {
+      groups => [ "Control", "Treatment" ], 
+      covariances => ["gender"]
+    }
+  },
+```
+
+## Practice in ACCRE
 
 Add following line to your .bashrc
 ```
