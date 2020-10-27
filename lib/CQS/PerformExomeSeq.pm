@@ -42,6 +42,8 @@ sub global_definition {
     mutect_docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/mutect.simg ",
     muTect_jar     => "/opt/mutect-1.1.7.jar",
 
+    muTect2_option => "--downsampling-stride 20 --max-reads-per-alignment-start 6 --max-suspicious-reads-per-alignment-start 6",
+
     vcf2maf_pl => "/scratch/cqs/softwares/mskcc-vcf2maf/vcf2maf.pl",
     vep_path   => "/scratch/cqs/softwares/ensembl-vep",
     vep_data   => "/scratch/cqs/references/vep_data",
@@ -106,7 +108,12 @@ sub gatk_hg38_genome {
       transcript_gtf => "/scratch/cqs_share/references/broad/hg38/v0/gencode.v27.primary_assembly.annotation.gtf",
 
       blacklist_file => "/scratch/cqs_share/references/blacklist_files/hg38-blacklist.v2.bed",
-      interval_list_file => "/scratch/cqs_share/references/broad/hg38/v0/scattered_calling_intervals/hg38.intervals_list",
+      interval_list_file => "/scratch/cqs_share/references/broad/hg38/v0/hg38_wgs_scattered_calling_intervals.txt",
+      known_indels_sites_VCFs => [ "/scratch/cqs_share/references/broad/hg38/v0/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz",
+        "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.known_indels.vcf.gz"
+      ],
+
+      germline_resource => "/scratch/cqs_share/references/broad/mutect2/af-only-gnomad.hg38.vcf.gz",
 
       dbsnp            => "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf.gz",
       hapmap           => "/scratch/cqs_share/references/broad/hg38/v0/hapmap_3.3.hg38.vcf.gz",
@@ -164,6 +171,9 @@ sub gatk_hg19_genome {
       name_map_file  => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.gtf.map",
 
       blacklist_file => "/scratch/cqs_share/references/blacklist_files/hg19-blacklist.v2.nochr.bed",
+
+      germline_resource => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-b37/af-only-gnomad.raw.sites.vcf",
+      panel_of_normals => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-b37/Mutect2-exome-panel.vcf",
 
       dbsnp            => "/scratch/cqs_share/references/broad/hg19/v0/dbsnp_138.b37.vcf.gz",
       hapmap           => "/scratch/cqs_share/references/broad/hg19/v0/hapmap_3.3.b37.vcf.gz",
