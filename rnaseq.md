@@ -7,7 +7,8 @@
     - [Simple comparison](#simple-comparison)
     - [Comparison with covariance](#comparison-with-covariance)
     - [Comparison with covariance file](#comparison-with-covariance-file)
-    - [Define group and covariance using regex pattern](#define-group-and-covariance-using-regex-pattern)
+    - [Define group and covariance using regex pattern value](#define-group-and-covariance-using-regex-pattern-value)
+    - [Define group using regex pattern dictionary](#define-group-using-regex-pattern-dictionary)
   - [Practice in ACCRE](#practice-in-accre)
 
 <hr>
@@ -142,7 +143,7 @@ Some time, there are too many covariances values need to be input handly. Once w
 
 <br>
 
-### Define group and covariance using regex pattern
+### Define group and covariance using regex pattern value
 
 [rnaseq_example_04_regex](https://github.com/shengqh/cqsperl/raw/master/examples/rnaseq_example_04_regex.pl)
 
@@ -160,6 +161,42 @@ In this example, we rename the sample with proper name which includes both group
     "Treatment_F_S7" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CACAGT_S7_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CACAGT_S7_R2_001.fastq.gz"],
   },
   groups_pattern => "(.+?)_",
+  covariance_patterns => {
+    gender => {
+      pattern => "_(.)_",
+      prefix => "GENDER_"
+    }
+  },
+  pairs => {
+    "Treatment_vs_Control" => {
+      groups => [ "Control", "Treatment" ], 
+      covariances => ["gender"]
+    }
+  },
+```
+<br>
+
+### Define group using regex pattern dictionary
+
+[rnaseq_example_05_regex_dic](https://github.com/shengqh/cqsperl/raw/master/examples/rnaseq_example_05_regex_dic.pl)
+
+In this example, we define groups by pattern dictionary which will much easier to define customed group name rather than extract it from file name.
+
+```perl
+
+  files => {
+    "Control_M_S1" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AAGAGG_S1_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AAGAGG_S1_R2_001.fastq.gz"],
+    "Control_F_S2" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GGAGAA_S2_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GGAGAA_S2_R2_001.fastq.gz"],
+    "Control_M_S3" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AGCATG_S3_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-AGCATG_S3_R2_001.fastq.gz"],
+    "Treatment_M_S4" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GAGTCA_S4_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-GAGTCA_S4_R2_001.fastq.gz"],
+    "Treatment_F_S5" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CGTAGA_S5_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CGTAGA_S5_R2_001.fastq.gz"],
+    "Treatment_F_S6" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-TCAGAG_S6_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-TCAGAG_S6_R2_001.fastq.gz"],
+    "Treatment_F_S7" => ["/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CACAGT_S7_R1_001.fastq.gz", "/scratch/cqs/pipeline_example/rnaseq_data/948-WZ-1-CACAGT_S7_R2_001.fastq.gz"],
+  },
+  groups_pattern => {
+    "Control" => "_S[123]",
+    "Treatment" => "_S[4567]",
+  },
   covariance_patterns => {
     gender => {
       pattern => "_(.)_",
