@@ -196,6 +196,7 @@ sub gencode_hg38_genome {
 sub common_mm10_genome() {
   return {
     webgestalt_organism => "mmusculus",
+    perform_webgestalt  => 1,
     dbsnp               => "/scratch/cqs/references/dbsnp/mouse_10090_b150_GRCm38p4.vcf.gz",
     annovar_buildver    => "mm10",
     annovar_param       => "-protocol refGene -operation g --remove",
