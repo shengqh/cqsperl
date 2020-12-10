@@ -12,6 +12,7 @@ our @ISA = qw(Exporter);
 our %EXPORT_TAGS = (
   'all' => [
       "performChIPSeq_gencode_hg19",
+      "performChIPSeq_gencode_hg38",
       "performChIPSeq_gencode_mm10",
       #"performChIPSeq_ucsc_hg19",
       #"performChIPSeq_ucsc_mm10"
@@ -82,6 +83,45 @@ sub gencode_hg19_options {
       bowtie1_fasta => "/scratch/cqs_share/references/gencode/GRCh37.p13/bowtie_index_1.2.3/Homo_sapiens_assembly19.fa",
       bowtie1_index => "/scratch/cqs_share/references/gencode/GRCh37.p13/bowtie_index_1.2.3/Homo_sapiens_assembly19",
       bwa_fasta     => "/scratch/cqs_share/references/gencode/GRCh37.p13/bwa_index_0.7.17/Homo_sapiens_assembly19.fa",
+
+      #enhancer
+      #enhancer_genome_path => "/scratch/cqs_share/references/gencode/GRCh37.p13/GRCh37.p13.chromosomes/",
+    }
+  );
+}
+
+
+sub common_hg38_options {
+  return {
+    #clean option
+    #https://github.com/Boyle-Lab/Blacklist/raw/master/lists/hg38-blacklist.v2.bed.gz
+    blacklist_file => "/scratch/cqs_share/references/mappable_region/hg38/hg38-blacklist.v2.bed",
+
+    #macs2
+    macs2_genome      => "hs",
+    #wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/database/cpgIslandExt.txt.gz
+    #zcat cpgIslandExt.txt.gz | cut -f 2,3,4,5 cpgIslandExt.txt > hg38_cpg_islands.bed
+    enhancer_cpg_path => "/scratch/cqs_share/references/mappable_region/hg38/hg38_cpg_islands.bed",
+
+    #chipqc
+    chipqc_genome      => "hg38",
+    chipqc_chromosomes => 'chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,chr19,chr20,chr21,chr22',
+
+    homer_genome => "hg38",
+    
+    bamplot_option  => "-g HG38 -y uniform -r --save-temp",
+  };
+}
+
+sub gencode_hg38_options {
+  return merge_hash_right_precedent(
+    merge_hash_right_precedent( common_options(), common_hg38_options() ),
+    {
+      #aligner database
+      bowtie2_index => "/scratch/cqs_share/references/gencode/GRCh38.p13/bowtie2_index_2.3.5.1/GRCh38.primary_assembly.genome",
+      bowtie1_fasta => "/scratch/cqs_share/references/gencode/GRCh38.p13/bowtie_index_1.2.3/GRCh38.primary_assembly.genome.fa",
+      bowtie1_index => "/scratch/cqs_share/references/gencode/GRCh38.p13/bowtie_index_1.2.3/GRCh38.primary_assembly.genome",
+      bwa_fasta     => "/scratch/cqs_share/references/gencode/GRCh38.p13/bwa_index_0.7.17/GRCh38.primary_assembly.genome.fa",
 
       #enhancer
       #enhancer_genome_path => "/scratch/cqs_share/references/gencode/GRCh37.p13/GRCh37.p13.chromosomes/",
@@ -165,6 +205,14 @@ sub gencode_mm10_options {
 sub performChIPSeq_gencode_hg19 {
   my ( $userdef, $perform ) = @_;
   my $def = merge_hash_left_precedent( $userdef, gencode_hg19_options() );
+
+  my $config = performChIPSeq( $def, $perform );
+  return $config;
+}
+
+sub performChIPSeq_gencode_hg38 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge_hash_left_precedent( $userdef, gencode_hg38_options() );
 
   my $config = performChIPSeq( $def, $perform );
   return $config;
