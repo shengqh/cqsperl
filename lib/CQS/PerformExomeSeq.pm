@@ -67,10 +67,10 @@ sub global_definition {
         "cromwell_config_file" => "/home/zhaos/source/perl_cqs/test/cromwell/cromwell.examples.local.conf",
         "mutect2" => {
           "perform_mutect2_pon" => 0,
-          "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2.wdl",
+          "wdl_file" => "/scratch/cqs_share/softwares/gatk-workflows/gatk/scripts/mutect2_wdl",
         },
         "mutect2_pon" => {
-          "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2_pon.wdl",
+          "wdl_file" => "/scratch/cqs_share/softwares/gatk-workflows/gatk/scripts/mutect2_pon.wdl",
         },
         "paired_fastq_to_unmapped_bam" => {
           "wdl_file" => "/scratch/cqs_share/softwares/gatk-workflows/seq-format-conversion/paired-fastq-to-unmapped-bam.wdl",
