@@ -20,6 +20,8 @@ our %EXPORT_TAGS = (
       performRNASeq_gencode_mm10
       ensembl_Mmul10_genome
       performRNASeq_ensembl_Mmul10
+      ensembl_GRCz11_genome
+      performRNASeq_ensembl_GRCz11
       )
   ]
   # 'all' => [
@@ -282,6 +284,23 @@ sub ensembl_Mmul10_genome {
   );
 }
 
+sub ensembl_GRCz11_genome {
+  return merge_hash_right_precedent(
+    global_definition(),
+    {
+      perform_gsea => 0,
+
+      #genome database
+      fasta_file => "/data/cqs/references/zebrafish/GRCz11/Danio_rerio.GRCz11.dna.primary_assembly.fa",
+
+      star_index          => "/data/cqs/references/zebrafish/GRCz11/STAR_index",
+      transcript_gtf      => "/data/cqs/references/zebrafish/GRCz11/Danio_rerio.GRCz11.102.gtf",
+      name_map_file       => "/data/cqs/references/zebrafish/GRCz11/Danio_rerio.GRCz11.102.gtf.map",
+      featureCount_option => "-g gene_name"
+    }
+  );
+}
+
 # sub ncbi_UMD311_genome {
 #   return merge_hash_right_precedent(
 #     global_definition(),
@@ -378,6 +397,12 @@ sub performRNASeq_ensembl_Mmul10 {
   return $config;
 }
 
+sub performRNASeq_ensembl_GRCz11 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge_hash_left_precedent( $userdef, ensembl_GRCz11_genome() );
+  my $config = performRNASeq( $def, $perform );
+  return $config;
+}
 
 # sub performRNASeq_ncbi_UMD311 {
 #   my ( $userdef, $perform ) = @_;
