@@ -4,7 +4,9 @@ package CQS::PerformChIPSeq;
 use strict;
 use warnings;
 use Pipeline::ChIPSeq;
+use CQS::Global;
 use CQS::ConfigUtils;
+use Hash::Merge qw( merge );
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -24,7 +26,7 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '0.01';
 
 sub common_options {
-  return {
+  return merge(global_options(), {
     version    => 1,
     constraint => "haswell",
 
@@ -52,7 +54,7 @@ sub common_options {
     perform_chipqc => 1,
 
     homer_option => "",
-  };
+  });
 }
 
 sub common_hg19_options {
