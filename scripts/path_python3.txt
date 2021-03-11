@@ -41,7 +41,7 @@ else
 fi
 
 MY_ENCODE_BIN=/scratch/cqs_share/softwares/encode/chip-seq-pipeline2/src
-MY_CELLRANGER_BIN=/scratch/cqs/softwares/10x/cellranger-3.1.0
+MY_CELLRANGER_BIN=/scratch/cqs_share/softwares/cellranger-5.0.1
 MY_GSEA_BIN=/scratch/cqs_share/softwares/GSEA
 MY_SRA_BIN=/scratch/cqs_share/softwares/sratoolkit/bin
 MY_STACK_BIN=/scratch/cqs_share/softwares/stack
@@ -49,7 +49,7 @@ MY_PANDOC_BIN=/scratch/cqs_share/softwares/pandoc/bin
 
 MY_SHARE_BIN=/scratch/cqs_share/softwares/local/bin
 
-MYBIN=/data/cqs/softwares/qualimap_v2.2.1:/scratch/cqs_share/softwares/je_1.2:/scratch/cqs_share/softwares/arcasHLA:$MY_SHARE_BIN:$MY_PANDOC_BIN:$MY_STACK_BIN:$MY_SRA_BIN:$MY_GSEA_BIN:$MY_CELLRANGER_BIN:$MY_ENCODE_BIN:$MY_PYTHON_BIN:/scratch/cqs_share/softwares/edirect:/scratch/cqs/softwares/local/bin:/scratch/cqs/softwares/subread/bin:/scratch/cqs/softwares/gatk4:/scratch/cqs/shengq2/gcloud/open_wdl/runners/cromwell_on_google/monitoring_tools:/scratch/cqs/softwares/ensembl-git-tools/bin:/scratch/cqs/shengq2/tools/pandoc-2.2.3.2/bin:/scratch/cqs/shengq2/tools/quality_scope:/scratch/cqs/shengq2/R3/lib64/R/bin:/home/shengq2/proteomicstools:/home/shengq2/cqstools:/scratch/cqs/shengq2/source/hisat2-2.1.0:/scratch/cqs/shengq2/local/bin/bedtools2/bin:/scratch/cqs/shengq2/local/bin/bbmap:/scratch/cqs/shengq2/tools/mirdeep2_0_0_8/bin:/scratch/cqs/shengq2/local/bin:/home/shengq2/local/bin:/home/shengq2/program/perl/bin:/scratch/cqs/shengq2/local/bin/bedops:/scratch/cqs/shengq2/local/bin/bradnerlab
+MYBIN=/home/shengq2/.cargo/bin:/data/cqs/softwares/local/bin:/data/cqs/softwares/qualimap_v2.2.1:/scratch/cqs_share/softwares/je_1.2:/scratch/cqs_share/softwares/arcasHLA:$MY_SHARE_BIN:$MY_PANDOC_BIN:$MY_STACK_BIN:$MY_SRA_BIN:$MY_GSEA_BIN:$MY_CELLRANGER_BIN:$MY_ENCODE_BIN:$MY_PYTHON_BIN:/scratch/cqs_share/softwares/edirect:/scratch/cqs/softwares/local/bin:/scratch/cqs/softwares/subread/bin:/scratch/cqs/softwares/gatk4:/scratch/cqs/shengq2/gcloud/open_wdl/runners/cromwell_on_google/monitoring_tools:/scratch/cqs/softwares/ensembl-git-tools/bin:/scratch/cqs/shengq2/tools/pandoc-2.2.3.2/bin:/scratch/cqs/shengq2/tools/quality_scope:/scratch/cqs/shengq2/R3/lib64/R/bin:/home/shengq2/proteomicstools:/home/shengq2/cqstools:/scratch/cqs/shengq2/source/hisat2-2.1.0:/home/shengq2/program/perl/bin
 
 HTMLDOC=/home/shengq2/bin/htmldoc-1.8.27/htmldoc
 
@@ -60,12 +60,10 @@ HOMER=/scratch/cqs/softwares/homer2/bin
 BOWTIE=/scratch/cqs_share/softwares/bowtie
 BOWTIE2=/scratch/cqs_share/softwares/bowtie2:/scratch/cqs_share/softwares/bowtie2/scripts
 
-FASTQC=/scratch/cqs/shengq2/local/bin/FastQC
-
-export BLAS='/scratch/cqs/shengq2/local/lib64/libblas.so'
-export LAPACK='/scratch/cqs/shengq2/local/lib64/liblapack.so'
-export BLAS_SRC='/scratch/cqs/shengq2/source/lapack/BLAS/SRC'
-export LAPACK_SRC='/scratch/cqs/shengq2/source/lapack/SRC'
+#export BLAS='/scratch/cqs/shengq2/local/lib64/libblas.so'
+#export LAPACK='/scratch/cqs/shengq2/local/lib64/liblapack.so'
+#export BLAS_SRC='/scratch/cqs/shengq2/source/lapack/BLAS/SRC'
+#export LAPACK_SRC='/scratch/cqs/shengq2/source/lapack/SRC'
 
 MY_PERL_BIN=/home/shengq2/perl5/bin
 MY_PERL_LIB=/scratch/cqs_share/softwares/ngsperl/lib/:/scratch/cqs_share/softwares/cqsperl/lib/:/home/shengq2/perl5/lib/perl5/
@@ -78,9 +76,9 @@ else
 fi
 
 MY_BLAST_BIN=/scratch/cqs_share/softwares/ncbi-blast/bin
-export PATH=$MY_PERL_BIN:$MY_BLAST_BIN:$MYBIN:$FASTQC:$BOWTIE:$BOWTIE2:$HTMLDOC:$ANNOVAR:$HOMER:$PATH
+export PATH=$MY_PERL_BIN:$MY_BLAST_BIN:$MYBIN:$BOWTIE:$BOWTIE2:$HTMLDOC:$ANNOVAR:$HOMER:$PATH
 
-MYINCLUDE=/scratch/cqs/softwares/local/include:/scratch/cqs/shengq2/local/include:/home/shengq2/local/include:/scratch/cqs/shengq2/source/bzip2-1.0.6
+MYINCLUDE=/data/cqs/softwares/local/include:/scratch/cqs/softwares/local/include
 if [ -z "$C_INCLUDE_PATH" ]
 then
   export C_INCLUDE_PATH=$MYINCLUDE
@@ -101,16 +99,10 @@ then
 else
   export CPLUS_INCLUDE_PATH=$MYINCLUDE:$C_INCLUDE_PATH
 fi
-if [ -z "$CLASSPATH" ]
-then
-  export CLASSPATH=/scratch/cqs/shengq2/local/bin/TCGA/mRNAseq_TCGA
-else
-  export CLASSPATH=/scratch/cqs/shengq2/local/bin/TCGA/mRNAseq_TCGA:$CLASSPATH
-fi
 
 alias ptools='mono /home/shengq2/proteomicstools/ProteomicsTools.exe'
 
-MYLIB=/scratch/cqs/softwares/local/lib:/scratch/cqs/shengq2/local/lib:/scratch/cqs/shengq2/local/lib64:/home/shengq2/local/lib:/scratch/cqs/shengq2/source/bzip2-1.0.6:/scratch/cqs/shengq2/source/samtools
+MYLIB=/data/cqs/softwares/local/lib:/scratch/cqs/softwares/local/lib
 if [ -z "$LD_LIBRARY_PATH" ]
 then
   export LD_LIBRARY_PATH=$MYLIB
