@@ -30,7 +30,7 @@ my $def = {
 
   files => {
     H3K27ac_activated => ["GSM4176113"],
-    input => ["GSM4176120"],
+    input => ["GSM4176111"],
   },
   treatments => {
     H3K27ac_activated => ["H3K27ac_activated"],
