@@ -14,8 +14,8 @@ module load Perl/5.28.1
 MY_R_LIBS=/scratch/cqs/shengq2/Rlibrary
 
 #rstudio
-export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
-MY_RSTUDIO_BIN=/scratch/cqs/shengq2/tools/rstudio-1.1.456/bin
+#export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
+#MY_RSTUDIO_BIN=/scratch/cqs/shengq2/tools/rstudio-1.1.456/bin
 
 export PATH=/data/cqs/softwares/Recon:/scratch/cqs_share/softwares/supernova:/scratch/cqs_share/softwares/strelka/bin:/scratch/cqs/softwares/firefox:$PATH
 
@@ -49,9 +49,7 @@ MY_PANDOC_BIN=/scratch/cqs_share/softwares/pandoc/bin
 
 MY_SHARE_BIN=/scratch/cqs_share/softwares/local/bin
 
-MYBIN=/home/shengq2/.cargo/bin:/data/cqs/softwares/local/bin:/data/cqs/softwares/qualimap_v2.2.1:/scratch/cqs_share/softwares/je_1.2:/scratch/cqs_share/softwares/arcasHLA:$MY_SHARE_BIN:$MY_PANDOC_BIN:$MY_STACK_BIN:$MY_SRA_BIN:$MY_GSEA_BIN:$MY_CELLRANGER_BIN:$MY_ENCODE_BIN:$MY_PYTHON_BIN:/scratch/cqs_share/softwares/edirect:/scratch/cqs/softwares/local/bin:/scratch/cqs/softwares/subread/bin:/scratch/cqs/softwares/gatk4:/scratch/cqs/shengq2/gcloud/open_wdl/runners/cromwell_on_google/monitoring_tools:/scratch/cqs/softwares/ensembl-git-tools/bin:/scratch/cqs/shengq2/tools/pandoc-2.2.3.2/bin:/scratch/cqs/shengq2/tools/quality_scope:/scratch/cqs/shengq2/R3/lib64/R/bin:/home/shengq2/proteomicstools:/home/shengq2/cqstools:/scratch/cqs/shengq2/source/hisat2-2.1.0:/home/shengq2/program/perl/bin
-
-HTMLDOC=/home/shengq2/bin/htmldoc-1.8.27/htmldoc
+MYBIN=/scratch/cqs_share/softwares/ngsperl/bin:/home/shengq2/.cargo/bin:/data/cqs/softwares/local/bin:/data/cqs/softwares/qualimap_v2.2.1:/scratch/cqs_share/softwares/je_1.2:/scratch/cqs_share/softwares/arcasHLA:$MY_SHARE_BIN:$MY_PANDOC_BIN:$MY_STACK_BIN:$MY_SRA_BIN:$MY_GSEA_BIN:$MY_CELLRANGER_BIN:$MY_ENCODE_BIN:$MY_PYTHON_BIN:/scratch/cqs_share/softwares/edirect:/scratch/cqs/softwares/local/bin:/scratch/cqs/softwares/subread/bin:/scratch/cqs/softwares/gatk4:/scratch/cqs/shengq2/gcloud/open_wdl/runners/cromwell_on_google/monitoring_tools:/scratch/cqs/softwares/ensembl-git-tools/bin:/scratch/cqs/shengq2/tools/pandoc-2.2.3.2/bin:/scratch/cqs/shengq2/tools/quality_scope:/scratch/cqs/shengq2/R3/lib64/R/bin:/home/shengq2/proteomicstools:/home/shengq2/cqstools:/scratch/cqs/shengq2/source/hisat2-2.1.0:/home/shengq2/program/perl/bin
 
 ANNOVAR=/scratch/cqs_share/softwares/annovar
 
@@ -76,7 +74,7 @@ else
 fi
 
 MY_BLAST_BIN=/scratch/cqs_share/softwares/ncbi-blast/bin
-export PATH=$MY_PERL_BIN:$MY_BLAST_BIN:$MYBIN:$BOWTIE:$BOWTIE2:$HTMLDOC:$ANNOVAR:$HOMER:$PATH
+export PATH=$MY_PERL_BIN:$MY_BLAST_BIN:$MYBIN:$BOWTIE:$BOWTIE2:$ANNOVAR:$HOMER:$PATH
 
 MYINCLUDE=/data/cqs/softwares/local/include:/scratch/cqs/softwares/local/include
 if [ -z "$C_INCLUDE_PATH" ]
@@ -118,9 +116,6 @@ else
 fi
 
 export BLASTDB=/scratch/cqs/shengq2/references/blastdb
-
-ulimit -s 102400
-alias r="$MY_RSTUDIO_BIN/rstudio &"
 
 export VEP_PATH=/scratch/cqs/softwares/ensembl-vep
 export VEP_DATA=/scratch/cqs/references/vep_data
