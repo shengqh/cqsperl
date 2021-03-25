@@ -87,6 +87,10 @@ sub global_definition {
         },
         "somaticCNV" => {
           "wdl_file" => "/scratch/cqs/zhaos/tools/gatk/scripts/cnv_wdl/somatic/cnv_somatic_pair_workflow.wdl"
+        },
+        "CollectAllelicCounts" => {
+          "wdl_file" => "/home/zhaos/source/ngsperl/lib/WDL/ExomeSeq/CollectAllelicCounts.wdl",
+          "input_file" => "/home/zhaos/source/ngsperl/lib/WDL/ExomeSeq/CollectAllelicCounts.wdl.json"
         }
       }
     }
