@@ -20,7 +20,7 @@ MY_R_LIBS=/scratch/cqs/shengq2/Rlibrary
 export PATH=/data/cqs/softwares/Recon:/scratch/cqs_share/softwares/supernova:/scratch/cqs_share/softwares/strelka/bin:/scratch/cqs/softwares/firefox:$PATH
 
 export SINGULARITY_TMPDIR=/scratch/cqs_share/softwares/singularity/temp
-export SINGULARITY_CACHE=/scratch/cqs_share/softwares/singularity/cache
+export SINGULARITY_CACHEDIR=/scratch/cqs_share/softwares/singularity/cache
 
 if [ -z "$R_LIBS" ]
 then
