@@ -51,6 +51,6 @@ my $def = {
 };
 
 my $config = performCRISPRScreen($def, 1);
-#performTask($config, "report");
+#performTask($config, "mageck_count");
 
 1;
