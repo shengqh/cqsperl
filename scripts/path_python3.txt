@@ -17,7 +17,7 @@ MY_R_LIBS=/scratch/cqs/shengq2/Rlibrary
 #export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
 #MY_RSTUDIO_BIN=/scratch/cqs/shengq2/tools/rstudio-1.1.456/bin
 
-export PATH=/data/cqs/softwares/Recon:/scratch/cqs_share/softwares/supernova:/scratch/cqs_share/softwares/strelka/bin:/scratch/cqs/softwares/firefox:$PATH
+export PATH=/data/cqs/softwares/STAR-Fusion:/data/cqs/softwares/Recon:/scratch/cqs_share/softwares/supernova:/scratch/cqs_share/softwares/strelka/bin:/scratch/cqs/softwares/firefox:$PATH
 
 export SINGULARITY_TMPDIR=/scratch/cqs_share/softwares/singularity/temp
 export SINGULARITY_CACHEDIR=/scratch/cqs_share/softwares/singularity/cache

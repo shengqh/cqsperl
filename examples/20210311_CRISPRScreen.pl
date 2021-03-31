@@ -43,6 +43,41 @@ my $def = {
     "Rep2_VU584" => ["/scratch/h_vangard_1/wangj52/Bill/Caleb-MV411-CRISPR_screen/fastq/4056-GH-6-CTATTCAA-TCTTTCCC_S397_R1_001.fastq"],
   },
   mageck_library => "/scratch/h_vangard_1/wangj52/Bill/Caleb-MV411-CRISPR_screen/MAGeCK/numbered_brunello_validation_library.txt",
+  
+  batch => {
+    "plasmid" => {
+      Batch => 1,
+      Condition => 1,
+    },
+    "Rep1_DMSO" => {
+      Batch => 2,
+      Condition => 2,
+    },
+    "Rep1_VU641" => {
+      Batch => 2,
+      Condition => 3,
+    },
+    "Rep1_VU584" => {
+      Batch => 2,
+      Condition => 4,
+    },
+    "Rep2_DMSO" => {
+      Batch => 3,
+      Condition => 2,
+    },
+    "Rep2_VU641" => {
+      Batch => 3,
+      Condition => 3,
+    },
+    "Rep2_VU584" => {
+      Batch => 3,
+      Condition => 4,
+    }
+  },
+
+  cnv_norm => "/scratch/h_vangard_1/wangj52/Bill/test-MAGeCKFlute/demo/mageck_cnv/cnv_data.txt",
+  cnv_norm_cell_line => "HL60_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE",
+  
   mageck_test => {
     DMSOvsplasmid => ["-t Rep1_DMSO,Rep2_DMSO -c plasmid"],
     VU641vsDMSO => ["-t Rep1_VU641,Rep2_VU641 -c Rep1_DMSO,Rep2_DMSO"],

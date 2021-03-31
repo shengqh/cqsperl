@@ -59,7 +59,8 @@ sub global_definition {
     perform_star_featurecount => 1,
     perform_qc3bam            => 0,
     qc3_perl                  => "/scratch/cqs_share/softwares/QC3/qc3.pl",
-    docker_command            => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
+    docker_command            => "singularity exec -e /data/cqs/softwares/singularity/cqs-rnaseq.20210331.simg ",
+    #docker_command            => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
     gatk_jar                  => "/opt/gatk3.jar",
     picard_jar                => "/opt/picard.jar",
   });
@@ -80,8 +81,10 @@ sub common_human_genome {
       #gsea_jar            => "/opt/gsea3.jar",
       annovar_param       => "-protocol refGene,avsnp150,cosmic70 -operation g,f,f --remove",
       annovar_db          => "/scratch/cqs_share/references/annovar/humandb/",
-      gsea_db             => "/scratch/cqs_share/references/gsea/v7.0",
-      gsea_categories     => "'h.all.v7.0.symbols.gmt', 'c2.all.v7.0.symbols.gmt', 'c5.all.v7.0.symbols.gmt', 'c6.all.v7.0.symbols.gmt', 'c7.all.v7.0.symbols.gmt'",
+      gsea_db             => "/scratch/cqs_share/references/gsea/v7.1",
+      gsea_categories     => "'h.all.v7.1.symbols.gmt', 'c2.all.v7.1.symbols.gmt', 'c5.all.v7.1.symbols.gmt', 'c6.all.v7.1.symbols.gmt', 'c7.all.v7.1.symbols.gmt'",
+      #gsea_db             => "/scratch/cqs_share/references/gsea/v7.0",
+      #gsea_categories     => "'h.all.v7.0.symbols.gmt', 'c2.all.v7.0.symbols.gmt', 'c5.all.v7.0.symbols.gmt', 'c6.all.v7.0.symbols.gmt', 'c7.all.v7.0.symbols.gmt'",
       perform_webgestalt  => 1,
       has_gsea            => 1,
       perform_gsea        => 1,
@@ -112,6 +115,20 @@ sub common_hg19_genome {
 }
 
 sub gencode_hg19_genome {
+  my ($userdef) = @_;
+  return merge_hash_right_precedent(
+    common_hg19_genome($userdef),
+    {
+      #genome database
+      fasta_file     => "/scratch/cqs_share/references/gencode/GRCh37.p13/Homo_sapiens_assembly19.fasta",
+      star_index     => "/scratch/cqs_share/references/gencode/GRCh37.p13/STAR_index_2.7.8a_v19_sjdb100",
+      transcript_gtf => "/scratch/cqs_share/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf",
+      name_map_file  => "/scratch/cqs_share/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf.map",
+    }
+  );
+}
+
+sub gencode_hg19_genome_star2_7_1a {
   my ($userdef) = @_;
   return merge_hash_right_precedent(
     common_hg19_genome($userdef),
@@ -170,7 +187,21 @@ sub gencode_hg38_genome {
     {
       #genome database
       fasta_file     => "/scratch/cqs_share/references/gencode/GRCh38.p13/GRCh38.primary_assembly.genome.fa",
-      star_index     => "/scratch/cqs_share/references/gencode/GRCh38.p13/STAR_index_2.7.1a_v33_sjdb100",
+      star_index     => "/scratch/cqs_share/references/gencode/GRCh38.p13/STAR_index_2.7.8a_v37_sjdb100",
+      transcript_gtf => "/scratch/cqs_share/references/gencode/GRCh38.p13/gencode.v37.annotation.gtf",
+      name_map_file  => "/scratch/cqs_share/references/gencode/GRCh38.p13/gencode.v37.annotation.gtf.map",
+    }
+  );
+}
+
+sub gencode_hg38_genome_v33 {
+  my ($userdef) = @_;
+  return merge_hash_right_precedent(
+    common_hg38_genome($userdef),
+    {
+      #genome database
+      fasta_file     => "/scratch/cqs_share/references/gencode/GRCh38.p13/GRCh38.primary_assembly.genome.fa",
+      star_index     => "/scratch/cqs_share/references/gencode/GRCh38.p13/STAR_index_2.7.1a_v37_sjdb100",
       transcript_gtf => "/scratch/cqs_share/references/gencode/GRCh38.p13/gencode.v33.annotation.gtf",
       name_map_file  => "/scratch/cqs_share/references/gencode/GRCh38.p13/gencode.v33.annotation.gtf.map",
     }
@@ -208,6 +239,19 @@ sub common_mm10_genome() {
 }
 
 sub gencode_mm10_genome {
+  return merge_hash_right_precedent(
+    merge_hash_right_precedent( global_definition(), common_mm10_genome() ),
+    {
+      #genome database
+      fasta_file     => "/scratch/cqs_share/references/gencode/GRCm38.p6/GRCm38.p6.genome.fa",
+      star_index     => "/scratch/cqs_share/references/gencode/GRCm38.p6/STAR_index_2.7.8a_vM26_sjdb100",
+      transcript_gtf => "/scratch/cqs_share/references/gencode/GRCm38.p6/gencode.vM26.annotation.gtf",
+      name_map_file  => "/scratch/cqs_share/references/gencode/GRCm38.p6/gencode.vM26.annotation.gtf.map",
+    }
+  );
+}
+
+sub gencode_mm10_genome_v24 {
   return merge_hash_right_precedent(
     merge_hash_right_precedent( global_definition(), common_mm10_genome() ),
     {
@@ -276,6 +320,7 @@ sub ensembl_Mmul10_genome {
     {
       perform_gsea => 0,
 
+      docker_command            => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
       fasta_file => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.dna.primary_assembly.fa",
       star_index     => "/scratch/cqs_share/references/ensembl/Mmul_10/STAR_index_2.7.1a_v99_sjdb100",
       transcript_gtf => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.99.chr.gtf",
@@ -292,6 +337,7 @@ sub ensembl_GRCz11_genome {
 
       #genome database
       fasta_file => "/data/cqs/references/zebrafish/GRCz11/Danio_rerio.GRCz11.dna.primary_assembly.fa",
+      docker_command            => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
 
       star_index          => "/data/cqs/references/zebrafish/GRCz11/STAR_index",
       transcript_gtf      => "/data/cqs/references/zebrafish/GRCz11/Danio_rerio.GRCz11.102.gtf",
