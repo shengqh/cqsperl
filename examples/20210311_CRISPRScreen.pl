@@ -44,6 +44,7 @@ my $def = {
   },
   mageck_library => "/scratch/h_vangard_1/wangj52/Bill/Caleb-MV411-CRISPR_screen/MAGeCK/numbered_brunello_validation_library.txt",
   
+  perform_batch_correction => 1,
   batch => {
     "plasmid" => {
       Batch => 1,
@@ -75,6 +76,7 @@ my $def = {
     }
   },
 
+  perform_cnv_correction => 1,
   cnv_norm => "/scratch/h_vangard_1/wangj52/Bill/test-MAGeCKFlute/demo/mageck_cnv/cnv_data.txt",
   cnv_norm_cell_line => "HL60_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE",
   
