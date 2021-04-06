@@ -32,7 +32,7 @@ sub common_options {
 
     docker_command => "singularity exec -e /data/cqs/softwares/singularity/cqs-chipseq.simg ",
     bamplot_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/bamplot.simg ",
-    chipqc_docker_command => "singularity exec -e /data/cqs/softwares/singularity/cqs-chipqc.simg ",
+    #chipqc_docker_command => "singularity exec -e /data/cqs/softwares/singularity/cqs-chipqc.simg ",
     bamsnap_docker_command => "singularity exec -e /data/cqs/softwares/singularity/bamsnap.simg ",
     picard_jar     => "/opt/picard.jar",
 
