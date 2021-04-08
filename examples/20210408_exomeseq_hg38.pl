@@ -9,14 +9,15 @@ use CQS::ClassFactory;
 use CQS::PerformExomeSeq;
 
 my $def = {
-  task_name => "gatk_hg38",
+  task_name => "exomeseq_hg38",
 
-  target_dir => "/scratch/cqs/shengq2/temp/ExomeSeq_gatk_hg38",
+  target_dir => "/scratch/cqs/shengq2/temp/exomeseq_hg38",
   email      => "quanhu.sheng.1\@vumc.org",
   files      => {
-    "sample1" => [ "/gpfs23/scratch/cqs/pipeline_example/dnaseq_data/human/sample1_R1.fastq.gz", "/gpfs23/scratch/cqs/pipeline_example/dnaseq_data/human/sample1_R2.fastq.gz" ],
-    "sample2" => [ "/gpfs23/scratch/cqs/pipeline_example/dnaseq_data/human/sample2_R1.fastq.gz", "/gpfs23/scratch/cqs/pipeline_example/dnaseq_data/human/sample2_R2.fastq.gz" ],
-    "sample3" => [ "/gpfs23/scratch/cqs/pipeline_example/dnaseq_data/human/sample3_R1.fastq.gz", "/gpfs23/scratch/cqs/pipeline_example/dnaseq_data/human/sample3_R2.fastq.gz" ],
+    'S1' => [ '/data/cqs/example_data/exomeseq/S1-AGTGTTGC-ATGTAACG_S329_R2_001.fastq.gz', '/data/cqs/example_data/exomeseq/S1-AGTGTTGC-ATGTAACG_S329_R1_001.fastq.gz' ],
+    'S2' => [ '/data/cqs/example_data/exomeseq/S2-TTACCTGG-GATTCTGA_S330_R1_001.fastq.gz', '/data/cqs/example_data/exomeseq/S2-TTACCTGG-GATTCTGA_S330_R2_001.fastq.gz' ],
+    'S3' => [ '/data/cqs/example_data/exomeseq/S3-TCTATCCT-GAGAGGTT_S331_R1_001.fastq.gz', '/data/cqs/example_data/exomeseq/S3-TCTATCCT-GAGAGGTT_S331_R2_001.fastq.gz' ],
+    'S4' => [ '/data/cqs/example_data/exomeseq/S4-TTCTACAT-TTGTATCA_S332_R1_001.fastq.gz', '/data/cqs/example_data/exomeseq/S4-TTCTACAT-TTGTATCA_S332_R2_001.fastq.gz' ],
   },
   merge_fastq => 0,
 
@@ -25,7 +26,7 @@ my $def = {
   cutadapt_option  => "-n 2 -O 1 -q 20 -a AGATCGGAAGAGCACACGTC -A AGATCGGAAGAGCGTCGTGT",
   min_read_length  => 30,
 
-  covered_bed                 => "/scratch/cqs_share/references/exomeseq/IDT/Exome-IDT-xGen-hg19-v1-slop50-nochr.bed",
+  covered_bed                 => "/scratch/cqs_share/references/exomeseq/Twist/Twist_Exome_Target_hg38.slop50.bed",
 
   perform_gatk_callvariants   => 1,
   gatk_callvariants_vqsr_mode => 1,
