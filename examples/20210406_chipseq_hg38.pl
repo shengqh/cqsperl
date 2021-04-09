@@ -93,11 +93,11 @@ my $def = {
       },
       "No_Treatment_2" => {
         Condition => "No_Treatment",
-        Replicate => "12"
+        Replicate => "2"
       },
       "TNF_Veh_2" => {
         Condition => "TNF_Veh",
-        Replicate => "21"
+        Replicate => "2"
       },
       "THZ_TNF_2" => {
         Condition => "THZ_TNF",
