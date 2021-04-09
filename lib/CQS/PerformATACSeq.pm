@@ -5,6 +5,7 @@ use strict;
 use warnings;
 use CQS::ConfigUtils;
 use Pipeline::ATACSeq;
+use Hash::Merge qw( merge );
 
 require Exporter;
 our @ISA = qw(Exporter);
