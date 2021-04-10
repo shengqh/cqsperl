@@ -29,11 +29,11 @@ sub common_options {
     version    => 1,
     constraint => "haswell",
 
-    cqstools   => "/home/shengq2/cqstools/cqstools.exe",
-    picard_jar => "/scratch/cqs/shengq2/local/bin/picard/picard.jar",
-    bamplot_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/bamplot.simg ",
-    docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-chipseq.simg ",
-    BWA_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
+    docker_command => "singularity exec -e /data/cqs/softwares/singularity/cqs-chipseq.simg ",
+    bamsnap_docker_command => "singularity exec -e /data/cqs/softwares/singularity/bamsnap.simg ",
+    bamplot_docker_command => "singularity exec -e /data/cqs/softwares/singularity/bamplot.simg ",
+    BWA_docker_command => "singularity exec -e /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
+    picard_jar     => "/opt/picard.jar",
 
     perform_cutadapt => 0,
 
