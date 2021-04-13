@@ -43,6 +43,9 @@ sub common_options {
 
     peak_caller => "macs2",
     macs2_peak_type        => "broad",
+
+    #don't draw gene
+    bamsnap_option => "-d",
   };
 }
 
@@ -56,7 +59,8 @@ sub common_hg19_options {
     enhancer_cpg_path => "/scratch/cqs/shengq2/references/ucsc/hg19_cpg_islands.bed",
     
     #homer
-    homer_genome => "hg19"
+    homer_genome => "hg19",
+    bamsnap_option => "-d",
   };
 }
 
