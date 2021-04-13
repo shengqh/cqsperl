@@ -22,6 +22,8 @@ our %EXPORT_TAGS = (
       performRNASeq_ensembl_Mmul10
       ensembl_GRCz11_genome
       performRNASeq_ensembl_GRCz11
+      ensembl_Rnor_6_genome
+      performRNASeq_ensembl_Rnor_6
       )
   ]
   # 'all' => [
@@ -59,8 +61,7 @@ sub global_definition {
     perform_star_featurecount => 1,
     perform_qc3bam            => 0,
     qc3_perl                  => "/scratch/cqs_share/softwares/QC3/qc3.pl",
-    docker_command            => "singularity exec -e /data/cqs/softwares/singularity/cqs-rnaseq.20210331.simg ",
-    #docker_command            => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
+    docker_command            => "singularity exec -e /data/cqs/softwares/singularity/cqs-rnaseq.simg ",
     gatk_jar                  => "/opt/gatk3.jar",
     picard_jar                => "/opt/picard.jar",
   });
@@ -264,6 +265,22 @@ sub gencode_mm10_genome_v24 {
   );
 }
 
+sub ensembl_Rnor_6_genome {
+  return merge_hash_right_precedent(
+    global_definition(), 
+    {
+      perform_webgestalt  => 0,
+      perform_gsea        => 0,
+
+      #genome database
+      fasta_file     => "/scratch/cqs_share/references/ensembl/Rnor_6.0/Rattus_norvegicus.Rnor_6.0.dna.primary_assembly.fa",
+      star_index     => "/scratch/cqs_share/references/ensembl/Rnor_6.0/STAR_index_2.7.8a_v99_sjdb100",
+      transcript_gtf => "/scratch/cqs_share/references/ensembl/Rnor_6.0/Rattus_norvegicus.Rnor_6.0.99.chr.gtf",
+      name_map_file  => "/scratch/cqs_share/references/ensembl/Rnor_6.0/Rattus_norvegicus.Rnor_6.0.99.chr.gtf.map",
+    }
+  );
+}
+
 # sub yan_mm10_genome {
 #   return merge_hash_right_precedent(
 #     merge_hash_right_precedent( global_definition(), common_mm10_genome() ),
@@ -429,12 +446,12 @@ sub performRNASeq_gencode_mm10 {
 #   return $config;
 # }
 
-# sub performRNASeq_ensembl_Mmul8 {
-#   my ( $userdef, $perform ) = @_;
-#   my $def = merge_hash_left_precedent( $userdef, ensembl_Mmul8_genome() );
-#   my $config = performRNASeq( $def, $perform );
-#   return $config;
-# }
+sub performRNASeq_ensembl_Rnor_6 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge_hash_left_precedent( $userdef, ensembl_Rnor_6_genome() );
+  my $config = performRNASeq( $def, $perform );
+  return $config;
+}
 
 sub performRNASeq_ensembl_Mmul10 {
   my ( $userdef, $perform ) = @_;
