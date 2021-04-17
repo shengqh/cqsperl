@@ -3,11 +3,9 @@ module load GCCcore/.8.2.0
 #module load CMake/3.13.
 module load Python/3.7.2
 
-#module load GCC/8.2.0  
-#module load CUDA/10.1.105  
-#module load OpenMPI/3.1.4
-#module load R/3.6.0
-
+module load GCC/8.2.0  
+module load OpenMPI/3.1.4
+module load HDF5/1.10.5
 module load Perl/5.28.1
 
 #MY_R_LIBS=/scratch/cqs/shengq2/Rlibrary
@@ -64,7 +62,7 @@ BOWTIE2=/scratch/cqs_share/softwares/bowtie2:/scratch/cqs_share/softwares/bowtie
 #export LAPACK_SRC='/scratch/cqs/shengq2/source/lapack/SRC'
 
 MY_PERL_BIN=/home/shengq2/perl5/bin
-MY_PERL_LIB=/scratch/cqs_share/softwares/ngsperl/lib/:/scratch/cqs_share/softwares/cqsperl/lib/:/home/shengq2/perl5/lib/perl5/
+MY_PERL_LIB=/scratch/cqs_share/softwares/ngsperl/lib/:/data/cqs/softwares/cqsperl/lib/:/home/shengq2/perl5/lib/perl5/
 
 if [ -z "$PERL5LIB" ]
 then
