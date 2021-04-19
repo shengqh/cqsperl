@@ -60,11 +60,11 @@ sub global_definition {
     },
 
     wdl => {
-      "cromwell_jar" => "/scratch/cqs_share/softwares/cromwell-51.jar",
-      "cromwell_option_file" => "/scratch/cqs_share/softwares/cromwell/cromwell.options.json",
+      "cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-51.jar",
+      "cromwell_option_file" => "/data/cqs/softwares/cromwell/cromwell.options.json",
       "local" => {
-        #"cromwell_config_file" => "/scratch/cqs_share/softwares/cromwell/cromwell.examples.local.conf",
-        "cromwell_config_file" => "/home/zhaos/source/perl_cqs/test/cromwell/cromwell.examples.local.conf",
+        "cromwell_config_file" => "/data/cqs/softwares/cromwell/cromwell.examples.local.conf",
+        #"cromwell_config_file" => "/home/zhaos/source/perl_cqs/test/cromwell/cromwell.examples.local.conf",
         "mutect2" => {
           "perform_mutect2_pon" => 0,
           "wdl_file" => "/scratch/cqs_share/softwares/gatk-workflows/gatk/scripts/mutect2_wdl/mutect2.wdl",
@@ -140,10 +140,10 @@ sub gatk_hg38_genome {
       wdl => {
         local => {
           "mutect2" => {
-            "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2.inputs.hg38.json",
+            "input_file" => "/data/cqs/softwares/cqsperl/data/wdl/local/mutect2.inputs.hg38.json",
           },
           "mutect2_pon" => {
-            "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.hg38.json",
+            "input_file" => "/data/cqs/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.hg38.json",
           },
           "paired_fastq_to_processed_bam" => {
             "input_file" => "/home/zhaos/source/perl_cqs/workflow/gatk4-data-processing/processing-for-variant-discovery-gatk4.hg38.wgs.inputs.json",
@@ -200,10 +200,10 @@ sub gatk_hg19_genome {
       wdl => {
         local => {
           "mutect2" => {
-            "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2.inputs.hg19.json",
+            "input_file" => "/data/cqs/softwares/cqsperl/data/wdl/local/mutect2.inputs.hg19.json",
           },
           "mutect2_pon" => {
-            "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.hg19.json",
+            "input_file" => "/data/cqs/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.hg19.json",
           },
           paired_fastq_to_processed_bam => {
             "input_file" => "missing",
@@ -285,11 +285,11 @@ sub gencode_mm10_genome {
         local => {
           "mutect2" => {
             perform_mutect2_pon => 1,
-            "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2.inputs.mm10.json",
+            "input_file" => "/data/cqs/softwares/cqsperl/data/wdl/local/mutect2.inputs.mm10.json",
           },
           "mutect2_pon" => {
-            "wdl_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/mutect2_pon.no_gnomad.wdl",
-            "input_file" => "/scratch/cqs_share/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.mm10.json",
+            "wdl_file" => "/data/cqs/softwares/cqsperl/data/wdl/mutect2_pon.no_gnomad.wdl",
+            "input_file" => "/data/cqs/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.mm10.json",
           },
           paired_fastq_to_processed_bam => {
             "input_file" => "/home/zhaos/source/perl_cqs/workflow/gatk4-data-processing/processing-for-variant-discovery-gatk4.mm10.inputs.json",
