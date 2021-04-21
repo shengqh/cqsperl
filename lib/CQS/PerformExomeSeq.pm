@@ -197,6 +197,8 @@ sub gatk_hg19_genome {
       biomart_dataset   => "hsapiens_gene_ensembl",
       biomart_symbolKey => "hgnc_symbol",
 
+      hapmap_file       => "/data/cqs/references/hg19/hg19_nochr_hapmap.txt",
+
       wdl => {
         local => {
           "mutect2" => {
