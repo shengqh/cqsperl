@@ -137,6 +137,9 @@ sub gatk_hg38_genome {
       biomart_dataset   => "hsapiens_gene_ensembl",
       biomart_symbolKey => "hgnc_symbol",
 
+      #https://github.com/oicr-gsi/fingerprint_maps
+      hapmap_file       => "/data/cqs/references/hg38/hg38_nochr_hapmap.txt",
+
       wdl => {
         local => {
           "mutect2" => {
