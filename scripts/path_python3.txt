@@ -3,9 +3,9 @@ module load GCCcore/.8.2.0
 #module load CMake/3.13.
 module load Python/3.7.2
 
-module load GCC/8.2.0  
-module load OpenMPI/3.1.4
-module load HDF5/1.10.5
+#module load GCC/8.2.0  
+#module load OpenMPI/3.1.4
+#module load HDF5/1.10.5
 module load Perl/5.28.1
 
 #MY_R_LIBS=/scratch/cqs/shengq2/Rlibrary
