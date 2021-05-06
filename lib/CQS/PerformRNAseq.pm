@@ -228,7 +228,7 @@ sub gencode_hg38_genome_v33 {
 # }
 
 sub common_mm10_genome() {
-  return {
+  return merge_hash_right_precedent(mm10_options(), {
     webgestalt_organism => "mmusculus",
     perform_webgestalt  => 1,
     dbsnp               => "/scratch/cqs/references/dbsnp/mouse_10090_b150_GRCm38p4.vcf.gz",
@@ -236,7 +236,7 @@ sub common_mm10_genome() {
     annovar_param       => "-protocol refGene -operation g --remove",
     annovar_db          => "/scratch/cqs_share/references/annovar/mousedb/",
     perform_gsea        => 0,
-  };
+  });
 }
 
 sub gencode_mm10_genome {
@@ -248,6 +248,7 @@ sub gencode_mm10_genome {
       star_index     => "/scratch/cqs_share/references/gencode/GRCm38.p6/STAR_index_2.7.8a_vM24_sjdb100",
       transcript_gtf => "/scratch/cqs_share/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf",
       name_map_file  => "/scratch/cqs_share/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf.map",
+      annotation_genes_add_chr => 1,
     }
   );
 }
