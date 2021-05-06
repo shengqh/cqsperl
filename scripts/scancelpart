@@ -1,0 +1,4 @@
+#!/bin/bash
+min="$1"
+max="$2"
+squeue -u shengq2 | awk -v min=$1 -v max=$2 '{if($1 >= min && $1 <= max){ print("scancel " $1); system( "scancel " $1) }}'
