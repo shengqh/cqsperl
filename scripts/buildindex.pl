@@ -160,7 +160,7 @@ if ( !-e "${basename}.fai" ) {
 }
 
 if ( !-e "${base}.dict" ) {
-  run_command("java -jar /scratch/cqs/shengq2/local/bin/picard/picard.jar CreateSequenceDictionary R=$fastaFile O=${base}.dict");
+  run_command("java -jar /data/cqs/softwares/picard.jar CreateSequenceDictionary R=$fastaFile O=${base}.dict");
 }
 
 if ( !-e "${base}.len" ) {

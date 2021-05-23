@@ -27,15 +27,16 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '0.01';
 
 sub global_options {
+  my $singularity_prefix = "singularity exec -e -B /data,/scratch,/home";
+
   return {
     constraint => "haswell",
     sratoolkit_setting_file => "/scratch/cqs_share/softwares/cqsperl/config/vdb-config/user-settings.mkfg",
-    BWA_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
-    bamplot_docker_command => "singularity exec -e /data/cqs/softwares/singularity/bamplot.simg ",
-    BWA_docker_command => "singularity exec -e /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
-
-    chipqc_docker_command => "singularity exec -e /data/cqs/softwares/singularity/cqs-chipseq.chipqc.simg ",
-    bamsnap_docker_command => "singularity exec -e /data/cqs/softwares/singularity/bamsnap.simg ",
+    bamplot_docker_command => "$singularity_prefix /data/cqs/softwares/singularity/bamplot.simg ",
+    BWA_docker_command => "$singularity_prefix /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
+    gatk4_docker_command => "$singularity_prefix /scratch/cqs_share/softwares/singularity/cqs-gatk4.simg ",
+    chipqc_docker_command => "$singularity_prefix /data/cqs/softwares/singularity/cqs-chipseq.chipqc.simg ",
+    bamsnap_docker_command => "$singularity_prefix /data/cqs/softwares/singularity/bamsnap.simg ",
     bamsnap_option => "--no_gene_track",
   };
 }

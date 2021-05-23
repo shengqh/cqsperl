@@ -27,19 +27,21 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '0.01';
 
 sub global_definition {
+  my $singularity_prefix = "singularity exec -B /data,/scratch,/home -e";
+
   return merge_hash_right_precedent(global_options(), {
     constraint => "haswell",
 
-    gatk4_docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/cqs-gatk4.simg ",
+    gatk4_docker_command => "$singularity_prefix /scratch/cqs_share/softwares/singularity/cqs-gatk4.simg ",
     #gatk4_docker_init    => "source activate gatk  ",
-    gotc_docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/gotc.latest.simg ",
+    gotc_docker_command => "$singularity_prefix /scratch/cqs_share/softwares/singularity/gotc.latest.simg ",
 
-    docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
-    mafreport_docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/mafreport.simg ",
+    docker_command => "$singularity_prefix /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
+    mafreport_docker_command => "$singularity_prefix /scratch/cqs_share/softwares/singularity/mafreport.simg ",
     docker_init    => "",
     gatk3_jar      => "/opt/gatk3.jar",
     picard_jar     => "/opt/picard.jar",
-    mutect_docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/mutect.simg ",
+    mutect_docker_command => "$singularity_prefix /scratch/cqs_share/softwares/singularity/mutect.simg ",
     muTect_jar     => "/opt/mutect-1.1.7.jar",
 
     muTect2_option => "--downsampling-stride 20 --max-reads-per-alignment-start 6 --max-suspicious-reads-per-alignment-start 6",
@@ -99,8 +101,9 @@ sub global_definition {
 }
 
 sub gatk_hg38_genome {
+  my $global_hg38 = merge_hash_right_precedent(hg38_options(), global_definition());
   return merge_hash_right_precedent(
-    global_definition(),
+    $global_hg38,
     {
       ref_fasta      => "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
       ref_fasta_dict => "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.dict",
@@ -164,8 +167,9 @@ sub gatk_hg38_genome {
 }
 
 sub gatk_hg19_genome {
+  my $global_hg19 = merge_hash_right_precedent(hg19_options(), global_definition());
   return merge_hash_right_precedent(
-    global_definition(),
+    $global_hg19,
     {
       ref_fasta      => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens_assembly19.fasta",
       ref_fasta_dict => "/scratch/cqs_share/references/broad/hg19/v0/Homo_sapiens_assembly19.dict",
@@ -260,8 +264,9 @@ sub gatk_hg19_genome {
 #}
 
 sub gencode_mm10_genome {
+  my $global_mm10 = merge_hash_right_precedent(mm10_options(), global_definition());
   return merge_hash_right_precedent(
-    global_definition(),
+    $global_mm10,
     {
       #genome database
       ref_fasta        => "/scratch/cqs_share/references/gencode/GRCm38.p6/GRCm38.primary_assembly.genome.fa",

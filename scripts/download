@@ -1,3 +1,5 @@
 #!/bin/bash
-singularity exec -e /data/cqs/softwares/singularity/cyberduck.simg duck --download ftps://shredder.file.vumc.org/ . -u $1 -p $2 -e compare
+project_id=$1
+singularity exec -e /data/cqs/softwares/singularity/cyberduck.simg duck --download ftps://shredder.file.vumc.org/ . -u $project_id -p $2 -e compare
 
+md5sum *.fastq.gz > ${project_id}.md5.txt

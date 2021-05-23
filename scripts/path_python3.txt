@@ -53,8 +53,8 @@ ANNOVAR=/scratch/cqs_share/softwares/annovar
 
 HOMER=/scratch/cqs/softwares/homer2/bin
 
-BOWTIE=/scratch/cqs_share/softwares/bowtie
-BOWTIE2=/scratch/cqs_share/softwares/bowtie2:/scratch/cqs_share/softwares/bowtie2/scripts
+BOWTIE=/data/cqs/softwares/bowtie
+BOWTIE2=/data/cqs/softwares/bowtie2:/data/cqs/softwares/bowtie2/scripts
 
 #export BLAS='/scratch/cqs/shengq2/local/lib64/libblas.so'
 #export LAPACK='/scratch/cqs/shengq2/local/lib64/liblapack.so'
