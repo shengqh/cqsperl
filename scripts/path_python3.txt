@@ -47,7 +47,7 @@ MY_PANDOC_BIN=/scratch/cqs_share/softwares/pandoc/bin
 MY_SHARE_BIN=/scratch/cqs_share/softwares/local/bin
 MY_FASTQC_BIN=/data/cqs/softwares/FastQC
 
-MYBIN=/scratch/cqs_share/softwares/ngsperl/bin:/data/cqs/softwares/local/bin:/scratch/cqs_share/softwares/arcasHLA:$MY_SHARE_BIN:$MY_PANDOC_BIN:$MY_STACK_BIN:$MY_SRA_BIN:$MY_GSEA_BIN:$MY_CELLRANGER_BIN:$MY_ENCODE_BIN:$MY_PYTHON_BIN:/scratch/cqs_share/softwares/edirect:/scratch/cqs/softwares/local/bin:/scratch/cqs/softwares/subread/bin:/scratch/cqs/softwares/gatk4:/scratch/cqs/shengq2/gcloud/open_wdl/runners/cromwell_on_google/monitoring_tools:/scratch/cqs/softwares/ensembl-git-tools/bin:/home/shengq2/program/perl/bin
+MYBIN=/data/cqs/softwares/ngsperl/bin:/data/cqs/softwares/local/bin:/scratch/cqs_share/softwares/arcasHLA:$MY_SHARE_BIN:$MY_PANDOC_BIN:$MY_STACK_BIN:$MY_SRA_BIN:$MY_GSEA_BIN:$MY_CELLRANGER_BIN:$MY_ENCODE_BIN:$MY_PYTHON_BIN:/scratch/cqs_share/softwares/edirect:/scratch/cqs/softwares/local/bin:/scratch/cqs/softwares/subread/bin:/scratch/cqs/softwares/gatk4:/scratch/cqs/shengq2/gcloud/open_wdl/runners/cromwell_on_google/monitoring_tools:/scratch/cqs/softwares/ensembl-git-tools/bin:/home/shengq2/program/perl/bin
 
 ANNOVAR=/scratch/cqs_share/softwares/annovar
 
@@ -62,7 +62,7 @@ BOWTIE2=/data/cqs/softwares/bowtie2:/data/cqs/softwares/bowtie2/scripts
 #export LAPACK_SRC='/scratch/cqs/shengq2/source/lapack/SRC'
 
 MY_PERL_BIN=/home/shengq2/perl5/bin
-MY_PERL_LIB=/scratch/cqs_share/softwares/ngsperl/lib/:/data/cqs/softwares/cqsperl/lib/:/home/shengq2/perl5/lib/perl5/
+MY_PERL_LIB=/data/cqs/softwares/ngsperl/lib/:/data/cqs/softwares/cqsperl/lib/:/home/shengq2/perl5/lib/perl5/
 
 if [ -z "$PERL5LIB" ]
 then
