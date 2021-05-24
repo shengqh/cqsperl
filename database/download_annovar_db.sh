@@ -1,4 +1,4 @@
-cd /scratch/cqs_share/references/annovar/humandb
+cd /data/cqs/references/annovar/humandb
 
 for hg in hg19 hg38
 do
@@ -8,7 +8,7 @@ do
   done
 done
 
-cd /scratch/cqs_share/references/annovar/mousedb
+cd /data/cqs/references/annovar/mousedb
 
 annotate_variation.pl -downdb -webfrom annovar -buildver mm10 refGene .
 annotate_variation.pl --buildver mm10 --downdb seq ./mm10_seq
