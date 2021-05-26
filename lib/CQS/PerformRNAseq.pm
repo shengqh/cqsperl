@@ -15,7 +15,9 @@ our %EXPORT_TAGS = (
     qw(gencode_hg19_genome
       performRNASeq_gencode_hg19
       gencode_hg38_genome
+      gencode_hg38_genome_v37
       performRNASeq_gencode_hg38
+      performRNASeq_gencode_hg38_v37
       gencode_mm10_genome
       performRNASeq_gencode_mm10
       ensembl_Mmul10_genome
@@ -129,20 +131,6 @@ sub gencode_hg19_genome {
   );
 }
 
-sub gencode_hg19_genome_star2_7_1a {
-  my ($userdef) = @_;
-  return merge_hash_right_precedent(
-    common_hg19_genome($userdef),
-    {
-      #genome database
-      fasta_file     => "/data/cqs/references/gencode/GRCh37.p13/Homo_sapiens_assembly19.fasta",
-      star_index     => "/data/cqs/references/gencode/GRCh37.p13/STAR_index_2.7.1a_v19_sjdb100",
-      transcript_gtf => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf",
-      name_map_file  => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf.map",
-    }
-  );
-}
-
 # sub gatk_b37_genome {
 #   my ($userdef) = @_;
 #   return merge_hash_right_precedent(
@@ -167,46 +155,28 @@ sub common_hg38_genome {
   );
 }
 
-# sub gatk_hg38_genome {
-#   my ($userdef) = @_;
-#   return merge_hash_right_precedent(
-#     common_hg38_genome($userdef),
-#     {
-#       #genome database
-#       fasta_file     => "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
-#       star_index     => "/scratch/cqs_share/references/broad/hg38/v0/STAR_index_2.7.1a_gencodev27_sjdb100",
-#       transcript_gtf => "/scratch/cqs_share/references/broad/hg38/v0/gencode.v27.primary_assembly.annotation.gtf",
-#       name_map_file  => "/scratch/cqs_share/references/broad/hg38/v0/gencode.v27.primary_assembly.annotation.gtf.map",
-#     }
-#   );
-# }
-
-sub gencode_hg38_genome {
-  my ($userdef) = @_;
+sub get_gencode_hg38_genome {
+  my ($userdef, $gtfVersion) = @_;
   return merge_hash_right_precedent(
     common_hg38_genome($userdef),
     {
       #genome database
-      fasta_file     => "/scratch/cqs_share/references/gencode/GRCh38.p13/GRCh38.primary_assembly.genome.fa",
-      star_index     => "/scratch/cqs_share/references/gencode/GRCh38.p13/STAR_index_2.7.8a_v37_sjdb100",
-      transcript_gtf => "/scratch/cqs_share/references/gencode/GRCh38.p13/gencode.v37.annotation.gtf",
-      name_map_file  => "/scratch/cqs_share/references/gencode/GRCh38.p13/gencode.v37.annotation.gtf.map",
+      star_index     => "/data/cqs/references/gencode/GRCh38.p13/STAR_index_2.7.8a_${gtfVersion}_sjdb100",
+      transcript_gtf => "/data/cqs/references/gencode/GRCh38.p13/gencode.${gtfVersion}.annotation.gtf",
+      name_map_file  => "/data/cqs/references/gencode/GRCh38.p13/gencode.${gtfVersion}.annotation.gtf.map",
+      gene_bed       => "/data/cqs/references/gencode/GRCh38.p13/gencode.${gtfVersion}.annotation.gtf.map.bed",
     }
   );
 }
 
-sub gencode_hg38_genome_v33 {
+sub gencode_hg38_genome {
   my ($userdef) = @_;
-  return merge_hash_right_precedent(
-    common_hg38_genome($userdef),
-    {
-      #genome database
-      fasta_file     => "/scratch/cqs_share/references/gencode/GRCh38.p13/GRCh38.primary_assembly.genome.fa",
-      star_index     => "/scratch/cqs_share/references/gencode/GRCh38.p13/STAR_index_2.7.1a_v37_sjdb100",
-      transcript_gtf => "/scratch/cqs_share/references/gencode/GRCh38.p13/gencode.v33.annotation.gtf",
-      name_map_file  => "/scratch/cqs_share/references/gencode/GRCh38.p13/gencode.v33.annotation.gtf.map",
-    }
-  );
+  return(get_gencode_hg38_genome($userdef, "v38"));
+}
+
+sub gencode_hg38_genome_v37 {
+  my ($userdef) = @_;
+  return(get_gencode_hg38_genome($userdef, "v37"));
 }
 
 # sub yan_hg38_genome() {
@@ -231,7 +201,7 @@ sub common_mm10_genome() {
   return merge_hash_right_precedent(mm10_options(), {
     webgestalt_organism => "mmusculus",
     perform_webgestalt  => 1,
-    dbsnp               => "/scratch/cqs/references/dbsnp/mouse_10090_b150_GRCm38p4.vcf.gz",
+    #dbsnp               => "/scratch/cqs/references/dbsnp/mouse_10090_b150_GRCm38p4.vcf.gz",
     annovar_buildver    => "mm10",
     annovar_param       => "-protocol refGene -operation g --remove",
     annovar_db          => "/scratch/cqs_share/references/annovar/mousedb/",
@@ -244,10 +214,10 @@ sub gencode_mm10_genome {
     merge_hash_right_precedent( global_definition(), common_mm10_genome() ),
     {
       #genome database
-      fasta_file     => "/scratch/cqs_share/references/gencode/GRCm38.p6/GRCm38.p6.genome.fa",
-      star_index     => "/scratch/cqs_share/references/gencode/GRCm38.p6/STAR_index_2.7.8a_vM24_sjdb100",
-      transcript_gtf => "/scratch/cqs_share/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf",
-      name_map_file  => "/scratch/cqs_share/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf.map",
+      fasta_file     => "/data/cqs/references/gencode/GRCm38.p6/GRCm38.p6.genome.fa",
+      star_index     => "/data/cqs/references/gencode/GRCm38.p6/STAR_index_2.7.8a_vM24_sjdb100",
+      transcript_gtf => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf",
+      name_map_file  => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf.map",
       annotation_genes_add_chr => 1,
     }
   );
@@ -258,10 +228,10 @@ sub gencode_mm10_genome_v24 {
     merge_hash_right_precedent( global_definition(), common_mm10_genome() ),
     {
       #genome database
-      fasta_file     => "/scratch/cqs_share/references/gencode/GRCm38.p6/GRCm38.p6.genome.fa",
-      star_index     => "/scratch/cqs_share/references/gencode/GRCm38.p6/STAR_index_2.7.1a_vM24_sjdb100",
-      transcript_gtf => "/scratch/cqs_share/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf",
-      name_map_file  => "/scratch/cqs_share/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf.map",
+      fasta_file     => "/data/cqs/references/gencode/GRCm38.p6/GRCm38.p6.genome.fa",
+      star_index     => "/data/cqs/references/gencode/GRCm38.p6/STAR_index_2.7.1a_vM24_sjdb100",
+      transcript_gtf => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf",
+      name_map_file  => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf.map",
     }
   );
 }
@@ -415,6 +385,13 @@ sub performRNASeq_gencode_hg19 {
 sub performRNASeq_gencode_hg38 {
   my ( $userdef, $perform ) = @_;
   my $def = merge_hash_left_precedent( $userdef, gencode_hg38_genome($userdef) );
+  my $config = performRNASeq( $def, $perform );
+  return $config;
+}
+
+sub performRNASeq_gencode_hg38_v37 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge_hash_left_precedent( $userdef, gencode_hg38_genome_v37($userdef) );
   my $config = performRNASeq( $def, $perform );
   return $config;
 }

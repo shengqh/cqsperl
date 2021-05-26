@@ -40,48 +40,48 @@ sub supplement_genome {
     docker_command => "singularity exec -e /scratch/cqs/softwares/singularity/cqs-smallRNA.simg ",
 
     #miRBase database
-    bowtie1_miRBase_index => "/scratch/cqs_share/references/mirbase/v22/bowtie_index_1.2.3/mature.dna",
+    bowtie1_miRBase_index => "/data/cqs/references/smallrna/mature.dna",
 
     bowtie_bacteria_index_list_file => "/scratch/cqs_share/references/refseq/bacteria/20200321_assembly_summary.txt.files.list",
     bowtie_viruses_index_list_file => "/scratch/cqs_share/references/refseq/viruses/20200326_assembly_summary.txt.files.list",
 
     #human microbime database
-    bowtie1_bacteria_group1_index => "/scratch/cqs_share/references/smallrna/20170206_Group1SpeciesAll",
-    bacteria_group1_species_map   => "/scratch/cqs_share/references/smallrna/20170206_Group1SpeciesAll.species.map",
+    bowtie1_bacteria_group1_index => "/data/cqs/references/smallrna/20170206_Group1SpeciesAll",
+    bacteria_group1_species_map   => "/data/cqs/references/smallrna/20170206_Group1SpeciesAll.species.map",
 
     #human enviroment bacteria database
-    bowtie1_bacteria_group2_index => "/scratch/cqs_share/references/smallrna/20160907_Group2SpeciesAll",
-    bacteria_group2_species_map   => "/scratch/cqs_share/references/smallrna/20160907_Group2SpeciesAll.species.map",
+    bowtie1_bacteria_group2_index => "/data/cqs/references/smallrna/20160907_Group2SpeciesAll",
+    bacteria_group2_species_map   => "/data/cqs/references/smallrna/20160907_Group2SpeciesAll.species.map",
 
     #fungus database
-    bowtie1_fungus_group4_index => "/scratch/cqs_share/references/smallrna/20160225_Group4SpeciesAll",
-    fungus_group4_species_map   => "/scratch/cqs_share/references/smallrna/20160225_Group4SpeciesAll.species.map",
+    bowtie1_fungus_group4_index => "/data/cqs/references/smallrna/20160225_Group4SpeciesAll",
+    fungus_group4_species_map   => "/data/cqs/references/smallrna/20160225_Group4SpeciesAll.species.map",
 
     #virus database
-    #bowtie1_virus_group6_index => "/scratch/cqs_share/references/smallrna/20190424_Group6SpeciesAll.species",
-    #virus_group6_species_map   => "/scratch/cqs_share/references/smallrna/20190424_Group6SpeciesAll.species.map",
-    bowtie1_virus_group6_index => "/scratch/cqs_share/references/refseq/viral/20200305_viral_genomes",
-    virus_group6_species_map   => "/scratch/cqs_share/references/refseq/viral/20200305_viral_genomes.map",
+    #bowtie1_virus_group6_index => "/data/cqs/references/smallrna/20190424_Group6SpeciesAll.species",
+    #virus_group6_species_map   => "/data/cqs/references/smallrna/20190424_Group6SpeciesAll.species.map",
+    bowtie1_virus_group6_index => "/data/cqs/references/smallrna/20200305_viral_genomes",
+    virus_group6_species_map   => "/data/cqs/references/smallrna/20200305_viral_genomes.map",
 
     #algae database
-    bowtie1_algae_group5_index => "/scratch/cqs_share/references/smallrna/20200214_AlgaeSpeciesAll.species",
-    algae_group5_species_map   => "/scratch/cqs_share/references/smallrna/20200214_AlgaeSpeciesAll.species.map",
+    bowtie1_algae_group5_index => "/data/cqs/references/smallrna/20200214_AlgaeSpeciesAll.species",
+    algae_group5_species_map   => "/data/cqs/references/smallrna/20200214_AlgaeSpeciesAll.species.map",
 
     #UCSC tRNA database
-    bowtie1_tRNA_index => "/scratch/cqs_share/references/smallrna/GtRNAdb2.20161214.mature",
-    trna_category_map  => "/scratch/cqs_share/references/smallrna/GtRNAdb2.20161214.category.map",
-    trna_map           => "/scratch/cqs_share/references/smallrna/GtRNAdb2.20161214.map",
+    bowtie1_tRNA_index => "/data/cqs/references/smallrna/GtRNAdb2.20161214.mature",
+    trna_category_map  => "/data/cqs/references/smallrna/GtRNAdb2.20161214.category.map",
+    trna_map           => "/data/cqs/references/smallrna/GtRNAdb2.20161214.map",
 
     #SILVA rRNA database
-    bowtie1_rRNA_index => "/scratch/cqs_share/references/smallrna/SILVA_128.rmdup",
-    rrna_category_map  => "/scratch/cqs_share/references/smallrna/SILVA_128.rmdup.category.map",
+    bowtie1_rRNA_index => "/data/cqs/references/smallrna/SILVA_128.rmdup",
+    rrna_category_map  => "/data/cqs/references/smallrna/SILVA_128.rmdup.category.map",
 
     blast_localdb => "/scratch/cqs_share/references/blastdb",
 
     customed_db => {
       "Bug" => {
-        bowtie1_index => "/scratch/cqs_share/references/smallrna/20200415_BugsAll.species",
-        species_map => "/scratch/cqs_share/references/smallrna/20200415_BugsAll.species.map",
+        bowtie1_index => "/data/cqs/references/smallrna/20200415_BugsAll.species",
+        species_map => "/data/cqs/references/smallrna/20200415_BugsAll.species.map",
       },
       "Lupusbug" => {
         bowtie1_index => "/scratch/cqs/ramirema/other_projects/20200520_lupusbugs_db/20200528_lupusbug",
@@ -97,10 +97,10 @@ sub hg19_genome {
     {
       #genome database
       mirbase_count_option => "-p hsa",
-      miRNA_coordinate     => "/scratch/cqs_share/references/smallrna/hg19_miRBase22_GtRNAdb2_gencode19_ncbi.miRNA.bed",
-      coordinate           => "/scratch/cqs_share/references/smallrna/hg19_miRBase22_GtRNAdb2_gencode19_ncbi.bed",
-      coordinate_fasta     => "/scratch/cqs_share/references/smallrna/hg19_miRBase22_GtRNAdb2_gencode19_ncbi.bed.fa",
-      bowtie1_index        => "/scratch/cqs_share/references/smallrna/hg19_miRBase22_GtRNAdb2_gencode19_ncbi",
+      miRNA_coordinate     => "/data/cqs/references/smallrna/hg19_miRBase22_GtRNAdb2_gencode19_ncbi.miRNA.bed",
+      coordinate           => "/data/cqs/references/smallrna/hg19_miRBase22_GtRNAdb2_gencode19_ncbi.bed",
+      coordinate_fasta     => "/data/cqs/references/smallrna/hg19_miRBase22_GtRNAdb2_gencode19_ncbi.bed.fa",
+      bowtie1_index        => "/data/cqs/references/smallrna/hg19_miRBase22_GtRNAdb2_gencode19_ncbi",
 
       #gsnap_index_directory => "/scratch/cqs_share/references/human/hg19/gsnap_index_k14_2016-08-08/",
       #gsnap_index_name      => "GRCh37.p13.genome",
@@ -133,10 +133,10 @@ sub hg38_genome {
     {
       #genome database
       mirbase_count_option => "-p hsa",
-      miRNA_coordinate     => "/scratch/cqs_share/references/smallrna/hg38_miRBase22_GtRNAdb2_gencode33_ncbi.miRNA.bed",
-      coordinate           => "/scratch/cqs_share/references/smallrna/hg38_miRBase22_GtRNAdb2_gencode33_ncbi.bed",
-      coordinate_fasta     => "/scratch/cqs_share/references/smallrna/hg38_miRBase22_GtRNAdb2_gencode33_ncbi.bed.fa",
-      bowtie1_index        => "/scratch/cqs_share/references/smallrna/hg38_miRBase22_GtRNAdb2_gencode33_ncbi",
+      miRNA_coordinate     => "/data/cqs/references/smallrna/hg38_miRBase22_GtRNAdb2_gencode33_ncbi.miRNA.bed",
+      coordinate           => "/data/cqs/references/smallrna/hg38_miRBase22_GtRNAdb2_gencode33_ncbi.bed",
+      coordinate_fasta     => "/data/cqs/references/smallrna/hg38_miRBase22_GtRNAdb2_gencode33_ncbi.bed.fa",
+      bowtie1_index        => "/data/cqs/references/smallrna/hg38_miRBase22_GtRNAdb2_gencode33_ncbi",
 
       hasYRNA   => 1,
       hasSnRNA  => 1,
@@ -163,10 +163,10 @@ sub mm10_genome {
 
       #genome database
       mirbase_count_option => "-p mmu",
-      miRNA_coordinate     => "/scratch/cqs_share/references/smallrna/mm10_miRBase22_GtRNAdb2_gencode24_ncbi.miRNA.bed",
-      coordinate           => "/scratch/cqs_share/references/smallrna/mm10_miRBase22_GtRNAdb2_gencode24_ncbi.bed",
-      coordinate_fasta     => "/scratch/cqs_share/references/smallrna/mm10_miRBase22_GtRNAdb2_gencode24_ncbi.bed.fa",
-      bowtie1_index        => "/scratch/cqs_share/references/smallrna/mm10_miRBase22_GtRNAdb2_gencode24_ncbi",
+      miRNA_coordinate     => "/data/cqs/references/smallrna/mm10_miRBase22_GtRNAdb2_gencode24_ncbi.miRNA.bed",
+      coordinate           => "/data/cqs/references/smallrna/mm10_miRBase22_GtRNAdb2_gencode24_ncbi.bed",
+      coordinate_fasta     => "/data/cqs/references/smallrna/mm10_miRBase22_GtRNAdb2_gencode24_ncbi.bed.fa",
+      bowtie1_index        => "/data/cqs/references/smallrna/mm10_miRBase22_GtRNAdb2_gencode24_ncbi",
 
       tDRmapper       => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
       tDRmapper_fasta => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/mm10_mature_pre_for_tdrMapper.fa",
@@ -195,10 +195,10 @@ sub rn6_genome {
 
       #genome database
       mirbase_count_option => "-p rno",
-      miRNA_coordinate     => "/scratch/cqs_share/references/smallrna/rn6_miRBase22_GtRNAdb2_ensembl99_ncbi.miRNA.bed",
-      coordinate           => "/scratch/cqs_share/references/smallrna/rn6_miRBase22_GtRNAdb2_ensembl99_ncbi.bed",
-      coordinate_fasta     => "/scratch/cqs_share/references/smallrna/rn6_miRBase22_GtRNAdb2_ensembl99_ncbi.bed.fa",
-      bowtie1_index        => "/scratch/cqs_share/references/smallrna/rn6_miRBase22_GtRNAdb2_ensembl99_ncbi",
+      miRNA_coordinate     => "/data/cqs/references/smallrna/rn6_miRBase22_GtRNAdb2_ensembl99_ncbi.miRNA.bed",
+      coordinate           => "/data/cqs/references/smallrna/rn6_miRBase22_GtRNAdb2_ensembl99_ncbi.bed",
+      coordinate_fasta     => "/data/cqs/references/smallrna/rn6_miRBase22_GtRNAdb2_ensembl99_ncbi.bed.fa",
+      bowtie1_index        => "/data/cqs/references/smallrna/rn6_miRBase22_GtRNAdb2_ensembl99_ncbi",
     }
   );
 }

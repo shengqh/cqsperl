@@ -14,6 +14,7 @@ our @ISA = qw(Exporter);
 our %EXPORT_TAGS = (
   'all' => [
     qw(
+      atacseq_options
       performATACSeq_gencode_hg19
       performATACSeq_gencode_hg38
       performATACSeq_gencode_mm10)

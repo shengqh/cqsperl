@@ -1,7 +1,12 @@
-alias lftp="singularity exec -e /data/cqs/softwares/singularity/cyberduck.simg lftp "
-alias duck="singularity exec -e /data/cqs/softwares/singularity/cyberduck.simg duck "
-alias dropest="singularity exec -e /scratch/cqs_share/softwares/singularity/dropest.simg dropest "
-alias sq='squeue -u $USER -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R"'
-alias cqstools='singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-smallRNA.simg cqstools'
-alias samtools='singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg samtools'
 
+export BIND="-B /data,/home"
+
+alias lftp="singularity exec $BIND -e /data/cqs/softwares/singularity/cyberduck.simg lftp "
+alias duck="singularity exec $BIND -e /data/cqs/softwares/singularity/cyberduck.simg duck "
+alias dropest="singularity exec $BIND -e /data/cqs/softwares/singularity/dropest.simg dropest "
+alias sq='squeue -u $USER -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R"'
+alias cqstools='singularity exec $BIND -e /data/cqs/softwares/singularity/cqs-smallRNA.simg cqstools'
+alias samtools='singularity exec $BIBD -e /data/cqs/softwares/singularity/cqs-exomeseq.simg samtools'
+alias meme='singularity exec $BIND -e /data/cqs/softwares/singularity/meme.simg meme'
+alias gatk='singularity exec $BIND -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk'
+alias sd='scontrol show jobid -dd '
