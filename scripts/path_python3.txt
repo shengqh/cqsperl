@@ -26,7 +26,7 @@ else
   export R_LIBS=$MY_R_LIBS:$R_LIBS
 fi
 
-MY_PYTHON_LIB=/scratch/cqs/shengq2/pythonlib_3.7
+MY_PYTHON_LIB=/data/cqs/shengq2/python3
 MY_PYTHON_PATH=$MY_PYTHON_LIB/lib/python3.7/site-packages
 MY_PYTHON_BIN=$MY_PYTHON_LIB/bin
 
