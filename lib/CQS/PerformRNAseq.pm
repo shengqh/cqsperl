@@ -61,7 +61,7 @@ sub global_definition {
     perform_star_featurecount => 1,
     perform_qc3bam            => 0,
     qc3_perl                  => "/scratch/cqs_share/softwares/QC3/qc3.pl",
-    docker_command            => "singularity exec -e /data/cqs/softwares/singularity/cqs-rnaseq.simg ",
+    docker_command            => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-rnaseq.simg ",
     gatk_jar                  => "/opt/gatk3.jar",
     picard_jar                => "/opt/picard.jar",
   });
@@ -81,7 +81,7 @@ sub common_human_genome {
       gsea_jar            => "gsea-cli.sh",
       #gsea_jar            => "/opt/gsea3.jar",
       annovar_param       => "-protocol refGene,avsnp150,cosmic70 -operation g,f,f --remove",
-      annovar_db          => "/scratch/cqs_share/references/annovar/humandb/",
+      annovar_db          => "/data/cqs/references/annovar/humandb/",
       gsea_db             => "/scratch/cqs_share/references/gsea/v7.1",
       gsea_categories     => "'h.all.v7.1.symbols.gmt', 'c2.all.v7.1.symbols.gmt', 'c5.all.v7.1.symbols.gmt', 'c6.all.v7.1.symbols.gmt', 'c7.all.v7.1.symbols.gmt'",
       #gsea_db             => "/scratch/cqs_share/references/gsea/v7.0",
@@ -121,10 +121,10 @@ sub gencode_hg19_genome {
     common_hg19_genome($userdef),
     {
       #genome database
-      fasta_file     => "/scratch/cqs_share/references/gencode/GRCh37.p13/Homo_sapiens_assembly19.fasta",
-      star_index     => "/scratch/cqs_share/references/gencode/GRCh37.p13/STAR_index_2.7.8a_v19_sjdb100",
-      transcript_gtf => "/scratch/cqs_share/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf",
-      name_map_file  => "/scratch/cqs_share/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf.map",
+      fasta_file     => "/data/cqs/references/gencode/GRCh37.p13/Homo_sapiens_assembly19.fasta",
+      star_index     => "/data/cqs/references/gencode/GRCh37.p13/STAR_index_2.7.8a_v19_sjdb100",
+      transcript_gtf => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf",
+      name_map_file  => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf.map",
     }
   );
 }
@@ -135,10 +135,10 @@ sub gencode_hg19_genome_star2_7_1a {
     common_hg19_genome($userdef),
     {
       #genome database
-      fasta_file     => "/scratch/cqs_share/references/gencode/GRCh37.p13/Homo_sapiens_assembly19.fasta",
-      star_index     => "/scratch/cqs_share/references/gencode/GRCh37.p13/STAR_index_2.7.1a_v19_sjdb100",
-      transcript_gtf => "/scratch/cqs_share/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf",
-      name_map_file  => "/scratch/cqs_share/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf.map",
+      fasta_file     => "/data/cqs/references/gencode/GRCh37.p13/Homo_sapiens_assembly19.fasta",
+      star_index     => "/data/cqs/references/gencode/GRCh37.p13/STAR_index_2.7.1a_v19_sjdb100",
+      transcript_gtf => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf",
+      name_map_file  => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf.map",
     }
   );
 }

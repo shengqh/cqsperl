@@ -30,16 +30,16 @@ sub global_definition {
   return merge_hash_right_precedent(global_options(), {
     constraint => "haswell",
 
-    gatk4_docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/cqs-gatk4.simg ",
+    gatk4_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-gatk4.simg ",
     #gatk4_docker_init    => "source activate gatk  ",
-    gotc_docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/gotc.latest.simg ",
+    gotc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/gotc.latest.simg ",
 
-    docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
-    mafreport_docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/mafreport.simg ",
+    docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
+    mafreport_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/mafreport.simg ",
     docker_init    => "",
     gatk3_jar      => "/opt/gatk3.jar",
     picard_jar     => "/opt/picard.jar",
-    mutect_docker_command => "singularity exec -B /data,/scratch,/home -e /scratch/cqs_share/softwares/singularity/mutect.simg ",
+    mutect_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/mutect.sif ",
     muTect_jar     => "/opt/mutect-1.1.7.jar",
 
     muTect2_option => "--downsampling-stride 20 --max-reads-per-alignment-start 6 --max-suspicious-reads-per-alignment-start 6",
@@ -51,12 +51,12 @@ sub global_definition {
 
     #cromwell
     singularity_image_files=> {
-#      "broadinstitute.gatk.4.1.4.1.simg" => "/scratch/cqs_share/softwares/singularity/gatk.4.1.4.1.simg",
-      "broadinstitute.gatk.latest.simg" => "/scratch/cqs_share/softwares/singularity/gatk.latest.simg",
-      "broadinstitute.gotc.latest.simg" => "/scratch/cqs_share/softwares/singularity/gotc.latest.simg",
-      "python.latest.simg" => "/scratch/cqs_share/softwares/singularity/python.latest.simg",
-      "gatk.latest.simg"=>"/scratch/cqs_share/softwares/singularity/gatk.latest.simg",
-      "gotc.latest.simg"=>"/scratch/cqs_share/softwares/singularity/gotc.latest.simg",
+#      "broadinstitute.gatk.4.1.4.1.simg" => "/data/cqs/softwares/singularity/gatk.4.1.4.1.simg",
+      "broadinstitute.gatk.latest.simg" => "/data/cqs/softwares/singularity/gatk.latest.simg",
+      "broadinstitute.gotc.latest.simg" => "/data/cqs/softwares/singularity/gotc.latest.simg",
+      "python.latest.simg" => "/data/cqs/softwares/singularity/python.latest.simg",
+      "gatk.latest.simg"=>"/data/cqs/softwares/singularity/gatk.latest.simg",
+      "gotc.latest.simg"=>"/data/cqs/softwares/singularity/gotc.latest.simg",
     },
 
     wdl => {

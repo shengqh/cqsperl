@@ -11,6 +11,7 @@ our @ISA = qw(Exporter);
 our %EXPORT_TAGS = (
   'all' => [
     qw(
+      singularity_prefix
       global_options
       mm10_options
       hg19_options
@@ -26,16 +27,20 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
 our $VERSION = '0.01';
 
+sub singularity_prefix {
+  return "singularity exec -c -B /gpfs52/data:/data,/workspace -e"
+}
+
 sub global_options {
   return {
     constraint => "haswell",
     sratoolkit_setting_file => "/scratch/cqs_share/softwares/cqsperl/config/vdb-config/user-settings.mkfg",
-    BWA_docker_command => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-exomeseq.simg ",
-    bamplot_docker_command => "singularity exec -e /data/cqs/softwares/singularity/bamplot.simg ",
-    BWA_docker_command => "singularity exec -e /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
+    BWA_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
+    bamplot_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/bamplot.simg ",
+    BWA_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
 
-    chipqc_docker_command => "singularity exec -e /data/cqs/softwares/singularity/cqs-chipseq.chipqc.simg ",
-    bamsnap_docker_command => "singularity exec -e /data/cqs/softwares/singularity/bamsnap.simg ",
+    chipqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.chipqc.simg ",
+    bamsnap_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/bamsnap.simg ",
     bamsnap_option => "--no_gene_track",
   };
 }

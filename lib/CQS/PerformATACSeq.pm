@@ -26,7 +26,7 @@ our $VERSION = '0.01';
 
 sub atacseq_options {
   return {
-    docker_command => "singularity exec -e /data/cqs/softwares/singularity/cqs-chipseq.simg ",
+    docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg ",
     picard_jar     => "/opt/picard.jar",
 
     perform_cutadapt => 0,
