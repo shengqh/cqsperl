@@ -4,6 +4,7 @@ use warnings;
 use File::Basename;
 use File::Spec;
 use Getopt::Long;
+use Cwd 'abs_path';
 
 sub run_command {
   my $command = shift;
@@ -214,8 +215,9 @@ if ( defined $dobwa ) {
       run_command("ln -s ../${basename}.fai ${basename}.fai ");
       run_command("ln -s ../${base}.len ${base}.len ");
     }
-    print "bwa index $option $basename \n";
-    run_command("bwa index $option $basename");
+    my $afile = dirname(abs_path($fastaFile)) . "/bwa_index_${bwa}/$basename";
+    print "bwa index $option $afile \n";
+    run_command("bwa index $option $afile");
 
     chdir($absolute_dir);
   }
