@@ -28,7 +28,7 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '0.01';
 
 sub singularity_prefix {
-  return "singularity exec -c -B /gpfs52/data:/data,/workspace -e"
+  return "singularity exec -c -B /gpfs52,/gpfs52/data:/data,/workspace -e"
 }
 
 sub global_options {
