@@ -173,7 +173,7 @@ sub gatk_hg19_genome {
     {
       ref_fasta      => "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.fasta",
       ref_fasta_dict => "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.dict",
-      bwa_fasta      => "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.fasta",
+      bwa_fasta      => "/data/cqs/references/broad/hg19/v0/bwa_index_0.7.17/Homo_sapiens_assembly19.fasta",
 
       has_chr_in_chromosome_name => 0,
 
