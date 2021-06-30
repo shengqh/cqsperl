@@ -43,6 +43,7 @@ sub global_definition {
     muTect_jar     => "/opt/mutect-1.1.7.jar",
 
     muTect2_option => "--downsampling-stride 20 --max-reads-per-alignment-start 6 --max-suspicious-reads-per-alignment-start 6",
+    'Mutect2.run_orientation_bias_mixture_model_filter' => "true",
 
     vcf2maf_pl => "/scratch/cqs/softwares/mskcc-vcf2maf/vcf2maf.pl",
     vep_path   => "/scratch/cqs/softwares/ensembl-vep",
@@ -139,10 +140,10 @@ sub gatk_hg38_genome {
       biomart_dataset   => "hsapiens_gene_ensembl",
       biomart_symbolKey => "hgnc_symbol",
 
-      pon => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-hg38/1000g_pon.hg38.vcf.gz",
+      panel_of_normals => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-hg38/1000g_pon.hg38.vcf.gz",
 
       #https://github.com/oicr-gsi/fingerprint_maps
-      hapmap_file       => "/data/cqs/references/hg38/hg38_nochr_hapmap.txt",
+      hapmap_file       => "/data/cqs/references/hg38/hg38_hapmap.txt",
 
       wdl => {
         local => {
