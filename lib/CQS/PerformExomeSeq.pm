@@ -27,8 +27,6 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '0.01';
 
 sub global_definition {
-  my $singularity_prefix = "singularity exec -B /data,/scratch,/home -e";
-
   return merge_hash_right_precedent(global_options(), {
     constraint => "haswell",
 
@@ -53,33 +51,33 @@ sub global_definition {
 
     #cromwell
     singularity_image_files=> {
-#      "broadinstitute.gatk.4.1.4.1.simg" => "/data/cqs/softwares/singularity/gatk.4.1.4.1.simg",
-      "broadinstitute.gatk.latest.simg" => "/data/cqs/softwares/singularity/gatk.latest.simg",
-      "broadinstitute.gotc.latest.simg" => "/data/cqs/softwares/singularity/gotc.latest.simg",
-      "python.latest.simg" => "/data/cqs/softwares/singularity/python.latest.simg",
-      "gatk.latest.simg"=>"/data/cqs/softwares/singularity/gatk.latest.simg",
-      "gotc.latest.simg"=>"/data/cqs/softwares/singularity/gotc.latest.simg",
+      "broadinstitute.gatk.latest.simg" => "/data/cqs/softwares/singularity/gatk.4.1.8.1.simg",
+      "broadinstitute.gotc.latest.simg" => "/data/cqs/softwares/singularity/genomes-in-the-cloud.2.4.5-1590104571.simg",
+      "python.latest.simg" => "/data/cqs/softwares/singularity/python.2.7.simg",
+      "gatk.latest.simg"=>"/data/cqs/softwares/singularity/gatk.4.1.8.1.simg",
+      "gotc.latest.simg"=>"/data/cqs/softwares/singularity/genomes-in-the-cloud.2.4.5-1590104571.simg",
     },
 
     wdl => {
-      "cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-53.1.jar",
+      #"cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-53.1.jar",
+      "cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-64.jar",
       "cromwell_option_file" => "/data/cqs/softwares/cromwell/cromwell.options.json",
       "local" => {
         "cromwell_config_file" => "/data/cqs/softwares/cromwell/cromwell.examples.local.conf",
         #"cromwell_config_file" => "/home/zhaos/source/perl_cqs/test/cromwell/cromwell.examples.local.conf",
         "mutect2" => {
           "perform_mutect2_pon" => 0,
-          "wdl_file" => "/scratch/cqs_share/softwares/gatk-workflows/gatk/scripts/mutect2_wdl/mutect2.wdl",
+          "wdl_file" => "/data/cqs/softwares/gatk/scripts/mutect2_wdl/mutect2.wdl",
         },
         "mutect2_pon" => {
-          "wdl_file" => "/scratch/cqs_share/softwares/gatk-workflows/gatk/scripts/mutect2_wdl/mutect2_pon.wdl",
+          "wdl_file" => "/data/cqs/softwares/gatk/scripts/mutect2_wdl/mutect2_pon.wdl",
         },
         "paired_fastq_to_unmapped_bam" => {
           "wdl_file" => "/data/cqs/softwares/gatk-workflows/seq-format-conversion/paired-fastq-to-unmapped-bam.wdl",
           "input_file" => "/data/cqs/softwares/gatk-workflows/seq-format-conversion/paired-fastq-to-unmapped-bam.inputs.json",
         },
         "paired_fastq_to_processed_bam" => {
-          "wdl_file" => "/data/cqs/softwares/gatk-workflows/gatk4-data-processing/processing-for-variant-discovery-gatk4-fromPairEndFastq.wdl",
+          "wdl_file" => "/data/cqs/softwares/cqsperl/config/wdl/processing-for-variant-discovery-gatk4-fromPairEndFastq.wdl",
         },
         "haplotypecaller" => {
           "wdl_file" => "/data/cqs/softwares/gatk-workflows/gatk4-germline-snps-indels/haplotypecaller-gvcf-gatk4.wdl",
@@ -111,16 +109,17 @@ sub gatk_hg38_genome {
 
       has_chr_in_chromosome_name => 1,
 
-      contig_ploidy_priors_file => "/scratch/cqs_share/references/broad/contig_ploidy_priors_homo_sapiens.chr.tsv",
+      contig_ploidy_priors_file => "/data/cqs/references/broad/hg38/contig_ploidy_priors_homo_sapiens.chr.tsv",
       transcript_gtf => "/data/cqs/references/broad/hg38/v0/gencode.v27.primary_assembly.annotation.gtf",
 
-      blacklist_file => "/scratch/cqs_share/references/blacklist_files/hg38-blacklist.v2.bed",
+      blacklist_file => "/data/cqs/references/blacklist_files/hg38-blacklist.v2.bed",
       interval_list_file => "/data/cqs/references/broad/hg38/v0/hg38_wgs_scattered_calling_intervals.txt",
       known_indels_sites_VCFs => [ "/data/cqs/references/broad/hg38/v0/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz",
         "/data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.known_indels.vcf.gz"
       ],
 
-      germline_resource => "/scratch/cqs_share/references/broad/mutect2/af-only-gnomad.hg38.vcf.gz",
+      germline_resource => "/data/cqs/references/broad/hg38/af-only-gnomad.hg38.vcf.gz",
+      variants_for_contamination => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz",
 
       dbsnp            => "/data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf.gz",
       hapmap           => "/data/cqs/references/broad/hg38/v0/hapmap_3.3.hg38.vcf.gz",
@@ -140,6 +139,8 @@ sub gatk_hg38_genome {
       biomart_dataset   => "hsapiens_gene_ensembl",
       biomart_symbolKey => "hgnc_symbol",
 
+      pon => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-hg38/1000g_pon.hg38.vcf.gz",
+
       #https://github.com/oicr-gsi/fingerprint_maps
       hapmap_file       => "/data/cqs/references/hg38/hg38_nochr_hapmap.txt",
 
@@ -152,7 +153,7 @@ sub gatk_hg38_genome {
             "input_file" => "/data/cqs/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.hg38.json",
           },
           "paired_fastq_to_processed_bam" => {
-            "input_file" => "/home/zhaos/source/perl_cqs/workflow/gatk4-data-processing/processing-for-variant-discovery-gatk4.hg38.wgs.inputs.json",
+            "input_file" => "/data/cqs/softwares/cqsperl/config/wdl/processing-for-variant-discovery-gatk4.hg38.wgs.inputs.json",
           },
           "somaticCNV_pon" => {
             "input_file" => "/home/zhaos/source/perl_cqs/workflow/gatk-scripts-cnv_wdl-somatic/cnv_somatic_panel_workflow.wdl.json",

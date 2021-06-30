@@ -7,6 +7,9 @@ module load Python/3.7.2
 #module load OpenMPI/3.1.4
 #module load HDF5/1.10.5
 module load Perl/5.28.1
+#module load SAMtools/1.9
+
+module load Java/11.0.2
 
 #MY_R_LIBS=/scratch/cqs/shengq2/Rlibrary
 MY_R_LIBS=/scratch/cqs/sunl8/tools/R/R-3.6
@@ -15,6 +18,16 @@ MY_R_LIBS=/scratch/cqs/sunl8/tools/R/R-3.6
 #MY_RSTUDIO_BIN=/scratch/cqs/shengq2/tools/rstudio-1.1.456/bin
 
 export PATH=/data/cqs/softwares/STAR-Fusion:/data/cqs/softwares/Recon:/scratch/cqs_share/softwares/supernova:/scratch/cqs_share/softwares/strelka/bin:/scratch/cqs/softwares/firefox:$PATH
+
+hn=$(hostname)
+#echo $hn
+
+if [[ $hn == 'cqs4.vampire' ]]; then
+  #export SINGULARITY_BINDPATH="/scratch,/data,/home,/workspace"
+  export SINGULARITY_BINDPATH="/gpfs23,/scratch,/gpfs52,/data,/home,/tmp"
+else
+  export SINGULARITY_BINDPATH="/gpfs23,/scratch,/gpfs52,/data,/home,/tmp"
+fi
 
 export SINGULARITY_TMPDIR=/scratch/cqs_share/softwares/singularity/temp
 export SINGULARITY_CACHEDIR=/scratch/cqs_share/softwares/singularity/cache
@@ -38,7 +51,7 @@ else
 fi
 
 MY_ENCODE_BIN=/scratch/cqs_share/softwares/encode/chip-seq-pipeline2/src
-MY_CELLRANGER_BIN=/scratch/cqs_share/softwares/cellranger-5.0.1
+MY_CELLRANGER_BIN=/data/cqs/softwares/10x/cellranger-6.0.2
 MY_GSEA_BIN=/scratch/cqs_share/softwares/GSEA
 MY_SRA_BIN=/scratch/cqs_share/softwares/sratoolkit/bin
 MY_STACK_BIN=/scratch/cqs_share/softwares/stack

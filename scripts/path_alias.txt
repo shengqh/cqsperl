@@ -1,12 +1,20 @@
 
-export BIND="-B /data,/home"
+hn=$(hostname)
+#echo $hn
+
+if [[ $hn == 'cqs4.vampire' ]]; then
+#  export BIND="-B /scratch,/data,/home,/workspace"
+  export BIND="-B /scratch,/data,/home"
+else
+  export BIND="-B /scratch,/data,/home"
+fi
 
 alias lftp="singularity exec $BIND -e /data/cqs/softwares/singularity/cyberduck.simg lftp "
 alias duck="singularity exec $BIND -e /data/cqs/softwares/singularity/cyberduck.simg duck "
 alias dropest="singularity exec $BIND -e /data/cqs/softwares/singularity/dropest.simg dropest "
 alias sq='squeue -u $USER -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R"'
 alias cqstools='singularity exec $BIND -e /data/cqs/softwares/singularity/cqs-smallRNA.simg cqstools'
-alias samtools='singularity exec $BIBD -e /data/cqs/softwares/singularity/cqs-exomeseq.simg samtools'
+#alias samtools='singularity exec $BIND -e /data/cqs/softwares/singularity/cqs-exomeseq.simg samtools'
 alias meme='singularity exec $BIND -e /data/cqs/softwares/singularity/meme.simg meme'
 alias gatk='singularity exec $BIND -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk'
 alias sd='scontrol show jobid -dd '

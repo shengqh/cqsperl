@@ -17,6 +17,20 @@ cd /data/cqs/references/exomeseq/IDT
 wget http://sfvideo.blob.core.windows.net/sitefinity/docs/default-source/supplementary-product-info/xgen-exome-research-panel-targetsae255a1532796e2eaa53ff00001c1b3c.bed
 bedtools slop -i xgen-exome-research-panel-targetsae255a1532796e2eaa53ff00001c1b3c.bed -g ~/program/cqsperl/database/exomeseq/hg19.genome -b 50 | sed 's/^chr//g' > Exome-IDT-xGen-hg19-v1-slop50-nochr.bed
 
+wget https://sfvideo.blob.core.windows.net/sitefinity/docs/default-source/supplementary-product-info/xgen-exome-research-panel-v2-targets-hg38.bed
+bedtools slop -i xgen-exome-research-panel-v2-targets-hg38.bed -g /data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta.fai -b 50 > xgen-exome-research-panel-v2-targets-hg38.slop50.bed
+singularity exec -c -B /gpfs52/data:/data  -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk BedToIntervalList -I /data/cqs/references/exomeseq/IDT/xgen-exome-research-panel-v2-targets-hg38.slop50.bed -O /data/cqs/references/exomeseq/IDT/xgen-exome-research-panel-v2-targets-hg38.slop50.bed.interval_list --SD /data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dict
+
+wget https://sfvideo.blob.core.windows.net/sitefinity/docs/default-source/supplementary-product-info/xgen-exome-research-panel-v2-probes-hg3862a5791532796e2eaa53ff00001c1b3c.bed
+bedtools slop -i xgen-exome-research-panel-v2-probes-hg3862a5791532796e2eaa53ff00001c1b3c.bed -g /data/cqs/softwares/cqsperl/database/exomeseq/hg38.genome -b 50 > xgen-exome-research-panel-v2-probes-hg3862a5791532796e2eaa53ff00001c1b3c.slop50.bed
+singularity exec -c -B /gpfs52/data:/data  -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk BedToIntervalList -I /data/cqs/references/exomeseq/IDT/xgen-exome-research-panel-v2-probes-hg3862a5791532796e2eaa53ff00001c1b3c.slop50.bed -O /data/cqs/references/exomeseq/IDT/xgen-exome-research-panel-v2-probes-hg3862a5791532796e2eaa53ff00001c1b3c.slop50.bed.interval_list --SD /data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dict
+
+wget https://raw.githubusercontent.com/AstraZeneca-NGS/reference_data/master/hg38/bed/Exome-IDT_V1.bed
+mv Exome-IDT_V1.bed Exome-IDT_V1.hg38.bed
+bedtools slop -i Exome-IDT_V1.hg38.bed -g /data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta.fai -b 50 > Exome-IDT_V1.hg38.slop50.bed
+singularity exec -c -B /gpfs52/data:/data  -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk BedToIntervalList -I /data/cqs/references/exomeseq/IDT/Exome-IDT_V1.hg38.slop50.bed -O /data/cqs/references/exomeseq/IDT/Exome-IDT_V1.hg38.slop50.bed.interval_list --SD /data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dict
+
+
 mkdir /data/cqs/references/exomeseq/Twist
 cd /data/cqs/references/exomeseq/Twist
 wget https://www.twistbioscience.com/sites/default/files/resources/2019-06/Twist_Exome_Target_hg19.bed
@@ -38,4 +52,18 @@ wget https://ftp.ncbi.nih.gov/snp/pre_build152/organisms/archive/mouse_10090/VCF
 zcat 00-All.vcf.gz | awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' | gzip > mouse_10090_b150_GRCm38.p4.vcf.gz
 tabix -p vcf mouse_10090_b150_GRCm38.p4.vcf.gz
 rm 00-All.vcf.gz
+
+##download vep_data
+
+singularity exec -B /data -e /data/cqs/softwares/singularity/ensembl-vep.104.3.simg perl /opt/vep/src/ensembl-vep/INSTALL.pl -a cfp -s homo_sapiens -y GRCh38 -g all -c /data/cqs/references/vep_data
+
+##run vep
+#singularity exec -e /data/cqs/softwares/singularity/ensembl-vep.104.3.simg vep --offline --vcf --dir_cache /data/cqs/references/vep_data --species homo_sapiens --assembly GRCh38 -o output.vcf -i input.vcf.gz 
+
+## download encode data
+cd /data/cqs/softwares/encode/atac-seq-pipeline/scripts/
+mkdir -p /data/cqs/references/encode-pipeline-genome-data/hg19
+./download_genome_data.sh hg19 /data/cqs/references/encode-pipeline-genome-data/hg19
+mkdir -p /data/cqs/references/encode-pipeline-genome-data/hg38
+./download_genome_data.sh hg38 /data/cqs/references/encode-pipeline-genome-data/hg38
 

@@ -1,14 +1,14 @@
 {
   "Mutect2.gatk_docker": "gatk.latest",
-  "Mutect2.gatk_override":"/scratch/cqs_share/softwares/gatk-4.1.8.1/gatk-package-4.1.8.1-local.jar",
+  "Mutect2.gatk_override":"/data/cqs/softwares/gatk-4.1.8.1/gatk-package-4.1.8.1-local.jar",
   
   "Mutect2.scatter_count": 14,
   "Mutect2.m2_extra_args": "--downsampling-stride 20 --max-reads-per-alignment-start 6 --max-suspicious-reads-per-alignment-start 6",
 
   "Mutect2.intervals": "String",
-  "Mutect2.ref_fasta": "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
-  "Mutect2.ref_dict": "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.dict",
-  "Mutect2.ref_fai": "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta.fai",
+  "Mutect2.ref_fasta": "/data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
+  "Mutect2.ref_dict": "/data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dict",
+  "Mutect2.ref_fai": "/data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta.fai",
   "Mutect2.normal_reads": "gs://gatk-best-practices/somatic-b37/HCC1143_normal.bam",
   "Mutect2.normal_reads_index": "gs://gatk-best-practices/somatic-b37/HCC1143_normal.bai",
   "Mutect2.tumor_reads": "gs://gatk-best-practices/somatic-b37/HCC1143.bam",
