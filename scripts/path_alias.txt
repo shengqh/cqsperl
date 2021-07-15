@@ -18,3 +18,5 @@ alias cqstools='singularity exec $BIND -e /data/cqs/softwares/singularity/cqs-sm
 alias meme='singularity exec $BIND -e /data/cqs/softwares/singularity/meme.simg meme'
 alias gatk='singularity exec $BIND -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk'
 alias sd='scontrol show jobid -dd '
+export CONDA_PREFIX=/scratch/cqs/CONDA_CACHE_DIR
+alias qiime2='singularity exec $BIND /data/cqs/softwares/singularity/qiime2.simg qiime'
