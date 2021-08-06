@@ -42,6 +42,7 @@ sub global_definition {
     mutect_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/mutect.sif ",
     muTect_jar     => "/opt/mutect-1.1.7.jar",
 
+    #this option came from mutect2 wdl file
     muTect2_option => "--downsampling-stride 20 --max-reads-per-alignment-start 6 --max-suspicious-reads-per-alignment-start 6",
     'Mutect2.run_orientation_bias_mixture_model_filter' => "true",
 
