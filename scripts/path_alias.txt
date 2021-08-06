@@ -20,3 +20,4 @@ alias gatk='singularity exec $BIND -e /data/cqs/softwares/singularity/cqs-gatk4.
 alias sd='scontrol show jobid -dd '
 export CONDA_PREFIX=/scratch/cqs/CONDA_CACHE_DIR
 alias qiime2='singularity exec $BIND /data/cqs/softwares/singularity/qiime2.simg qiime'
+alias cdb='cd /scratch/cqs/shengq2/jennifer_pietenpol_projects/20210502_brian_rnaseq_6151_hg38'
