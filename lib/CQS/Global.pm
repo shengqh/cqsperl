@@ -42,7 +42,7 @@ sub global_options {
     bamplot_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/bamplot.simg ",
     chipqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.chipqc.simg ",
     gatk4_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-gatk4.simg ",
-    bamsnap_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/bamsnap.simg ",
+    bamsnap_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-bamsnap.simg ",
     bamsnap_option => "--no_gene_track",
   };
 }
