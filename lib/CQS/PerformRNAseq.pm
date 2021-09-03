@@ -80,21 +80,17 @@ sub common_human_genome {
     global_definition(),
     {
       webgestalt_organism => "hsapiens",
-      gsea_jar            => "gsea-cli.sh",
-      #gsea_jar            => "/opt/gsea3.jar",
       annovar_param       => "-protocol refGene,avsnp150,cosmic70 -operation g,f,f --remove",
       annovar_db          => "/data/cqs/references/annovar/humandb/",
-      gsea_db             => "/scratch/cqs_share/references/gsea/v7.1",
-      gsea_categories     => "'h.all.v7.1.symbols.gmt', 'c2.all.v7.1.symbols.gmt', 'c5.all.v7.1.symbols.gmt', 'c6.all.v7.1.symbols.gmt', 'c7.all.v7.1.symbols.gmt'",
-      #gsea_db             => "/scratch/cqs_share/references/gsea/v7.0",
-      #gsea_categories     => "'h.all.v7.0.symbols.gmt', 'c2.all.v7.0.symbols.gmt', 'c5.all.v7.0.symbols.gmt', 'c6.all.v7.0.symbols.gmt', 'c7.all.v7.0.symbols.gmt'",
+      gsea_jar            => "gsea-cli.sh",
+      gsea_db             => "/data/cqs/references/gsea/v7.2",
+      gsea_categories     => "'h.all.v7.2.symbols.gmt', 'c2.all.v7.2.symbols.gmt', 'c5.all.v7.2.symbols.gmt', 'c6.all.v7.2.symbols.gmt', 'c7.all.v7.2.symbols.gmt'",
       perform_webgestalt  => 1,
       has_gsea            => 1,
       perform_gsea        => 1,
 
       software_version => {
         "GSEA" => ["v4"],
-        #"GSEA" => ["v3"],
       }
     }
   );
