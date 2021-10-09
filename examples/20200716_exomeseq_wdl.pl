@@ -29,12 +29,12 @@ my $def = {
   covered_bed  => "/scratch/cqs_share/references/exomeseq/IDT/Exome-IDT-xGen-hg19-v1-slop50-nochr.bed",
 
   files => {
-    "Normal_06-18798" => ["/data/cqs/ramirema/ciombor_kristen_data/Plate_1_2/2585-KL-122-GCAATATT-GACTGAGT_S68_R1_001.fastq.gz", "/data/cqs/ramirema/ciombor_kristen_data/Plate_1_2/2585-KL-122-GCAATATT-GACTGAGT_S68_R2_001.fastq.gz"],
-    "Tumor_06-18798" => ["/data/cqs/ramirema/ciombor_kristen_data/Plate_1_2/2585-KL-30-CCGGTTCC-TCCATTGC_S1_L001_R1.fastq.gz", "/data/cqs/ramirema/ciombor_kristen_data/Plate_1_2/2585-KL-30-CCGGTTCC-TCCATTGC_S1_L001_R2.fastq.gz"],
+    "CW_67_WT" => ["/data/cqs/jennifer_pietenpol/20190905_3772_dedup/P_67B.dedup.1.fastq.gz", "/data/cqs/jennifer_pietenpol/20190905_3772_dedup/P_67B.dedup.2.fastq.gz"],
+    'CW_67_Tumor' => [ '/data/cqs/pietenpol_lab/20210506_6213_LR_exomeseq_human/6213-LR-2_S1_L005_R1_001.fastq.gz', '/data/cqs/pietenpol_lab/20210506_6213_LR_exomeseq_human/6213-LR-2_S1_L005_R2_001.fastq.gz' ],
   },
 
   groups => {
-    "ID_06-18798" => ["Normal_06-18798", "Tumor_06-18798"],
+    "CW_67" => ["CW_67_WT", "CW_67_Tumor"],
   },
 
   perform_IBS => 1,
@@ -42,5 +42,6 @@ my $def = {
 };
 
 my $config = performExomeSeq_gatk_hg38( $def, 1 );
+#performTask($config, "muTect2_07_report");
 
 1;
