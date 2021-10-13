@@ -76,6 +76,8 @@ sub no_docker {
 sub common_human_genome {
   my ($userdef) = @_;
 
+  my $gsea_db_ver = "v7.4";
+
   my $result = merge_hash_right_precedent(
     global_definition(),
     {
@@ -83,8 +85,9 @@ sub common_human_genome {
       annovar_param       => "-protocol refGene,avsnp150,cosmic70 -operation g,f,f --remove",
       annovar_db          => "/data/cqs/references/annovar/humandb/",
       gsea_jar            => "gsea-cli.sh",
-      gsea_db             => "/data/cqs/references/gsea/v7.2",
-      gsea_categories     => "'h.all.v7.2.symbols.gmt', 'c2.all.v7.2.symbols.gmt', 'c5.all.v7.2.symbols.gmt', 'c6.all.v7.2.symbols.gmt', 'c7.all.v7.2.symbols.gmt'",
+      gsea_db_ver         => $gsea_db_ver,
+      gsea_db             => "/data/cqs/references/gsea/$gsea_db_ver",
+      gsea_categories     => "'h.all.$gsea_db_ver.symbols.gmt', 'c2.all.$gsea_db_ver.symbols.gmt', 'c5.all.$gsea_db_ver.symbols.gmt', 'c6.all.$gsea_db_ver.symbols.gmt', 'c7.all.$gsea_db_ver.symbols.gmt'",
       perform_webgestalt  => 1,
       has_gsea            => 1,
       perform_gsea        => 1,
