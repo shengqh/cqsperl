@@ -58,6 +58,7 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '0.01';
 
 sub global_definition {
+  my $gsea_db_ver = "v7.4";
   return merge_hash_right_precedent(global_options(), {
     constraint                => "haswell",
     perform_star_featurecount => 1,
@@ -66,6 +67,14 @@ sub global_definition {
     docker_command            => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-rnaseq.simg ",
     gatk_jar                  => "/opt/gatk3.jar",
     picard_jar                => "/opt/picard.jar",
+    gsea_jar            => "gsea-cli.sh",
+    gsea_db_ver         => $gsea_db_ver,
+    gsea_db             => "/data/cqs/references/gsea/$gsea_db_ver",
+    gsea_categories     => "'h.all.$gsea_db_ver.symbols.gmt', 'c2.all.$gsea_db_ver.symbols.gmt', 'c5.all.$gsea_db_ver.symbols.gmt', 'c6.all.$gsea_db_ver.symbols.gmt', 'c7.all.$gsea_db_ver.symbols.gmt'",
+
+    software_version => {
+      "GSEA" => ["v4"],
+    }
   });
 }
 
@@ -76,25 +85,14 @@ sub no_docker {
 sub common_human_genome {
   my ($userdef) = @_;
 
-  my $gsea_db_ver = "v7.4";
-
   my $result = merge_hash_right_precedent(
     global_definition(),
     {
       webgestalt_organism => "hsapiens",
       annovar_param       => "-protocol refGene,avsnp150,cosmic70 -operation g,f,f --remove",
       annovar_db          => "/data/cqs/references/annovar/humandb/",
-      gsea_jar            => "gsea-cli.sh",
-      gsea_db_ver         => $gsea_db_ver,
-      gsea_db             => "/data/cqs/references/gsea/$gsea_db_ver",
-      gsea_categories     => "'h.all.$gsea_db_ver.symbols.gmt', 'c2.all.$gsea_db_ver.symbols.gmt', 'c5.all.$gsea_db_ver.symbols.gmt', 'c6.all.$gsea_db_ver.symbols.gmt', 'c7.all.$gsea_db_ver.symbols.gmt'",
       perform_webgestalt  => 1,
-      has_gsea            => 1,
       perform_gsea        => 1,
-
-      software_version => {
-        "GSEA" => ["v4"],
-      }
     }
   );
 
@@ -204,7 +202,8 @@ sub common_mm10_genome() {
     annovar_buildver    => "mm10",
     annovar_param       => "-protocol refGene -operation g --remove",
     annovar_db          => "/scratch/cqs_share/references/annovar/mousedb/",
-    perform_gsea        => 0,
+    perform_gsea        => 1,
+    gsea_chip           => "/data/cqs/references/gsea/v7.4/Mouse_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.v7.4.chip",
   });
 }
 
@@ -222,25 +221,13 @@ sub gencode_mm10_genome {
   );
 }
 
-sub gencode_mm10_genome_v24 {
-  return merge_hash_right_precedent(
-    merge_hash_right_precedent( global_definition(), common_mm10_genome() ),
-    {
-      #genome database
-      fasta_file     => "/data/cqs/references/gencode/GRCm38.p6/GRCm38.p6.genome.fa",
-      star_index     => "/data/cqs/references/gencode/GRCm38.p6/STAR_index_2.7.1a_vM24_sjdb100",
-      transcript_gtf => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf",
-      name_map_file  => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf.map",
-    }
-  );
-}
-
 sub ensembl_Rnor_6_genome {
   return merge_hash_right_precedent(
     global_definition(), 
     {
       perform_webgestalt  => 0,
-      perform_gsea        => 0,
+      perform_gsea        => 1,
+      gsea_chip           => "/data/cqs/references/gsea/v7.4/Rat_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.v7.4.chip",
 
       #genome database
       fasta_file     => "/scratch/cqs_share/references/ensembl/Rnor_6.0/Rattus_norvegicus.Rnor_6.0.dna.primary_assembly.fa",
@@ -305,8 +292,7 @@ sub ensembl_Mmul10_genome {
   return merge_hash_right_precedent(
     global_definition(),
     {
-      perform_gsea => 0,
-
+      perform_gsea => 1,
       docker_command            => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
       fasta_file => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.dna.primary_assembly.fa",
       star_index     => "/scratch/cqs_share/references/ensembl/Mmul_10/STAR_index_2.7.1a_v99_sjdb100",
