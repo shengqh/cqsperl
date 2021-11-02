@@ -43,6 +43,8 @@ my $def = {
   perform_cnv_cnMOPs => 0,
   cnv_xhmm_preprocess_intervals => 0,
   perform_cnv_xhmm              => 0,
+
+  use_tmp_folder => 1,
 };
 
 my $config = performExomeSeq_gatk_hg38( $def, 1 );
