@@ -93,7 +93,7 @@ sub global_definition {
         "CollectAllelicCounts" => {
           "wdl_file" => "/home/zhaos/source/ngsperl/lib/WDL/ExomeSeq/CollectAllelicCounts.wdl",
           "input_file" => "/home/zhaos/source/ngsperl/lib/WDL/ExomeSeq/CollectAllelicCounts.wdl.json"
-        }
+        },
       }
     }
 
@@ -162,7 +162,7 @@ sub gatk_hg38_genome {
           },
           "somaticCNV" => {
             "input_file" => "/home/zhaos/source/perl_cqs/workflow/gatk-scripts-cnv_wdl-somatic/cnv_somatic_pair_workflow.wdl.json",
-          }
+          },
         }
       }
     }
@@ -281,9 +281,9 @@ sub gencode_mm10_genome {
       transcript_gtf   => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf",
       name_map_file    => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf.map",
 
-      blacklist_file => "/scratch/cqs_share/references/blacklist_files/mm10-blacklist.v2.bed",
+      blacklist_file => "/data/cqs/references/blacklist_files/mm10-blacklist.v2.bed",
 
-      dbsnp            => "/scratch/cqs_share/references/dbsnp/mouse_10090_b150_GRCm38.p4.vcf.gz",
+      dbsnp            => "/data/cqs/references/dbsnp/mouse_10090_b150_GRCm38.p4.vcf.gz",
       perform_annovar  => 1,
       annovar_buildver => "mm10",
       annovar_param    => "-protocol refGene -operation g --remove",
