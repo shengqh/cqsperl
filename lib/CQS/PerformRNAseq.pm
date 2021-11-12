@@ -108,7 +108,7 @@ sub common_hg19_genome {
   return merge_hash_right_precedent(
     common_human_genome($userdef),
     {
-      dbsnp            => "/scratch/cqs/references/human/b37/dbsnp_150.b37.vcf.gz",
+      dbsnp            => "/data/cqs/references/dbsnp/dbSNP154.hg19.vcf.gz",
       annovar_buildver => "hg19",
     }
   );
@@ -147,6 +147,7 @@ sub common_hg38_genome {
   return merge_hash_right_precedent(
     common_human_genome($userdef),
     {
+      dbsnp => "/data/cqs/references/dbsnp/dbSNP154.hg38.vcf.gz",
       annovar_buildver => "hg38",
     }
   );
@@ -198,10 +199,10 @@ sub common_mm10_genome() {
   return merge_hash_right_precedent(mm10_options(), {
     webgestalt_organism => "mmusculus",
     perform_webgestalt  => 1,
-    #dbsnp               => "/scratch/cqs/references/dbsnp/mouse_10090_b150_GRCm38p4.vcf.gz",
+    dbsnp               => "/data/cqs/references/dbsnp/mouse_10090_b150_GRCm38.p4.vcf.gz",
     annovar_buildver    => "mm10",
     annovar_param       => "-protocol refGene -operation g --remove",
-    annovar_db          => "/scratch/cqs_share/references/annovar/mousedb/",
+    annovar_db          => "/data/cqs/references/annovar/mousedb/",
     perform_gsea        => 1,
     gsea_chip           => "/data/cqs/references/gsea/v7.4/Mouse_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.v7.4.chip",
   });
@@ -212,16 +213,17 @@ sub gencode_mm10_genome {
     merge_hash_right_precedent( global_definition(), common_mm10_genome() ),
     {
       #genome database
-      fasta_file     => "/data/cqs/references/gencode/GRCm38.p6/GRCm38.p6.genome.fa",
-      star_index     => "/data/cqs/references/gencode/GRCm38.p6/STAR_index_2.7.8a_vM24_sjdb100",
-      transcript_gtf => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf",
-      name_map_file  => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf.map",
+      fasta_file     => "/data/cqs/references/gencode/GRCm38.p6/GRCm38.primary_assembly.genome.fa",
+      star_index     => "/data/cqs/references/gencode/GRCm38.p6/STAR_index_2.7.8a_vM27_sjdb100",
+      transcript_gtf => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM27.annotation.gtf",
+      name_map_file  => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM27.annotation.gtf.map",
       annotation_genes_add_chr => 1,
     }
   );
 }
 
 sub ensembl_Rnor_6_genome {
+  die "contact tiger to build Rnor 6 genome. Thanks.";
   return merge_hash_right_precedent(
     global_definition(), 
     {
@@ -230,10 +232,10 @@ sub ensembl_Rnor_6_genome {
       gsea_chip           => "/data/cqs/references/gsea/v7.4/Rat_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.v7.4.chip",
 
       #genome database
-      fasta_file     => "/scratch/cqs_share/references/ensembl/Rnor_6.0/Rattus_norvegicus.Rnor_6.0.dna.primary_assembly.fa",
-      star_index     => "/scratch/cqs_share/references/ensembl/Rnor_6.0/STAR_index_2.7.8a_v99_sjdb100",
-      transcript_gtf => "/scratch/cqs_share/references/ensembl/Rnor_6.0/Rattus_norvegicus.Rnor_6.0.99.chr.gtf",
-      name_map_file  => "/scratch/cqs_share/references/ensembl/Rnor_6.0/Rattus_norvegicus.Rnor_6.0.99.chr.gtf.map",
+      fasta_file     => "/data/cqs/references/ensembl/Rnor6.0/Rattus_norvegicus.Rnor_6.0.dna.toplevel.fa",
+      star_index     => "/data/cqs/references/ensembl/Rnor6.0/STAR_index_2.7.8a_ensembl_104_sjdb100",
+      transcript_gtf => "/data/cqs/references/ensembl/Rnor6.0/Rattus_norvegicus.Rnor_6.0.104.gtf",
+      name_map_file  => "/data/cqs/references/ensembl/Rnor6.0/Rattus_norvegicus.Rnor_6.0.104.gtf.map",
     }
   );
 }
