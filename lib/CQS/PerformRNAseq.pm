@@ -214,9 +214,9 @@ sub gencode_mm10_genome {
     {
       #genome database
       fasta_file     => "/data/cqs/references/gencode/GRCm38.p6/GRCm38.primary_assembly.genome.fa",
-      star_index     => "/data/cqs/references/gencode/GRCm38.p6/STAR_index_2.7.8a_vM27_sjdb100",
-      transcript_gtf => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM27.annotation.gtf",
-      name_map_file  => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM27.annotation.gtf.map",
+      star_index     => "/data/cqs/references/gencode/GRCm38.p6/STAR_index_2.7.8a_vM24_sjdb100",
+      transcript_gtf => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf",
+      name_map_file  => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf.map",
       annotation_genes_add_chr => 1,
     }
   );
