@@ -1,7 +1,7 @@
 #module pu
 module load GCCcore/.8.2.0
 #module load CMake/3.13.
-module load Python/3.7.2
+#module load Python/3.7.2
 
 #module load GCC/8.2.0  
 #module load OpenMPI/3.1.4
@@ -39,16 +39,16 @@ else
   export R_LIBS=$MY_R_LIBS:$R_LIBS
 fi
 
-MY_PYTHON_LIB=/data/cqs/shengq2/python3
-MY_PYTHON_PATH=$MY_PYTHON_LIB/lib/python3.7/site-packages
-MY_PYTHON_BIN=$MY_PYTHON_LIB/bin
+#MY_PYTHON_LIB=/data/cqs/shengq2/python3
+#MY_PYTHON_PATH=$MY_PYTHON_LIB/lib/python3.7/site-packages
+#MY_PYTHON_BIN=$MY_PYTHON_LIB/bin
 
-if [ -z "$PYTHONPATH" ]
-then
-  export PYTHONPATH=$MY_PYTHON_PATH
-else
-  export PYTHONPATH=$MY_PYTHON_PATH:$PYTHONPATH
-fi
+#if [ -z "$PYTHONPATH" ]
+#then
+#  export PYTHONPATH=$MY_PYTHON_PATH
+#else
+#  export PYTHONPATH=$MY_PYTHON_PATH:$PYTHONPATH
+#fi
 
 MY_ENCODE_BIN=/scratch/cqs_share/softwares/encode/chip-seq-pipeline2/src
 MY_CELLRANGER_BIN=/data/cqs/softwares/10x/cellranger-6.0.2
@@ -147,3 +147,24 @@ if [ -f '/scratch/cqs_share/softwares/google-cloud-sdk/path.bash.inc' ]; then . 
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/scratch/cqs_share/softwares/google-cloud-sdk/completion.bash.inc' ]; then . '/scratch/cqs_share/softwares/google-cloud-sdk/completion.bash.inc'; fi
+
+#use conda python
+module load Anaconda3/2021.05
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/accre/arch/easybuild/software/BinDist/Anaconda3/2021.05/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/accre/arch/easybuild/software/BinDist/Anaconda3/2021.05/etc/profile.d/conda.sh" ]; then
+        . "/accre/arch/easybuild/software/BinDist/Anaconda3/2021.05/etc/profile.d/conda.sh"
+    else
+        export PATH="/accre/arch/easybuild/software/BinDist/Anaconda3/2021.05/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+conda activate /scratch/cqs/shengq2/conda
+
