@@ -124,6 +124,10 @@ sub gencode_hg19_genome {
       star_index     => "/data/cqs/references/gencode/GRCh37.p13/STAR_index_2.7.8a_v19_sjdb100",
       transcript_gtf => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf",
       name_map_file  => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf.map",
+      software_version => {
+        genome => "Gencode GRCh37.p13",
+        gtf => "Gencode v19",
+      }
     }
   );
 }
@@ -163,6 +167,10 @@ sub get_gencode_hg38_genome {
       transcript_gtf => "/data/cqs/references/gencode/GRCh38.p13/gencode.${gtfVersion}.annotation.gtf",
       name_map_file  => "/data/cqs/references/gencode/GRCh38.p13/gencode.${gtfVersion}.annotation.gtf.map",
       gene_bed       => "/data/cqs/references/gencode/GRCh38.p13/gencode.${gtfVersion}.annotation.gtf.map.bed",
+      software_version => {
+        genome => "Gencode GRCh38.p13",
+        gtf => "Gencode ${gtfVersion}",
+      }
     }
   );
 }
@@ -218,6 +226,10 @@ sub gencode_mm10_genome {
       transcript_gtf => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf",
       name_map_file  => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf.map",
       annotation_genes_add_chr => 1,
+      software_version => {
+        genome => "Gencode GRCm38.p6",
+        gtf => "Gencode vM24",
+      }
     }
   );
 }
@@ -236,6 +248,10 @@ sub ensembl_Rnor_6_genome {
       star_index     => "/data/cqs/references/ensembl/Rnor6.0/STAR_index_2.7.8a_ensembl_104_sjdb100",
       transcript_gtf => "/data/cqs/references/ensembl/Rnor6.0/Rattus_norvegicus.Rnor_6.0.104.gtf",
       name_map_file  => "/data/cqs/references/ensembl/Rnor6.0/Rattus_norvegicus.Rnor_6.0.104.gtf.map",
+      software_version => {
+        genome => "Ensembl Rnor6.0",
+        gtf => "Ensembl v104",
+      }
     }
   );
 }
@@ -300,6 +316,10 @@ sub ensembl_Mmul10_genome {
       star_index     => "/scratch/cqs_share/references/ensembl/Mmul_10/STAR_index_2.7.1a_v99_sjdb100",
       transcript_gtf => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.99.chr.gtf",
       name_map_file  => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.99.chr.gtf.map",
+      software_version => {
+        genome => "Ensembl Mmul 10",
+        gtf => "Ensembl v99",
+      }
     }
   );
 }
@@ -317,7 +337,11 @@ sub ensembl_GRCz11_genome {
       star_index          => "/data/cqs/references/zebrafish/GRCz11/STAR_index",
       transcript_gtf      => "/data/cqs/references/zebrafish/GRCz11/Danio_rerio.GRCz11.102.gtf",
       name_map_file       => "/data/cqs/references/zebrafish/GRCz11/Danio_rerio.GRCz11.102.gtf.map",
-      featureCount_option => "-g gene_name"
+      featureCount_option => "-g gene_name",
+      software_version => {
+        genome => "Ensembl GRCz11",
+        gtf => "Ensembl v102",
+      }
     }
   );
 }

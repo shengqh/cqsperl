@@ -67,3 +67,9 @@ mkdir -p /data/cqs/references/encode-pipeline-genome-data/hg19
 mkdir -p /data/cqs/references/encode-pipeline-genome-data/hg38
 ./download_genome_data.sh hg38 /data/cqs/references/encode-pipeline-genome-data/hg38
 
+##Roche exomeseq
+cd /data/cqs/references/exomeseq/Roche
+bedtools slop -i HyperExome_hg38_capture_targets.bed -g /data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta.fai -b 50 > HyperExome_hg38_capture_targets.slop50.bed
+singularity exec -c -B /data  -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk BedToIntervalList -I /data/cqs/references/exomeseq/Roche/HyperExome_hg38_capture_targets.slop50.bed -O /data/cqs/references/exomeseq/Roche/HyperExome_hg38_capture_targets.slop50.bed.interval_list --SD /data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dict
+bedtools slop -i HyperExome_hg19_capture_targets.bed -g  /data/cqs/softwares/cqsperl/database/exomeseq/hg19.genome -b 50 | sed 's/^chr//g' > HyperExome_hg19_capture_targets.slop50.nochr.bed
+singularity exec -c -B /data  -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk BedToIntervalList -I /data/cqs/references/exomeseq/Roche/HyperExome_hg19_capture_targets.slop50.nochr.bed -O /data/cqs/references/exomeseq/Roche/HyperExome_hg19_capture_targets.slop50.nochr.bed.interval_list --SD /data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.dict
