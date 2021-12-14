@@ -2,9 +2,8 @@
 hn=$(hostname)
 #echo $hn
 
-if [[ $hn == 'cqs4.vampire' ]]; then
-#  export BIND="-B /scratch,/data,/home,/workspace"
-  export BIND="-B /scratch,/data,/home"
+if [[ -e /workspace ]]; then
+  export BIND="-B /scratch,/data,/home,/workspace"
 else
   export BIND="-B /scratch,/data,/home"
 fi
