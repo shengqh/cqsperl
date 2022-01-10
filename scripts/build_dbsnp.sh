@@ -29,4 +29,3 @@ fi
 if [[ -s dbSNP154.hg38.vcf.gz.tbi ]]; then
   rm GCF_000001405.25.gz GCF_000001405.25.gz.tbi GCF_000001405.38.gz GCF_000001405.38.gz.tbi GCF_000001405.25_GRCh37.p13_assembly_report.txt GCF_000001405.38_GRCh38.p12_assembly_report.txt dbSNP-to-UCSC-GRCh37.p13.map dbSNP-to-UCSC-GRCh38.p12.map
 fi
-

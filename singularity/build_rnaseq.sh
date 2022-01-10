@@ -1,2 +1,2 @@
-singularity build --disable-cache cqs-rnaseq.20210723.simg docker://shengqh/cqs_rnaseq:20210723
+singularity build --disable-cache cqs-rnaseq.20211228.simg docker://shengqh/cqs_rnaseq:20211228
 

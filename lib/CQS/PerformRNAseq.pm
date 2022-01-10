@@ -18,6 +18,7 @@ our %EXPORT_TAGS = (
       gencode_hg38_genome_v37
       performRNASeq_gencode_hg38
       performRNASeq_gencode_hg38_v37
+      performRNASeq_gencode_hg38_v33
       gencode_mm10_genome
       performRNASeq_gencode_mm10
       ensembl_Mmul10_genome
@@ -183,6 +184,11 @@ sub gencode_hg38_genome {
 sub gencode_hg38_genome_v37 {
   my ($userdef) = @_;
   return(get_gencode_hg38_genome($userdef, "v37"));
+}
+
+sub gencode_hg38_genome_v33 {
+  my ($userdef) = @_;
+  return(get_gencode_hg38_genome($userdef, "v33"));
 }
 
 # sub yan_hg38_genome() {
@@ -403,6 +409,13 @@ sub performRNASeq_gencode_hg38 {
 sub performRNASeq_gencode_hg38_v37 {
   my ( $userdef, $perform ) = @_;
   my $def = merge_hash_left_precedent( $userdef, gencode_hg38_genome_v37($userdef) );
+  my $config = performRNASeq( $def, $perform );
+  return $config;
+}
+
+sub performRNASeq_gencode_hg38_v33 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge_hash_left_precedent( $userdef, gencode_hg38_genome_v33($userdef) );
   my $config = performRNASeq( $def, $perform );
   return $config;
 }

@@ -20,6 +20,8 @@ our %EXPORT_TAGS = ( 'all' => [qw(
   performExomeSeq_gatk_hg19 
   gencode_mm10_genome
   performExomeSeq_gencode_mm10
+  ucsc_mm10_nochr_genome
+  performExomeSeq_ucsc_mm10_nochr
   )] );
 
 our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
@@ -313,6 +315,35 @@ sub gencode_mm10_genome {
   );
 }
 
+sub ucsc_mm10_nochr_genome {
+  my $global_mm10 = merge_hash_right_precedent(mm10_options(), global_definition());
+  return merge_hash_right_precedent(
+    $global_mm10,
+    {
+      #genome database
+      has_chr_in_chromosome_name => 0,
+      fasta_file => "/data/cqs/references/ucsc/mm10_nochr_sorted/mm10.fa",
+      ref_fasta => "/data/cqs/references/ucsc/mm10_nochr_sorted/mm10.fa",
+      ref_fasta_dict => "/data/cqs/references/ucsc/mm10_nochr_sorted/mm10.dict",
+      bwa_fasta        => "/data/cqs/references/ucsc/mm10_nochr_sorted/bwa_index_0.7.17/mm10.fa",
+      blacklist_file => "/data/cqs/references/blacklist_files/mm10-blacklist.v2.nochr.bed",
+      dbsnp => "/data/cqs/references/dbsnp/mouse_10090_b150_GRCm38.p4.nochr.vcf.gz",
+
+      contig_ploidy_priors_file => "/data/cqs/references/broad/contig_ploidy_priors_mm10.nochr.tsv",
+
+      perform_annovar  => 1,
+      annovar_buildver => "mm10",
+      annovar_param    => "-protocol refGene,cytoBand -operation g,r --remove",
+      annovar_db       => "/data/cqs/references/annovar/mousedb/",
+
+      species    => "mus_musculus",
+      ncbi_build               => "GRCm38",
+      perform_vep              => 0,
+      perform_cnv_gatk4_cohort => 1,
+    }
+  );
+}
+
 sub performExomeSeq_gatk_hg38 {
   my ( $userdef, $perform ) = @_;
   my $def = merge_hash_left_precedent( $userdef, gatk_hg38_genome() );
@@ -337,6 +368,13 @@ sub performExomeSeq_gatk_hg19 {
 sub performExomeSeq_gencode_mm10 {
   my ( $userdef, $perform ) = @_;
   my $def = merge_hash_left_precedent( $userdef, gencode_mm10_genome() );
+  my $config = performExomeSeq( $def, $perform );
+  return $config;
+}
+
+sub performExomeSeq_ucsc_mm10_nochr {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge_hash_left_precedent( $userdef, ucsc_mm10_nochr_genome() );
   my $config = performExomeSeq( $def, $perform );
   return $config;
 }
