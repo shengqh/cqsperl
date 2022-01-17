@@ -154,6 +154,11 @@ sub common_hg38_genome {
     {
       dbsnp => "/data/cqs/references/dbsnp/dbSNP154.hg38.vcf.gz",
       annovar_buildver => "hg38",
+      biomart_host      => "www.ensembl.org",
+      biomart_dataset   => "hsapiens_gene_ensembl",
+      biomart_symbolKey => "hgnc_symbol",
+      annotation_genes_shift => 1000, #including possible TF range
+      annotation_genes_add_chr => 1, #add chr to chromosome
     }
   );
 }
