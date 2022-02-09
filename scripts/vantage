@@ -1,0 +1,9 @@
+#!/bin/bash
+project_id=$1
+export SSHPASS=$2
+
+sshpass -e sftp -oBatchMode=no -b - $project_id@shredder.file.vumc.org << EOF
+   cd data
+   reget -r *
+   bye
+EOF

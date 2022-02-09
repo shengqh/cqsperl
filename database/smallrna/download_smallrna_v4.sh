@@ -40,17 +40,17 @@ gunzip Rattus_norvegicus.Rnor_6.0.dna.toplevel.fa.gz
 #smallrna
 cd /scratch/cqs_share/references/smallrna
 
-wget https://cqsweb.app.vumc.org/download1/GtRNAdb2.tar.gz
+wget https://cqsweb.app.vumc.org/download1/annotateGenome/TIGER/GtRNAdb2.tar.gz
 tar -xzvf GtRNAdb2.tar.gz
-wget https://cqsweb.app.vumc.org/download1/SILVA_128.tar.gz
+wget https://cqsweb.app.vumc.org/download1/annotateGenome/TIGER/SILVA_128.tar.gz
 tar -xzvf SILVA_128.tar.gz
-wget https://cqsweb.app.vumc.org/download1/group1.tar.gz
+wget https://cqsweb.app.vumc.org/download1/annotateGenome/TIGER/group1.tar.gz
 tar -xzvf group1.tar.gz
-wget https://cqsweb.app.vumc.org/download1/group2.tar.gz
+wget https://cqsweb.app.vumc.org/download1/annotateGenome/TIGER/group2.tar.gz
 tar -xzvf group2.tar.gz
-wget https://cqsweb.app.vumc.org/download1/group4.tar.gz
+wget https://cqsweb.app.vumc.org/download1/annotateGenome/TIGER/group4.tar.gz
 tar -xzvf group4.tar.gz
-wget https://cqsweb.app.vumc.org/download1/rn5.tar.gz
+wget https://cqsweb.app.vumc.org/download1/annotateGenome/TIGER/rn5.tar.gz
 tar -xzvf rn5.tar.gz
 rm *.tar.gz
 

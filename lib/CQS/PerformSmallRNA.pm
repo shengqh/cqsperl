@@ -171,6 +171,7 @@ sub mm10_genome {
       tDRmapper       => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
       tDRmapper_fasta => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/mm10_mature_pre_for_tdrMapper.fa",
 
+      hasYRNA   => 0,
       hasSnRNA  => 1,
       hasSnoRNA => 1,
     }
