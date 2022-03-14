@@ -122,7 +122,7 @@ sub gatk_hg38_genome {
         "/data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.known_indels.vcf.gz"
       ],
 
-      germline_resource => "/data/cqs/references/broad/hg38/af-only-gnomad.hg38.vcf.gz",
+      germline_resource => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-hg38/af-only-gnomad.hg38.vcf.gz",
       variants_for_contamination => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz",
 
       dbsnp            => "/data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf.gz",

@@ -44,6 +44,7 @@ sub global_options {
     gatk4_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-gatk4.simg ",
     bamsnap_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-bamsnap.simg ",
     bamsnap_option => "--no_gene_track",
+    multiqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/multiqc.sif ",
   };
 }
 
