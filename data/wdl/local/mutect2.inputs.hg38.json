@@ -25,6 +25,6 @@
 
   "Mutect2.run_funcotator": "true",
   "Mutect2.funco_reference_version": "hg38",
-  "Mutect2.funco_data_sources_tar_gz": "/data/h_vangard_1/references/broad/broad-public-datasets/funcotator/funcotator_dataSources.v1.7.20200521s.tar.gz",
-  "Mutect2.funco_transcript_selection_list": "/data/h_vangard_1/references/broad/broad-public-datasets/funcotator/funcotator_dataSources.v1.7.20200521s/transcriptList.exact_uniprot_matches.AKT1_CRLF2_FGFR1.txt"
+  "Mutect2.funco_data_sources_tar_gz": "/data/h_vangard_1/references/broad/broad-public-datasets/funcotator/funcotator_dataSources.v1.6.20190124s.tar.gz",
+  "Mutect2.funco_transcript_selection_list": "/data/h_vangard_1/references/broad/broad-public-datasets/funcotator/transcriptList.exact_uniprot_matches.AKT1_CRLF2_FGFR1.txt"
 }
