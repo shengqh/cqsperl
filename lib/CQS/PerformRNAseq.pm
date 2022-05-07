@@ -57,9 +57,12 @@ our %EXPORT_TAGS = (
 our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
 our $VERSION = '0.01';
+our $gsea_ver = "4.2.3";
+#our $gsea_ver = "4.1.0";
+our $gsea_db_ver = "v7.5.1";
+#our $gsea_db_ver = "v7.4";
 
 sub global_definition {
-  my $gsea_db_ver = "v7.4";
   return merge_hash_right_precedent(global_options(), {
     constraint                => "haswell",
     perform_star_featurecount => 1,
@@ -68,13 +71,16 @@ sub global_definition {
     docker_command            => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-rnaseq.simg ",
     gatk_jar                  => "/opt/gatk3.jar",
     picard_jar                => "/opt/picard.jar",
-    gsea_jar            => "gsea-cli.sh",
+    #gsea_no_docker            => 1,
+    gsea_jar                  => "gsea-cli.sh",
+    #gsea_jar                  => "/scratch/cqs_share/softwares/GSEA/gsea-cli.sh",
     gsea_db_ver         => $gsea_db_ver,
     gsea_db             => "/data/cqs/references/gsea/$gsea_db_ver",
     gsea_categories     => "'h.all.$gsea_db_ver.symbols.gmt', 'c2.all.$gsea_db_ver.symbols.gmt', 'c5.all.$gsea_db_ver.symbols.gmt', 'c6.all.$gsea_db_ver.symbols.gmt', 'c7.all.$gsea_db_ver.symbols.gmt'",
 
     software_version => {
-      "GSEA" => ["v4"],
+      "GSEA" => ["v${gsea_ver}"],
+      "GSEA_DB" => ["${gsea_db_ver}"],
     }
   });
 }
@@ -125,6 +131,7 @@ sub gencode_hg19_genome {
       star_index     => "/data/cqs/references/gencode/GRCh37.p13/STAR_index_2.7.8a_v19_sjdb100",
       transcript_gtf => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf",
       name_map_file  => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf.map",
+      dexseq_gff     => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.dexseq.gff",
       software_version => {
         genome => "Gencode GRCh37.p13",
         gtf => "Gencode v19",
@@ -173,6 +180,7 @@ sub get_gencode_hg38_genome {
       transcript_gtf => "/data/cqs/references/gencode/GRCh38.p13/gencode.${gtfVersion}.annotation.gtf",
       name_map_file  => "/data/cqs/references/gencode/GRCh38.p13/gencode.${gtfVersion}.annotation.gtf.map",
       gene_bed       => "/data/cqs/references/gencode/GRCh38.p13/gencode.${gtfVersion}.annotation.gtf.map.bed",
+      dexseq_gff     => "/data/cqs/references/gencode/GRCh38.p13/gencode.${gtfVersion}.annotation.dexseq.gff",
       software_version => {
         genome => "Gencode GRCh38.p13",
         gtf => "Gencode ${gtfVersion}",
@@ -223,7 +231,7 @@ sub common_mm10_genome() {
     annovar_param       => "-protocol refGene -operation g --remove",
     annovar_db          => "/data/cqs/references/annovar/mousedb/",
     perform_gsea        => 1,
-    gsea_chip           => "/data/cqs/references/gsea/v7.4/Mouse_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.v7.4.chip",
+    gsea_chip           => "/data/cqs/references/gsea/$gsea_db_ver/Mouse_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.$gsea_db_ver.chip",
   });
 }
 
@@ -236,6 +244,7 @@ sub gencode_mm10_genome {
       star_index     => "/data/cqs/references/gencode/GRCm38.p6/STAR_index_2.7.8a_vM24_sjdb100",
       transcript_gtf => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf",
       name_map_file  => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.gtf.map",
+      dexseq_gff     => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM24.annotation.dexseq.gff",
       annotation_genes_add_chr => 1,
       software_version => {
         genome => "Gencode GRCm38.p6",
@@ -246,13 +255,13 @@ sub gencode_mm10_genome {
 }
 
 sub ensembl_Rnor_6_genome {
-  die "contact tiger to build Rnor 6 genome. Thanks.";
+  #die "contact tiger to build Rnor 6 genome. Thanks.";
   return merge_hash_right_precedent(
     global_definition(), 
     {
       perform_webgestalt  => 0,
       perform_gsea        => 1,
-      gsea_chip           => "/data/cqs/references/gsea/v7.4/Rat_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.v7.4.chip",
+      gsea_chip           => "/data/cqs/references/gsea/$gsea_db_ver/Rat_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.$gsea_db_ver.chip",
 
       #genome database
       fasta_file     => "/data/cqs/references/ensembl/Rnor6.0/Rattus_norvegicus.Rnor_6.0.dna.toplevel.fa",

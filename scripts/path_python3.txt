@@ -137,7 +137,7 @@ export PATH=$VEP_PATH/htslib:$PATH
 source /home/shengq2/program/cqsperl/scripts/path_alias.txt
 
 alias cqstools='singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-smallRNA.simg cqstools'
-alias lcqstools='singularity exec -e /scratch/cqs_share/softwares/singularity/mono5.simg mono /home/shengq2/cqstools/cqstools.exe'
+alias lcqstools='singularity exec -e /data/cqs/softwares/singularity/cqs-smallRNA.simg mono /home/shengq2/cqstools/cqstools.exe'
 #alias perl='singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-smallRNA.simg perl'
 alias fastqc='singularity exec /scratch/cqs_share/softwares/singularity/cqs-chipseq.simg fastqc'
 alias qd='scontrol show jobid -dd '

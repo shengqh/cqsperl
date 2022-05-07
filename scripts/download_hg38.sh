@@ -5,3 +5,5 @@ ls /data/cqs/references/broad/hg38/v0/scattered_calling_intervals/*/* > hg38_wgs
 cd /data/cqs/references/broad/hg19/v0
 gsutil -m cp -r gs://gcp-public-data--broad-references/hg19/v0/scattered_calling_intervals/ .
 ls /data/cqs/references/broad/hg19/v0/scattered_calling_intervals/*/* > hg19_wgs_scattered_calling_intervals.txt
+
+#https://console.cloud.google.com/storage/browser/gatk-best-practices/somatic-b37

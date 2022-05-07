@@ -8,12 +8,12 @@ use CQS::ConfigUtils;
 require Exporter;
 our @ISA = qw(Exporter);
 
-our $singularity_prefix_str = "singularity exec -c -B /gpfs51,/dors,/gpfs23,/scratch,/gpfs52,/data,/home,/tmp -H `pwd` -e";
+our $singularity_prefix_str = "singularity exec -c -B /gpfs51,/dors,/gpfs23,/scratch,/gpfs52,/data,/home,/nobackup,/tmp -H `pwd` -e";
 
 our %EXPORT_TAGS = (
   'all' => [
     qw(
-      $singularity_prefix_str
+      singularity_prefix_str
       singularity_prefix
       global_options
       mm10_options
