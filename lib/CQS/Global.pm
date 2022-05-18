@@ -67,6 +67,8 @@ sub mm10_options {
     chipqc_genome      => "mm10",
     chipqc_chromosomes => 'chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,chr19',
 
+    active_gene_genome => "mm10",
+
     #annotation
     homer_genome => "mm10",
 
@@ -99,6 +101,8 @@ sub hg19_options {
     #chipqc
     chipqc_genome      => "hg19",
     chipqc_chromosomes => 'chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,chr19,chr20,chr21,chr22',
+
+    active_gene_genome => "hg19",
 
     #visualization
     bamplot_option  => "-g HG19 -y uniform -r --save-temp",
@@ -134,6 +138,8 @@ sub hg38_options {
     #chipqc
     chipqc_genome      => "hg38",
     chipqc_chromosomes => 'chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,chr19,chr20,chr21,chr22',
+
+    active_gene_genome => "hg38",
 
     #visualization
     bamplot_option  => "-g HG38 -y uniform -r --save-temp",

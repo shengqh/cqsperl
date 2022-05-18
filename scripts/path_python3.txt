@@ -12,12 +12,12 @@ module load Perl/5.28.1
 module load Java/11.0.2
 
 #MY_R_LIBS=/scratch/cqs/shengq2/Rlibrary
-MY_R_LIBS=/scratch/cqs/sunl8/tools/R/R-3.6
+#MY_R_LIBS=/scratch/cqs/sunl8/tools/R/R-3.6
 #rstudio
 #export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
 #MY_RSTUDIO_BIN=/scratch/cqs/shengq2/tools/rstudio-1.1.456/bin
 
-export PATH=/data/cqs/softwares/STAR-Fusion:/data/cqs/softwares/Recon:/scratch/cqs_share/softwares/supernova:/scratch/cqs_share/softwares/strelka/bin:/scratch/cqs/softwares/firefox:$PATH
+export PATH=/data/cqs/softwares/pypy/bin:/data/cqs/softwares/STAR-Fusion:/data/cqs/softwares/Recon:/scratch/cqs_share/softwares/supernova:/scratch/cqs_share/softwares/strelka/bin:/scratch/cqs/softwares/firefox:$PATH
 
 hn=$(hostname)
 #echo $hn

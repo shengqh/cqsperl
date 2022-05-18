@@ -26,6 +26,7 @@ our $VERSION = '0.01';
 sub chipseq_options {
   return {
     docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg ",
+    annovar_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
     picard_jar     => "/opt/picard.jar",
 
     perform_cutadapt => 0,
@@ -52,24 +53,39 @@ sub chipseq_options {
 }
 
 sub gencode_hg19_options {
-  return merge_hash_right_precedent(
-    merge_hash_right_precedent( hg19_options(), chipseq_options() ),
-    gencode_hg19_databases()
-  );
+  my $result = merge_hash_right_precedent( hg19_options(), chipseq_options() );
+  $result = merge_hash_right_precedent( $result, gencode_hg19_databases() );
+  $result = merge_hash_right_precedent($result, 
+  {
+    annovar_buildver => "hg19",
+    annovar_param => "-protocol refGene -operation g --remove",
+    annovar_db => "/data/cqs/references/annovar/humandb/",
+  });
+  return($result);
 }
 
 sub gencode_hg38_options {
-  return merge_hash_right_precedent(
-    merge_hash_right_precedent( hg38_options(), chipseq_options() ),
-    gencode_hg38_databases()
-  );
+  my $result = merge_hash_right_precedent( hg38_options(), chipseq_options() );
+  $result = merge_hash_right_precedent( $result, gencode_hg38_databases() );
+  $result = merge_hash_right_precedent($result, 
+  {
+    annovar_buildver => "hg38",
+    annovar_param => "-protocol refGene -operation g --remove",
+    annovar_db => "/data/cqs/references/annovar/humandb/",
+  });
+  return($result);
 }
 
 sub gencode_mm10_options {
-  return merge_hash_right_precedent(
-    merge_hash_right_precedent( chipseq_options(), mm10_options() ),
-    gencode_mm10_databases()
-  );
+  my $result = merge_hash_right_precedent( mm10_options(), chipseq_options() );
+  $result = merge_hash_right_precedent( $result, gencode_mm10_databases() );
+  $result = merge_hash_right_precedent($result, 
+  {
+    annovar_buildver => "mm10",
+    annovar_param => "-protocol refGene -operation g --remove",
+    annovar_db => "/data/cqs/references/annovar/humandb/",
+  });
+  return($result);
 }
 
 sub performChIPSeq_gencode_hg19 {
