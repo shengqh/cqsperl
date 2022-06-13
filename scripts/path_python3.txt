@@ -1,18 +1,25 @@
-#module pu
-module load GCCcore/.8.2.0
+module load GCC/10.2.0
+module load CMake/3.18.4
+#module load X11/.20201008
+#module load cairo/.1.16.0
+#module load libreadline/.8.0
+#module load PCRE2/.10.35
+#module load XZ/.5.2.5
+module load OpenBLAS/0.3.12
+module load bzip2/.1.0.8
+module load Perl/5.32.0
+module load Java/13.0.2
+#module load libjpeg-turbo/.2.0.5
+
 #module load CMake/3.13.
 #module load Python/3.7.2
-
 #module load GCC/8.2.0  
 #module load OpenMPI/3.1.4
 #module load HDF5/1.10.5
-module load Perl/5.28.1
+#module load Perl/5.28.1
 #module load SAMtools/1.9
+#module load Java/11.0.2
 
-module load Java/11.0.2
-
-#MY_R_LIBS=/scratch/cqs/shengq2/Rlibrary
-#MY_R_LIBS=/scratch/cqs/sunl8/tools/R/R-3.6
 #rstudio
 #export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
 #MY_RSTUDIO_BIN=/scratch/cqs/shengq2/tools/rstudio-1.1.456/bin
@@ -22,13 +29,7 @@ export PATH=/data/cqs/softwares/pypy/bin:/data/cqs/softwares/STAR-Fusion:/data/c
 hn=$(hostname)
 #echo $hn
 
-if [[ $hn == 'cqs4.vampire' ]]; then
-  #export SINGULARITY_BINDPATH="/scratch,/data,/home,/workspace"
-  export SINGULARITY_BINDPATH="/gpfs23,/scratch,/gpfs52,/data,/home,/tmp"
-else
-  export SINGULARITY_BINDPATH="/gpfs23,/scratch,/gpfs52,/data,/home,/tmp"
-fi
-
+export SINGULARITY_BINDPATH="/gpfs23,/gpfs51,/gpfs52,/data,/scratch,/nobackup,/home,/tmp"
 export SINGULARITY_TMPDIR=/scratch/cqs_share/softwares/singularity/temp
 export SINGULARITY_CACHEDIR=/scratch/cqs_share/softwares/singularity/cache
 
@@ -38,17 +39,6 @@ then
 else
   export R_LIBS=$MY_R_LIBS:$R_LIBS
 fi
-
-#MY_PYTHON_LIB=/data/cqs/shengq2/python3
-#MY_PYTHON_PATH=$MY_PYTHON_LIB/lib/python3.7/site-packages
-#MY_PYTHON_BIN=$MY_PYTHON_LIB/bin
-
-#if [ -z "$PYTHONPATH" ]
-#then
-#  export PYTHONPATH=$MY_PYTHON_PATH
-#else
-#  export PYTHONPATH=$MY_PYTHON_PATH:$PYTHONPATH
-#fi
 
 MY_ENCODE_BIN=/scratch/cqs_share/softwares/encode/chip-seq-pipeline2/src
 MY_CELLRANGER_BIN=/data/cqs/softwares/10x/cellranger-6.0.2
@@ -68,11 +58,6 @@ HOMER=/scratch/cqs/softwares/homer2/bin
 
 BOWTIE=/data/cqs/softwares/bowtie
 BOWTIE2=/data/cqs/softwares/bowtie2:/data/cqs/softwares/bowtie2/scripts
-
-#export BLAS='/scratch/cqs/shengq2/local/lib64/libblas.so'
-#export LAPACK='/scratch/cqs/shengq2/local/lib64/liblapack.so'
-#export BLAS_SRC='/scratch/cqs/shengq2/source/lapack/BLAS/SRC'
-#export LAPACK_SRC='/scratch/cqs/shengq2/source/lapack/SRC'
 
 MY_PERL_BIN=/home/shengq2/perl5/bin
 MY_PERL_LIB=/data/cqs/softwares/ngsperl/lib/:/data/cqs/softwares/cqsperl/lib/:/home/shengq2/perl5/lib/perl5/
@@ -138,7 +123,6 @@ source /home/shengq2/program/cqsperl/scripts/path_alias.txt
 
 alias cqstools='singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-smallRNA.simg cqstools'
 alias lcqstools='singularity exec -e /data/cqs/softwares/singularity/cqs-smallRNA.simg mono /home/shengq2/cqstools/cqstools.exe'
-#alias perl='singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-smallRNA.simg perl'
 alias fastqc='singularity exec /scratch/cqs_share/softwares/singularity/cqs-chipseq.simg fastqc'
 alias qd='scontrol show jobid -dd '
 
@@ -149,18 +133,18 @@ if [ -f '/scratch/cqs_share/softwares/google-cloud-sdk/path.bash.inc' ]; then . 
 if [ -f '/scratch/cqs_share/softwares/google-cloud-sdk/completion.bash.inc' ]; then . '/scratch/cqs_share/softwares/google-cloud-sdk/completion.bash.inc'; fi
 
 #use conda python
-module load Anaconda3/2021.05
+module load Anaconda3/2021.11
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/accre/arch/easybuild/software/BinDist/Anaconda3/2021.05/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/accre/arch/easybuild/software/BinDist/Anaconda3/2021.11/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/accre/arch/easybuild/software/BinDist/Anaconda3/2021.05/etc/profile.d/conda.sh" ]; then
-        . "/accre/arch/easybuild/software/BinDist/Anaconda3/2021.05/etc/profile.d/conda.sh"
+    if [ -f "/accre/arch/easybuild/software/BinDist/Anaconda3/2021.11/etc/profile.d/conda.sh" ]; then
+        . "/accre/arch/easybuild/software/BinDist/Anaconda3/2021.11/etc/profile.d/conda.sh"
     else
-        export PATH="/accre/arch/easybuild/software/BinDist/Anaconda3/2021.05/bin:$PATH"
+        export PATH="/accre/arch/easybuild/software/BinDist/Anaconda3/2021.11/bin:$PATH"
     fi
 fi
 unset __conda_setup

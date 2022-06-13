@@ -9,6 +9,8 @@ else
 fi
 
 alias lftp="singularity exec $BIND -e /data/cqs/softwares/singularity/cyberduck.simg lftp "
+alias samtools="singularity exec $BIND -e /data/cqs/softwares/singularity/samtools.sif samtools "
+alias bcftools="singularity exec $BIND -e /data/cqs/softwares/singularity/samtools.sif bcftools "
 alias duck="singularity exec $BIND -e /data/cqs/softwares/singularity/cyberduck.simg duck "
 alias dropest="singularity exec $BIND -e /data/cqs/softwares/singularity/dropest.simg dropest "
 alias sq='squeue -u $USER -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R"'
@@ -17,7 +19,6 @@ alias cqstools='singularity exec $BIND -e /data/cqs/softwares/singularity/cqs-sm
 alias meme='singularity exec $BIND -e /data/cqs/softwares/singularity/meme.simg meme'
 alias gatk='singularity exec $BIND -e /data/cqs/softwares/singularity/gatk.latest.simg gatk'
 alias sd='scontrol show jobid -dd '
-export CONDA_PREFIX=/scratch/cqs/CONDA_CACHE_DIR
 alias qiime2='singularity exec $BIND /data/cqs/softwares/singularity/qiime2.simg qiime'
 alias dexseq_count.py='singularity exec $BIND -c -e /data/cqs/softwares/singularity/cqs-rnaseq.simg dexseq_count.py'
 alias dexseq_prepare_annotation.py='singularity exec $BIND -c -e /data/cqs/softwares/singularity/cqs-rnaseq.simg dexseq_prepare_annotation.py'

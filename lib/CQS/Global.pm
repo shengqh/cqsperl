@@ -45,6 +45,7 @@ sub global_options {
     bamsnap_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-bamsnap.simg ",
     bamsnap_option => "--no_gene_track",
     multiqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/multiqc.sif ",
+    report_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/report.sif ",
   };
 }
 
@@ -73,7 +74,7 @@ sub mm10_options {
     homer_genome => "mm10",
 
     #visualization
-    bamplot_option  => "-g MM10 -y uniform -r --save-temp",
+    bamplot_option  => "-g MM10 -y uniform --save-temp",
 
     bamsnap_option => "",
     bamsnap_raw_option => {
@@ -105,7 +106,7 @@ sub hg19_options {
     active_gene_genome => "hg19",
 
     #visualization
-    bamplot_option  => "-g HG19 -y uniform -r --save-temp",
+    bamplot_option  => "-g HG19 -y uniform --save-temp",
 
     bamsnap_option => "",
     bamsnap_raw_option => {
@@ -142,7 +143,7 @@ sub hg38_options {
     active_gene_genome => "hg38",
 
     #visualization
-    bamplot_option  => "-g HG38 -y uniform -r --save-temp",
+    bamplot_option  => "-g HG38 -y uniform --save-temp",
 
     bamsnap_option => "",
     bamsnap_raw_option => {
