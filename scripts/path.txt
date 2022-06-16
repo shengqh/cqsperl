@@ -1,1 +1,5 @@
-path_r.txt
+source /data/cqs/softwares/cqsperl/scripts/path_base.txt
+source /data/cqs/softwares/cqsperl/scripts/path_conda.txt
+
+#export R_LIBS_USER=/data/h_vangard_1/shengq2/rlib4.1_local
+#export PATH=/data/cqs/softwares/R-4.1.3/bin:$PATH

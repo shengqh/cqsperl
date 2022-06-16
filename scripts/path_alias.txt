@@ -1,25 +1,17 @@
+source /data/cqs/softwares/cqsperl/scripts/binds.sh
+export SING_OPTION="-e -c -B $mybinds"
 
-hn=$(hostname)
-#echo $hn
+alias lftp="singularity $SING_OPTION /data/cqs/softwares/singularity/cyberduck.simg lftp "
+alias samtools="singularity $SING_OPTION /data/cqs/softwares/singularity/samtools.sif samtools "
+alias bcftools="singularity $SING_OPTION /data/cqs/softwares/singularity/samtools.sif bcftools "
+alias duck="singularity $SING_OPTION /data/cqs/softwares/singularity/cyberduck.simg duck "
+alias dropest="singularity $SING_OPTION /data/cqs/softwares/singularity/dropest.simg dropest "
+alias cqstools='singularity $SING_OPTION /data/cqs/softwares/singularity/cqs-smallRNA.simg cqstools'
+alias meme='singularity $SING_OPTION /data/cqs/softwares/singularity/meme.simg meme'
+alias gatk='singularity $SING_OPTION /data/cqs/softwares/singularity/gatk.latest.simg gatk'
+alias qiime2='singularity $SING_OPTION /data/cqs/softwares/singularity/qiime2.simg qiime'
+alias dexseq_count.py='singularity $SING_OPTION /data/cqs/softwares/singularity/cqs-rnaseq.simg dexseq_count.py'
+alias dexseq_prepare_annotation.py='singularity $SING_OPTION /data/cqs/softwares/singularity/cqs-rnaseq.simg dexseq_prepare_annotation.py'
 
-if [[ -e /workspace ]]; then
-  export BIND="-B /scratch,/data,/home,/nobackup,/workspace -H `pwd`"
-else
-  export BIND="-B /scratch,/data,/home,/nobackup -H `pwd`"
-fi
-
-alias lftp="singularity exec $BIND -e /data/cqs/softwares/singularity/cyberduck.simg lftp "
-alias samtools="singularity exec $BIND -e /data/cqs/softwares/singularity/samtools.sif samtools "
-alias bcftools="singularity exec $BIND -e /data/cqs/softwares/singularity/samtools.sif bcftools "
-alias duck="singularity exec $BIND -e /data/cqs/softwares/singularity/cyberduck.simg duck "
-alias dropest="singularity exec $BIND -e /data/cqs/softwares/singularity/dropest.simg dropest "
 alias sq='squeue -u $USER -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R"'
-alias cqstools='singularity exec $BIND -e /data/cqs/softwares/singularity/cqs-smallRNA.simg cqstools'
-#alias samtools='singularity exec $BIND -e /data/cqs/softwares/singularity/cqs-exomeseq.simg samtools'
-alias meme='singularity exec $BIND -e /data/cqs/softwares/singularity/meme.simg meme'
-alias gatk='singularity exec $BIND -e /data/cqs/softwares/singularity/gatk.latest.simg gatk'
 alias sd='scontrol show jobid -dd '
-alias qiime2='singularity exec $BIND /data/cqs/softwares/singularity/qiime2.simg qiime'
-alias dexseq_count.py='singularity exec $BIND -c -e /data/cqs/softwares/singularity/cqs-rnaseq.simg dexseq_count.py'
-alias dexseq_prepare_annotation.py='singularity exec $BIND -c -e /data/cqs/softwares/singularity/cqs-rnaseq.simg dexseq_prepare_annotation.py'
-alias cdb='cd /scratch/cqs/shengq2/jennifer_pietenpol_projects/20210502_brian_rnaseq_6151_hg38'

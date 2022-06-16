@@ -45,7 +45,8 @@ sub supplement_genome {
     bowtie_bacteria_index_list_file => "/scratch/cqs_share/references/refseq/bacteria/20200321_assembly_summary.txt.files.list",
     bowtie_viruses_index_list_file => "/scratch/cqs_share/references/refseq/viruses/20200326_assembly_summary.txt.files.list",
 
-    #search_refseq_bacteria => 1
+    search_refseq_bacteria => 1,
+    #spcount => "python3 /data/cqs/softwares/spcount/src/debug.py",
     refseq_bacteria_species => "/data/cqs/references/spcount/20220406_bacteria.taxonomy.txt",
     refseq_assembly_summary => '/data/cqs/references/spcount/20220406_assembly_summary_refseq.txt',
     refseq_taxonomy => '/data/cqs/references/spcount/20220406_taxonomy.txt',

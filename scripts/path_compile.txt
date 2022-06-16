@@ -1,0 +1,69 @@
+module load GCC/10.2.0
+module load CMake/3.18.4
+module load X11/.20201008
+module load cairo/.1.16.0
+module load libreadline/.8.0
+module load PCRE2/.10.35
+module load XZ/.5.2.5
+module load OpenBLAS/0.3.12
+module load libpng/.1.6.37
+module load bzip2/.1.0.8
+module load Perl/5.32.0
+module load Java/13.0.2
+module load libjpeg-turbo/.2.0.5
+module load LibTIFF/.4.1.0
+module load cURL/.7.72.0
+
+module load git/2.28.0-nodocs
+
+#export SINGULARITY_BINDPATH="/gpfs23,/gpfs51,/gpfs52,/data,/scratch,/nobackup,/home,/tmp"
+export SINGULARITY_TMPDIR=/scratch/cqs_share/softwares/singularity/temp
+export SINGULARITY_CACHEDIR=/scratch/cqs_share/softwares/singularity/cache
+
+MY_PERL_LIB=/data/cqs/softwares/ngsperl/lib/:/data/cqs/softwares/cqsperl/lib/:/home/shengq2/perl5/lib/perl5/
+if [ -z "$PERL5LIB" ]
+then
+  export PERL5LIB=$MY_PERL_LIB
+else
+  export PERL5LIB=$MY_PERL_LIB:$PERL5LIB
+fi
+
+MYINCLUDE=/data/cqs/softwares/local/include
+if [ -z "$C_INCLUDE_PATH" ]
+then
+  export C_INCLUDE_PATH=$MYINCLUDE
+else
+  export C_INCLUDE_PATH=$MYINCLUDE:$C_INCLUDE_PATH
+fi
+
+if [ -z "$CPATH" ]
+then
+  export CPATH=$MYINCLUDE
+else
+  export CPATH=$MYINCLUDE:$CPATH
+fi
+
+if [ -z "$CPLUS_INCLUDE_PATH" ]
+then
+  export CPLUS_INCLUDE_PATH=$MYINCLUDE
+else
+  export CPLUS_INCLUDE_PATH=$MYINCLUDE:$C_INCLUDE_PATH
+fi
+
+MYLIB=/data/cqs/softwares/local/lib
+if [ -z "$LD_LIBRARY_PATH" ]
+then
+  export LD_LIBRARY_PATH=$MYLIB
+else
+  export LD_LIBRARY_PATH=$MYLIB:$LD_LIBRARY_PATH
+fi
+
+if [ -z "$LIBRARY_PATH" ]
+then
+  export LIBRARY_PATH=$MYLIB
+else
+  export LIBRARY_PATH=$MYLIB:$LIBRARY_PATH
+fi
+
+MYBIN=/data/cqs/softwares/local/bin
+export PATH=$MYBIN:$PATH
