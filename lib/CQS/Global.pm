@@ -8,7 +8,20 @@ use CQS::ConfigUtils;
 require Exporter;
 our @ISA = qw(Exporter);
 
-our $singularity_prefix_str = "singularity exec -c -B /gpfs51,/dors,/gpfs23,/scratch,/gpfs52,/data,/home,/nobackup,/tmp -H `pwd` -e";
+sub get_binding {
+  my $result = "/home";
+  my @folders = qw(/gpfs23 /gpfs51 /gpfs52 /data /dors /scratch /nobackup /tmp);
+  for my $folder (@folders){
+    if (-d $folder) {
+      $result=$result . "," . $folder
+    }
+  }
+  return($result);
+}
+
+our $bind_folders = get_binding();
+
+our $singularity_prefix_str = "singularity exec -c -e -B $bind_folders -H `pwd` ";
 
 our %EXPORT_TAGS = (
   'all' => [
@@ -37,7 +50,7 @@ sub singularity_prefix {
 sub global_options {
   return {
     constraint => "haswell",
-    sratoolkit_setting_file => "/scratch/cqs_share/softwares/cqsperl/config/vdb-config/user-settings.mkfg",
+    sratoolkit_setting_file => "/data/cqs/softwares/cqsperl/config/vdb-config/user-settings.mkfg",
     BWA_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
     bamplot_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/bamplot.simg ",
     chipqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.chipqc.simg ",
