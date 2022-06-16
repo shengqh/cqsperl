@@ -1,6 +1,18 @@
 #!/bin/bash
 
-export mybinds='/nobackup,/home,/data,/scratch'
+export mybinds='/home'
+
+if [[ -e /nobackup ]]; then
+  export mybinds=$mybinds,/nobackup
+fi
+
+if [[ -e /data ]]; then
+  export mybinds=$mybinds,/data
+fi
+
+if [[ -e /scratch ]]; then
+  export mybinds=$mybinds,/scratch
+fi
 
 if [[ -e /workspace ]]; then
   export mybinds=$mybinds,/workspace

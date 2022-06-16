@@ -47,6 +47,7 @@ sub supplement_genome {
 
     search_refseq_bacteria => 1,
     #spcount => "python3 /data/cqs/softwares/spcount/src/debug.py",
+    krona_taxonomy_folder => '/data/cqs/references/spcount/',
     refseq_bacteria_species => "/data/cqs/references/spcount/20220406_bacteria.taxonomy.txt",
     refseq_assembly_summary => '/data/cqs/references/spcount/20220406_assembly_summary_refseq.txt',
     refseq_taxonomy => '/data/cqs/references/spcount/20220406_taxonomy.txt',
