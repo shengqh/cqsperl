@@ -12,9 +12,9 @@ my $def = {
   email => "quanhu.sheng.1\@vumc.org",
   emailType => "FAIL",
 
-  target_dir => create_directory_or_die("/data/cqs/shengq2/temp/20220630_scRNA_cellranger"),
+  target_dir => create_directory_or_die("/scratch/cqs/shengq2/temp/20220630_scRNA_cellranger"),
 
-  count_fastq_folder => "/data/cqs/alexander_gelbard_data/JLin112020/JLin112020",
+  count_fastq_folder => "/data/h_gelbard_lab/data/JLin112020/JLin112020",
   count_files => {
     "nMCu81420" => [ "081420-N" ],
     "sMCu81420" => [ "081420-S" ],
@@ -26,8 +26,9 @@ my $def = {
   },
   count_reference => "/data/cqs/references/10x/refdata-gex-GRCh38-2020-A",
   count_chemistry => "SC5P-R2", #single end data, only R2 contains mRNA sequence
+  count_jobmode => "slurm", #or local
 
-  vdj_fastq_folder => "/data/cqs/alexander_gelbard_data/JLin112020/JLin112020_TCR",
+  vdj_fastq_folder => "/data/h_gelbard_lab/data/JLin112020/JLin112020_TCR",
   vdj_files => {
     "nMCu81420" => [ "081420-N-TCR" ],
     "sMCu81420" => [ "081420-S-TCR" ],
