@@ -1,17 +1,20 @@
 module load GCC/10.2.0
 module load CMake/3.18.4
-module load X11/.20201008
-module load cairo/.1.16.0
+#module load X11/.20201008
+#module load cairo/.1.16.0
 module load OpenBLAS/0.3.12
-module load libpng/.1.6.37
+#module load libpng/.1.6.37
 module load Perl/5.32.0
 module load Java/13.0.2
+#module load GEOS/.3.9.1
+#module load libjpeg-turbo/.2.0.5
+#module load OpenMPI/4.0.5
+#module load HDF5/1.10.7
 
 #module load bzip2/.1.0.8
 #module load libreadline/.8.0
 #module load PCRE2/.10.35
 #module load XZ/.5.2.5
-#module load libjpeg-turbo/.2.0.5
 #module load LibTIFF/.4.1.0
 #module load ICU/.67.1
 #module load cURL/.7.72.0
@@ -66,7 +69,7 @@ else
   export LIBRARY_PATH=$MYLIB:$LIBRARY_PATH
 fi
 
-MYBIN=/data/cqs/softwares/local/bin:/data/cqs/softwares/edirect
+MYBIN=/data/cqs/softwares/ngsperl/bin/:/data/cqs/softwares/local/bin:/data/cqs/softwares/edirect
 export PATH=$MYBIN:$PATH
 
 # The next line updates PATH for the Google Cloud SDK.
