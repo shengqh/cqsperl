@@ -182,11 +182,11 @@ sub gatk_hg19_genome {
 
       has_chr_in_chromosome_name => 0,
 
-      contig_ploidy_priors_file => "/scratch/cqs_share/references/broad/contig_ploidy_priors_homo_sapiens.noChr.tsv",
+      contig_ploidy_priors_file => "/data/cqs/references/broad/hg19/contig_ploidy_priors_homo_sapiens.noChr.tsv",
       transcript_gtf => "/data/cqs/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.gtf",
       name_map_file  => "/data/cqs/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.gtf.map",
 
-      blacklist_file => "/scratch/cqs_share/references/blacklist_files/hg19-blacklist.v2.nochr.bed",
+      blacklist_file => "/data/cqs/references/blacklist_files/hg19-blacklist.v2.nochr.bed",
 
       germline_resource => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-b37/af-only-gnomad.raw.sites.vcf",
       panel_of_normals => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-b37/Mutect2-exome-panel.vcf",
