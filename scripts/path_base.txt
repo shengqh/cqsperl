@@ -73,8 +73,8 @@ MYBIN=/data/cqs/softwares/ngsperl/bin/:/data/cqs/softwares/local/bin:/data/cqs/s
 export PATH=$MYBIN:$PATH
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/scratch/cqs_share/softwares/google-cloud-sdk/path.bash.inc' ]; then . '/scratch/cqs_share/softwares/google-cloud-sdk/path.bash.inc'; fi
+if [ -f '/gpfs52/data/cqs/softwares/google-cloud-sdk/path.bash.inc' ]; then . '/gpfs52/data/cqs/softwares/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/scratch/cqs_share/softwares/google-cloud-sdk/completion.bash.inc' ]; then . '/scratch/cqs_share/softwares/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f '/gpfs52/data/cqs/softwares/google-cloud-sdk/completion.bash.inc' ]; then . '/gpfs52/data/cqs/softwares/google-cloud-sdk/completion.bash.inc'; fi
 
