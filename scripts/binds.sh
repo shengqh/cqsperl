@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export mybinds='/home'
+export mybinds='/home,/tmp'
 
 if [[ -e /nobackup ]]; then
   export mybinds=$mybinds,/nobackup
@@ -32,6 +32,10 @@ fi
 
 if [[ -e /gpfs52 ]]; then
   export mybinds=$mybinds,/gpfs52
+fi
+
+if [[ -e /gpfs23 ]]; then
+  export mybinds=$mybinds,/gpfs23
 fi
 
 #echo mybinds=$mybinds
