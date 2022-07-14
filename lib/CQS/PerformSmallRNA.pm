@@ -151,6 +151,10 @@ sub hg19_genome {
       hasYRNA   => 1,
       hasSnRNA  => 1,
       hasSnoRNA => 1,
+
+      software_version => {
+        host => "GENCODE GRCh37.p13",
+      }
     }
   );
 }
@@ -180,6 +184,10 @@ sub hg38_genome {
       hasYRNA   => 1,
       hasSnRNA  => 1,
       hasSnoRNA => 1,
+
+      software_version => {
+        host => "GENCODE GRCh38.p13",
+      }
     }
   );
 }
@@ -213,6 +221,10 @@ sub mm10_genome {
       hasYRNA   => 0,
       hasSnRNA  => 1,
       hasSnoRNA => 1,
+
+      software_version => {
+        host => "GENCODE GRCm38.p6",
+      }
     }
   );
 }
@@ -239,6 +251,10 @@ sub rn6_genome {
       coordinate           => "/data/cqs/references/smallrna/rn6_miRBase22_GtRNAdb2_ensembl99_ncbi.bed",
       coordinate_fasta     => "/data/cqs/references/smallrna/rn6_miRBase22_GtRNAdb2_ensembl99_ncbi.bed.fa",
       bowtie1_index        => "/data/cqs/references/smallrna/rn6_miRBase22_GtRNAdb2_ensembl99_ncbi",
+
+      software_version => {
+        host => "Ensembl Rnor_6.0",
+      }
     }
   );
 }
