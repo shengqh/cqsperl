@@ -58,7 +58,9 @@ workflow PreProcessingForVariantDiscovery_GATK4 {
     Array[File] known_indels_sites_VCFs
     Array[File] known_indels_sites_indices
 
-    String bwa_commandline = "bwa mem -K 100000000 -p -v 3 -t 16 -Y $bash_ref_fasta"
+    #String bwa_commandline = "bwa mem -K 100000000 -p -v 3 -t 16 -Y $bash_ref_fasta"
+    #We should not use -p since we use paired FASTQ files
+    String bwa_commandline = "bwa mem -K 100000000 -v 3 -t 16 -Y $bash_ref_fasta"
     Int compression_level = 5
   
     String gatk_docker = "us.gcr.io/broad-gatk/gatk:4.2.0.0"

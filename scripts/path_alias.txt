@@ -1,5 +1,5 @@
 source /data/cqs/softwares/cqsperl/scripts/binds.sh
-export SING_OPTION="exec -e -c -B $mybinds"
+export SING_OPTION="exec -e -B $mybinds"
 
 alias lftp="singularity $SING_OPTION /data/cqs/softwares/singularity/cyberduck.simg lftp "
 alias samtools="singularity $SING_OPTION /data/cqs/softwares/singularity/samtools.sif samtools "
