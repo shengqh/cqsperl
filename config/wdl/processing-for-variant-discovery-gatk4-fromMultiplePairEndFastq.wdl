@@ -69,6 +69,11 @@ workflow PreProcessingForVariantDiscovery_GATK4 {
     String gotc_path = "/usr/gitc/"
     String python_docker = "python:2.7"  
 
+    String gatk_singularity
+    String gotc_singularity
+    String python_singularity
+    String singularity_bindpath
+
     Int flowcell_small_disk = 100
     Int flowcell_medium_disk = 200
     Int agg_small_disk = 200
@@ -86,6 +91,8 @@ workflow PreProcessingForVariantDiscovery_GATK4 {
   call GetBwaVersion {
     input: 
       docker_image = gotc_docker,
+      singularity_image = gotc_singularity,
+      singularity_bindpath = singularity_bindpath,
       bwa_path = gotc_path,
       preemptible_tries = preemptible_tries
   }
@@ -114,6 +121,8 @@ workflow PreProcessingForVariantDiscovery_GATK4 {
         ref_pac = ref_pac,
         ref_amb = ref_amb,
         docker_image = gotc_docker,
+        singularity_image = gotc_singularity,
+        singularity_bindpath = singularity_bindpath,
         bwa_path = gotc_path,
         gotc_path = gotc_path,
         disk_size = flowcell_medium_disk,
@@ -131,6 +140,8 @@ workflow PreProcessingForVariantDiscovery_GATK4 {
       output_bam_basename = base_file_name + ".aligned.unsorted.duplicates_marked",
       metrics_filename = base_file_name + ".duplicate_metrics",
       docker_image = gatk_docker,
+      singularity_image = gatk_singularity,
+      singularity_bindpath = singularity_bindpath,
       gatk_path = gatk_path,
       disk_size = agg_large_disk,
       compression_level = compression_level,
@@ -146,6 +157,8 @@ workflow PreProcessingForVariantDiscovery_GATK4 {
       ref_fasta = ref_fasta,
       ref_fasta_index = ref_fasta_index,
       docker_image = gatk_docker,
+      singularity_image = gatk_singularity,
+      singularity_bindpath = singularity_bindpath,
       gatk_path = gatk_path,
       disk_size = agg_large_disk,
       preemptible_tries = 0,
@@ -157,6 +170,8 @@ workflow PreProcessingForVariantDiscovery_GATK4 {
     input:
       ref_dict = ref_dict,
       docker_image = python_docker,
+      singularity_image = python_singularity,
+      singularity_bindpath = singularity_bindpath,
       preemptible_tries = preemptible_tries
   }
   
@@ -177,6 +192,8 @@ workflow PreProcessingForVariantDiscovery_GATK4 {
         ref_fasta = ref_fasta,
         ref_fasta_index = ref_fasta_index,
         docker_image = gatk_docker,
+        singularity_image = gatk_singularity,
+        singularity_bindpath = singularity_bindpath,
         gatk_path = gatk_path,
         disk_size = agg_small_disk,
         preemptible_tries = preemptible_tries
@@ -189,6 +206,8 @@ workflow PreProcessingForVariantDiscovery_GATK4 {
       input_bqsr_reports = BaseRecalibrator.recalibration_report,
       output_report_filename = base_file_name + ".recal_data.csv",
       docker_image = gatk_docker,
+      singularity_image = gatk_singularity,
+      singularity_bindpath = singularity_bindpath,
       gatk_path = gatk_path,
       disk_size = flowcell_small_disk,
       preemptible_tries = preemptible_tries
@@ -208,6 +227,8 @@ workflow PreProcessingForVariantDiscovery_GATK4 {
         ref_fasta = ref_fasta,
         ref_fasta_index = ref_fasta_index,
         docker_image = gatk_docker,
+        singularity_image = gatk_singularity,
+        singularity_bindpath = singularity_bindpath,
         gatk_path = gatk_path,
         disk_size = agg_small_disk,
         preemptible_tries = preemptible_tries
@@ -220,6 +241,8 @@ workflow PreProcessingForVariantDiscovery_GATK4 {
       input_bams = ApplyBQSR.recalibrated_bam,
       output_bam_basename = base_file_name,
       docker_image = gatk_docker,
+      singularity_image = gatk_singularity,
+      singularity_bindpath = singularity_bindpath,
       gatk_path = gatk_path,
       disk_size = agg_large_disk,
       preemptible_tries = preemptible_tries,
@@ -244,6 +267,8 @@ task GetBwaVersion {
     Int mem_size_gb = 1
     Int preemptible_tries
     String docker_image
+    String singularity_image
+    String singularity_bindpath
     String bwa_path
   }  
 
@@ -257,7 +282,10 @@ task GetBwaVersion {
   runtime {
     preemptible: preemptible_tries
     docker: docker_image
+    singularity: singularity_image
+    singularity_bindpath: singularity_bindpath
     memory: mem_size_gb
+    memory_mb: mem_size_gb * 1024
     cpu: 1
   }
   output {
@@ -293,6 +321,8 @@ task SamToFastqAndBwaMem {
     Int disk_size
 
     String docker_image
+    String singularity_image
+    String singularity_bindpath
     String bwa_path
     String gotc_path
   }
@@ -313,7 +343,10 @@ task SamToFastqAndBwaMem {
   runtime {
     preemptible: preemptible_tries
     docker: docker_image
+    singularity: singularity_image
+    singularity_bindpath: singularity_bindpath
     memory: mem_size_gb
+    memory_mb: mem_size_gb * 1024
     cpu: num_cpu
     disks: "local-disk " + disk_size + " HDD"
   }
@@ -338,6 +371,8 @@ task SortAndFixTags {
     Int mem_size_gb = 10
 
     String docker_image
+    String singularity_image
+    String singularity_bindpath
     String gatk_path
   }
     Int command_mem_gb_sort = ceil(mem_size_gb) - 1
@@ -365,7 +400,10 @@ task SortAndFixTags {
   runtime {
     preemptible: preemptible_tries
     docker: docker_image
+    singularity: singularity_image
+    singularity_bindpath: singularity_bindpath
     memory: mem_size_gb
+    memory_mb: mem_size_gb * 1024
     disks: "local-disk " + disk_size + " HDD"
     cpu: 1
   }
@@ -389,6 +427,8 @@ task MarkDuplicates {
     Int mem_size_gb = 8
 
     String docker_image
+    String singularity_image
+    String singularity_bindpath
     String gatk_path
   }
     Int command_mem_gb = ceil(mem_size_gb) - 2
@@ -409,7 +449,10 @@ task MarkDuplicates {
   runtime {
     preemptible: preemptible_tries
     docker: docker_image
+    singularity: singularity_image
+    singularity_bindpath: singularity_bindpath
     memory: mem_size_gb
+    memory_mb: mem_size_gb * 1024
     disks: "local-disk " + disk_size + " HDD"
     cpu: 1
   }
@@ -428,6 +471,8 @@ task CreateSequenceGroupingTSV {
     Int mem_size_gb = 2
 
     String docker_image
+    String singularity_image
+    String singularity_bindpath
   }
   # Use python to create the Sequencing Groupings used for BQSR and PrintReads Scatter. 
   # It outputs to stdout where it is parsed into a wdl Array[Array[String]]
@@ -471,7 +516,10 @@ task CreateSequenceGroupingTSV {
   runtime {
     preemptible: preemptible_tries
     docker: docker_image
+    singularity: singularity_image
+    singularity_bindpath: singularity_bindpath
     memory: mem_size_gb
+    memory_mb: mem_size_gb * 1024
     cpu: 1
   }
   output {
@@ -500,6 +548,8 @@ task BaseRecalibrator {
     Int mem_size_gb = 6
 
     String docker_image
+    String singularity_image
+    String singularity_bindpath
     String gatk_path
   }
   Int command_mem_gb = ceil(mem_size_gb) - 2
@@ -518,7 +568,10 @@ task BaseRecalibrator {
   runtime {
     preemptible: preemptible_tries
     docker: docker_image
+    singularity: singularity_image
+    singularity_bindpath: singularity_bindpath
     memory: mem_size_gb
+    memory_mb: mem_size_gb * 1024
     disks: "local-disk " + disk_size + " HDD"
     cpu: 1
   }
@@ -539,6 +592,8 @@ task GatherBqsrReports {
    Int mem_size_gb = 4
 
    String docker_image
+   String singularity_image
+   String singularity_bindpath
    String gatk_path
   }
   Int command_mem_gb = ceil(mem_size_gb) - 1
@@ -552,7 +607,10 @@ task GatherBqsrReports {
   runtime {
     preemptible: preemptible_tries
     docker: docker_image
+    singularity: singularity_image
+    singularity_bindpath: singularity_bindpath
     memory: mem_size_gb
+    memory_mb: mem_size_gb * 1024
     disks: "local-disk " + disk_size + " HDD"
     cpu: 1
   }
@@ -578,6 +636,8 @@ task ApplyBQSR {
     Int mem_size_gb = 4
 
     String docker_image
+    String singularity_image
+    String singularity_bindpath
     String gatk_path
   }
   Int command_mem_gb = ceil(mem_size_gb) - 1
@@ -598,7 +658,10 @@ task ApplyBQSR {
   runtime {
     preemptible: preemptible_tries
     docker: docker_image
+    singularity: singularity_image
+    singularity_bindpath: singularity_bindpath
     memory: mem_size_gb
+    memory_mb: mem_size_gb * 1024
     disks: "local-disk " + disk_size + " HDD"
     cpu: 1
   }
@@ -619,6 +682,8 @@ task GatherBamFiles {
     Int mem_size_gb = 3
 
     String docker_image
+    String singularity_image
+    String singularity_bindpath
     String gatk_path
   }
   Int command_mem_gb = ceil(mem_size_gb) - 1
@@ -634,7 +699,10 @@ task GatherBamFiles {
   runtime {
     preemptible: preemptible_tries
     docker: docker_image
+    singularity: singularity_image
+    singularity_bindpath: singularity_bindpath
     memory: mem_size_gb
+    memory_mb: mem_size_gb * 1024
     disks: "local-disk " + disk_size + " HDD"
     cpu: 1
   }
