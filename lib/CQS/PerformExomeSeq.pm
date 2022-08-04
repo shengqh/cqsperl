@@ -219,13 +219,19 @@ sub gatk_hg19_genome {
           "mutect2_pon" => {
             "input_file" => "/data/cqs/softwares/cqsperl/data/wdl/local/mutect2_pon.inputs.hg19.json",
           },
-          paired_fastq_to_processed_bam => {
+          "paired_fastq_to_processed_bam" => {
             "input_file" => "missing",
           },
           "haplotypecaller" => {
             "input_file" => "/scratch/cqs_share/softwares/gatk-workflows/gatk4-germline-snps-indels/haplotypecaller-gvcf-gatk4.wdl",
-          }
-        }
+          },
+          "somaticCNV_pon" => {
+            "input_file" => "/data/cqs/softwares/cqsperl/config/wdl/cnv_somatic_panel_workflow.hg19.wdl.json",
+          },
+          "somaticCNV" => {
+            "input_file" => "/data/cqs/softwares/cqsperl/config/wdl/cnv_somatic_pair_workflow.hg19.wdl.json",
+          },
+        },
       }
     }
   );

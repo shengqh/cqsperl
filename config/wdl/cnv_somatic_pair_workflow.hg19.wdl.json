@@ -1,0 +1,25 @@
+{
+  "CNVSomaticPairWorkflow.tumor_bam": "",
+  "CNVSomaticPairWorkflow.tumor_bam_idx": "",
+  "CNVSomaticPairWorkflow.normal_bam": "",
+  "CNVSomaticPairWorkflow.normal_bam_idx": "",
+
+  "CNVSomaticPairWorkflow.common_sites": "/data/cqs/references/broad/hg19/v0/cnv/common_snps.interval_list",
+  "CNVSomaticPairWorkflow.read_count_pon": "", 
+  "CNVSomaticPairWorkflow.intervals": "",
+
+  "CNVSomaticPairWorkflow.bin_length": "0",
+
+  "CNVSomaticPairWorkflow.ref_fasta": "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.fasta",
+  "CNVSomaticPairWorkflow.ref_fasta_fai": "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.fasta.fai",
+  "CNVSomaticPairWorkflow.ref_fasta_dict": "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.dict",
+  "CNVSomaticPairWorkflow.gatk_docker": "gatk.latest",
+  "CNVSomaticPairWorkflow.gatk4_jar_override": "/scratch/cqs_share/softwares/gatk-4.1.8.1/gatk-package-4.1.8.1-local.jar",
+
+  "CNVSomaticPairWorkflow.is_run_funcotator": "true",
+  "CNVSomaticPairWorkflow.funcotator_data_sources_tar_gz": "/scratch/cqs_share/references/broad/funcotator/funcotator_dataSources.v1.6.20190124s.tar.gz",
+  "CNVSomaticPairWorkflow.funcotator_transcript_selection_list": "/scratch/cqs_share/references/broad/funcotator/transcriptList.exact_uniprot_matches.AKT1_CRLF2_FGFR1.txt",
+
+  "CNVSomaticPairWorkflow.oncotator_docker": "String? (optional)"
+}
+

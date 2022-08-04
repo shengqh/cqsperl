@@ -1,0 +1,15 @@
+{
+  "CNVSomaticPanelWorkflow.ref_fasta_dict": "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.dict",
+  "CNVSomaticPanelWorkflow.ref_fasta": "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
+  "CNVSomaticPanelWorkflow.ref_fasta_fai": "/scratch/cqs_share/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta.fai",
+  "CNVSomaticPanelWorkflow.gatk_docker": "gatk.latest",
+  "CNVSomaticPanelWorkflow.gatk4_jar_override": "/scratch/cqs_share/softwares/gatk-4.1.8.1/gatk-package-4.1.8.1-local.jar",
+
+  "CNVSomaticPanelWorkflow.bin_length": "0",
+
+  "CNVSomaticPanelWorkflow.normal_bams": "Array[String]",
+  "CNVSomaticPanelWorkflow.normal_bais": "Array[String]",
+  "CNVSomaticPanelWorkflow.pon_entity_id": "String",
+  "CNVSomaticPanelWorkflow.intervals": ""
+}
+
