@@ -1,15 +1,15 @@
 {
-  "CNVSomaticPanelWorkflow.ref_fasta_dict": "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.dict",
-  "CNVSomaticPanelWorkflow.ref_fasta": "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.fasta",
-  "CNVSomaticPanelWorkflow.ref_fasta_fai": "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.fasta.fai",
   "CNVSomaticPanelWorkflow.gatk_docker": "gatk.latest",
+  "CNVSomaticPanelWorkflow.intervals": "/data/cqs/references/broad/hg19/v0/wgs_calling_regions.v1.interval_list",
   "CNVSomaticPanelWorkflow.gatk4_jar_override": "/scratch/cqs_share/softwares/gatk-4.1.8.1/gatk-package-4.1.8.1-local.jar",
-
-  "CNVSomaticPanelWorkflow.bin_length": "0",
 
   "CNVSomaticPanelWorkflow.normal_bams": "Array[String]",
   "CNVSomaticPanelWorkflow.normal_bais": "Array[String]",
   "CNVSomaticPanelWorkflow.pon_entity_id": "String",
-  "CNVSomaticPanelWorkflow.intervals": ""
+  
+  "CNVSomaticPanelWorkflow.bin_length": "10000",
+  "CNVSomaticPanelWorkflow.ref_fasta_dict": "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.dict",
+  "CNVSomaticPanelWorkflow.ref_fasta_fai": "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.fasta.fai",
+  "CNVSomaticPanelWorkflow.ref_fasta": "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.fasta"
 }
 

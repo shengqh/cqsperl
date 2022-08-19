@@ -49,7 +49,7 @@ sub singularity_prefix {
 
 sub global_options {
   return {
-    constraint => "haswell",
+    #constraint => "haswell",
     sratoolkit_setting_file => "/data/cqs/softwares/cqsperl/config/vdb-config/user-settings.mkfg",
     BWA_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
     bamplot_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/bamplot.simg ",
