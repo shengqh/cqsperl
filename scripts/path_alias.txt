@@ -2,8 +2,8 @@ source /data/cqs/softwares/cqsperl/scripts/binds.sh
 export SING_OPTION="exec -e -B $mybinds"
 
 alias lftp="singularity $SING_OPTION /data/cqs/softwares/singularity/cyberduck.simg lftp "
-alias samtools="singularity $SING_OPTION /data/cqs/softwares/singularity/samtools.sif samtools "
-alias bcftools="singularity $SING_OPTION /data/cqs/softwares/singularity/samtools.sif bcftools "
+#alias samtools="singularity $SING_OPTION /data/cqs/softwares/singularity/samtools.sif samtools "
+#alias bcftools="singularity $SING_OPTION /data/cqs/softwares/singularity/samtools.sif bcftools "
 alias duck="singularity $SING_OPTION /data/cqs/softwares/singularity/cyberduck.simg duck "
 alias dropest="singularity $SING_OPTION /data/cqs/softwares/singularity/dropest.simg dropest "
 alias cqstools='singularity $SING_OPTION /data/cqs/softwares/singularity/cqs-smallRNA.simg cqstools'

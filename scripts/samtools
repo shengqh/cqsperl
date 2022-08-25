@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source /data/cqs/softwares/cqsperl/scripts/binds.sh
+
+singularity exec -B $mybinds /data/cqs/softwares/singularity/samtools.sif samtools $@
