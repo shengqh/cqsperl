@@ -103,8 +103,9 @@ sub global_definition {
 }
 
 sub gatk_hg38_genome {
+  my $is_wgs = shift;
   my $global_hg38 = merge_hash_right_precedent(hg38_options(), global_definition());
-  return merge_hash_right_precedent(
+  my $result = merge_hash_right_precedent(
     $global_hg38,
     {
       ref_fasta      => "/data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
@@ -113,9 +114,12 @@ sub gatk_hg38_genome {
 
       has_chr_in_chromosome_name => 1,
 
+      is_wgs => (defined $is_wgs) ? $is_wgs : 0,
+
       contig_ploidy_priors_file => "/data/cqs/references/broad/hg38/contig_ploidy_priors_homo_sapiens.chr.tsv",
       transcript_gtf => "/data/cqs/references/broad/hg38/v0/gencode.v27.primary_assembly.annotation.gtf",
 
+      wgs_calling_regions_file => "/data/cqs/references/broad/hg38/v0/wgs_calling_regions.hg38.interval_list",
       blacklist_file => "/data/cqs/references/blacklist_files/hg38-blacklist.v2.bed",
       interval_list_file => "/data/cqs/references/broad/hg38/v0/hg38_wgs_scattered_calling_intervals.txt",
       known_indels_sites_VCFs => [ "/data/cqs/references/broad/hg38/v0/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz",
@@ -169,6 +173,12 @@ sub gatk_hg38_genome {
       }
     }
   );
+
+  if($result->{is_wgs}){
+    $result->{covered_bed} = $result->{wgs_calling_regions_file};
+  }
+
+  return($result);
 }
 
 sub gatk_hg19_genome {
