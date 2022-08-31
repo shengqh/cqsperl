@@ -25,7 +25,7 @@ our $VERSION = '0.01';
 
 sub performWholeGenomeSeq_gatk_hg38 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge_hash_left_precedent( $userdef, gatk_hg38_genome() );
+  my $def = merge_hash_left_precedent( $userdef, gatk_hg38_genome(1) );
   my $config = performWGS( $def, $perform );
   return $config;
 }
