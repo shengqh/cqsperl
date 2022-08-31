@@ -14,5 +14,8 @@ alias dexseq_count.py='singularity $SING_OPTION /data/cqs/softwares/singularity/
 alias dexseq_prepare_annotation.py='singularity $SING_OPTION /data/cqs/softwares/singularity/cqs-rnaseq.simg dexseq_prepare_annotation.py'
 #alias bowtie2='singularity $SING_OPTION /data/cqs/softwares/singularity/cutruntools2.sif bowtie2'
 
+alias cromwell='java -jar /data/cqs/softwares/wdl/cromwell-84.jar '
+alias womtool='java -jar /data/cqs/softwares/wdl/womtool-84.jar '
+
 alias sq='squeue -u $USER -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R"'
 alias sd='scontrol show jobid -dd '
