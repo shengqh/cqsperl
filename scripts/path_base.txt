@@ -24,7 +24,7 @@ module load git/2.28.0-nodocs
 export SINGULARITY_TMPDIR=/data/cqs/softwares/singularity/temp
 export SINGULARITY_CACHEDIR=/data/cqs/softwares/singularity/cache
 
-MY_PERL_LIB=/data/cqs/softwares/ngsperl/lib/:/data/cqs/softwares/cqsperl/lib/:/home/shengq2/perl5/lib/perl5/
+MY_PERL_LIB=/data/cqs/softwares/ngsperl/lib/:/data/cqs/softwares/cqsperl/lib/:/data/cqs/softwares/perl5_lib/lib/perl5/
 if [ -z "$PERL5LIB" ]
 then
   export PERL5LIB=$MY_PERL_LIB
