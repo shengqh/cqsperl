@@ -69,7 +69,7 @@ else
   export LIBRARY_PATH=$MYLIB:$LIBRARY_PATH
 fi
 
-MYBIN=/data/cqs/softwares/ngsperl/bin/:/data/cqs/softwares/cqsperl/scripts:/data/cqs/softwares/local/bin:/data/cqs/softwares/edirect:/data/cqs/softwares/cellranger-7.0.0/bin
+MYBIN=/data/cqs/softwares/ngsperl/bin/:/data/cqs/softwares/cqsperl/scripts:/data/cqs/softwares/local/bin:/data/cqs/softwares/bowtie:/data/cqs/softwares/cellranger-7.0.0/bin
 export PATH=$MYBIN:$PATH
 
 # The next line updates PATH for the Google Cloud SDK.

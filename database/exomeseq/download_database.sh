@@ -8,6 +8,18 @@ mkdir -p /data/cqs/reference/broad/hg19
 cd /data/cqs/reference/broad/hg19
 gsutil -m cp -r gs://gcp-public-data--broad-references/hg19/v0 .
 
+
+##download ucsc mm10
+mkdir -p /data/cqs/references/ucsc/mm10_unsorted
+mkdir -p /data/cqs/references/ucsc/mm10
+cd /data/cqs/references/ucsc/mm10_unsorted
+wget https://hgdownload.soe.ucsc.edu/goldenPath/mm10/bigZips/mm10.fa.gz
+gunzip mm10.fa
+cd /data/cqs/references/ucsc/mm10
+perl /home/shengq2/program/cqsperl/database/exomeseq/reorder_fasta.pl
+buildindex.pl -f mm10.fa
+
+
 ##download capture bed
 
 mkdir /data/cqs/references/exomeseq
@@ -36,13 +48,19 @@ cd /data/cqs/references/exomeseq/Twist
 wget https://www.twistbioscience.com/sites/default/files/resources/2019-06/Twist_Exome_Target_hg19.bed
 bedtools slop -i Twist_Exome_Target_hg19.bed -g /data/cqs/softwares/cqsperl/database/exomeseq/hg19.genome -b 50 | sed 's/^chr//g' | grep -v "Un_gl000228" > Twist_Exome_Target_hg19-slop50-nochr.bed
 
-singularity exec -c -B /gpfs52/data:/data  -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk BedToIntervalList -I /data/cqs/references/exomeseq/Twist/Twist_Exome_Target_hg19-slop50-nochr.bed -O /data/cqs/references/exomeseq/Twist/Twist_Exome_Target_hg19-slop50-nochr.bed.interval_list --SD /data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.dict
+singularity exec -B /gpfs52/data:/data  -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk BedToIntervalList -I /data/cqs/references/exomeseq/Twist/Twist_Exome_Target_hg19-slop50-nochr.bed -O /data/cqs/references/exomeseq/Twist/Twist_Exome_Target_hg19-slop50-nochr.bed.interval_list --SD /data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.dict
 
 #cut -f 2,3 /data/cqs/softwares/cqsperl/database/exomeseq/Homo_sapiens_assembly38.dict | sed "s/SN://g" |sed "s/LN://g" | grep -v "VN:" | grep -v "_" | grep -v "HLA" | grep -v "chrEBV" > /data/cqs/softwares/cqsperl/database/exomeseq/hg38.genome
 wget https://www.twistbioscience.com/sites/default/files/resources/2018-09/Twist_Exome_Target_hg38.bed
 bedtools slop -i Twist_Exome_Target_hg38.bed -g /data/cqs/softwares/cqsperl/database/exomeseq/hg38.genome -b 50 > Twist_Exome_Target_hg38.slop50.bed
 
 singularity exec -c -B /gpfs52/data:/data  -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk BedToIntervalList -I /data/cqs/references/exomeseq/Twist/Twist_Exome_Target_hg38.slop50.bed -O /data/cqs/references/exomeseq/Twist/Twist_Exome_Target_hg38.slop50.bed.interval_list --SD /data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dict
+
+#cut -f 2,3 /data/cqs/references/ucsc/mm10/mm10.dict | sed "s/SN://g" |sed "s/LN://g" | grep -v "VN:" > /data/cqs/softwares/cqsperl/database/exomeseq/mm10.genome
+wget https://www.twistbioscience.com/sites/default/files/resources/2020-04/Twist_Mouse_Exome_Target_Rev1_7APR20.bed
+bedtools slop -i Twist_Mouse_Exome_Target_Rev1_7APR20.bed -g /data/cqs/softwares/cqsperl/database/exomeseq/mm10.genome -b 50 > Twist_Mouse_Exome_Target_Rev1_7APR20.slop50.bed
+
+singularity exec -c -B /gpfs52/data:/data  -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk BedToIntervalList -I /data/cqs/references/exomeseq/Twist/Twist_Mouse_Exome_Target_Rev1_7APR20.slop50.bed -O /data/cqs/references/exomeseq/Twist/Twist_Mouse_Exome_Target_Rev1_7APR20.slop50.bed.interval_list --SD /data/cqs/references/ucsc/mm10/mm10.dict
 
 ##download dbsnp for mm10
 

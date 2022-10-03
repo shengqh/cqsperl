@@ -36,6 +36,7 @@ my $def = {
 };
 
 #performWholeGenomeSeq_gatk_hg38($def);
+#performWholeGenomeSeq_gatk_hg19($def);
 performWholeGenomeSeq_gencode_mm10($def);
 
 1;
