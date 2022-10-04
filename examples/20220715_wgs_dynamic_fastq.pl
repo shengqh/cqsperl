@@ -24,8 +24,8 @@ my $def = {
   mark_duplicates_memory => "80gb",
 
   #once you get all gvcf file, you can set those triggers to 1
-  perform_gvcf_to_genotype => 0,
-  perform_filter_and_merge => 0,
+  perform_gvcf_to_genotype => 1,
+  perform_filter_and_merge => 1,
 
   #for multiple fastqs of same sample, the array should be read1, read2, read1, read2
   files => {
@@ -40,12 +40,13 @@ my $def = {
 
   perform_paired_end_validation => 1,
 
-  use_tmp_folder => 1,#for normal task, we want to copy source file to computer node to avoid the struggle of /scratch storege
+  use_tmp_folder => 0,#for normal task, we want to copy source file to computer node to avoid the struggle of /scratch storege
   use_tmp_folder_fastqc => 0, #we don't want to copy all files to compute node for fastqQC as default
   use_tmp_folder_paired_end_validation => 0, #we don't want to copy all files to compute node for paired end validation as default
 };
 
-my $config = performWholeGenomeSeq_gatk_hg38($def, 1);
+my $config = performWholeGenomeSeq_gatk_hg19($def, 1);
+#my $config = performWholeGenomeSeq_gatk_hg38($def, 1);
 
 1;
 

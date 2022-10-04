@@ -121,6 +121,7 @@ sub gatk_hg38_genome {
       contig_ploidy_priors_file => "/data/cqs/references/broad/hg38/contig_ploidy_priors_homo_sapiens.chr.tsv",
       transcript_gtf => "/data/cqs/references/broad/hg38/v0/gencode.v27.primary_assembly.annotation.gtf",
 
+      eval_interval_list => "/data/cqs/references/broad/hg38/v0/wgs_evaluation_regions.hg38.interval_list",
       wgs_calling_regions_file => "/data/cqs/references/broad/hg38/v0/wgs_calling_regions.hg38.interval_list",
       blacklist_file => "/data/cqs/references/blacklist_files/hg38-blacklist.v2.bed",
       interval_list_file => "/data/cqs/references/broad/hg38/v0/hg38_wgs_scattered_calling_intervals.txt",
@@ -201,6 +202,7 @@ sub gatk_hg19_genome {
       transcript_gtf => "/data/cqs/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.gtf",
       name_map_file  => "/data/cqs/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.gtf.map",
 
+      eval_interval_list => "/data/cqs/references/broad/hg19/v0/wgs_evaluation_regions.v1.interval_list",
       wgs_calling_regions_file => "/data/cqs/references/broad/hg19/v0/wgs_calling_regions.v1.interval_list",
       blacklist_file => "/data/cqs/references/blacklist_files/hg19-blacklist.v2.nochr.bed",
       interval_list_file => "/data/cqs/references/broad/hg19/v0/hg19_wgs_scattered_calling_intervals.txt",

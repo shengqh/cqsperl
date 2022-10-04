@@ -32,14 +32,14 @@ sub performWholeGenomeSeq_gatk_hg38 {
 
 sub performWholeGenomeSeq_gatk_hg19 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge_hash_left_precedent( $userdef, gatk_hg19_genome() );
+  my $def = merge_hash_left_precedent( $userdef, gatk_hg19_genome(1) );
   my $config = performWGS( $def, $perform );
   return $config;
 }
 
 sub performWholeGenomeSeq_gencode_mm10 {
   my ( $userdef, $perform ) = @_;
-  my $def = merge_hash_left_precedent( $userdef, gencode_mm10_genome() );
+  my $def = merge_hash_left_precedent( $userdef, gencode_mm10_genome(1) );
   my $config = performWGS( $def, $perform );
   return $config;
 }
