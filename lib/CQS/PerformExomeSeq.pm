@@ -69,7 +69,7 @@ sub global_definition {
       "cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-64.jar",
       "cromwell_option_file" => "/data/cqs/softwares/cromwell/cromwell.options.json",
       "local" => {
-        "cromwell_config_file" => "/data/cqs/softwares/cromwell/cromwell.examples.local.conf",
+        "cromwell_config_file" => "/data/cqs/softwares/cromwell/cromwell.examples.local.nopull.conf",
         #"cromwell_config_file" => "/home/zhaos/source/perl_cqs/test/cromwell/cromwell.examples.local.conf",
         "mutect2" => {
           "perform_mutect2_pon" => 0,
@@ -184,13 +184,16 @@ sub gatk_hg38_genome {
 }
 
 sub gatk_hg19_genome {
+  my $is_wgs = shift;
   my $global_hg19 = merge_hash_right_precedent(hg19_options(), global_definition());
-  return merge_hash_right_precedent(
+  my $result = merge_hash_right_precedent(
     $global_hg19,
     {
       ref_fasta      => "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.fasta",
       ref_fasta_dict => "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.dict",
       bwa_fasta      => "/data/cqs/references/broad/hg19/v0/bwa_index_0.7.17/Homo_sapiens_assembly19.fasta",
+
+      is_wgs => (defined $is_wgs) ? $is_wgs : 0,
 
       has_chr_in_chromosome_name => 0,
 
@@ -198,7 +201,12 @@ sub gatk_hg19_genome {
       transcript_gtf => "/data/cqs/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.gtf",
       name_map_file  => "/data/cqs/references/broad/hg19/v0/Homo_sapiens.GRCh37.75.gtf.map",
 
+      wgs_calling_regions_file => "/data/cqs/references/broad/hg19/v0/wgs_calling_regions.v1.interval_list",
       blacklist_file => "/data/cqs/references/blacklist_files/hg19-blacklist.v2.nochr.bed",
+      interval_list_file => "/data/cqs/references/broad/hg19/v0/hg19_wgs_scattered_calling_intervals.txt",
+      known_indels_sites_VCFs => [ "/data/cqs/references/broad/hg19/v0/Mills_and_1000G_gold_standard.indels.b37.vcf.gz",
+        "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.known_indels.vcf"
+      ],
 
       germline_resource => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-b37/af-only-gnomad.raw.sites.vcf",
       panel_of_normals => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-b37/Mutect2-exome-panel.vcf",
@@ -247,6 +255,12 @@ sub gatk_hg19_genome {
       }
     }
   );
+
+  if($result->{is_wgs}){
+    $result->{covered_bed} = $result->{wgs_calling_regions_file};
+  }
+
+  return($result);
 }
 
 #sub gatk_b37_genome {
