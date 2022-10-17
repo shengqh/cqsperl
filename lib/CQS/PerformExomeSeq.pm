@@ -66,10 +66,11 @@ sub global_definition {
 
     wdl => {
       #"cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-53.1.jar",
-      "cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-64.jar",
-      "cromwell_option_file" => "/data/cqs/softwares/cromwell/cromwell.options.json",
+      #"cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-64.jar",
+      "cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-81.jar",
+      "cromwell_option_file" => "/data/cqs/cqsperl/config/wdl/cromwell.options.json",
       "local" => {
-        "cromwell_config_file" => "/data/cqs/softwares/cromwell/cromwell.examples.local.nopull.conf",
+        "cromwell_config_file" => "/data/cqs/cqsperl/config/wdl/cromwell.local.nopull.conf",
         #"cromwell_config_file" => "/home/zhaos/source/perl_cqs/test/cromwell/cromwell.examples.local.conf",
         "mutect2" => {
           "perform_mutect2_pon" => 0,
