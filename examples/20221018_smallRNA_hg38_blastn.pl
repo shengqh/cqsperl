@@ -35,18 +35,6 @@ my $def = {
     "HDL_97_Unt" => ["/data/cqs/example_data/smallrnaseq/6092-ES-14_S1_L005_R1_001.fastq.gz"],
     "HDL_98_Unt" => ["/data/cqs/example_data/smallrnaseq/6092-ES-15_S1_L005_R1_001.fastq.gz"],
   },
-
-  #group information for visualization and comparison
-  groups => {
-    "HDL_AlkB" => ["HDL_96_AlkB", "HDL_97_AlkB", "HDL_98_AlkB"],
-    "HDL_Unt" => ["HDL_96_Unt", "HDL_97_Unt", "HDL_98_Unt"],
-  },
-
-  #Comparison information, in each comparison, the first one is control. For example, in comparison "DMSO_vs_FED", "FED" is control.
-  pairs => {
-    "HDL_AlkB_vs_HDL_Untreated" => ["HDL_Unt", "HDL_AlkB"],
-  },
-
 };
 
 my $config = performSmallRNA_hg38( $def, 1 );
