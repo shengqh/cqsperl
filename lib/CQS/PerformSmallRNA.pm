@@ -24,6 +24,8 @@ our %EXPORT_TAGS = (
       performSmallRNA_hg38
       performSmallRNA_mm10
       performSmallRNA_rn6
+      hg38_mm10_genome
+      performSmallRNA_hg38_mm10
       supplement_genome)
   ]
 );
@@ -259,6 +261,28 @@ sub rn6_genome {
   );
 }
 
+sub hg38_mm10_genome {
+  return merge(
+    supplement_genome(),
+    {
+      #genome database
+      mirbase_count_option => "-p hsa",
+      miRNA_coordinate     => "/data/cqs/references/smallrna/hg38_gencode33_mm10_gencode24_miRBase22_GtRNAdb2_ncbi.miRNA.bed",
+      coordinate           => "/data/cqs/references/smallrna/hg38_gencode33_mm10_gencode24_miRBase22_GtRNAdb2_ncbi.modified.bed",
+      coordinate_fasta     => "/data/cqs/references/smallrna/hg38_gencode33_mm10_gencode24_miRBase22_GtRNAdb2_ncbi.modified.fasta",
+      bowtie1_index        => "/data/cqs/references/smallrna/hg38_gencode33_mm10_gencode24_miRBase22_GtRNAdb2_ncbi",
+
+      hasYRNA   => 1,
+      hasSnRNA  => 1,
+      hasSnoRNA => 1,
+
+      software_version => {
+        host => "GENCODE GRCh38.p13/GRCm38.p6",
+      }
+    }
+  );
+}
+
 sub performSmallRNA_hg19 {
   my ( $userdef, $perform ) = @_;
   my $def = getSmallRNADefinition( $userdef, hg19_genome() );
@@ -290,5 +314,14 @@ sub performSmallRNA_rn6 {
   my $config = performSmallRNA( $def, $perform );
   return $config;
 }
+
+sub performSmallRNA_hg38_mm10 {
+  my ( $userdef, $perform ) = @_;
+  my $def = getSmallRNADefinition( $userdef, hg38_mm10_genome() );
+
+  my $config = performSmallRNA( $def, $perform );
+  return $config;
+}
+
 
 1;
