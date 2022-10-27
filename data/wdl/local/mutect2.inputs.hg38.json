@@ -1,6 +1,6 @@
 {
   "Mutect2.gatk_docker": "gatk.latest",
-  "Mutect2.gatk_override":"/data/cqs/softwares/gatk-4.1.8.1/gatk-package-4.1.8.1-local.jar",
+  "Mutect2.gatk_override":"/data/cqs/softwares/gatk/gatk-package-4.1.8.1-local.jar",
   
   "Mutect2.scatter_count": 14,
   "Mutect2.m2_extra_args": "--downsampling-stride 20 --max-reads-per-alignment-start 6 --max-suspicious-reads-per-alignment-start 6",

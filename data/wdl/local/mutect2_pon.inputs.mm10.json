@@ -10,5 +10,6 @@
 	"Mutect2_Panel.scatter_count":7,
 	"Mutect2_Panel.create_pon_extra_args": "",
 
-	"Mutect2_Panel.gatk_docker":"gatk.latest"
+	"Mutect2_Panel.gatk_docker":"gatk.latest",
+  "Mutect2_Panel.gatk_override":"/data/cqs/softwares/gatk/gatk-package-4.1.8.1-local.jar"
 }
