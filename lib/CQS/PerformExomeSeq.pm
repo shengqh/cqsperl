@@ -375,6 +375,14 @@ sub ucsc_mm10_genome {
       ncbi_build               => "GRCm38",
       perform_vep              => 0,
       perform_cnv_gatk4_cohort => 1,
+
+      wdl => {
+        local => {
+          "mutect2" => {
+            "input_file" => "/data/cqs/softwares/cqsperl/data/wdl/local/mutect2.inputs.ucsc.mm10.json",
+          },
+        }
+      }
     }
   );
 }

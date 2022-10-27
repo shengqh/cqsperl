@@ -280,6 +280,8 @@ sub hg38_mm10_genome {
       hasSnRNA  => 1,
       hasSnoRNA => 1,
 
+      is_mix_genome => 1,
+
       software_version => {
         host => "GENCODE GRCh38.p13/GRCm38.p6",
       }

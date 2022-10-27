@@ -2,6 +2,11 @@ import argparse
 import logging
 from Bio.SeqIO.FastaIO import FastaIterator
 
+def get_value(token):
+  result = token.split(' ', 1)[1]
+  result = result[1:(len(trans_exon)-1)]
+  return(result)
+  
 parser = argparse.ArgumentParser(description="Extract exon fasta",
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
@@ -27,7 +32,7 @@ last_chr = ""
 logger.info("reading " + args.gtf + " ...")
 keys = set()
 with open(args.gtf, "rt") as fin, open(args.output, "wt") as fout, open(args.output + ".namemap", "wt") as fnm:
-  fnm.write("id\ttrans_exon\n")
+  fnm.write("id\ttrans_exon\tgene\ttranscript_type\n")
   icount = 0
   for line in fin:
     if line.startswith('##'):
@@ -59,12 +64,17 @@ with open(args.gtf, "rt") as fin, open(args.output, "wt") as fout, open(args.out
     value = parts[8]
     values = value.split('; ')
     trans_exon = ""
+    gene_name = ""
+    transcript_type = ""
     for v in values:
       if v.startswith("transcript_name"):
-        trans_exon = v.split(' ', 1)[1]
-        trans_exon = trans_exon[1:(len(trans_exon)-1)]
+        trans_exon = get_value(v)
       elif v.startswith("exon_number"):
         trans_exon = trans_exon + ":" + v.split(' ', 1)[1]
-        break
+      elif v.startswith("gene_name"):
+        gene_name = get_value(v)
+      elif v.startswith("transcript_type"):
+        transcript_type = get_value(v)
+        
 
-    fnm.write(f"{key}\t{trans_exon}\n")
+    fnm.write(f"{key}\t{trans_exon}\t{gene_name}\t{transcript_type}\n")

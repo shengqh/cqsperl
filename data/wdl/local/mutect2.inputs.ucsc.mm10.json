@@ -1,0 +1,14 @@
+{
+  "Mutect2.gatk_docker": "gatk.latest",
+  
+  "Mutect2.intervals": "/data/h_vangard_1/WilsonKeith_data/20190501_3197MouseWES/S0276129_Covered.NoHeaderForPipeline_mm9Tomm10_Map95.bed",
+  "Mutect2.scatter_count": 7,
+  "Mutect2.m2_extra_args": "",
+
+  "Mutect2.ref_fasta": "/data/cqs/references/ucsc/mm10/mm10.fa",
+  "Mutect2.ref_dict": "/data/cqs/references/ucsc/mm10/mm10.dict",
+  "Mutect2.ref_fai": "/data/cqs/references/ucsc/mm10/mm10.fa.fai",
+  "Mutect2.tumor_reads": "",
+  "Mutect2.tumor_reads_index": ""
+
+}
