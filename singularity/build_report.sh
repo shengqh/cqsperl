@@ -1,2 +1,2 @@
-singularity build --disable-cache report.20220608.sif docker://shengqh/report:20220608
+singularity build --disable-cache report.20221113.sif docker://shengqh/report:20221113
 

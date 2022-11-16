@@ -83,7 +83,7 @@ sub gencode_mm10_options {
   {
     annovar_buildver => "mm10",
     annovar_param => "-protocol refGene -operation g --remove",
-    annovar_db => "/data/cqs/references/annovar/humandb/",
+    annovar_db => "/data/cqs/references/annovar/mousedb/",
   });
   return($result);
 }

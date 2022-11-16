@@ -69,7 +69,7 @@ else
   export LIBRARY_PATH=$MYLIB:$LIBRARY_PATH
 fi
 
-MYBIN=/data/cqs/softwares/strelka-2.9.10.centos6_x86_64/bin:/data/cqs/softwares/ngsperl/bin/:/data/cqs/softwares/cqsperl/scripts:/data/cqs/softwares/local/bin:/data/cqs/softwares/bowtie:/data/cqs/softwares/cellranger-7.0.0/bin
+MYBIN=/data/cqs/softwares/strelka-2.9.10.centos6_x86_64/bin:/data/cqs/softwares/ngsperl/bin/:/data/cqs/softwares/cqsperl/scripts:/data/cqs/softwares/local/bin:/data/cqs/softwares/bowtie:/data/cqs/softwares/cellranger-7.0.0/bin:/data/cqs/softwares/edirect
 export PATH=$MYBIN:$PATH
 
 # The next line updates PATH for the Google Cloud SDK.
