@@ -59,6 +59,7 @@ sub global_options {
     bamsnap_option => "--no_gene_track",
     multiqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/multiqc.sif ",
     report_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/report.sif ",
+    sratools_docker_command  => singularity_prefix() . " /data/cqs/softwares/singularity/sra-tools.sif ",
   };
 }
 
