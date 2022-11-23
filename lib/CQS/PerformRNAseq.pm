@@ -235,23 +235,32 @@ sub common_mm10_genome() {
   });
 }
 
-sub gencode_mm10_genome {
+sub get_gencode_mm10_genome {
+  my $gtfVersion = shift;
   return merge_hash_right_precedent(
     merge_hash_right_precedent( global_definition(), common_mm10_genome() ),
     {
       #genome database
       fasta_file     => "/data/cqs/references/gencode/GRCm38.p6/GRCm38.primary_assembly.genome.fa",
-      star_index     => "/data/cqs/references/gencode/GRCm38.p6/STAR_index_2.7.8a_vM27_sjdb100",
-      transcript_gtf => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM27.annotation.gtf",
-      name_map_file  => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM27.annotation.gtf.map",
-      dexseq_gff     => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM27.annotation.dexseq.gff",
+      star_index     => "/data/cqs/references/gencode/GRCm38.p6/STAR_index_2.7.8a_${gtfVersion}_sjdb100",
+      transcript_gtf => "/data/cqs/references/gencode/GRCm38.p6/gencode.${gtfVersion}.annotation.gtf",
+      name_map_file  => "/data/cqs/references/gencode/GRCm38.p6/gencode.${gtfVersion}.annotation.gtf.map",
+      dexseq_gff     => "/data/cqs/references/gencode/GRCm38.p6/gencode.${gtfVersion}.annotation.dexseq.gff",
       annotation_genes_add_chr => 1,
       software_version => {
         genome => "Gencode GRCm38.p6",
-        gtf => "Gencode vM27",
+        gtf => "Gencode ${gtfVersion}",
       }
     }
   );
+}
+
+sub gencode_mm10_genome_vM25 {
+  return(get_gencode_mm10_genome("vM25"));
+}
+
+sub gencode_mm10_genome {
+  return(get_gencode_mm10_genome("vM24"));
 }
 
 sub ensembl_Rnor_6_genome {
