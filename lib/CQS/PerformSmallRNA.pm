@@ -4,6 +4,7 @@ package CQS::PerformSmallRNA;
 use strict;
 use warnings;
 use CQS::Global;
+use CQS::ConfigUtils;
 use Pipeline::SmallRNA;
 use Pipeline::SmallRNAUtils;
 use Hash::Merge qw( merge );
@@ -22,6 +23,7 @@ our %EXPORT_TAGS = (
       rn6_genome
       performSmallRNA_hg19
       performSmallRNA_hg38
+      performSmallRNA_hg38_v2022
       performSmallRNA_mm10
       performSmallRNA_rn6
       hg38_mm10_genome
@@ -35,7 +37,7 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '5.0';
 
 sub supplement_genome {
-  return merge(global_options(), {
+  return merge_hash_right_precedent(global_options(), {
     version    => 5,
     constraint => "haswell",
     #cqstools   => "/home/shengq2/cqstools/cqstools.exe",
@@ -111,13 +113,16 @@ sub supplement_genome {
     #UCSC tRNA database
     bowtie1_tRNA_index => "/data/cqs/references/smallrna/GtRNAdb2.20161214.mature",
     trna_category_map  => "/data/cqs/references/smallrna/GtRNAdb2.20161214.category.map",
-    trna_map           => "/data/cqs/references/smallrna/GtRNAdb2.20161214.map",
+    #trna_map was used in perform_nonhost_tRNA_coverage, somehow I lost this file.
+    #trna_map           => "/data/cqs/references/smallrna/GtRNAdb2.20161214.map",
 
     #SILVA rRNA database
     bowtie1_rRNA_index => "/data/cqs/references/smallrna/SILVA_128.rmdup",
     rrna_category_map  => "/data/cqs/references/smallrna/SILVA_128.rmdup.category.map",
 
     blast_localdb => "/scratch/cqs_share/references/blastdb",
+
+    hasERV => 0,
 
     customed_db => {
       "Bug" => {
@@ -132,8 +137,24 @@ sub supplement_genome {
   });
 }
 
+sub supplement_genome_v2022 {
+  return merge_hash_right_precedent(supplement_genome(), {
+    version    => 2022,
+    #miRBase database
+    bowtie1_miRBase_index => "/data/cqs/references/smallrna/v202211/miRBase.v22.1/bowtie_index_1.3.1/mature.dna",
+
+    #UCSC tRNA database
+    bowtie1_tRNA_index => "/data/cqs/references/smallrna/v202211/GtRNAdb.v19/bowtie_index_1.3.1/GtRNAdb.v19.mature",
+    trna_category_map  => "/data/cqs/references/smallrna/v202211/GtRNAdb.v19/GtRNAdb.v19.category.map",
+
+    #SILVA rRNA database
+    bowtie1_rRNA_index => "/data/cqs/references/smallrna/v202211/SILVA_138.1/bowtie_index_1.3.1/SILVA_138.1.rmdup",
+    rrna_category_map  => "/data/cqs/references/smallrna/v202211/SILVA_138.1/SILVA_138.1.category.map",
+  });
+}
+
 sub hg19_genome {
-  return merge(
+  return merge_hash_right_precedent(
     supplement_genome(),
     {
       #genome database
@@ -173,7 +194,7 @@ sub hg19_3utr {
 }
 
 sub hg38_genome {
-  return merge(
+  return merge_hash_right_precedent(
     supplement_genome(),
     {
       #genome database
@@ -205,8 +226,31 @@ sub hg38_3utr {
   };
 }
 
+sub hg38_genome_v2022 {
+  return merge_hash_right_precedent(
+    supplement_genome_v2022(),
+    {
+      #genome database
+      mirbase_count_option => "-p hsa",
+      miRNA_coordinate     => "/data/cqs/references/smallrna/v202211/hg38/hg38_miRBase22_GtRNAdb19_gencode42.miRNA.bed",
+      coordinate           => "/data/cqs/references/smallrna/v202211/hg38/hg38_miRBase22_GtRNAdb19_gencode42_HERVd.bed",
+      coordinate_fasta     => "/data/cqs/references/smallrna/v202211/hg38/hg38_miRBase22_GtRNAdb19_gencode42_HERVd.bed.fa",
+      bowtie1_index        => "/data/cqs/references/smallrna/v202211/hg38/bowtie_index_1.3.1/hg38_miRBase22_GtRNAdb19_gencode42",
+
+      hasYRNA   => 1,
+      hasSnRNA  => 1,
+      hasSnoRNA => 1,
+      hasERV => 1,
+
+      software_version => {
+        host => "GENCODE GRCh38.p13",
+      }
+    }
+  );
+}
+
 sub mm10_genome {
-  return merge(
+  return merge_hash_right_precedent(
     supplement_genome(),
     {
 
@@ -243,7 +287,7 @@ sub mm10_3utr {
 }
 
 sub rn6_genome {
-  return merge(
+  return merge_hash_right_precedent(
     supplement_genome(),
     {
 
@@ -300,6 +344,14 @@ sub performSmallRNA_hg19 {
 sub performSmallRNA_hg38 {
   my ( $userdef, $perform ) = @_;
   my $def = getSmallRNADefinition( $userdef, hg38_genome() );
+
+  my $config = performSmallRNA( $def, $perform );
+  return $config;
+}
+
+sub performSmallRNA_hg38_v2022 {
+  my ( $userdef, $perform ) = @_;
+  my $def = getSmallRNADefinition( $userdef, hg38_genome_v2022() );
 
   my $config = performSmallRNA( $def, $perform );
   return $config;
