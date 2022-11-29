@@ -1,7 +1,7 @@
 source /data/cqs/softwares/cqsperl/scripts/binds.sh
 export SING_OPTION="exec -e -B $mybinds"
 
-alias lftp="singularity $SING_OPTION /data/cqs/softwares/singularity/cyberduck.simg lftp "
+#alias lftp="singularity $SING_OPTION /data/cqs/softwares/singularity/cyberduck.simg lftp "
 #alias samtools="singularity $SING_OPTION /data/cqs/softwares/singularity/samtools.sif samtools "
 #alias bcftools="singularity $SING_OPTION /data/cqs/softwares/singularity/samtools.sif bcftools "
 alias duck="singularity $SING_OPTION /data/cqs/softwares/singularity/cyberduck.simg duck "
@@ -18,4 +18,5 @@ alias cromwell='java -jar /data/cqs/softwares/wdl/cromwell-84.jar '
 alias womtool='java -jar /data/cqs/softwares/wdl/womtool-84.jar '
 
 alias sq='squeue -u $USER -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R"'
+alias squ='squeue -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R" -u '
 alias sd='scontrol show jobid -dd '

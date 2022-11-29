@@ -9,7 +9,7 @@ use CQS::ClassFactory;
 my $def = {
   task_name        => "chipseq_hg38",
   email            => "quanhu.sheng.1\@vumc.org",
-  target_dir       => create_directory_or_die("/scratch/cqs/shengq2/temp/chipseq_hg38"),
+  target_dir       => create_directory_or_die("/scratch/h_vangard_1/shengq2/test/chipseq_hg38"),
   add_folder_index => 0,
 
   files => {
@@ -118,7 +118,14 @@ my $def = {
   perform_report => 1,
 };
 
-my $config = performChIPSeq_gencode_hg38($def, 1);
-#performTask($config, "report");
+$def->{peak_caller} = "macs";
+my $config = performChIPSeq_gencode_hg38($def, 0);
+$config->{sequencetask}{target_dir} = $def->{target_dir} . "/sequencetask_macs";
+performConfig($config);
+
+$def->{peak_caller} = "macs2";
+$config = performChIPSeq_gencode_hg38($def, 0);
+$config->{sequencetask}{target_dir} = $def->{target_dir} . "/sequencetask_macs2";
+performConfig($config);
 
 1;
