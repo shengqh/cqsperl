@@ -1,6 +1,6 @@
 {
   "Mutect2.gatk_docker": "gatk.latest",
-  "Mutect2.gatk_override":"/data/cqs/softwares/gatk/gatk-package-4.1.8.1-local.jar",
+  "Mutect2.gatk_override":"/data/cqs/softwares/gatk-4.3.0.0/gatk-package-4.3.0.0-local.jar",
   
   "Mutect2.scatter_count": 14,
   "Mutect2.m2_extra_args": "--downsampling-stride 20 --max-reads-per-alignment-start 6 --max-suspicious-reads-per-alignment-start 6",
@@ -20,10 +20,5 @@
   "Mutect2.gnomad": "/workspace/shengq2/references/exomeseq/af-only-gnomad.hg38.vcf.gz",
   "Mutect2.gnomad_idx": "/workspace/shengq2/references/exomeseq/af-only-gnomad.hg38.vcf.gz.tbi",
   "Mutect2.variants_for_contamination": "/workspace/shengq2/references/exomeseq/small_exac_common_3.hg38.vcf.gz",
-  "Mutect2.variants_for_contamination_idx": "/workspace/shengq2/references/exomeseq/small_exac_common_3.hg38.vcf.gz.tbi",
-
-  "Mutect2.run_funcotator": "true",
-  "Mutect2.funco_reference_version": "hg38",
-  "Mutect2.funco_data_sources_tar_gz": "/workspace/shengq2/references/exomeseq/funcotator_dataSources.v1.6.20190124s.tar.gz",
-  "Mutect2.funco_transcript_selection_list": "/workspace/shengq2/references/exomeseq/transcriptList.exact_uniprot_matches.AKT1_CRLF2_FGFR1.txt"
+  "Mutect2.variants_for_contamination_idx": "/workspace/shengq2/references/exomeseq/small_exac_common_3.hg38.vcf.gz.tbi"
 }

@@ -11,5 +11,5 @@
 	"Mutect2_Panel.create_pon_extra_args": "",
 
 	"Mutect2_Panel.gatk_docker":"gatk.latest",
-  "Mutect2_Panel.gatk_override":"/data/cqs/softwares/gatk/gatk-package-4.1.8.1-local.jar"
+  "Mutect2_Panel.gatk_override":"/data/cqs/softwares/gatk-4.3.0.0/gatk-package-4.3.0.0-local.jar"
 }

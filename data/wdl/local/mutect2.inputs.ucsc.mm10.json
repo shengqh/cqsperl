@@ -1,6 +1,6 @@
 {
   "Mutect2.gatk_docker": "gatk.latest",
-  "Mutect2.gatk_override":"/data/cqs/softwares/gatk/gatk-package-4.1.8.1-local.jar",
+  "Mutect2.gatk_override":"/data/cqs/softwares/gatk-4.3.0.0/gatk-package-4.3.0.0-local.jar",
   
   "Mutect2.intervals": "/data/h_vangard_1/WilsonKeith_data/20190501_3197MouseWES/S0276129_Covered.NoHeaderForPipeline_mm9Tomm10_Map95.bed",
   "Mutect2.scatter_count": 7,
