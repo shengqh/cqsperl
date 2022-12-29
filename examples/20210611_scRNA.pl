@@ -39,7 +39,7 @@ my $def = {
   },
 
   perform_localization_genes_plot => 1,
-  localization_genes_file => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/GeneLocalizationMap_06222021.txt",
+  localization_genes_file => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/GeneLocalizationMap_06222021.txt",
 
   perform_localization_gene_ratio_plot => 1,
   localization_gene_ratio => [qw(BAX/BCL2)],
@@ -60,7 +60,7 @@ my $def = {
   markers_file        => "/data/cqs/references/scrna/PanglaoDB_markers_27_Mar_2020.tsv",
   HLA_panglao5_file   => "/data/cqs/references/scrna/HLA_panglao5.txt",
   curated_markers_file => "/data/cqs/references/scrna/curated_markers.txt",
-  summary_layer_file => "$home/projects/alexander_gelbard/HLA_panglao5_ag.06222021.xlsx",
+  summary_layer_file => "$home/collaborations/alexander_gelbard/HLA_panglao5_ag.06222021.xlsx",
   annotate_tcell      => 0,
   remove_subtype      => "T cells",
   tcell_markers_file  => "/data/cqs/references/scrna/TcellAI_marker.txt",
@@ -77,7 +77,7 @@ my $def = {
   },
 
   #view marker genes
-  #marker_genes_file => "C:/Users/sheng/Programs/projects/alexander_gelbard/20200519_cell_markers.txt",
+  #marker_genes_file => "C:/Users/sheng/Programs/collaborations/alexander_gelbard/20200519_cell_markers.txt",
 
   perform_scRNABatchQC => 0,
 
@@ -113,10 +113,10 @@ my $def = {
 
   plot_marker_genes => {
     "celltype" => {
-      file => "$home/projects/alexander_gelbard/20200519_cell_markers.txt",
+      file => "$home/collaborations/alexander_gelbard/20200519_cell_markers.txt",
     },
     "pathway" => {
-      file => "$home/projects/alexander_gelbard/20200526_pathway_genes.txt",
+      file => "$home/collaborations/alexander_gelbard/20200526_pathway_genes.txt",
     },
   },
 
@@ -124,21 +124,21 @@ my $def = {
 
   perform_curated_gene_dotplot => 1,
   curated_gene_files => {
-    Genomic_Cannidate => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Genomic_Cannidate_GeneList.txt",
-    Pathway_Apoptosis => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_Apoptosis.txt",
-    Pathway_AutoAntigens => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_AutoAntigens.txt",
-    Pathway_ClassI_AntigenPresentation => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_ClassI_AntigenPresentation.txt",
-    Pathway_ClassII_AntigenPresentation => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_ClassII_AntigenPresentation.txt",
-    Pathway_EndothelialTargets => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_EndothelialTargets.txt",
-    Pathway_FocalAdhesion => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_FocalAdhesion.txt",
-    Pathway_mTOR => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_mTOR.txt",
-    Pathway_OMIM_LTS => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_OMIM_LTS_genes.txt",
-    Pathway_TCR_signaling => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_TCR_signaling.txt",
-    Pathway_TGFB_signaling => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_TGFB_signaling.txt",
-    Pathway_TH1_TH2_TH17 => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_TH1_TH2_TH17.txt",
-    Pathway_Upregulated_proteins => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_Upregulated_protiens.txt",
-    ECM_components => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/ECM_components.txt",
-    Epithelial_markers => "$home/projects/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Epithelial_markers.txt"
+    Genomic_Cannidate => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Genomic_Cannidate_GeneList.txt",
+    Pathway_Apoptosis => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_Apoptosis.txt",
+    Pathway_AutoAntigens => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_AutoAntigens.txt",
+    Pathway_ClassI_AntigenPresentation => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_ClassI_AntigenPresentation.txt",
+    Pathway_ClassII_AntigenPresentation => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_ClassII_AntigenPresentation.txt",
+    Pathway_EndothelialTargets => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_EndothelialTargets.txt",
+    Pathway_FocalAdhesion => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_FocalAdhesion.txt",
+    Pathway_mTOR => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_mTOR.txt",
+    Pathway_OMIM_LTS => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_OMIM_LTS_genes.txt",
+    Pathway_TCR_signaling => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_TCR_signaling.txt",
+    Pathway_TGFB_signaling => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_TGFB_signaling.txt",
+    Pathway_TH1_TH2_TH17 => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_TH1_TH2_TH17.txt",
+    Pathway_Upregulated_proteins => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Pathway_Upregulated_protiens.txt",
+    ECM_components => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/ECM_components.txt",
+    Epithelial_markers => "$home/collaborations/alexander_gelbard/20210611_NoAAC_iSGS_3364_3800_6363_scRNA/curated_genes/Epithelial_markers.txt"
   },
 
   perform_scMRMA => 0,
@@ -148,7 +148,7 @@ my $def = {
   perform_SignacX => 0,
   perform_SignacX_tcell => 0,
 
-  bubblemap_file => "$home/projects/alexander_gelbard/Gelbard_BubbleMap_06222021_v2.xlsx",
+  bubblemap_file => "$home/collaborations/alexander_gelbard/Gelbard_BubbleMap_06222021_v2.xlsx",
 };
 
 my $config = performScRNASeq( $def, 1 );
