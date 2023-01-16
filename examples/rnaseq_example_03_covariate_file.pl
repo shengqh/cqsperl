@@ -37,7 +37,7 @@ my $def = {
   pairs => {
     "Treatment_vs_Control" => {
       groups => [ "Control", "Treatment" ], 
-      covariances => ["gender"]
+      covariances => ["gender"],
       designFormula => ["~ gender + Condition"],
     }
   },
