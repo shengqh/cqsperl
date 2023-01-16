@@ -11,7 +11,7 @@ my $def = {
   #General options
   task_name  => "rnaseq_example",
   email      => "quanhu.sheng.1\@vumc.org",
-  target_dir => "/scratch/cqs/shengq2/temp/rnaseq_example_03_covariance_file",
+  target_dir => "/scratch/cqs/shengq2/temp/rnaseq_example_02_covariate",
   max_thread => 8,
 
   is_paired => 1,
@@ -33,11 +33,10 @@ my $def = {
     "Control" => [ "S1", "S2", "S3" ],
     "Treatment" => [ "S4", "S5", "S6", "S7" ]
   },
-  covariance_file => "/scratch/cqs/pipeline_example/rnaseq_data/covariance.txt",
   pairs => {
     "Treatment_vs_Control" => {
       groups => [ "Control", "Treatment" ], 
-      covariances => ["gender"]
+      gender => ["M", "F", "M", "M", "F", "F", "F"],
     }
   },
   perform_proteincoding_gene => 1,
@@ -46,7 +45,7 @@ my $def = {
   show_label_PCA             => 0,
 };
 
-my $config = performRNASeq_gencode_hg19( $def, 1 );
+my $config = performRNASeq_gencode_hg38( $def, 1 );
 
 #my $config = performRNASeq_gencode_hg19( $def, 0 );
 #performTask( $config, "deseq2_proteincoding_genetable" );

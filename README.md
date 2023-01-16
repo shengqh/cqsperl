@@ -225,7 +225,7 @@ my $config = performRNASeq_gencode_hg19($def, 1);
 
 ```
 
-If we want to introduce covariance in comparison, we can define the pairs as following lines. "patient" is the covariance name and the first three names correspond to three samples in group "5mM" and the last three names correspond to the three samples in group "metaC". You can add multiple covariance in the definition, such as batch_name, date, gender, and so on.
+If we want to introduce covariate in comparison, we can define the pairs as following lines. "patient" is the covariate name and the first three names correspond to three samples in group "5mM" and the last three names correspond to the three samples in group "metaC". You can add multiple covariate in the definition, such as batch_name, date, gender, and so on.
 
 ```perl
   pairs => {

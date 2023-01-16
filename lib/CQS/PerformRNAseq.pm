@@ -12,13 +12,16 @@ our @ISA = qw(Exporter);
 
 our %EXPORT_TAGS = (
   'all' => [
-    qw(gencode_hg19_genome
+    qw(
+      add_human_gsea
+      gencode_hg19_genome
       performRNASeq_gencode_hg19
       gencode_hg38_genome
       gencode_hg38_genome_v37
       performRNASeq_gencode_hg38
       performRNASeq_gencode_hg38_v37
       performRNASeq_gencode_hg38_v33
+      add_mouse_gsea
       gencode_mm10_genome
       performRNASeq_gencode_mm10
       ensembl_Mmul10_genome
@@ -57,13 +60,38 @@ our %EXPORT_TAGS = (
 our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
 our $VERSION = '0.01';
-our $gsea_ver = "4.2.3";
-#our $gsea_ver = "4.1.0";
-our $gsea_db_ver = "v7.5.1";
-#our $gsea_db_ver = "v7.4";
+our $gsea_ver = "4.3.2";
+our $gsea_db_ver = "v2022.1.Hs";
+
+sub add_human_gsea {
+  my ($def, $host) = @_;
+
+  if (!defined $host) {
+    die "host not defined, can be Human,Mouse,Rat and so on. Looking for HOST_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.$gsea_db_ver.chip."
+  }
+  
+  $host = ucfirst($host);
+  if($host eq "Human"){
+    $def->{gsea_chip} = undef;
+  }else{
+    $def->{gsea_chip} = "/data/cqs/references/gsea/$gsea_db_ver/${host}_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.$gsea_db_ver.chip",
+  }
+
+  return merge_hash_left_precedent($def, {
+    perform_gsea => 1,
+    gsea_jar => "gsea-cli.sh",
+    gsea_db => "/data/cqs/references/gsea/${gsea_db_ver}",
+    gsea_categories => "'h.all.$gsea_db_ver.symbols.gmt', 'c2.all.$gsea_db_ver.symbols.gmt', 'c5.all.$gsea_db_ver.symbols.gmt', 'c6.all.$gsea_db_ver.symbols.gmt', 'c7.all.$gsea_db_ver.symbols.gmt'",
+    gsea_makeReport => 0,
+    software_version => {
+      "GSEA" => ["v${gsea_ver}"],
+      "GSEA_DB" => ["${gsea_db_ver}"],
+    }
+  });
+}
 
 sub global_definition {
-  return merge_hash_right_precedent(global_options(), {
+  my $result = merge_hash_right_precedent(global_options(), {
     constraint                => "haswell",
     perform_star_featurecount => 1,
     perform_qc3bam            => 0,
@@ -71,18 +99,9 @@ sub global_definition {
     docker_command            => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-rnaseq.simg ",
     gatk_jar                  => "/opt/gatk3.jar",
     picard_jar                => "/opt/picard.jar",
-    #gsea_no_docker            => 1,
-    gsea_jar                  => "gsea-cli.sh",
-    #gsea_jar                  => "/scratch/cqs_share/softwares/GSEA/gsea-cli.sh",
-    gsea_db_ver         => $gsea_db_ver,
-    gsea_db             => "/data/cqs/references/gsea/$gsea_db_ver",
-    gsea_categories     => "'h.all.$gsea_db_ver.symbols.gmt', 'c2.all.$gsea_db_ver.symbols.gmt', 'c5.all.$gsea_db_ver.symbols.gmt', 'c6.all.$gsea_db_ver.symbols.gmt', 'c7.all.$gsea_db_ver.symbols.gmt'",
-
-    software_version => {
-      "GSEA" => ["v${gsea_ver}"],
-      "GSEA_DB" => ["${gsea_db_ver}"],
-    }
   });
+
+  return($result);
 }
 
 sub no_docker {
@@ -95,10 +114,10 @@ sub common_human_genome {
   my $result = merge_hash_right_precedent(
     global_definition(),
     {
-      webgestalt_organism => "hsapiens",
       annovar_param       => "-protocol refGene,avsnp150,cosmic70 -operation g,f,f --remove",
       annovar_db          => "/data/cqs/references/annovar/humandb/",
       perform_webgestalt  => 1,
+      webgestalt_organism => "hsapiens",
       perform_gsea        => 1,
     }
   );
@@ -106,6 +125,8 @@ sub common_human_genome {
   if ( ( defined $userdef ) and $userdef->{ignore_docker} ) {
     $result = merge_hash_right_precedent( $result, no_docker() );
   }
+
+  $result = add_human_gsea($result, "Human");
 
   return ($result);
 }
@@ -222,17 +243,36 @@ sub gencode_hg38_genome_v33 {
 #   );
 # }
 
-sub common_mm10_genome() {
-  return merge_hash_right_precedent(mm10_options(), {
+sub add_mouse_gsea {
+  my $def = shift;
+  $def->{gsea_chip} = undef;
+
+  my $mouse_gsea_db_ver = "v2022.1.Mm";
+
+  return merge_hash_right_precedent($def, {
+    perform_gsea => 1,
+    gsea_jar => "gsea-cli.sh",
+    gsea_db             => "/data/cqs/references/gsea/${mouse_gsea_db_ver}",
+    gsea_categories     => "'mh.all.$mouse_gsea_db_ver.symbols.gmt', 'm2.all.$mouse_gsea_db_ver.symbols.gmt', 'm5.all.$mouse_gsea_db_ver.symbols.gmt'",
+    software_version => {
+      "GSEA_DB" => ["${mouse_gsea_db_ver}"],
+    }
+  });
+}
+
+sub common_mm10_genome {
+  my $result = merge_hash_right_precedent(mm10_options(), {
     webgestalt_organism => "mmusculus",
     perform_webgestalt  => 1,
     dbsnp               => "/data/cqs/references/dbsnp/mouse_10090_b150_GRCm38.p4.vcf.gz",
     annovar_buildver    => "mm10",
     annovar_param       => "-protocol refGene -operation g --remove",
     annovar_db          => "/data/cqs/references/annovar/mousedb/",
-    perform_gsea        => 1,
-    gsea_chip           => "/data/cqs/references/gsea/$gsea_db_ver/Mouse_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.$gsea_db_ver.chip",
   });
+
+  $result = add_human_gsea($result, "Mouse");
+
+  return($result);
 }
 
 sub get_gencode_mm10_genome {
@@ -264,13 +304,10 @@ sub gencode_mm10_genome {
 }
 
 sub ensembl_Rnor_6_genome {
-  #die "contact tiger to build Rnor 6 genome. Thanks.";
-  return merge_hash_right_precedent(
+  my $result = merge_hash_right_precedent(
     global_definition(), 
     {
       perform_webgestalt  => 0,
-      perform_gsea        => 1,
-      gsea_chip           => "/data/cqs/references/gsea/$gsea_db_ver/Rat_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.$gsea_db_ver.chip",
 
       #genome database
       fasta_file     => "/data/cqs/references/ensembl/Rnor6.0/Rattus_norvegicus.Rnor_6.0.dna.toplevel.fa",
@@ -283,6 +320,10 @@ sub ensembl_Rnor_6_genome {
       }
     }
   );
+
+  $result = add_human_gsea($result, "Rat");
+
+  return($result);
 }
 
 # sub yan_mm10_genome {
@@ -453,6 +494,12 @@ sub performRNASeq_gencode_hg38_v33 {
 sub performRNASeq_gencode_mm10 {
   my ( $userdef, $perform ) = @_;
   my $def = merge_hash_left_precedent( $userdef, gencode_mm10_genome() );
+
+  if(getValue($def, "perform_gsea")){
+    if(getValue($def, "use_mouse_gsea_db", 0)){
+      $def = add_mouse_gsea($def);
+    }
+  }
   my $config = performRNASeq( $def, $perform );
   return $config;
 }

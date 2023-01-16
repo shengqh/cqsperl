@@ -11,7 +11,7 @@ my $def = {
   #General options
   task_name  => "rnaseq_example",
   email      => "quanhu.sheng.1\@vumc.org",
-  target_dir => "/scratch/cqs/shengq2/temp/rnaseq_example_02_covariance",
+  target_dir => "/scratch/cqs/shengq2/temp/rnaseq_example_03_covariate_file",
   max_thread => 8,
 
   is_paired => 1,
@@ -33,10 +33,12 @@ my $def = {
     "Control" => [ "S1", "S2", "S3" ],
     "Treatment" => [ "S4", "S5", "S6", "S7" ]
   },
+  covariance_file => "/scratch/cqs/pipeline_example/rnaseq_data/covariate.txt",
   pairs => {
     "Treatment_vs_Control" => {
       groups => [ "Control", "Treatment" ], 
-      gender => ["M", "F", "M", "M", "F", "F", "F"]
+      covariances => ["gender"]
+      designFormula => ["~ gender + Condition"],
     }
   },
   perform_proteincoding_gene => 1,
