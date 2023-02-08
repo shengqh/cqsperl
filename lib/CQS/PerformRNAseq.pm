@@ -65,6 +65,7 @@ our $gsea_db_ver = "v2022.1.Hs";
 
 sub add_human_gsea {
   my ($def, $host) = @_;
+  $def->{use_mouse_gsea_db} = 0;
 
   if (!defined $host) {
     die "host not defined, can be Human,Mouse,Rat and so on. Looking for HOST_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.$gsea_db_ver.chip."
@@ -246,6 +247,7 @@ sub gencode_hg38_genome_v33 {
 sub add_mouse_gsea {
   my $def = shift;
   $def->{gsea_chip} = undef;
+  $def->{use_mouse_gsea_db} = 1;
 
   my $mouse_gsea_db_ver = "v2022.1.Mm";
 

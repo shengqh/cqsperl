@@ -1,2 +1,2 @@
-singularity build --disable-cache cqs_smallrnaseq.20221124.sif docker://shengqh/cqs_smallrnaseq:20221124
+singularity build --disable-cache cqs_smallrnaseq.20230131.sif docker://shengqh/cqs_smallrnaseq:20230131
 
