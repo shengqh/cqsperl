@@ -282,10 +282,10 @@ if ( defined $dogsnap ) {
   my $gsnap = `grep version 1 | cut -d " " -f 3`;
   chomp($gsnap);
   `rm 1`;
-  if ( !-e "gsnap_index_k14_${gsnap}" ) {
-    mkdir("gsnap_index_k14_${gsnap}");
+  if ( !-e "gsnap_index_${gsnap}" ) {
+    mkdir("gsnap_index_${gsnap}");
   }
-  chdir("gsnap_index_k14_${gsnap}");
+  chdir("gsnap_index_${gsnap}");
   if ( !-e $basename ) {
     run_command("ln -s ../$fastaFile $basename ");
     run_command("ln -s ../${base}.dict ${base}.dict ");
@@ -293,11 +293,31 @@ if ( defined $dogsnap ) {
     run_command("ln -s ../${base}.len ${base}.len ");
   }
 
-  #min_read_length = kmers + interval - 1
-  #in order to control the min_read_length = 16, we have to smaller the kmers from 15 to 14 when keep the "sampling interval for genome" equals 3
-  run_command("gmap_build -D . -d $base -k 14 -j 14 -s none $basename");
-  run_command("atoiindex -F . -d $base -k 14");
+  run_command("gmap_build -D . -d $base -s none $basename");
+  run_command("atoiindex -F . -d $base");
   chdir($absolute_dir);
+
+  # # gsnap
+  # `gsnap 2> 1`;
+  # my $gsnap = `grep version 1 | cut -d " " -f 3`;
+  # chomp($gsnap);
+  # `rm 1`;
+  # if ( !-e "gsnap_index_k14_${gsnap}" ) {
+  #   mkdir("gsnap_index_k14_${gsnap}");
+  # }
+  # chdir("gsnap_index_k14_${gsnap}");
+  # if ( !-e $basename ) {
+  #   run_command("ln -s ../$fastaFile $basename ");
+  #   run_command("ln -s ../${base}.dict ${base}.dict ");
+  #   run_command("ln -s ../${basename}.fai ${basename}.fai ");
+  #   run_command("ln -s ../${base}.len ${base}.len ");
+  # }
+
+  # #min_read_length = kmers + interval - 1
+  # #in order to control the min_read_length = 16, we have to smaller the kmers from 15 to 14 when keep the "sampling interval for genome" equals 3
+  # run_command("gmap_build -D . -d $base -k 14 -j 14 -s none $basename");
+  # run_command("atoiindex -F . -d $base -k 14");
+  # chdir($absolute_dir);
 }
 
 if ( defined $dohisat2 ) {
