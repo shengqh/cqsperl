@@ -60,7 +60,7 @@ singularity exec -c -B /gpfs52/data:/data  -e /data/cqs/softwares/singularity/cq
 wget https://www.twistbioscience.com/sites/default/files/resources/2020-04/Twist_Mouse_Exome_Target_Rev1_7APR20.bed
 bedtools slop -i Twist_Mouse_Exome_Target_Rev1_7APR20.bed -g /data/cqs/softwares/cqsperl/database/exomeseq/mm10.genome -b 50 > Twist_Mouse_Exome_Target_Rev1_7APR20.slop50.bed
 
-singularity exec -c -B /gpfs52/data:/data  -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk BedToIntervalList -I /data/cqs/references/exomeseq/Twist/Twist_Mouse_Exome_Target_Rev1_7APR20.slop50.bed -O /data/cqs/references/exomeseq/Twist/Twist_Mouse_Exome_Target_Rev1_7APR20.slop50.bed.interval_list --SD /data/cqs/references/ucsc/mm10/mm10.dict
+singularity exec -c -B /gpfs52/data:/data  -e /data/cqs/softwares/singularity/cqs-gatk4.simg gatk BedToIntervalList -I /data/cqs/references/exomeseq/Twist/Twist_Mouse_Exome_Target_Rev1_7APR20.slop50.bed -O /data/cqs/references/exomeseq/Twist/Twist_Mouse_Exome_Target_Rev1_7APR20.slop50.bed.ucsc.interval_list --SD /data/cqs/references/ucsc/mm10/mm10.dict
 
 ##download dbsnp for mm10
 
