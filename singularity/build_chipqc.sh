@@ -1,2 +1,2 @@
-singularity build cqs-chipqc.20221122.sif docker://shengqh/cqs_chipqc:20221122
+singularity build cqs-chipqc.20230226.sif docker://shengqh/cqs_chipqc:20230226
 
