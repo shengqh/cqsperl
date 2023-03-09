@@ -13,6 +13,7 @@ tar -czf /data1/backup/references/smallrna/v5/20200130_mm10_miRBase22_GtRNAdb2_g
 tar -czf /data1/backup/references/smallrna/v5/20200130_rn6_miRBase22_GtRNAdb2_ensembl99.tar.gz rn6_miRBase22_GtRNAdb2_ensembl99*
 tar -czf /data1/backup/references/smallrna/v5/20161214_GtRNAdb2.tar.gz GtRNAdb2*
 tar -czf /data1/backup/references/smallrna/v5/20160929_SILVA_128.tar.gz SILVA_128*
+tar -czf /data1/backup/references/smallrna/v5/20200214_AlgaeSpeciesAll.tar.gz 20200214_AlgaeSpeciesAll*
 
 cd /scratch/cqs_share/references/gencode
 tar -czf /data1/backup/references/gencode/GRCh37.p13.tar.gz GRCh37.p13

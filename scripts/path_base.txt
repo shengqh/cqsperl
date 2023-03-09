@@ -21,8 +21,7 @@ module load Java/13.0.2
 
 module load git/2.28.0-nodocs
 
-export SINGULARITY_TMPDIR=/data/cqs/softwares/singularity/temp
-export SINGULARITY_CACHEDIR=/data/cqs/softwares/singularity/cache
+export SINGULARITY_TMPDIR=/scratch/cqs/singularity_home/temp
 
 MY_PERL_LIB=/data/cqs/softwares/ngsperl/lib/:/data/cqs/softwares/cqsperl/lib/:/data/cqs/softwares/perl5_lib/lib/perl5/
 if [ -z "$PERL5LIB" ]
@@ -69,7 +68,7 @@ else
   export LIBRARY_PATH=$MYLIB:$LIBRARY_PATH
 fi
 
-MYBIN=/data/cqs/softwares/Recon:/data/cqs/softwares/GSEA:/data/cqs/softwares/homer/bin:/data/cqs/softwares/dotnet:/data/cqs/softwares/sratoolkit/bin:/data/cqs/softwares/gatk:/data/cqs/softwares/strelka-2.9.10.centos6_x86_64/bin:/data/cqs/softwares/ngsperl/bin/:/data/cqs/softwares/cqsperl/scripts:/data/cqs/softwares/local/bin:/data/cqs/softwares/bowtie:/data/cqs/softwares/cellranger-7.0.0/bin:/data/cqs/softwares/edirect
+MYBIN=/data/cqs/softwares/salmon/bin:/data/cqs/softwares/Recon:/data/cqs/softwares/GSEA:/data/cqs/softwares/homer/bin:/data/cqs/softwares/dotnet:/data/cqs/softwares/sratoolkit/bin:/data/cqs/softwares/gatk:/data/cqs/softwares/strelka-2.9.10.centos6_x86_64/bin:/data/cqs/softwares/ngsperl/bin/:/data/cqs/softwares/cqsperl/scripts:/data/cqs/softwares/local/bin:/data/cqs/softwares/bowtie:/data/cqs/softwares/cellranger-7.0.0/bin:/data/cqs/softwares/edirect
 export PATH=$MYBIN:$PATH
 
 # The next line updates PATH for the Google Cloud SDK.
