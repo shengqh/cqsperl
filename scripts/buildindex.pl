@@ -208,19 +208,20 @@ if ( defined $dobwa ) {
   `rm 1`;
   if ( !-e "bwa_index_${bwa}" ) {
     mkdir("bwa_index_${bwa}");
-    chdir("bwa_index_${bwa}");
-    if ( !-e $basename ) {
-      run_command("ln -s ../$fastaFile $basename ");
-      run_command("ln -s ../${base}.dict ${base}.dict ");
-      run_command("ln -s ../${basename}.fai ${basename}.fai ");
-      run_command("ln -s ../${base}.len ${base}.len ");
-    }
+  }
+  chdir("bwa_index_${bwa}");
+  if ( !-e $basename ) {
+    run_command("ln -s ../$fastaFile $basename ");
+    run_command("ln -s ../${base}.dict ${base}.dict ");
+    run_command("ln -s ../${basename}.fai ${basename}.fai ");
+    run_command("ln -s ../${base}.len ${base}.len ");
+
     my $afile = dirname(abs_path($fastaFile)) . "/bwa_index_${bwa}/$basename";
     print "bwa index $option $afile \n";
     run_command("bwa index $option $afile");
-
-    chdir($absolute_dir);
   }
+
+  chdir($absolute_dir);
 }
 
 if ( defined $dostar ) {
