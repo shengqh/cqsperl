@@ -46,8 +46,8 @@ sub supplement_genome {
     #miRBase database
     bowtie1_miRBase_index => "/data/cqs/references/smallrna/mature.dna",
 
-    bowtie_bacteria_index_list_file => "/scratch/cqs_share/references/refseq/bacteria/20200321_assembly_summary.txt.files.list",
-    bowtie_viruses_index_list_file => "/scratch/cqs_share/references/refseq/viruses/20200326_assembly_summary.txt.files.list",
+    #bowtie_bacteria_index_list_file => "/scratch/cqs_share/references/refseq/bacteria/20200321_assembly_summary.txt.files.list",
+    #bowtie_viruses_index_list_file => "/scratch/cqs_share/references/refseq/viruses/20200326_assembly_summary.txt.files.list",
 
     search_refseq_bacteria => 1,
     #spcount => "python3 /data/cqs/softwares/spcount/src/debug.py",
@@ -120,7 +120,7 @@ sub supplement_genome {
     bowtie1_rRNA_index => "/data/cqs/references/smallrna/SILVA_128.rmdup",
     rrna_category_map  => "/data/cqs/references/smallrna/SILVA_128.rmdup.category.map",
 
-    blast_localdb => "/scratch/cqs_share/references/blastdb",
+    blast_localdb => "/data/cqs/references/blastdb",
 
     hasERV => 0,
 
@@ -128,10 +128,6 @@ sub supplement_genome {
       "Bug" => {
         bowtie1_index => "/data/cqs/references/smallrna/20200415_BugsAll.species",
         species_map => "/data/cqs/references/smallrna/20200415_BugsAll.species.map",
-      },
-      "Lupusbug" => {
-        bowtie1_index => "/scratch/cqs/ramirema/other_projects/20200520_lupusbugs_db/20200528_lupusbug",
-        species_map => "/scratch/cqs/ramirema/other_projects/20200520_lupusbugs_db/20200528_lupusbug.map",
       },
     },
   });
@@ -164,12 +160,8 @@ sub hg19_genome {
       coordinate_fasta     => "/data/cqs/references/smallrna/hg19_miRBase22_GtRNAdb2_gencode19_ncbi.bed.fa",
       bowtie1_index        => "/data/cqs/references/smallrna/hg19_miRBase22_GtRNAdb2_gencode19_ncbi",
 
-      #gsnap_index_directory => "/scratch/cqs_share/references/human/hg19/gsnap_index_k14_2016-08-08/",
-      #gsnap_index_name      => "GRCh37.p13.genome",
-      #star_index_directory  => "/scratch/cqs_share/references/human/hg19/STAR_index_2.5.3a_gencodeV19_sjdb99",
-
-      tDRmapper       => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
-      tDRmapper_fasta => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/hg19_mature_and_pre.fa",
+      # tDRmapper       => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/Scripts/TdrMappingScripts.pl",
+      # tDRmapper_fasta => "/scratch/cqs/zhaos/vickers/otherPipeline/tDRmapper/hg19_mature_and_pre.fa",
 
       hasYRNA   => 1,
       hasSnRNA  => 1,

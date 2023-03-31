@@ -96,7 +96,7 @@ sub global_definition {
     constraint                => "haswell",
     perform_star_featurecount => 1,
     perform_qc3bam            => 0,
-    qc3_perl                  => "/scratch/cqs_share/softwares/QC3/qc3.pl",
+    qc3_perl                  => "/data/cqs/softwares/QC3/qc3.pl",
     docker_command            => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-rnaseq.simg ",
     gatk_jar                  => "/opt/gatk3.jar",
     picard_jar                => "/opt/picard.jar",
@@ -383,11 +383,11 @@ sub ensembl_Mmul10_genome {
     global_definition(),
     {
       perform_gsea => 1,
-      docker_command            => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
-      fasta_file => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.dna.primary_assembly.fa",
-      star_index     => "/scratch/cqs_share/references/ensembl/Mmul_10/STAR_index_2.7.1a_v99_sjdb100",
-      transcript_gtf => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.99.chr.gtf",
-      name_map_file  => "/scratch/cqs_share/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.99.chr.gtf.map",
+      docker_command            => "singularity exec -e /data/cqs/softwares/singularity/cqs-rnaseq.simg ",
+      fasta_file => "/data/cqs/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.dna.primary_assembly.fa",
+      star_index     => "/data/cqs/references/ensembl/Mmul_10/STAR_index_2.7.1a_v99_sjdb100",
+      transcript_gtf => "/data/cqs/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.99.chr.gtf",
+      name_map_file  => "/data/cqs/references/ensembl/Mmul_10/Macaca_mulatta.Mmul_10.99.chr.gtf.map",
       software_version => {
         genome => "Ensembl Mmul 10",
         gtf => "Ensembl v99",
@@ -404,7 +404,7 @@ sub ensembl_GRCz11_genome {
 
       #genome database
       fasta_file => "/data/cqs/references/zebrafish/GRCz11/Danio_rerio.GRCz11.dna.primary_assembly.fa",
-      docker_command            => "singularity exec -e /scratch/cqs_share/softwares/singularity/cqs-rnaseq.simg ",
+      docker_command            => "singularity exec -e /data/cqs/softwares/singularity/cqs-rnaseq.simg ",
 
       star_index          => "/data/cqs/references/zebrafish/GRCz11/STAR_index",
       transcript_gtf      => "/data/cqs/references/zebrafish/GRCz11/Danio_rerio.GRCz11.102.gtf",
