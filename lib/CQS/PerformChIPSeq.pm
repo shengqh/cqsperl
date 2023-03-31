@@ -39,13 +39,6 @@ sub chipseq_options {
 
     peak_caller => "macs",
 
-    perform_enhancer   => 0,
-    enhancer_folder    => "/scratch/cqs_share/local/bin/linlabpipeline",
-    enhancer_gsea_path => "/scratch/cqs_share/tools/gsea/gsea2-2.2.3.jar",
-    enhancer_gmx_path  => "/scratch/cqs_share/tools/gsea/c2.all.v5.2.symbols.gmt",
-
-    rose_folder => "/scratch/cqs_share/local/bin/bradnerlab",
-
     perform_chipqc => 1,
 
     homer_option => "",
