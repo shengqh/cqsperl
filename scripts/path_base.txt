@@ -21,7 +21,7 @@ module load Java/13.0.2
 
 module load git/2.28.0-nodocs
 
-export SINGULARITY_TMPDIR=/scratch/cqs/singularity_home/temp
+export SINGULARITY_TMPDIR=/nobackup/h_cqs/singularity_home/temp
 
 MY_PERL_LIB=/data/cqs/softwares/ngsperl/lib/:/data/cqs/softwares/cqsperl/lib/:/data/cqs/softwares/perl5_lib/lib/perl5/
 if [ -z "$PERL5LIB" ]
@@ -31,7 +31,7 @@ else
   export PERL5LIB=$MY_PERL_LIB:$PERL5LIB
 fi
 
-MYINCLUDE=/data/cqs/softwares/local/include:/scratch/cqs/softwares/local/include
+MYINCLUDE=/data/cqs/softwares/local/include
 if [ -z "$C_INCLUDE_PATH" ]
 then
   export C_INCLUDE_PATH=$MYINCLUDE
@@ -53,7 +53,7 @@ else
   export CPLUS_INCLUDE_PATH=$MYINCLUDE:$C_INCLUDE_PATH
 fi
 
-MYLIB=/data/cqs/softwares/local/lib:/scratch/cqs/softwares/local/lib
+MYLIB=/data/cqs/softwares/local/lib
 if [ -z "$LD_LIBRARY_PATH" ]
 then
   export LD_LIBRARY_PATH=$MYLIB

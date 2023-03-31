@@ -21,5 +21,5 @@ alias sq='squeue -u $USER -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R"'
 alias squ='squeue -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R" -u '
 alias sd='scontrol show jobid -dd '
 
-alias chrome='/scratch/cqs_share/softwares/chrome/opt/google/chrome/google-chrome --no-sandbox'
+alias chrome='/data/cqs/softwares/chrome/opt/google/chrome/google-chrome --no-sandbox'
 
