@@ -9,11 +9,15 @@ require Exporter;
 our @ISA = qw(Exporter);
 
 sub get_binding {
-  my $result = "/home";
-  my @folders = qw(/gpfs23 /gpfs51 /gpfs52 /data /dors /scratch /nobackup /tmp);
+  my $result = "";
+  my @folders = qw(/panfs /gpfs23 /gpfs51 /gpfs52 /data /dors /scratch /nobackup /home /tmp);
   for my $folder (@folders){
     if (-d $folder) {
-      $result=$result . "," . $folder
+      if ($result eq "") {
+        $result=$folder
+      }else{
+        $result=$result . "," . $folder
+      }
     }
   }
   return($result);
@@ -21,11 +25,10 @@ sub get_binding {
 
 our $bind_folders = get_binding();
 
-our $singularity_prefix_str = "singularity exec -c -e -B $bind_folders -H `pwd` ";
-
 our %EXPORT_TAGS = (
   'all' => [
     qw(
+      get_binding
       singularity_prefix
       global_options
       mm10_options
@@ -43,7 +46,9 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '0.01';
 
 sub singularity_prefix {
-  return ($singularity_prefix_str);
+  my $by_run = shift;
+  my $cmd = $by_run ? "run" : "exec";
+  return("singularity $cmd -c -e -B " . get_binding() . " -H `pwd` ");
 }
 
 sub global_options {
