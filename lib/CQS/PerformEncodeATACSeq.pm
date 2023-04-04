@@ -56,8 +56,21 @@ sub gencode_hg38_genome {
   });
 }
 
+sub init_singularity {
+  my ($userdef) = @_;
+
+  if(defined $userdef->{encode_option}){
+    if (not $userdef->{encode_option} =~ /singularity/){
+      $userdef->{encode_option} = $userdef->{encode_option} . " --singularity";
+    }
+  }
+}
+
 sub PerformEncodeATACSeq_gencode_hg38 {
   my ($userdef, $perform) = @_;
+
+  init_singularity($userdef);
+
   my $def = merge_hash_left_precedent($userdef, gencode_hg38_genome());
   my $config = performEncodeATACseq($def, $perform);
   return $config;
