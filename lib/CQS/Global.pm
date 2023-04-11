@@ -9,8 +9,13 @@ require Exporter;
 our @ISA = qw(Exporter);
 
 sub get_binding {
+  my $no_home = shift;
   my $result = "";
-  my @folders = qw(/panfs /gpfs23 /gpfs51 /gpfs52 /data /dors /scratch /nobackup /home /tmp);
+  my @folders = qw(/panfs /gpfs23 /gpfs51 /gpfs52 /data /dors /nobackup /tmp);
+  if(!$no_home){
+    push(@folders, "/home/\$USER");
+  }
+
   for my $folder (@folders){
     if (-d $folder) {
       if ($result eq "") {
@@ -46,9 +51,9 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '0.01';
 
 sub singularity_prefix {
-  my $by_run = shift;
+  my ($by_run, $no_home) = @_;
   my $cmd = $by_run ? "run" : "exec";
-  return("singularity $cmd -c -e -B " . get_binding() . " -H `pwd` ");
+  return("singularity $cmd -c -e -B " . get_binding($no_home) . " -H `pwd` ");
 }
 
 sub global_options {
