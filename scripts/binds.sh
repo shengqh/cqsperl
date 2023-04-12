@@ -14,10 +14,6 @@ if [[ -e /data ]]; then
   export mybinds=$mybinds,/data
 fi
 
-if [[ -e /scratch ]]; then
-  export mybinds=$mybinds,/scratch
-fi
-
 if [[ -e /workspace ]]; then
   export mybinds=$mybinds,/workspace
 fi
