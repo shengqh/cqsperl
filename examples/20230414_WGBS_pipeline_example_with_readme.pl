@@ -14,6 +14,7 @@ my $def = {
   email => "your.id\@vumc.org",
   emailType => "FAIL",
   target_dir => "/nobackup/h_cqs/ywang/PI_Coffey/20230301_Coffey_methylation_QZ9413/analysis/dev_test",
+  thread     => "4",
   abismal_index => "/data/cqs/references/abismal_index/hg19_chrm.abismalidx",
   chr_dir       => "/data/cqs/references/abismal_index/hg19_chrm.fa",
   chr_size_file => "/data/cqs/references/abismal_index/hg19_chrm.sizes",
