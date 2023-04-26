@@ -17,7 +17,7 @@ alias dexseq_prepare_annotation.py='singularity $SING_OPTION /data/cqs/softwares
 alias cromwell='java -jar /data/cqs/softwares/wdl/cromwell-84.jar '
 alias womtool='java -jar /data/cqs/softwares/wdl/womtool-84.jar '
 
-alias sq='squeue -u $USER -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R"'
+alias sq='squeue -u $USER -o "%.20i %100j %.2t %.10M %R"'
 alias squ='squeue -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R" -u '
 alias sd='scontrol show jobid -dd '
 

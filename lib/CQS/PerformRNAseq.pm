@@ -149,11 +149,16 @@ sub gencode_hg19_genome {
     common_hg19_genome($userdef),
     {
       #genome database
-      fasta_file     => "/data/cqs/references/gencode/GRCh37.p13/Homo_sapiens_assembly19.fasta",
-      star_index     => "/data/cqs/references/gencode/GRCh37.p13/STAR_index_2.7.8a_v19_sjdb100",
-      transcript_gtf => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf",
-      name_map_file  => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf.map",
-      dexseq_gff     => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.dexseq.gff",
+      # fasta_file     => "/data/cqs/references/gencode/GRCh37.p13/GRCh37.primary_assembly.genome.fa",
+      # star_index     => "/data/cqs/references/gencode/GRCh37.p13/STAR_index_2.7.8a_v19_sjdb100",
+      # transcript_gtf => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf",
+      # name_map_file  => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.gtf.map",
+      # dexseq_gff     => "/data/cqs/references/gencode/GRCh37.p13/gencode.v19.annotation.dexseq.gff",
+      fasta_file     => "/data/cqs/references/gencode/GRCh37.p13.reorder/GRCh37.primary_assembly.genome.reorder.fa",
+      star_index     => "/data/cqs/references/gencode/GRCh37.p13.reorder/STAR_index_2.7.8a_v19_sjdb100",
+      transcript_gtf => "/data/cqs/references/gencode/GRCh37.p13.reorder/gencode.v19.annotation.gtf",
+      name_map_file  => "/data/cqs/references/gencode/GRCh37.p13.reorder/gencode.v19.annotation.gtf.map",
+      dexseq_gff     => "/data/cqs/references/gencode/GRCh37.p13.reorder/gencode.v19.annotation.dexseq.gff",
       software_version => {
         genome => "Gencode GRCh37.p13",
         gtf => "Gencode v19",

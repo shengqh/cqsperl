@@ -10,10 +10,18 @@ our @ISA = qw(Exporter);
 
 sub get_binding {
   my $no_home = shift;
+
+  if(!defined $no_home){
+    $no_home = 0;
+  }
+
+  #print("no_home = $no_home");
+
   my $result = "";
   my @folders = qw(/panfs /gpfs23 /gpfs51 /gpfs52 /data /dors /nobackup /tmp);
   if(!$no_home){
-    push(@folders, "/home/\$USER");
+    my $userName =  $ENV{'LOGNAME'};
+    push(@folders, "/home/$userName");
   }
 
   for my $folder (@folders){
@@ -52,6 +60,15 @@ our $VERSION = '0.01';
 
 sub singularity_prefix {
   my ($by_run, $no_home) = @_;
+
+  if(!defined $by_run){
+    $by_run = 0;
+  }
+
+  if(!defined $no_home){
+    $no_home = 0;
+  }
+
   my $cmd = $by_run ? "run" : "exec";
   return("singularity $cmd -c -e -B " . get_binding($no_home) . " -H `pwd` ");
 }
