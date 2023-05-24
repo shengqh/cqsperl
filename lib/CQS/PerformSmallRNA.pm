@@ -129,6 +129,11 @@ sub supplement_genome {
         bowtie1_index => "/data/cqs/references/smallrna/20200415_BugsAll.species",
         species_map => "/data/cqs/references/smallrna/20200415_BugsAll.species.map",
       },
+      "Rice" => {
+        bowtie1_index => "/data/cqs/references/smallrna/rice/bowtie_index_1.3.1/Oryza_sativa.IRGSP-1.0.dna.toplevel",
+        species_map => "/data/cqs/references/smallrna/rice/Oryza_sativa.IRGSP-1.0.dna.toplevel.species.map",
+        gtf => "/data/cqs/references/smallrna/rice/Oryza_sativa.IRGSP-1.0.56.gtf",
+      }
     },
   });
 }

@@ -16,4 +16,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-conda activate /data/cqs/softwares/conda_py3_10
+#conda activate /nobackup/h_cqs/shengq2/.conda/envs/r4
