@@ -9,7 +9,7 @@ with open('/data/cqs/references/smallrna/v202211/HERVd.20221123/HERVd.erv.bed', 
     parts = line.split('\t')
     parts = parts[0:6]
     names = parts[3].replace(',',"_").split(':')
-    name = f"{names[1]}:{names[2]}_{names[0]}"
+    name = f"{names[1]}:{names[2]}"
     parts[3] = name
     erv_lines.append("\t".join(parts) + "\n")
 

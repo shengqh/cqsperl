@@ -47,7 +47,7 @@ my $def = {
   is_paired_end => 0,
 
   perform_cutadapt => 1,
-  adapter          => "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC",    #trueseq adapter
+  adapter          => "AGATCGGAAGAGC",    #trueseq adapter
   cutadapt_option  => "-O 1",
   min_read_length  => 30,
 
@@ -59,7 +59,7 @@ my $def = {
   keep_chromosome   => "chr",
 
   #peak
-  peak_caller => "macs",
+  peak_caller => "macs", #macs or macs2
 
   perform_chipqc     => 1,
   perform_diffbind   => 1,
@@ -118,14 +118,6 @@ my $def = {
   perform_report => 1,
 };
 
-$def->{peak_caller} = "macs";
-my $config = performChIPSeq_gencode_hg38($def, 0);
-$config->{sequencetask}{target_dir} = $def->{target_dir} . "/sequencetask_macs";
-performConfig($config);
-
-$def->{peak_caller} = "macs2";
-$config = performChIPSeq_gencode_hg38($def, 0);
-$config->{sequencetask}{target_dir} = $def->{target_dir} . "/sequencetask_macs2";
-performConfig($config);
+my $config = performChIPSeq_gencode_hg38($def, 1);
 
 1;

@@ -2,6 +2,10 @@
 
 export mybinds='/home,/tmp'
 
+if [[ -e /afs ]]; then
+  export mybinds=$mybinds,/afs
+fi
+
 if [[ -e /panfs ]]; then
   export mybinds=$mybinds,/panfs
 fi

@@ -18,7 +18,7 @@ sub get_binding {
   #print("no_home = $no_home");
 
   my $result = "";
-  my @folders = qw(/panfs /gpfs23 /gpfs51 /gpfs52 /data /dors /nobackup /tmp);
+  my @folders = qw(/panfs /gpfs51 /gpfs52 /data /dors /nobackup /tmp);
   if(!$no_home){
     my $userName =  $ENV{'LOGNAME'};
     push(@folders, "/home/$userName");
@@ -87,6 +87,7 @@ sub global_options {
     report_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/report.sif ",
     sratools_docker_command  => singularity_prefix() . " /data/cqs/softwares/singularity/sra-tools.sif ",
     crc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/novartis.20210408.simg ",
+    genepos_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg ",
   };
 }
 

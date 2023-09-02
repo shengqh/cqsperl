@@ -14,6 +14,7 @@ our %EXPORT_TAGS = (
   'all' => [
     qw(
       PerformEncodeATACSeq_gencode_hg38
+      PerformEncodeATACSeq_gencode_mm10
       )
   ]
 );
@@ -26,7 +27,7 @@ sub global_definition {
   my $result = merge_hash_right_precedent(global_options(), {
     "constraint" => "haswell",
 
-    "docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-encode.sif",
+    "docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-rnaseq.simg",
 
     "use_caper" => 1,
     "encode_option" => "-b local --singularity",
@@ -56,6 +57,12 @@ sub gencode_hg38_genome {
   });
 }
 
+sub gencode_mm10_genome {
+  return merge_hash_right_precedent(global_definition(), {
+    "encode_atacseq_genome_tsv" => "/data/cqs/references/encode-pipeline-genome-data/mm10/mm10.tsv",
+  });
+}
+
 sub init_singularity {
   my ($userdef) = @_;
 
@@ -72,6 +79,16 @@ sub PerformEncodeATACSeq_gencode_hg38 {
   init_singularity($userdef);
 
   my $def = merge_hash_left_precedent($userdef, gencode_hg38_genome());
+  my $config = performEncodeATACseq($def, $perform);
+  return $config;
+}
+
+sub PerformEncodeATACSeq_gencode_mm10 {
+  my ($userdef, $perform) = @_;
+
+  init_singularity($userdef);
+
+  my $def = merge_hash_left_precedent($userdef, gencode_mm10_genome());
   my $config = performEncodeATACseq($def, $perform);
   return $config;
 }
