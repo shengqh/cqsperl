@@ -1,0 +1,6 @@
+Fibroblasts PCOLCE+	CD55, PCOLCE2, PI16
+Fibroblasts MYOC/FMO1/APOE_low	MYOC, ITM2A, FMO1, LSP1, MGP
+Myofibroblast	ASPN, CLU, VIM, POSTN
+Vascular Smooth Muscle VSM	TAGLN,ACTA2,MYH11
+Pericyte	RGS5,COX4I2,PTGFRB
+Preadipocyte	CEBP, PPARG, FABP4

@@ -1,0 +1,5 @@
+Endothelial	CLDN5, PECAM1
+Capillary	CA4, RGCC, CD36, IL7R
+Arterial	HEY1, GJA4, GJA5, CXCL12, BMX
+Venous	ACKR1, VWF, PLVAP
+Lymphatic	LYVE1, PROX1, CCL21

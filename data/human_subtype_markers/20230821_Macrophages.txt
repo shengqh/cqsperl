@@ -1,0 +1,4 @@
+Macrophages	CD163, CD68, PTPRC, CD34, IL1B, MARCO, MRC1, MSR1, LYZ, C1QB
+Lipid-associated Macrophages	TREM2, CD9
+Perivascular Macrophages (LYVE1hi)	RNASE1, LYVE1, MRC1, CD163, FOLR2
+Perivascular Macrophages (LYVE1lo)	CD9, CX3CR1, CXCL16, CD74, HLA-DQA1
