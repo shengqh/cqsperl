@@ -39,7 +39,7 @@ our $VERSION = '5.0';
 sub supplement_genome {
   return merge_hash_right_precedent(global_options(), {
     version    => 5,
-    constraint => "haswell",
+    #constraint => "haswell",
     #cqstools   => "/home/shengq2/cqstools/cqstools.exe",
     docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-smallRNA.simg ",
 

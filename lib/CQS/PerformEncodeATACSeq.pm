@@ -25,12 +25,15 @@ our $VERSION = '0.01';
 
 sub global_definition {
   my $result = merge_hash_right_precedent(global_options(), {
-    "constraint" => "haswell",
+    #"constraint" => "haswell",
 
-    "docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-rnaseq.simg",
+    "docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-smallRNA.simg",
+    "report_docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/report.sif",
+    "croo_docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-encode.sif",
 
     "use_caper" => 1,
-    "encode_option" => "-b local --singularity",
+    "encode_option" => "--backend-file /data/cqs/softwares/cqsperl/config/caper/backend.conf --singularity",
+    #"encode_option" => "--singularity",
     "encode_atac_walltime" => "48",
     "atac.singularity" => "/data/cqs/softwares/singularity/atac-seq-pipeline.v2.2.2.sif",
     "croo_out_def_json" => "/data/cqs/softwares/encode/atac-seq-pipeline.v2.2.2/atac.croo.v5.json",

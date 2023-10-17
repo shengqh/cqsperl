@@ -93,7 +93,7 @@ sub add_human_gsea {
 
 sub global_definition {
   my $result = merge_hash_right_precedent(global_options(), {
-    constraint                => "haswell",
+    #constraint                => "haswell",
     perform_star_featurecount => 1,
     perform_qc3bam            => 0,
     qc3_perl                  => "/data/cqs/softwares/QC3/qc3.pl",

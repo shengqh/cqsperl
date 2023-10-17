@@ -25,10 +25,10 @@ our $VERSION = '0.01';
 
 sub global_definition {
   my $result = merge_hash_right_precedent(global_options(), {
-    constraint                => "haswell",
+    #constraint                => "haswell",
     docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.simg ",
 
-    pipseeker_docker_command => singularity_prefix(1, 1) . " /data/cqs/softwares/singularity/fluent-pipseeker_1.0.0.sif",
+    pipseeker_docker_command => singularity_prefix(1, 1) . " /data/cqs/softwares/singularity/fluent-pipseeker_2.1.4.sif",
 
     perform_individual_qc => 1,
 
