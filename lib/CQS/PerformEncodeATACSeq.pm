@@ -27,7 +27,7 @@ sub global_definition {
   my $result = merge_hash_right_precedent(global_options(), {
     #"constraint" => "haswell",
 
-    "docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-smallRNA.simg",
+    "docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg",
     "report_docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/report.sif",
     "croo_docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-encode.sif",
 
