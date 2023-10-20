@@ -1,1 +1,2 @@
-singularity build --disable-cache dnmtools.1.0.sif docker://alfredshawn/dnmtools:1.0
+singularity build --disable-cache cqs-dnmtools.20231019.sif docker://shengqh/cqs_dnmtools:20231019
+
