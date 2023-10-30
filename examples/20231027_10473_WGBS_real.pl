@@ -12,39 +12,44 @@ use Hash::Merge qw( merge );
 
 my $def = {
   task_name           => "P10473",
-  email               => "lk.stolze\@vumc.org",
+  email               => "quanhu.sheng.1\@vumc.org",
   emailType           => "FAIL",
-  target_dir          => "/nobackup/h_cqs/shengq2/temp/20231024_10473_WGBS",
+  target_dir          => "/nobackup/h_cqs/shengq2/temp/20231027_10473_WGBS_real",
 
   files => {
-    "C002_Control" => [ "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0002b_S1_L005_R1_001.fastq.gz", "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0002b_S1_L005_R2_001.fastq.gz" ],
-    "C003_Control" => [ "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0001b_S1_L005_R1_001.fastq.gz", "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0001b_S1_L005_R2_001.fastq.gz" ],
-    "E012_PAD" => [ "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0010b_S1_L005_R1_001.fastq.gz", "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0010b_S1_L005_R2_001.fastq.gz" ],
+    "A1" => [ "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0001b_S1_L005_R1_001.fastq.gz", "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0001b_S1_L005_R2_001.fastq.gz" ],
+    "A2" => [ "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0002b_S1_L005_R1_001.fastq.gz", "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0002b_S1_L005_R2_001.fastq.gz" ],
+    "B1" => [ "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0009b_S1_L005_R1_001.fastq.gz", "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0009b_S1_L005_R2_001.fastq.gz" ],
+    "B2" => [ "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0010b_S1_L005_R1_001.fastq.gz", "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0010b_S1_L005_R2_001.fastq.gz" ],
+  },
 
-  },
-  groups => {
-    "Control" => [ 'C002_Control', 'C003_Control' ], 
-    "PAD" => [ 'E012_PAD' ]
-  },
+  #group definition
+  groups_pattern => "(.).",
+
+  #comparison
   pairs => {
     #control first, then treatment
-    "PAD_vs_Control" => [ 'Control', 'PAD' ],
+    "B_vs_A" => [ 'A', 'B' ],
+    #just for test.
+    #"A_vs_B" => [ 'B', 'A' ],
   },
 
+  methylDiff_difference => 25,
+  methylDiff_qvalue => 0.01,
+
+  #can set trimgalore_option => "--illumina" to use trueseq adapter AGATCGGAAGAGC
+  #can set trimgalore_option => "--nextera" to use nextera adapter CTGTCTCTTATA
+  trimgalore_option => "", #empty means auto-detection of adapter
+  trimgalore_do_fastqc => 1,
+
   interval_list => "/nobackup/brown_lab/projects/20231006_10473_DNAMethyl_hg38/covered_targets_Twist_Methylome_hg38_annotated_collapsed.intervals",
-  meta_file => "/data/cqs/shengq2/program/cqsperl/examples/20231006_10473_WGBS.meta.tsv",
+  meta_file => "/data/cqs/shengq2/program/cqsperl/examples/20231027_10473_WGBS_real.meta.tsv",
   #use_tmp_folder => 1,
+
+  dnmtools_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-dnmtools.20231026.sif ",
 };
 
-my $USE_NEW_DNMTOOLS = 1;
-
-if($USE_NEW_DNMTOOLS){
-  $def->{dnmtools_command} = singularity_prefix() . " /data/cqs/softwares/singularity/cqs-dnmtools.20231023.sif dnmtools";
-  $def->{target_dir} = "/nobackup/h_cqs/shengq2/temp/20231024_10473_WGBS_new_dnmtools";
-  performWGBS_gencode_hg38($def, 1);
-}else{  
-  my $config = performWGBS_gencode_hg38($def, 1);
-}
+my $config = performWGBS_gencode_hg38($def, 1);
 
 1;
 
