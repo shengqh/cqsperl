@@ -43,6 +43,7 @@ our %EXPORT_TAGS = (
     qw(
       get_binding
       singularity_prefix
+      images
       global_options
       mm10_options
       hg19_options
@@ -57,6 +58,12 @@ our %EXPORT_TAGS = (
 our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
 our $VERSION = '0.01';
+
+sub images {
+  return {
+    exomeseq => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.20231031.sif "
+  }
+}
 
 sub singularity_prefix {
   my ($by_run, $no_home) = @_;
@@ -77,7 +84,7 @@ sub global_options {
   return {
     #constraint => "haswell",
     sratoolkit_setting_file => "/data/cqs/softwares/cqsperl/config/vdb-config/user-settings.mkfg",
-    BWA_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
+    BWA_docker_command => images()->{"exomeseq"},
     bamplot_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/bamplot.simg ",
     chipqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.chipqc.simg ",
     gatk4_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-gatk4.simg ",

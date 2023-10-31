@@ -38,7 +38,7 @@ sub global_definition {
     #gatk4_docker_init    => "source activate gatk  ",
     gotc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/gotc.latest.simg ",
 
-    docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.20220719.sif ",
+    docker_command => images()->{"exomeseq"},
     mafreport_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/mafreport.simg ",
     docker_init    => "",
     gatk3_jar      => "/opt/gatk3.jar",

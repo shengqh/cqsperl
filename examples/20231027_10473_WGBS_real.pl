@@ -14,7 +14,7 @@ my $def = {
   task_name           => "P10473",
   email               => "quanhu.sheng.1\@vumc.org",
   emailType           => "FAIL",
-  target_dir          => "/nobackup/h_cqs/shengq2/temp/20231027_10473_WGBS_real",
+  target_dir          => "/nobackup/h_cqs/shengq2/temp/20231030_10473_WGBS_real",
 
   files => {
     "A1" => [ "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0001b_S1_L005_R1_001.fastq.gz", "/data/jbrown_lab/2023/20231006_Freiberg_10473_methylation/poolA_samples0001-0048/10473-AS-0001b_S1_L005_R2_001.fastq.gz" ],
@@ -45,8 +45,6 @@ my $def = {
   interval_list => "/nobackup/brown_lab/projects/20231006_10473_DNAMethyl_hg38/covered_targets_Twist_Methylome_hg38_annotated_collapsed.intervals",
   meta_file => "/data/cqs/shengq2/program/cqsperl/examples/20231027_10473_WGBS_real.meta.tsv",
   #use_tmp_folder => 1,
-
-  dnmtools_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-dnmtools.20231026.sif ",
 };
 
 my $config = performWGBS_gencode_hg38($def, 1);

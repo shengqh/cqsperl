@@ -26,7 +26,7 @@ our $VERSION = '0.01';
 sub chipseq_options {
   return {
     docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg ",
-    annovar_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
+    annovar_docker_command => images()->{"exomeseq"},
     picard_jar     => "/opt/picard.jar",
 
     perform_cutadapt => 0,

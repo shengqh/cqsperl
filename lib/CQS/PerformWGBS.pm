@@ -24,8 +24,8 @@ our $VERSION = '0.01';
 
 sub global_definition {
   my $result = merge_hash_right_precedent(global_options(), {
-    #dnmtools_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-dnmtools.sif ",
-    #dnmtools_command => singularity_prefix() . " /data/cqs/softwares/singularity/dnmtools.1.0.sif dnmtools",
+    docker_command => images()->{"exomeseq"},
+    dnmtools_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-dnmtools.20231026.sif ",
   });
 
   return($result);
