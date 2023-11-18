@@ -95,6 +95,7 @@ sub global_options {
     sratools_docker_command  => singularity_prefix() . " /data/cqs/softwares/singularity/sra-tools.sif ",
     crc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/novartis.20210408.simg ",
     genepos_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg ",
+    fastq_screen_configuration_file => "/data/cqs/softwares/FastQ-Screen/fastq_screen.conf",
   };
 }
 
@@ -125,6 +126,8 @@ sub mm10_options {
 
     #visualization
     bamplot_option  => "-g MM10 -y uniform --save-temp",
+    dataset_name => "mm10",
+    add_chr => 1,
 
     bamsnap_option => "",
     bamsnap_raw_option => {
@@ -158,6 +161,8 @@ sub hg19_options {
 
     #visualization
     bamplot_option  => "-g HG19 -y uniform --save-temp",
+    dataset_name => "hg19",
+    add_chr => 1,
 
     bamsnap_option => "",
     bamsnap_raw_option => {
@@ -196,6 +201,8 @@ sub hg38_options {
 
     #visualization
     bamplot_option  => "-g HG38 -y uniform --save-temp",
+    dataset_name => "hg38",
+    add_chr => 1,
 
     bamsnap_option => "",
     bamsnap_raw_option => {
@@ -240,6 +247,7 @@ sub gencode_hg38_databases {
 sub gencode_mm10_databases {
   return {
     #aligner database
+    fasta_file => "/data/cqs/references/gencode/GRCm38.p6/GRCm38.primary_assembly.genome.fa",
     bowtie2_index => "/data/cqs/references/gencode/GRCm38.p6/bowtie2_index_2.4.3/GRCm38.primary_assembly.genome",
     bowtie1_fasta => "/data/cqs/references/gencode/GRCm38.p6/bowtie_index_1.3.0/GRCm38.primary_assembly.genome.fa",
     bowtie1_index => "/data/cqs/references/gencode/GRCm38.p6/bowtie_index_1.3.0/GRCm38.primary_assembly.genome",

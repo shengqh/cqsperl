@@ -1,3 +1,9 @@
 #!/bin/bash
-curl -L http://cpanmin.us | perl - $1 $2 $3
+
+if [[ $HOSTNAME == 'cqs1.vampire' || $HOSTNAME == 'cqs3.vampire' ]]; then
+  curl -L http://cpanmin.us | perl - -l /nobackup/h_vangard_1/shengq2/perl5_cqs13lib/ $1 $2 $3
+else
+  curl -L http://cpanmin.us | perl - -l /data/cqs/softwares/perl5_lib/ $1 $2 $3
+fi
+
 

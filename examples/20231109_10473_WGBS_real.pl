@@ -24,10 +24,10 @@ my $def = {
   },
 
   #group definition
-  groups_pattern => "(.).",
+  _groups_pattern => "(.).",
 
   #comparison
-  pairs => {
+  _pairs => {
     #control first, then treatment
     "B_vs_A" => [ 'A', 'B' ],
     #just for test.
