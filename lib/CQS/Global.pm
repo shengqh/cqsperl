@@ -96,6 +96,8 @@ sub global_options {
     crc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/novartis.20210408.simg ",
     genepos_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg ",
     fastq_screen_configuration_file => "/data/cqs/softwares/FastQ-Screen/fastq_screen.conf",
+
+    cellbender_docker_command => singularity_prefix() . " /nobackup/h_cqs/softwares/singularity/cellbender.0.3.0.sif ",
   };
 }
 
