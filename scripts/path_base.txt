@@ -28,11 +28,12 @@ module load FFTW/3.3.8
 module load GSL/2.6
 
 export SINGULARITY_TMPDIR=/nobackup/h_cqs/singularity_home/temp
+export softwares=/nobackup/h_cqs/softwares
 
 if [[ $HOSTNAME == 'cqs1.vampire' || $HOSTNAME == 'cqs3.vampire' ]]; then
-  MY_PERL_LIB=/data/cqs/softwares/ngsperl/lib/:/data/cqs/softwares/cqsperl/lib/:/nobackup/h_vangard_1/shengq2/perl5_cqs13lib/lib/perl5
+  MY_PERL_LIB=$softwares/ngsperl/lib:$softwares/cqsperl/lib:/nobackup/h_vangard_1/shengq2/perl5_cqs13lib/lib/perl5
 else
-  MY_PERL_LIB=/data/cqs/softwares/ngsperl/lib/:/data/cqs/softwares/cqsperl/lib/:/data/cqs/softwares/perl5_lib/lib/perl5/
+  MY_PERL_LIB=$softwares/ngsperl/lib:$softwares/cqsperl/lib:$softwares/perl5_lib/lib/perl5
 fi
 
 if [ -z "$PERL5LIB" ]
@@ -42,7 +43,7 @@ else
   export PERL5LIB=$MY_PERL_LIB:$PERL5LIB
 fi
 
-MYINCLUDE=/data/cqs/softwares/local/include
+MYINCLUDE=$softwares/local/include
 if [ -z "$C_INCLUDE_PATH" ]
 then
   export C_INCLUDE_PATH=$MYINCLUDE
@@ -64,7 +65,7 @@ else
   export CPLUS_INCLUDE_PATH=$MYINCLUDE:$C_INCLUDE_PATH
 fi
 
-MYLIB=/data/cqs/softwares/local/lib
+MYLIB=$softwares/local/lib
 if [ -z "$LD_LIBRARY_PATH" ]
 then
   export LD_LIBRARY_PATH=$MYLIB
@@ -79,12 +80,12 @@ else
   export LIBRARY_PATH=$MYLIB:$LIBRARY_PATH
 fi
 
-MYBIN=/data/cqs/softwares/FastQ-Screen:/data/cqs/softwares/subread/bin:/data/cqs/softwares/FastQC:/data/cqs/softwares/annovar:/data/cqs/softwares/salmon/bin:/data/cqs/softwares/Recon:/data/cqs/softwares/GSEA:/data/cqs/softwares/homer/bin:/data/cqs/softwares/dotnet:/data/cqs/softwares/sratoolkit/bin:/data/cqs/softwares/gatk:/data/cqs/softwares/strelka-2.9.10.centos6_x86_64/bin:/data/cqs/softwares/ngsperl/bin/:/data/cqs/softwares/cqsperl/scripts:/data/cqs/softwares/local/bin:/data/cqs/softwares/bowtie:/data/cqs/softwares/cellranger-7.2.0/bin:/data/cqs/softwares/edirect
+MYBIN=$softwares/cqsperl/bin:$softwares/FastQ-Screen:$softwares/subread/bin:$softwares/FastQC:$softwares/annovar:$softwares/salmon/bin:$softwares/Recon:$softwares/GSEA:$softwares/homer/bin:$softwares/dotnet:$softwares/sratoolkit/bin:$softwares/gatk:$softwares/strelka-2.9.10.centos6_x86_64/bin:$softwares/ngsperl/bin/:$softwares/cqsperl/scripts:$softwares/local/bin:$softwares/bowtie:$softwares/cellranger-7.2.0/bin:$softwares/edirect
 export PATH=$MYBIN:$PATH
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/gpfs52/data/cqs/softwares/google-cloud-sdk/path.bash.inc' ]; then . '/gpfs52/data/cqs/softwares/google-cloud-sdk/path.bash.inc'; fi
+if [ -f '/gpfs52$softwares/google-cloud-sdk/path.bash.inc' ]; then . '/gpfs52$softwares/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/gpfs52/data/cqs/softwares/google-cloud-sdk/completion.bash.inc' ]; then . '/gpfs52/data/cqs/softwares/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f '/gpfs52$softwares/google-cloud-sdk/completion.bash.inc' ]; then . '/gpfs52$softwares/google-cloud-sdk/completion.bash.inc'; fi
 
