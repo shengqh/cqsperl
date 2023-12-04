@@ -1,7 +1,12 @@
 #!/bin/bash
 
-source /nobackup/h_cqs/softwares/cqsperl/scripts/binds.sh
+sif=/nobackup/h_cqs/softwares/singularity/cqs_bioconductor.sif
 
-rimg=/nobackup/h_cqs/softwares/singularity/cqs_bioconductor.3_17_R_4_3_0.20230611.sif
+rlib_path=/nobackup/h_cqs/rlibs/$USER
+if [[ ! -s $rlib_path ]]; then
+  mkdir -p $rlib_path
+fi
 
-singularity exec -c -e -B $mybinds --pwd `pwd` --env LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-11-openjdk-amd64/lib/server --env R_LIBS="/nobackup/h_cqs/rlibs/$USER" $rimg R $@
+ulimit -u 10000
+
+singularity exec -c -e -B $mybinds -H `pwd` --env LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-11-openjdk-amd64/lib/server --env R_LIBS="$rlib_path" $sif R $@
