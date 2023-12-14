@@ -1,4 +1,5 @@
-export softwares=/nobackup/h_cqs/softwares
+#export softwares=/nobackup/h_cqs/softwares
+export softwares=/data/cqs/softwares
 
 source $softwares/cqsperl/scripts/binds.sh
 export SING_OPTION="exec -e -B $mybinds"

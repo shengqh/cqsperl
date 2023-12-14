@@ -28,7 +28,8 @@ module load FFTW/3.3.8
 module load GSL/2.6
 
 export SINGULARITY_TMPDIR=/nobackup/h_cqs/singularity_home/temp
-export softwares=/nobackup/h_cqs/softwares
+#export softwares=/nobackup/h_cqs/softwares
+export softwares=/data/cqs/softwares
 
 if [[ $HOSTNAME == 'cqs1.vampire' || $HOSTNAME == 'cqs3.vampire' ]]; then
   MY_PERL_LIB=$softwares/ngsperl/lib:$softwares/cqsperl/lib:/nobackup/h_vangard_1/shengq2/perl5_cqs13lib/lib/perl5
@@ -80,11 +81,11 @@ else
   export LIBRARY_PATH=$MYLIB:$LIBRARY_PATH
 fi
 
-MYBIN=$softwares/mixcr:$softwares/cqsperl/bin:$softwares/FastQ-Screen:$softwares/subread/bin:$softwares/FastQC:$softwares/annovar:$softwares/salmon/bin:$softwares/Recon:$softwares/GSEA:$softwares/homer/bin:$softwares/dotnet:$softwares/sratoolkit/bin:$softwares/gatk:$softwares/strelka-2.9.10.centos6_x86_64/bin:$softwares/ngsperl/bin/:$softwares/cqsperl/scripts:$softwares/local/bin:$softwares/bowtie:$softwares/cellranger-7.2.0/bin:$softwares/edirect
+MYBIN=$softwares/aws-cli/v2/current/dist:$softwares/mixcr:$softwares/cqsperl/bin:$softwares/FastQ-Screen:$softwares/subread/bin:$softwares/FastQC:$softwares/annovar:$softwares/salmon/bin:$softwares/Recon:$softwares/GSEA:$softwares/homer/bin:$softwares/dotnet:$softwares/sratoolkit/bin:$softwares/gatk:$softwares/strelka-2.9.10.centos6_x86_64/bin:$softwares/ngsperl/bin/:$softwares/cqsperl/scripts:$softwares/local/bin:$softwares/bowtie:$softwares/cellranger-7.2.0/bin:$softwares/edirect
 export PATH=$MYBIN:$PATH
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '$softwares/google-cloud-sdk/path.bash.inc' ]; then . '$softwares/google-cloud-sdk/path.bash.inc'; fi
+if [ -f "$softwares/google-cloud-sdk/path.bash.inc" ]; then . "$softwares/google-cloud-sdk/path.bash.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '$softwares/google-cloud-sdk/completion.bash.inc' ]; then . '$softwares/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f "$softwares/google-cloud-sdk/completion.bash.inc" ]; then . "$softwares/google-cloud-sdk/completion.bash.inc"; fi
