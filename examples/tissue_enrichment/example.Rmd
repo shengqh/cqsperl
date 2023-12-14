@@ -1,0 +1,109 @@
+---
+title: "Target Gene Enrichment Report"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+ rmdformats::readthedown:
+    toc_depth: 3
+    code_folding: hide
+---
+
+```{r,eval=FALSE,echo=FALSE}
+library(xfun)
+root_dir = '/nobackup/h_cqs/shengq2/temp/tissue_enrichment_report'
+dir.create(root_dir, showWarnings=FALSE)
+
+setwd(root_dir)
+
+file.copy("/nobackup/h_cqs/shengq2/program/cqsperl/examples/tissue_enrichment/example.Rmd", "./", overwrite=TRUE)
+file.copy("/nobackup/h_cqs/shengq2/program/cqsperl/examples/tissue_enrichment/tissue_enrichment.Rmd", "./", overwrite=TRUE)
+
+date_str = format(Sys.time(), "%Y%m%d")
+
+xfun::Rscript_call(
+  rmarkdown::render,
+  list(input="example.Rmd",
+       output_file=paste0(date_str, "_example.html"))
+)
+```
+
+```{css, echo=FALSE}
+#content{
+    max-width:1920px;
+}
+```
+
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+root_dir = '/nobackup/h_cqs/shengq2/temp/tissue_enrichment_report'
+
+library(knitr)
+library(data.table)
+
+knitr::opts_chunk$set(
+  include=TRUE, 
+  echo=FALSE, 
+  warning=FALSE, 
+  message=FALSE, 
+  results="asis"
+)
+
+date_str = format(Sys.time(), "%Y%m%d")
+
+knitr::opts_knit$set(root.dir = root_dir)
+setwd(root_dir)
+```
+
+```{r include=FALSE}
+#set up those variables in main RMD file
+code_folder="/nobackup/h_cqs/jstolze/General_scripts/TissueExpression_combined/Functions"
+prefix="test"
+
+gene_exp_file = "/nobackup/h_cqs/references/tissue_specific/20230627_tabula_logNorm_averageExpression_matrix_by_tissueOnly.txt.gz"
+
+pathway_analysis_sets = c("KEGG","Reactome")
+
+fromType = "SYMBOL" #target and background genes
+toType = "ENTREZID" #pathway analysis db ids
+organism="mmu"
+OrgDb="org.Mm.eg.db"
+
+database_gene = "ENSEMBL" #What gene annotation is in the gene_exp file
+xaxis_enrichment = "" #If string, will pull column of that name from target/background
+colNameGenes = "EntrezGeneSymbol"
+singDirection = ""
+
+perform_pathway = T
+perform_tissue_specificity = T
+perform_gene_exp_heatmap = T
+perform_gene_exp_5perc = T
+perform_gene_exp_enrichment = F
+perform_singscore = F
+```
+
+# Top 200 genes
+
+```{r, eval=TRUE}
+target_genes=fread("/nobackup/h_cqs/shengq2/program/cqsperl/data/ObObEthionine_vs_ObObChow_min5_fdr0.05_DESeq2_GSEA.rnk")$V1[1:200]
+background_genes=fread("/nobackup/h_cqs/shengq2/program/cqsperl/data/ObObEthionine_vs_ObObChow_min5_fdr0.05_DESeq2_GSEA.rnk")$V1
+```
+
+```{r child="tissue_enrichment.Rmd", eval=TRUE}
+```
+
+# Middle 1000
+
+```{r, eval=TRUE}
+# 101-200 genes
+library(data.table)
+target_genes=fread("/nobackup/h_cqs/shengq2/program/cqsperl/data/ObObEthionine_vs_ObObChow_min5_fdr0.05_DESeq2_GSEA.rnk")$V1[1000:1500]
+background_genes=fread("/nobackup/h_cqs/shengq2/program/cqsperl/data/ObObEthionine_vs_ObObChow_min5_fdr0.05_DESeq2_GSEA.rnk")$V1
+```
+
+```{r child="tissue_enrichment.Rmd", eval=TRUE}
+```
+
+# Save the session information
+
+```{r}
+writeLines(capture.output(sessionInfo()), paste0(prefix, '.sessionInfo.txt'))
+```
+

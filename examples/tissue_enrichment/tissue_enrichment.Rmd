@@ -1,0 +1,187 @@
+```{r eval=FALSE}
+#set up those variables in main RMD file
+#set up those variables in main RMD file
+code_folder="/nobackup/h_cqs/jstolze/General_scripts/TissueExpression_combined/Functions"
+prefix="test"
+
+gene_exp_file = "/nobackup/h_cqs/references/tissue_specific/20230627_tabula_logNorm_averageExpression_matrix_by_tissueOnly.txt.gz"
+
+pathway_analysis_sets = c("KEGG","Reactome")
+
+fromType = "SYMBOL" #target and background genes
+toType = "ENTREZID" #pathway analysis db ids
+organism="mmu"
+OrgDb="org.Mm.eg.db"
+
+database_gene = "ENSEMBL" #What gene annotation is in the gene_exp file
+xaxis_enrichment = "" #If string, will pull column of that name from target/background
+colNameGenes = "EntrezGeneSymbol"
+singDirection = ""
+
+perform_pathway = T
+perform_tissue_specificity = T
+perform_gene_exp_heatmap = T
+perform_gene_exp_5perc = T
+perform_gene_exp_enrichment = F
+perform_singscore = F
+```
+
+```{r}
+stopifnot(exists("code_folder"))
+
+#make sure all required variables are defined
+stopifnot(exists("prefix"))
+
+#target_genes is a list of genes that will be the testing set that we will look at where the background_genes is the full list of genes that were tested to get the target genes.
+stopifnot(exists("target_genes"))
+stopifnot(exists("background_genes"))
+stopifnot(exists("organism"))
+stopifnot(exists("OrgDb"))
+
+#Options 
+stopifnot(exists("pathway_analysis_sets"))
+stopifnot(exists("fromType"))
+stopifnot(exists("toType"))
+stopifnot(exists("database_gene"))
+stopifnot(exists("colNameGenes"))
+stopifnot(exists("singDirection"))
+
+#What analyses do you want done?
+# perform_pathway = T
+# perform_tissue_specificity = T
+# perform_gene_exp_heatmap = T
+# perform_gene_exp_5perc = T
+# perform_gene_exp_enrichment = F
+# perform_singscore = F
+stopifnot(exists("perform_pathway"))
+stopifnot(exists("perform_tissue_specificity"))
+stopifnot(exists("perform_gene_exp_heatmap"))
+stopifnot(exists("perform_gene_exp_5perc"))
+stopifnot(exists("perform_gene_exp_enrichment"))
+stopifnot(exists("perform_singscore"))
+
+if(perform_gene_exp_heatmap | perform_gene_exp_5perc | perform_gene_exp_enrichment){
+  #gene_exp_file should be the database to compare to (rows = genes, columns = celltypes/tissues/samples) WILL NOT BE USED IF ALL gene_exp OPTIONS ARE 'F'
+  #gene_exp_file = "/nobackup/h_cqs/references/tissue_specific/20230627_tabula_logNorm_averageExpression_matrix_by_tissueOnly.txt.gz"
+  if(!exists("gene_exp_file")){
+    has_gene_exp_file = F
+  }else{
+    if(is.null(gene_exp_file)){
+      has_gene_exp_file = F
+    }else{
+      if(!file.exists(gene_exp_file)){
+        stop(paste0("gene_exp_file does not exist: ", gene_exp_file))
+      }else{
+        has_gene_exp_file = T
+      }
+    }
+  }
+
+  if(!has_gene_exp_file){
+    stop("No gene expression file provided, but gene expression analysis is to be performed. Please provide the link to a file to perform this analysis.")
+  }
+}
+
+if(perform_gene_exp_enrichment){
+  stopifnot(exists("xaxis_enrichment"))
+  if(is.null(xaxis_enrichment)){
+    stop("No xaxis_enrichment value provided, but perform_gene_exp_enrichment is to be performed. Please provide the stat to put on the x-axis to perform this task.")
+  }
+}
+```
+
+```{r}
+load_install<-function(library_name, library_sources=library_name){
+  if(!require(library_name, character.only = T)){
+    BiocManager::install(library_sources, ask=FALSE)
+  }
+  library(library_name, character.only = T)
+}
+
+load_install("tools")
+load_install("ggplot2")
+load_install("gplots")
+load_install("ggpubr")
+load_install("ggrepel")
+load_install("AnnotationDbi")
+load_install("org.Hs.eg.db")
+load_install("data.table")
+load_install("reshape2")
+load_install("ComplexHeatmap")
+load_install("viridis")
+load_install("pander")
+load_install("clusterProfiler")
+load_install("ReactomePA")
+load_install("tidytext")
+load_install("kableExtra")
+load_install("singscore")
+load_install("TissueEnrich")
+load_install("circlize")
+load_install("deTS")
+load_install("RColorBrewer")
+```
+
+```{r}
+source(paste0(code_folder, "/gene_exp_functions.R"))
+source(paste0(code_folder, "/tissue_spec_functions.R"))
+source("https://raw.githubusercontent.com/shengqh/ngsperl/master/lib/CQS/reportFunctions.R")
+source("https://raw.githubusercontent.com/shengqh/ngsperl/master/lib/CQS/countTableVisFunctions.R")
+#source("/nobackup/h_cqs/shengq2/program/ngsperl/lib/Annotation/enrichmentByClusterProfiler.R")
+source("https://raw.githubusercontent.com/shengqh/ngsperl/master/lib/Annotation/enrichmentByClusterProfiler.R")
+```
+
+```{r, eval=perform_pathway, error=FALSE, warning=FALSE}
+if(!exists("pathway_width")){
+  pathway_width=6
+}
+if(!exists("pathway_height")){
+  pathway_height=4
+}
+
+cat("\n\n## Pathway Analysis \n\n")
+res<-do_pathway(genes=target_genes,
+                universe=background_genes,
+                modules=pathway_analysis_sets,
+                organism=organism,
+                fromType=fromType,
+                toType=toType,
+                OrgDb=OrgDb)
+dataForPlotList=res$dataForPlot
+```
+
+```{r, eval=perform_pathway, error=FALSE, warning=FALSE}
+rmd=""
+pname=pathway_analysis_sets[1]
+for(pname in pathway_analysis_sets){
+  lst=show_pathway(
+    dataForPlotList=dataForPlotList,
+    pname=pname,
+    prefix=prefix, 
+    pathway_width=pathway_width, 
+    pathway_height=pathway_height)
+
+  rmd=paste0(rmd, "\n\n### ", pname, "\n\n")
+  if(nrow(lst$res_tbl) == 0){
+    rmd=paste0(rmd, "No enriched pathways found.\n\n")
+  }else{
+    rmd=paste0(rmd, getTable(lst$csv))
+  }
+
+  if(is.null(lst$png)){
+    rmd=paste0(rmd, "No valid pathways found.\n\n")
+  }else{
+    rmd=paste0(rmd, getFigure_width_height(lst$png, fig.width=pathway_width, fig.height=pathway_height))
+  }
+}
+pathway_file=paste0(prefix,"_pathway.rmd")
+writeLines(rmd, pathway_file)
+```
+
+```{r child=pathway_file, eval=perform_pathway}
+```
+
+```{r, eval=FALSE}
+if(perform_gene_exp_heatmap | perform_gene_exp_5perc | perform_gene_exp_enrichment){
+  geneExprTab<-read.delim(gene_exp_file, sep = "\t", header = T, as.is = T, stringsAsFactors = F, row.names = 1)
+}
+```
