@@ -24,10 +24,10 @@ my $def = {
   },
 
   #group definition
-  _groups_pattern => "(.).",
+  groups_pattern => "(.).",
 
   #comparison
-  _pairs => {
+  pairs => {
     #control first, then treatment
     "B_vs_A" => [ 'A', 'B' ],
     #just for test.
@@ -42,11 +42,14 @@ my $def = {
   trimgalore_option => "", #empty means auto-detection of adapter
   trimgalore_do_fastqc => 1,
 
-  interval_list => "/nobackup/brown_lab/projects/20231006_10473_DNAMethyl_hg38/covered_targets_Twist_Methylome_hg38_annotated_collapsed.intervals",
-  meta_file => "/data/cqs/shengq2/program/cqsperl/examples/20231027_10473_WGBS_real.meta.tsv",
+  interval_list => "/nobackup/h_cqs/shengq2/program/collaborations/jonathan_brown/20231113_10473_DNAMethyl_hg38/covered_targets_Twist_Methylome_hg38_annotated_collapsed.intervals",
+  #meta_file => "/data/cqs/shengq2/program/cqsperl/examples/20231027_10473_WGBS_real.meta.tsv",
   #use_tmp_folder => 1,
 
-  add_folder_index => 1,  
+  add_folder_index => 0,  
+  abismal_walltime => "48",
+  perform_fastqc => 1,
+  perform_paired_end_validation => 0,
 };
 
 my $config = performWGBS_gencode_hg38($def, 1);
