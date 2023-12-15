@@ -37,6 +37,7 @@ root_dir = '/nobackup/h_cqs/shengq2/temp/tissue_enrichment_report'
 
 library(knitr)
 library(data.table)
+library(dplyr)
 
 knitr::opts_chunk$set(
   include=TRUE, 
@@ -58,47 +59,50 @@ code_folder="/nobackup/h_cqs/jstolze/General_scripts/TissueExpression_combined/F
 prefix="test"
 
 gene_exp_file = "/nobackup/h_cqs/references/tissue_specific/20230627_tabula_logNorm_averageExpression_matrix_by_tissueOnly.txt.gz"
+proteinAtlasDatabaseFile = "/nobackup/h_cqs/references/tissue_specific/proteinatlas.tsv.zip"
 
-pathway_analysis_sets = c("KEGG","Reactome")
+pathway_analysis_sets = c("KEGG", "Reactome", "WikiPathways")
 
 fromType = "SYMBOL" #target and background genes
 toType = "ENTREZID" #pathway analysis db ids
-organism="mmu"
-OrgDb="org.Mm.eg.db"
+#organism="mmu"
+#OrgDb="org.Mm.eg.db"
+organism="hsa"
+OrgDb="org.Hs.eg.db"
 
 database_gene = "ENSEMBL" #What gene annotation is in the gene_exp file
 xaxis_enrichment = "" #If string, will pull column of that name from target/background
 colNameGenes = "EntrezGeneSymbol"
 singDirection = ""
 
-perform_pathway = T
+perform_pathway = F
+
 perform_tissue_specificity = T
+
 perform_gene_exp_heatmap = T
 perform_gene_exp_5perc = T
 perform_gene_exp_enrichment = F
 perform_singscore = F
 ```
 
-# Top 200 genes
+# Top 500 genes
 
 ```{r, eval=TRUE}
-target_genes=fread("/nobackup/h_cqs/shengq2/program/cqsperl/data/ObObEthionine_vs_ObObChow_min5_fdr0.05_DESeq2_GSEA.rnk")$V1[1:200]
-background_genes=fread("/nobackup/h_cqs/shengq2/program/cqsperl/data/ObObEthionine_vs_ObObChow_min5_fdr0.05_DESeq2_GSEA.rnk")$V1
+rnk_file="/nobackup/h_cqs/shengq2/program/cqsperl/data/Cardiomyocyte.AS_vs_Control_GSEA.rnk"
+background_genes=fread(rnk_file)$V1
+target_genes=background_genes[1:500]
 ```
 
 ```{r child="tissue_enrichment.Rmd", eval=TRUE}
 ```
 
-# Middle 1000
-
-```{r, eval=TRUE}
-# 101-200 genes
-library(data.table)
-target_genes=fread("/nobackup/h_cqs/shengq2/program/cqsperl/data/ObObEthionine_vs_ObObChow_min5_fdr0.05_DESeq2_GSEA.rnk")$V1[1000:1500]
-background_genes=fread("/nobackup/h_cqs/shengq2/program/cqsperl/data/ObObEthionine_vs_ObObChow_min5_fdr0.05_DESeq2_GSEA.rnk")$V1
+```{r, eval=FALSE}
+cat("\n\n# Bottom 500\n\n")
+background_genes=fread(rnk_file)$V1
+target_genes=background_genes[(length(background_genes)-500): length(background_genes)]
 ```
 
-```{r child="tissue_enrichment.Rmd", eval=TRUE}
+```{r child="tissue_enrichment.Rmd", eval=FALSE}
 ```
 
 # Save the session information
