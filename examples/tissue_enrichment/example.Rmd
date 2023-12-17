@@ -30,6 +30,7 @@ copy_or_download<-function(source){
 copy_or_download("/nobackup/h_cqs/shengq2/program/cqsperl/examples/tissue_enrichment/example.Rmd")
 
 lib_folder="https://raw.githubusercontent.com/shengqh/ngsperl/master/lib"
+#lib_folder="/nobackup/h_cqs/shengq2/program/ngsperl/lib"
 copy_or_download(paste0(lib_folder, "/Report/pathway.Rmd"))
 copy_or_download(paste0(lib_folder, "/Report/gene_exp.Rmd"))
 copy_or_download(paste0(lib_folder, "/Report/tissue_specificity.Rmd"))
