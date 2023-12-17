@@ -5,6 +5,7 @@ output:
  rmdformats::readthedown:
     toc_depth: 3
     code_folding: hide
+    number_sections: true
 ---
 
 ```{r,eval=FALSE,echo=FALSE}
@@ -14,8 +15,24 @@ dir.create(root_dir, showWarnings=FALSE)
 
 setwd(root_dir)
 
-file.copy("/nobackup/h_cqs/shengq2/program/cqsperl/examples/tissue_enrichment/example.Rmd", "./", overwrite=TRUE)
-file.copy("/nobackup/h_cqs/shengq2/program/cqsperl/examples/tissue_enrichment/tissue_enrichment.Rmd", "./", overwrite=TRUE)
+copy_or_download<-function(source){
+  target = paste0("./", basename(source))
+  if(file.exists(source)){
+    file.copy(source, target, overwrite=TRUE)
+  }else{
+    if(file.exists(target)){      
+      file.remove(target)
+    }
+    download.file(source, target, "auto")
+  }
+}
+
+copy_or_download("/nobackup/h_cqs/shengq2/program/cqsperl/examples/tissue_enrichment/example.Rmd")
+
+lib_folder="https://raw.githubusercontent.com/shengqh/ngsperl/master/lib"
+copy_or_download(paste0(lib_folder, "/Report/pathway.Rmd"))
+copy_or_download(paste0(lib_folder, "/Report/gene_exp.Rmd"))
+copy_or_download(paste0(lib_folder, "/Report/tissue_specificity.Rmd"))
 
 date_str = format(Sys.time(), "%Y%m%d")
 
@@ -55,34 +72,37 @@ setwd(root_dir)
 
 ```{r include=FALSE}
 #set up those variables in main RMD file
-code_folder="/nobackup/h_cqs/jstolze/General_scripts/TissueExpression_combined/Functions"
-prefix="test"
 
-gene_exp_file = "/nobackup/h_cqs/references/tissue_specific/20230627_tabula_logNorm_averageExpression_matrix_by_tissueOnly.txt.gz"
-proteinAtlasDatabaseFile = "/nobackup/h_cqs/references/tissue_specific/proteinatlas.tsv.zip"
+#pathway analysis
+perform_pathway = T
+if(perform_pathway){
+  pathway_analysis_sets = c("KEGG", "Reactome", "WikiPathways")
+  pathway_toType = "ENTREZID" #pathway analysis db ids
+  organism="hsa" #"mmu"
+  OrgDb="org.Hs.eg.db" #"org.Mm.eg.db"
+}
 
-pathway_analysis_sets = c("KEGG", "Reactome", "WikiPathways")
-
-fromType = "SYMBOL" #target and background genes
-toType = "ENTREZID" #pathway analysis db ids
-#organism="mmu"
-#OrgDb="org.Mm.eg.db"
-organism="hsa"
-OrgDb="org.Hs.eg.db"
-
-database_gene = "ENSEMBL" #What gene annotation is in the gene_exp file
-xaxis_enrichment = "" #If string, will pull column of that name from target/background
-colNameGenes = "EntrezGeneSymbol"
-singDirection = ""
-
-perform_pathway = F
-
+#tissue specificity by protein atlas
 perform_tissue_specificity = T
+if(perform_tissue_specificity){
+  proteinAtlasDatabaseFile = "/nobackup/h_cqs/references/tissue_specific/proteinatlas.tsv.zip"
+  database_gene = "ENSEMBL" #What gene annotation is in the gene_exp file
+  colNameGenes = "EntrezGeneSymbol"
+  horizontalHeatmap=FALSE
+}
 
+#gene expression heatmap by tabula 
 perform_gene_exp_heatmap = T
-perform_gene_exp_5perc = T
-perform_gene_exp_enrichment = F
-perform_singscore = F
+if(perform_gene_exp_heatmap){
+  gene_exp_file = "/nobackup/h_cqs/references/tissue_specific/20230627_tabula_logNorm_averageExpression_matrix_by_tissueOnly.txt.gz"
+  gene_exp_toType = "ENSEMBL" #pathway analysis db ids
+  organism="hsa" #"mmu"
+  OrgDb="org.Hs.eg.db" #"org.Mm.eg.db"
+}
+
+#perform_singscore = F
+
+test_bottom=FALSE
 ```
 
 # Top 500 genes
@@ -91,18 +111,38 @@ perform_singscore = F
 rnk_file="/nobackup/h_cqs/shengq2/program/cqsperl/data/Cardiomyocyte.AS_vs_Control_GSEA.rnk"
 background_genes=fread(rnk_file)$V1
 target_genes=background_genes[1:500]
+
+#for each gene set, we need a new prefix and indicate the fromType
+prefix="top500"
+fromType = "SYMBOL" #target and background genes
 ```
 
-```{r child="tissue_enrichment.Rmd", eval=TRUE}
+```{r child="pathway.Rmd", eval=perform_pathway}
 ```
 
-```{r, eval=FALSE}
+```{r child="tissue_specificity.Rmd", eval=perform_tissue_specificity}
+```
+
+```{r child="gene_exp.Rmd", eval=perform_gene_exp_heatmap}
+```
+
+```{r, eval=TRUE}
 cat("\n\n# Bottom 500\n\n")
 background_genes=fread(rnk_file)$V1
 target_genes=background_genes[(length(background_genes)-500): length(background_genes)]
+
+#for each gene set, we need a new prefix and indicate the fromType
+prefix="bottom500"
+fromType = "SYMBOL" #target and background genes
 ```
 
-```{r child="tissue_enrichment.Rmd", eval=FALSE}
+```{r child="pathway.Rmd", eval=perform_pathway & test_bottom}
+```
+
+```{r child="tissue_specificity.Rmd", eval=perform_tissue_specificity & test_bottom}
+```
+
+```{r child="gene_exp.Rmd", eval=perform_gene_exp_heatmap & test_bottom}
 ```
 
 # Save the session information
