@@ -29,8 +29,14 @@ copy_or_download<-function(source){
 
 copy_or_download("/nobackup/h_cqs/shengq2/program/cqsperl/examples/tissue_enrichment/example.Rmd")
 
+#set lib_folder to the folder where you put the enrichmentByClusterProfiler.R, gene_exp_functions.R, tissue_spec_functions.R, 
+#pathway.Rmd, gene_exp.Rmd and tissue_specificity.Rmd
+#you can set it as a local folder or a github folder
+#set as a local folder would be easier for you to debug/modify the pipeline Rmd files
+#set as a github folder would be easier for you to distribute the final Rmd file
 lib_folder="https://raw.githubusercontent.com/shengqh/ngsperl/master/lib"
 #lib_folder="/nobackup/h_cqs/shengq2/program/ngsperl/lib"
+
 copy_or_download(paste0(lib_folder, "/Report/pathway.Rmd"))
 copy_or_download(paste0(lib_folder, "/Report/gene_exp.Rmd"))
 copy_or_download(paste0(lib_folder, "/Report/tissue_specificity.Rmd"))
