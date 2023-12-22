@@ -8,6 +8,16 @@ output:
     number_sections: true
 ---
 
+```{r}
+#set lib_folder to the folder where you put the enrichmentByClusterProfiler.R, gene_exp_functions.R, tissue_spec_functions.R, 
+#pathway.Rmd, gene_exp.Rmd and tissue_specificity.Rmd
+#you can set it as a local folder or a github folder
+#set as a local folder would be easier for you to debug/modify the pipeline Rmd files
+#set as a github folder would be easier for you to distribute the final Rmd file
+#lib_folder="https://raw.githubusercontent.com/shengqh/ngsperl/master/lib"
+lib_folder="/nobackup/h_cqs/shengq2/program/ngsperl/lib"
+```
+
 ```{r,eval=FALSE,echo=FALSE}
 library(xfun)
 root_dir = '/nobackup/h_cqs/shengq2/temp/tissue_enrichment_report'
@@ -28,14 +38,6 @@ copy_or_download<-function(source){
 }
 
 copy_or_download("/nobackup/h_cqs/shengq2/program/cqsperl/examples/tissue_enrichment/example.Rmd")
-
-#set lib_folder to the folder where you put the enrichmentByClusterProfiler.R, gene_exp_functions.R, tissue_spec_functions.R, 
-#pathway.Rmd, gene_exp.Rmd and tissue_specificity.Rmd
-#you can set it as a local folder or a github folder
-#set as a local folder would be easier for you to debug/modify the pipeline Rmd files
-#set as a github folder would be easier for you to distribute the final Rmd file
-lib_folder="https://raw.githubusercontent.com/shengqh/ngsperl/master/lib"
-#lib_folder="/nobackup/h_cqs/shengq2/program/ngsperl/lib"
 
 copy_or_download(paste0(lib_folder, "/Report/pathway.Rmd"))
 copy_or_download(paste0(lib_folder, "/Report/gene_exp.Rmd"))
@@ -78,8 +80,6 @@ setwd(root_dir)
 ```
 
 ```{r include=FALSE}
-#set up those variables in main RMD file
-
 #pathway analysis
 perform_pathway = T
 if(perform_pathway){
@@ -105,6 +105,9 @@ if(perform_gene_exp_heatmap){
   gene_exp_toType = "ENSEMBL" #pathway analysis db ids
   organism="hsa" #"mmu"
   OrgDb="org.Hs.eg.db" #"org.Mm.eg.db"
+
+  perform_gene_exp_5perc=TRUE
+  draw_gene_exp_heatmap_5perc_global=TRUE
 }
 
 #perform_singscore = F
@@ -118,6 +121,9 @@ test_bottom=FALSE
 rnk_file="/nobackup/h_cqs/shengq2/program/cqsperl/data/Cardiomyocyte.AS_vs_Control_GSEA.rnk"
 background_genes=fread(rnk_file)$V1
 target_genes=background_genes[1:500]
+
+#let's test background_genes=NULL
+background_genes=NULL
 
 #for each gene set, we need a new prefix and indicate the fromType
 prefix="top500"
@@ -133,10 +139,13 @@ fromType = "SYMBOL" #target and background genes
 ```{r child="gene_exp.Rmd", eval=perform_gene_exp_heatmap}
 ```
 
-```{r, eval=TRUE}
+```{r, eval=test_bottom}
 cat("\n\n# Bottom 500\n\n")
 background_genes=fread(rnk_file)$V1
 target_genes=background_genes[(length(background_genes)-500): length(background_genes)]
+
+#let's test 
+background_genes=NULL
 
 #for each gene set, we need a new prefix and indicate the fromType
 prefix="bottom500"
