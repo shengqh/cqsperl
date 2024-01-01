@@ -30,17 +30,17 @@ if [[ -e /dors ]]; then
   export mybinds=$mybinds,/dors
 fi
 
-if [[ -e /gpfs51 ]]; then
-  export mybinds=$mybinds,/gpfs51
-fi
+# if [[ -e /gpfs51 ]]; then
+#   export mybinds=$mybinds,/gpfs51
+# fi
 
-if [[ -e /gpfs52 ]]; then
-  export mybinds=$mybinds,/gpfs52
-fi
+# if [[ -e /gpfs52 ]]; then
+#   export mybinds=$mybinds,/gpfs52
+# fi
 
-if [[ -e /gpfs23 ]]; then
-  export mybinds=$mybinds,/gpfs23
-fi
+# if [[ -e /gpfs23 ]]; then
+#   export mybinds=$mybinds,/gpfs23
+# fi
 
 #echo mybinds=$mybinds
 
