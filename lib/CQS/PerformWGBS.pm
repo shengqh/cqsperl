@@ -35,7 +35,7 @@ sub gencode_hg38_genome {
   return merge_hash_right_precedent(global_definition(), {
     abismal_index       => "/data/cqs/references/gencode/GRCh38.p13/abismal_index/GRCh38_chrm.abismalidx",
     chr_fasta           => "/data/cqs/references/gencode/GRCh38.p13/abismal_index/GRCh38_chrm.fa",
-    chr_size_file       => "/data/cqs/references/gencode/GRCh38.p13/abismal_index/GRCh38_chrm.sizes",
+    chr_size_file       => "/data/cqs/references/gencode/GRCh38.p13/GRCh38.primary_assembly.genome.sizes",
     genome => "hg38",
     annovar_buildver    => "hg38",
     annovar_db          => "/data/cqs/references/annovar/humandb",

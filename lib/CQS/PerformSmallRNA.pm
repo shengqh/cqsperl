@@ -36,7 +36,7 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
 our $VERSION = '5.0';
 
-sub supplement_genome {
+sub supplement_genome_v5 {
   return merge_hash_right_precedent(global_options(), {
     version    => 5,
     #constraint => "haswell",
@@ -139,7 +139,7 @@ sub supplement_genome {
 }
 
 sub supplement_genome_v2022 {
-  return merge_hash_right_precedent(supplement_genome(), {
+  return merge_hash_right_precedent(supplement_genome_v5(), {
     version    => 2022,
     #miRBase database
     bowtie1_miRBase_index => "/data/cqs/references/smallrna/v202211/miRBase.v22.1/bowtie_index_1.3.1/mature.dna",
@@ -154,9 +154,13 @@ sub supplement_genome_v2022 {
   });
 }
 
+sub supplement_genome {
+  return supplement_genome_v2022();
+}
+
 sub hg19_genome {
   return merge_hash_right_precedent(
-    supplement_genome(),
+    supplement_genome_v5(),
     {
       #genome database
       mirbase_count_option => "-p hsa",
@@ -190,9 +194,9 @@ sub hg19_3utr {
   };
 }
 
-sub hg38_genome {
+sub hg38_genome_v5 {
   return merge_hash_right_precedent(
-    supplement_genome(),
+    supplement_genome_v5(),
     {
       #genome database
       mirbase_count_option => "-p hsa",
@@ -210,17 +214,6 @@ sub hg38_genome {
       }
     }
   );
-}
-
-sub hg38_3utr {
-  my $bowtie1 = hg38_genome()->{bowtie1_index};
-  return {
-    search_3utr   => 1,
-    bowtie1_index => $bowtie1,
-    fasta_file    => $bowtie1 . ".fasta",
-    #utr3_db       => "/scratch/cqs/shengq2/references/3utr/20151218_ucsc_hg38_refgene_3utr.bed",
-    #refgene_file  => "/scratch/cqs/shengq2/references/3utr/20151218_ucsc_hg38_refgene.tsv",
-  };
 }
 
 sub hg38_genome_v2022 {
@@ -244,6 +237,21 @@ sub hg38_genome_v2022 {
       }
     }
   );
+}
+
+sub hg38_genome {
+  return hg38_genome_v2022();
+}
+
+sub hg38_3utr {
+  my $bowtie1 = hg38_genome()->{bowtie1_index};
+  return {
+    search_3utr   => 1,
+    bowtie1_index => $bowtie1,
+    fasta_file    => $bowtie1 . ".fasta",
+    #utr3_db       => "/scratch/cqs/shengq2/references/3utr/20151218_ucsc_hg38_refgene_3utr.bed",
+    #refgene_file  => "/scratch/cqs/shengq2/references/3utr/20151218_ucsc_hg38_refgene.tsv",
+  };
 }
 
 sub mm10_genome {
@@ -338,9 +346,9 @@ sub performSmallRNA_hg19 {
   return $config;
 }
 
-sub performSmallRNA_hg38 {
+sub performSmallRNA_hg38_v5 {
   my ( $userdef, $perform ) = @_;
-  my $def = getSmallRNADefinition( $userdef, hg38_genome() );
+  my $def = getSmallRNADefinition( $userdef, hg38_genome_v5() );
 
   my $config = performSmallRNA( $def, $perform );
   return $config;
@@ -352,6 +360,11 @@ sub performSmallRNA_hg38_v2022 {
 
   my $config = performSmallRNA( $def, $perform );
   return $config;
+}
+
+sub performSmallRNA_hg38 {
+  my ( $userdef, $perform ) = @_;
+  return(performSmallRNA_hg38_v2022($userdef, $perform));
 }
 
 sub performSmallRNA_mm10 {
