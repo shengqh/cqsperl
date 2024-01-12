@@ -19,6 +19,9 @@ lib_folder="/nobackup/h_cqs/shengq2/program/ngsperl/lib"
 ```
 
 ```{r,eval=FALSE,echo=FALSE}
+#Example to render report
+#set root_dir to the folder where you want to put this file "example.Rmd"
+
 library(xfun)
 root_dir = '/nobackup/h_cqs/shengq2/temp/tissue_enrichment_report'
 dir.create(root_dir, showWarnings=FALSE)

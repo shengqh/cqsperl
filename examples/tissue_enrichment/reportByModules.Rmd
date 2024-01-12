@@ -1,0 +1,58 @@
+---
+title: "Report"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+ rmdformats::readthedown:
+    toc_depth: 3
+    code_folding: hide
+    number_sections: false
+---
+
+```{css, echo=FALSE}
+#content{
+    max-width:1920px;
+}
+```
+
+
+
+
+```{r}
+source("D:/source/cqsperl/examples/reportFunctions.R")
+```
+
+```{r}
+output_folder = "D:/temp/tissue_enrichment_report"
+setwd(output_folder)
+#copy_report_files()
+
+```
+
+
+
+## Test gene set 1
+
+```{r}
+prefix="Gene set 1"
+reportParametersList=prepare_analysis_parameters(
+  target_genes=c("CDK2","CDK4","CDK6","CDKN1A","CDKN1B","CDKN2A","CDKN2B","CDKN2C","CDKN2D","CCND1","CCND2","CCND3","CCNE1","CCNE2","CCNA2","CCNB1","CCNB2","CCNB3","CDK1","CDK7","CDK8","CDK9","CDK10","CDK11A","CDK11B"),
+  prefix=prefix)
+
+```
+
+### Pathway Analysis
+```{r child="pathway.Rmd"}
+
+```
+
+### Protein-Protein interactions
+```{r child="StringDb.Rmd"}
+
+```
+
+## Save the session information
+
+```{r}
+writeLines(capture.output(sessionInfo()), paste0(prefix, '.sessionInfo.txt'))
+```
+
