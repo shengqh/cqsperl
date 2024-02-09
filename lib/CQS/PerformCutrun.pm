@@ -34,6 +34,10 @@ sub cutrun_options {
   
     cutruntools2_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cutruntools2.sif",
     cutruntools2_path => "/opt/CUT-RUNTools-2.0",
+
+    seacr_path => "/opt/SEACR/SEACR_1.3.sh",
+
+    homer_option => "",
   };
 }
 
@@ -43,6 +47,8 @@ sub gencode_hg38_options {
   $result = merge_hash_right_precedent($result, 
   {
     macs2_genome => "hs",
+    remove_chromosome => "chrM",
+    keep_chromosome   => "chr",
   });
   return($result);
 }
@@ -53,6 +59,8 @@ sub gencode_mm10_options {
   $result = merge_hash_right_precedent($result, 
   {
     macs2_genome => "mm",
+    remove_chromosome => "chrM",
+    keep_chromosome   => "chr",
   });
   return($result);
 }
