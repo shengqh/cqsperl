@@ -70,7 +70,7 @@ sub global_definition {
       "cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-81.jar",
       "cromwell_option_file" => "/data/cqs/softwares/cqsperl/config/wdl/cromwell.options.json",
       "local" => {
-        "cromwell_config_file" => "/data/cqs/softwares/cqsperl/config/wdl/cromwell.local.nopull.conf",
+        "cromwell_config_file" => "/data/cqs/softwares/cqsperl/config/wdl/cromwell.local.conf",
         #"cromwell_config_file" => "/home/zhaos/source/perl_cqs/test/cromwell/cromwell.examples.local.conf",
         "mutect2" => {
           "perform_mutect2_pon" => 0,
