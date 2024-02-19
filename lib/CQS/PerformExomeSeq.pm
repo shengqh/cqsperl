@@ -34,7 +34,7 @@ sub global_definition {
   return merge_hash_right_precedent(global_options(), {
     #constraint => "haswell",
 
-    gatk4_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-gatk4.simg ",
+    gatk4_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-gatk-4.5.0.0.20240216.sif ",
     #gatk4_docker_init    => "source activate gatk  ",
     gotc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/gotc.latest.simg ",
 
