@@ -3,6 +3,7 @@
   "CNVSomaticPanelWorkflow.ref_fasta": "/data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
   "CNVSomaticPanelWorkflow.ref_fasta_fai": "/data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta.fai",
   "CNVSomaticPanelWorkflow.gatk_docker": "gatk.latest",
+  "CNVSomaticPanelWorkflow.gatk4_jar_override": "/data/cqs/softwares/gatk-4.5.0.0/gatk-package-4.5.0.0-local.jar",
 
   "CNVSomaticPanelWorkflow.bin_length": "0",
 
