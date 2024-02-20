@@ -1,7 +1,6 @@
 {
   "CNVSomaticPanelWorkflow.gatk_docker": "gatk.latest",
   "CNVSomaticPanelWorkflow.intervals": "/data/cqs/references/broad/hg19/v0/wgs_calling_regions.v1.interval_list",
-  "CNVSomaticPanelWorkflow.gatk4_jar_override": "/data/cqs/softwares/gatk-4.1.8.1/gatk-package-4.1.8.1-local.jar",
 
   "CNVSomaticPanelWorkflow.normal_bams": "Array[String]",
   "CNVSomaticPanelWorkflow.normal_bais": "Array[String]",

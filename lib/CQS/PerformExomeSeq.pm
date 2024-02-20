@@ -93,10 +93,10 @@ sub global_definition {
           "wdl_file" => "/data/cqs/softwares/gatk-workflows/gatk4-germline-snps-indels/haplotypecaller-gvcf-gatk4.wdl",
         },
         "somaticCNV_pon" => {
-          "wdl_file" => "/data/cqs/softwares/gatk-4.1.8.1/scripts/cnv_wdl/somatic/cnv_somatic_panel_workflow.wdl"
+          "wdl_file" => "/data/cqs/softwares/gatk-4.5.0.0/scripts/cnv_wdl/somatic/cnv_somatic_panel_workflow.wdl"
         },
         "somaticCNV" => {
-          "wdl_file" => "/data/cqs/softwares/gatk-4.1.8.1/scripts/cnv_wdl/somatic/cnv_somatic_pair_workflow.wdl"
+          "wdl_file" => "/data/cqs/softwares/gatk-4.5.0.0/scripts/cnv_wdl/somatic/cnv_somatic_pair_workflow.wdl"
         },
         "CollectAllelicCounts" => {
           "wdl_file" => "/home/zhaos/source/ngsperl/lib/WDL/ExomeSeq/CollectAllelicCounts.wdl",
