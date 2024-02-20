@@ -56,12 +56,12 @@ sub global_definition {
     cluster    => "slurm",
 
     #cromwell
-    _singularity_image_files=> {
-      "broadinstitute.gatk.latest.simg" => "/data/cqs/softwares/singularity/gatk.latest.simg",
-      "broadinstitute.gotc.latest.simg" => "/data/cqs/softwares/singularity/genomes-in-the-cloud.2.4.5-1590104571.simg",
-      "python.latest.simg" => "/data/cqs/softwares/singularity/python.2.7.simg",
-      "gatk.latest.simg"=>"/data/cqs/softwares/singularity/gatk.latest.simg",
-      "gotc.latest.simg"=>"/data/cqs/softwares/singularity/genomes-in-the-cloud.2.4.5-1590104571.simg",
+    singularity_image_files=> {
+      # "broadinstitute.gatk.latest.simg" => "/data/cqs/softwares/singularity/gatk.latest.simg",
+      # "broadinstitute.gotc.latest.simg" => "/data/cqs/softwares/singularity/genomes-in-the-cloud.2.4.5-1590104571.simg",
+      # "python.latest.simg" => "/data/cqs/softwares/singularity/python.2.7.simg",
+      # "gatk.latest.simg"=>"/data/cqs/softwares/singularity/gatk.latest.simg",
+      # "gotc.latest.simg"=>"/data/cqs/softwares/singularity/genomes-in-the-cloud.2.4.5-1590104571.simg",
     },
 
     wdl => {
