@@ -17,6 +17,7 @@
   "CNVSomaticPairWorkflow.ref_fasta_dict": "/data/cqs/references/broad/hg19/v0/Homo_sapiens_assembly19.dict",
 
   "CNVSomaticPairWorkflow.is_run_funcotator": "true",
-  "CNVSomaticPairWorkflow.funcotator_data_sources_tar_gz": "/data/cqs/references/broad/funcotator_dataSources.v1.7.20200521s.no_chr_hg19.tar.gz"
+  "CNVSomaticPairWorkflow.funcotator_data_sources_tar_gz": "/data/cqs/references/broad/funcotator/funcotator_dataSources.v1.8.hg19.20230908s.tar.gz",
+  "CNVSomaticPairWorkflow.funcotator_transcript_selection_list": "/data/cqs/references/broad/funcotator/transcriptList.exact_uniprot_matches.AKT1_CRLF2_FGFR1.txt"
 }
 
