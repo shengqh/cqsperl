@@ -50,9 +50,9 @@ sub global_definition {
     muTect2_option => "--downsampling-stride 20 --max-reads-per-alignment-start 6 --max-suspicious-reads-per-alignment-start 6",
     'Mutect2.run_orientation_bias_mixture_model_filter' => "true",
 
-    vcf2maf_pl => "/scratch/cqs/softwares/mskcc-vcf2maf/vcf2maf.pl",
-    vep_path   => "/scratch/cqs/softwares/ensembl-vep",
-    vep_data   => "/scratch/cqs/references/vep_data",
+    # vcf2maf_pl => "/scratch/cqs/softwares/mskcc-vcf2maf/vcf2maf.pl",
+    vep_path   => "/data/cqs/softwares/ensembl-vep",
+    vep_data   => "/data/cqs/references/vep_data",
     cluster    => "slurm",
 
     #cromwell
@@ -171,10 +171,10 @@ sub gatk_hg38_genome {
             "input_file" => "/data/cqs/softwares/cqsperl/config/wdl/processing-for-variant-discovery-gatk4.hg38.wgs.inputs.json",
           },
           "somaticCNV_pon" => {
-            "input_file" => "/home/zhaos/source/perl_cqs/workflow/gatk-scripts-cnv_wdl-somatic/cnv_somatic_panel_workflow.wdl.json",
+            "input_file" => "/nobackup/h_cqs/shengq2/program/cqsperl/config/wdl/cnv_somatic_panel_workflow.hg38.wdl.json",
           },
           "somaticCNV" => {
-            "input_file" => "/home/zhaos/source/perl_cqs/workflow/gatk-scripts-cnv_wdl-somatic/cnv_somatic_pair_workflow.wdl.json",
+            "input_file" => "/nobackup/h_cqs/shengq2/program/cqsperl/config/wdl/cnv_somatic_panel_workflow.hg38.wdl.json",
           },
         }
       }
