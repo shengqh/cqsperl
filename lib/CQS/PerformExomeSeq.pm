@@ -174,7 +174,7 @@ sub gatk_hg38_genome {
             "input_file" => "/nobackup/h_cqs/shengq2/program/cqsperl/config/wdl/cnv_somatic_panel_workflow.hg38.wdl.json",
           },
           "somaticCNV" => {
-            "input_file" => "/nobackup/h_cqs/shengq2/program/cqsperl/config/wdl/cnv_somatic_panel_workflow.hg38.wdl.json",
+            "input_file" => "/nobackup/h_cqs/shengq2/program/cqsperl/config/wdl/cnv_somatic_pair_workflow.hg38.wdl.json",
           },
         }
       }
