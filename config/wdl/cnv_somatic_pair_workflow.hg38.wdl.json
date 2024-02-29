@@ -11,7 +11,7 @@
   "CNVSomaticPairWorkflow.ref_fasta": "/data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta",
   "CNVSomaticPairWorkflow.ref_fasta_fai": "/data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.fasta.fai",
   "CNVSomaticPairWorkflow.ref_fasta_dict": "/data/cqs/references/broad/hg38/v0/Homo_sapiens_assembly38.dict",
-  "CNVSomaticPairWorkflow.common_sites": "/data/cqs/references/broad/CNV/gnomad_grch38_snps_sitesonly.vcf.gz",
+  "CNVSomaticPairWorkflow.common_sites": "/data/cqs/references/broad/hg38/v0/cnv/somatic-hg38_af-only-gnomad.hg38.AFgt0.02.interval_list",
   "CNVSomaticPairWorkflow.gatk_docker": "gatk.latest",
   "CNVSomaticPairWorkflow.gatk4_jar_override": "/data/cqs/softwares/gatk-4.5.0.0/gatk-package-4.5.0.0-local.jar",
 
