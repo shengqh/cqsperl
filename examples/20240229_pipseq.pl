@@ -17,9 +17,9 @@ my $def = {
 
   #file path should contain the prefix which can identify the specific sample in the folder
   files => {
-    "AS_11162_0011" => ["/data/cqs/ramirema/ken_lau/20240227_11162_AS/11162-AS-0011"],
-    "AS_11162_0012" => ["/data/cqs/ramirema/ken_lau/20240227_11162_AS/11162-AS-0012"],
-    "AS_11162_0013" => ["/data/cqs/ramirema/ken_lau/20240227_11162_AS/11162-AS-0013"],
+    'AS_0001' => [ '/data/cqs/ramirema/ken_lau/20240227_11162_AS/11162-AS-0001_S1_L005_R1_001.fastq.gz', '/data/cqs/ramirema/ken_lau/20240227_11162_AS/11162-AS-0001_S1_L005_R2_001.fastq.gz' ],
+    'AS_0002' => [ '/data/cqs/ramirema/ken_lau/20240227_11162_AS/11162-AS-0002_S1_L005_R1_001.fastq.gz', '/data/cqs/ramirema/ken_lau/20240227_11162_AS/11162-AS-0002_S1_L005_R2_001.fastq.gz' ],
+    'AS_0003' => [ '/data/cqs/ramirema/ken_lau/20240227_11162_AS/11162-AS-0003_S1_L005_R1_001.fastq.gz', '/data/cqs/ramirema/ken_lau/20240227_11162_AS/11162-AS-0003_S1_L005_R2_001.fastq.gz' ],
   },
   
   pipseeker_command => "/data/cqs/softwares/pipseeker_v3.1.3/pipseeker",
