@@ -46,7 +46,9 @@ sub gencode_hg38_genome {
     picard              => "/data/cqs/softwares/picard.jar",
     is_paired_end       => 1,
     webgestalt_organism => "hsapiens",
-    wgbs_r_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/wgbs_r.1.1.sif ",
+    wgbs_r_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_wgbs.20240229.sif ",
+    #wgbs_r_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/wgbs_r.1.1.sif ",
+    
   });
 }
 
