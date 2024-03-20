@@ -1,0 +1,45 @@
+```{r}
+library(data.table)
+library(reshape2)
+
+setwd('/data/cqs/references/protein_atlas')
+
+ct_tissues=fread('/data/cqs/references/protein_atlas/rna_single_cell_type_tissue.tsv')
+tissues=unique(ct_tissues$Tissue)
+tissues=tissues[order(tissues)]
+
+tissue=tissues[1]
+for(tissue in tissues){
+  cat(tissue, '\n')
+  tissue_file_name=gsub(' ', '_', tissue)
+  tissue_count=ct_tissues[ct_tissues$Tissue==tissue,]
+  count_tbl=dcast(tissue_count, `Gene name`~`Cell type`, value.var='Read count', fun.aggregate=sum) 
+  write.table(count_tbl, file=paste0('rna_single_cell_read_count/', tissue_file_name, '.tsv'), quote=F, sep='\t', row.names=F)
+}
+
+tissue='vascular'
+for(tissue in tissues){
+  tissue_folder=paste0('/data/cqs/references/protein_atlas/rna_single_cell_read_count/', tissue)
+  cell_data=fread(paste0(tissue_folder, '/cell_data.tsv'))
+  counts=data.frame(fread(paste0(tissue_folder, '/read_count.tsv'), header=TRUE), row.names=1, check.names=FALSE)
+
+  clusters=ct_tissues[ct_tissues$Tissue==tissue & ct_tissues$Gene=='ENSG00000000003', c("Cluster", "Cell type") ]
+  clusters$Cluster=as.numeric(gsub("c-","",clusters$Cluster))
+  stopifnot(all(all(cell_data$cluster %in% clusters$Cluster)))
+
+  cell_data_ct=merge(cell_data, clusters, by.x='cluster', by.y='Cluster')
+  colnames(cell_data_ct)[5]='celltype'
+  cell_data_ct=cell_data_ct[order(cell_data_ct$cell_id),]
+
+  scaden_folder=paste0('/data/cqs/references/protein_atlas/rna_single_cell_scaden/', tissue)
+  dir.create(scaden_folder, showWarnings = FALSE, recursive = TRUE)
+  ct_df=data.frame("Celltype"=cell_data_ct$celltype)
+  write.table(ct_df, file=paste0(scaden_folder, '/', tissue, '_celltypes.txt'), quote=F, sep='\t', row.names=F)
+
+  counts=counts[rowSums(counts)>0,]
+
+  tcounts=t(counts)
+  stopifnot(all(rownames(tcounts) == as.character(cell_data_ct$cell_id)))
+  write.table(tcounts, file=paste0(scaden_folder, '/', tissue, '_counts.txt'), quote=F, sep='\t', row.names=T, col.names=NA)
+}
+```
