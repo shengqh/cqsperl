@@ -57,12 +57,14 @@ sub global_definition {
 sub gencode_hg38_genome {
   return merge_hash_right_precedent(global_definition(), {
     "encode_atacseq_genome_tsv" => "/data/cqs/references/encode-pipeline-genome-data/hg38/hg38.tsv",
+    "macs2_genome" => "hs",
   });
 }
 
 sub gencode_mm10_genome {
   return merge_hash_right_precedent(global_definition(), {
     "encode_atacseq_genome_tsv" => "/data/cqs/references/encode-pipeline-genome-data/mm10/mm10.tsv",
+    "macs2_genome" => "mm",
   });
 }
 
