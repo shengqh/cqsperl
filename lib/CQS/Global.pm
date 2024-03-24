@@ -18,7 +18,7 @@ sub get_binding {
   #print("no_home = $no_home");
 
   my $result = "";
-  my @folders = qw(/panfs /gpfs51 /gpfs52 /data /dors /nobackup /tmp);
+  my @folders = qw(/panfs /data /dors /nobackup /tmp);
   if(!$no_home){
     my $userName =  $ENV{'LOGNAME'};
     push(@folders, "/home/$userName");
