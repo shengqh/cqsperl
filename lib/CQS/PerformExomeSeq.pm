@@ -217,6 +217,9 @@ sub gatk_hg19_genome {
       germline_resource => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-b37/af-only-gnomad.raw.sites.vcf",
       panel_of_normals => "/data/h_vangard_1/references/broad/gatk-best-practices/somatic-b37/Mutect2-exome-panel.vcf",
 
+      "CNVSomaticPairWorkflow.read_count_pon" => "/data/cqs/references/broad/hg19/v0/cnv/wes-do-gc.pon.hdf5",
+      "CNVSomaticPairWorkflow.intervals" => "/data/cqs/references/broad/hg19/v0/cnv/ice_targets.tsv.interval_list",
+
       dbsnp            => "/data/cqs/references/broad/hg19/v0/dbsnp_138.b37.vcf.gz",
       hapmap           => "/data/cqs/references/broad/hg19/v0/hapmap_3.3.b37.vcf.gz",
       mills            => "/data/cqs/references/broad/hg19/v0/Mills_and_1000G_gold_standard.indels.b37.vcf.gz",
