@@ -1,0 +1,196 @@
+---
+title: "Meta Data Report"
+author: "Quanhu Sheng"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  rmdformats::readthedown:
+    toc_depth: 3
+    code_folding: hide
+    number_sections: yes
+---
+
+```{r,eval=FALSE,echo=FALSE}
+library(xfun)
+root_dir = '/nobackup/h_cqs/shengq2/examples/20240411_meta_report'
+dir.create(root_dir, showWarnings=FALSE)
+setwd(root_dir)
+
+file.copy('/nobackup/h_cqs/shengq2/program/ngsperl/lib/CQS/reportFunctions.R', './', overwrite=TRUE)
+file.copy('/nobackup/h_cqs/shengq2/program/cqsperl/examples/20240411_meta_report.rmd', "./", overwrite=TRUE)
+
+date_str = format(Sys.time(), "%Y%m%d")
+
+if(1){
+  xfun::Rscript_call(
+    rmarkdown::render,
+    list(input="20240411_meta_report.rmd",
+        output_file=paste0(date_str, "_cohort_meta.html"))
+  )
+}
+```
+
+```{css, echo=FALSE}
+#content{
+    max-width:1920px;
+}
+```
+
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+root_dir = "/nobackup/h_cqs/shengq2/examples/20240411_meta_report"
+
+library(knitr)
+library(Hmisc)
+require(arsenal)
+library(gtsummary)
+library(flextable)
+library(officer)
+
+knitr::opts_chunk$set(
+  echo=TRUE, 
+  include=TRUE, 
+  warning=FALSE, 
+  message=FALSE, 
+  results="asis"
+)
+
+date_str = format(Sys.time(), "%Y%m%d")
+
+knitr::opts_knit$set(root.dir = root_dir)
+setwd(root_dir)
+```
+
+```{r}
+source('reportFunctions.R')
+
+mono_meta_file = "/nobackup/h_cqs/shengq2/program/RaviProjects/20230526_mona_rnaseq/20240313_adiposity_mona_kb_rnaseq_for_obesity_revision.Mona_meta.csv"
+
+kb_meta_file = "/nobackup/h_cqs/shengq2/program/RaviProjects/20230526_mona_rnaseq/20240313_adiposity_mona_kb_rnaseq_for_obesity_revision.KB_meta.csv"
+
+PLHIV_meta_file_1 = "/nobackup/h_cqs/shengq2/program/RaviProjects/20230526_mona_rnaseq/HATIM_LassoScores.csv"
+PLHIV_meta_file_2 = "/nobackup/h_cqs/shengq2/program/RaviProjects/20230526_mona_rnaseq/HATIM_metadata_5.8.23.csv"
+```
+
+# AHA cohort
+
+Read meta file: `r basename(mono_meta_file)`
+
+```{r}
+aha_meta=data.frame(fread(mono_meta_file), row.names=1) |>
+  dplyr::mutate(female_sex=sex=="Female",
+         non_white=is.na(race) | race != "White") |> 
+  dplyr::select(age, female_sex, non_white, bmi, homa.ir) |> 
+  dplyr::rename(`Age (years)`=age,
+    `Women`=female_sex,
+    `Non-white race`=non_white,
+    `Body mass index (kg/m2)`=bmi,
+    `HOMA-IR`=homa.ir)
+    
+aha_meta |> tbl_summary() |> modify_header(all_stat_cols() ~ "Discovery cohort (N={N})")
+```
+
+There were `r nrow(aha_meta)` subjects in AHA meta file.
+
+# VA cohort
+
+Read meta file: `r basename(kb_meta_file)`
+
+```{r}
+va_meta = fread(kb_meta_file) |> 
+  dplyr::mutate(
+    female_sex=sex=="Female",
+    non_white=race != 4) |> 
+  dplyr::select(age, female_sex, non_white, bmi, homa.ir) |> 
+  dplyr::rename(`Age (years)`=age,
+    `Women`=female_sex,
+    `Non-white race`=non_white,
+    `Body mass index (kg/m2)`=bmi,
+    `HOMA-IR`=homa.ir)
+    
+va_meta |> tbl_summary() |> modify_header(all_stat_cols() ~ "Validation cohort 1 (N={N})")
+```
+
+There were `r nrow(va_meta)` subjects in VA meta file.
+
+# PLHIV cohort
+
+Read meta file: `r basename(PLHIV_meta_file_1)` and `r basename(PLHIV_meta_file_2)`
+
+```{r}
+PLHIV_meta_1=fread(PLHIV_meta_file_1)
+PLHIV_meta_2=fread(PLHIV_meta_file_2)
+PLHIV_meta_2=PLHIV_meta_2[PLHIV_meta_2$hatim_clin_visit_pid %in% PLHIV_meta_1$HATIMID, c("hatim_clin_visit_pid", "meta_sex", "meta_age", "meta_bmi", "meta_race", "std_homa_ir")]
+PLHIV_meta_2=data.frame(PLHIV_meta_2, row.names=1)
+
+PLHIV_meta = PLHIV_meta_2 |> 
+  dplyr::mutate(
+    female_sex=meta_sex == 1,
+    non_white=meta_race != 0) |> 
+  dplyr::select(meta_age, female_sex, non_white, meta_bmi, std_homa_ir) |> 
+  dplyr::rename(`Age (years)`=meta_age,
+    `Women`=female_sex,
+    `Non-white race`=non_white,
+    `Body mass index (kg/m2)`=meta_bmi,
+    `HOMA-IR`=std_homa_ir)
+
+PLHIV_meta |> tbl_summary() |> modify_header(all_stat_cols() ~ "Validation cohort 2 (N={N})")
+```
+
+There were `r nrow(PLHIV_meta)` subjects in PLHIV meta file.
+
+# Descriptive statistics
+
+```{r}
+all=rbind(aha_meta |> mutate(Cohort="AHA"), 
+          va_meta |> mutate(Cohort="VA"), 
+          PLHIV_meta |> mutate(Cohort="PLHIV"))
+write.csv(all, "table1.clinical_summary.csv", row.names=FALSE)
+
+all |> tbl_summary(by="Cohort") |> add_p() 
+```
+
+# Table 1
+
+```{r}
+add_stat_pairwise <- function(data, variable, by, ...) {
+  # calculate pairwise p-values
+  pw <- pairwise.t.test(data[[variable]], data[[by]], p.adj = "none")
+
+  # convert p-values to list
+  index <- 0L
+  p.value.list <- list()
+  for (i in seq_len(nrow(pw$p.value))) {
+    for (j in seq_len(nrow(pw$p.value))) {
+      index <- index + 1L
+      
+      p.value.list[[index]] <- 
+        c(pw$p.value[i, j]) %>%
+        setNames(glue::glue("**{colnames(pw$p.value)[j]} vs. {rownames(pw$p.value)[i]}**"))
+    }
+  }
+  
+  # convert list to data frame
+  p.value.list %>% 
+    unlist() %>%
+    purrr::discard(is.na) %>%
+    t() %>%
+    as.data.frame() %>%
+    # formatting/roundign p-values
+    dplyr::mutate(dplyr::across(everything(), style_pvalue))
+}
+
+all_tbl = all |> 
+  tbl_summary(by=Cohort) |> 
+  add_stat(everything() ~ add_stat_pairwise) |>
+  modify_header(stat_1="Discovery cohort\n(N=76)", 
+                stat_2="Validation cohort 1\n(N=73)", 
+                stat_3="Validation cohort 2\n(N=71)") |>
+  as_flex_table()
+
+table1_file = "table1.clinical_summary.docx"
+all_tbl |>save_as_docx(path = table1_file, pr_section = prop_section(
+    page_size = page_size(orient = "landscape")
+  ))   
+all_tbl
+```
+
+Table 1 was saved to [table1.clinical_summary.docx](table1.clinical_summary.docx).
