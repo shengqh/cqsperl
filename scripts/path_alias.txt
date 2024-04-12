@@ -4,6 +4,8 @@ export softwares=/data/cqs/softwares
 source $softwares/cqsperl/scripts/binds.sh
 export SING_OPTION="exec -e -B $mybinds"
 
+alias dchrome='singularity exec -c -e -B /data,/nobackup,/panfs $softwares/singularity/chrome.sif /opt/google/chrome/google-chrome'
+
 #alias lftp="singularity $SING_OPTION $softwares/singularity/cyberduck.simg lftp "
 #alias samtools="singularity $SING_OPTION $softwares/singularity/samtools.sif samtools "
 #alias bcftools="singularity $SING_OPTION $softwares/singularity/samtools.sif bcftools "
@@ -25,4 +27,15 @@ alias squ='squeue -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R" -u '
 alias sd='scontrol show jobid -dd '
 
 alias chrome='$softwares/chrome/opt/google/chrome/google-chrome --no-sandbox'
+
+export biobakery_BIND_OPTION="$SING_OPTION -B /data/cqs/references/microbiome/biobakery_workflows_databases/picrust_data:/usr/local/lib/python2.7/dist-packages/picrust/data"
+
+alias biobakery="singularity $biobakery_BIND_OPTION $softwares/singularity/biobakery_workflows.20240331.sif "
+export BIOBAKERY_WORKFLOWS_DATABASES='/data/cqs/references/microbiome/biobakery_workflows_databases'
+
+alias biobakery_workflows="singularity $biobakery_BIND_OPTION $softwares/singularity/biobakery_workflows.20240331.sif biobakery_workflows"
+alias biobakery_workflows_databases="singularity $biobakery_BIND_OPTION $softwares/singularity/biobakery_workflows.20240331.sif biobakery_workflows_databases"
+alias biobakery_workflows_scripts="singularity $biobakery_BIND_OPTION $softwares/singularity/biobakery_workflows.20240331.sif biobakery_workflows_scripts"
+
+alias regenie="singularity $SING_OPTION $softwares/singularity/regenie.3.4.1.gz.sif regenie"
 
