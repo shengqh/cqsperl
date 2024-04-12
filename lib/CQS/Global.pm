@@ -97,7 +97,10 @@ sub global_options {
     genepos_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg ",
     fastq_screen_configuration_file => "/data/cqs/softwares/FastQ-Screen/fastq_screen.conf",
 
-    cellbender_docker_command => singularity_prefix() . " /nobackup/h_cqs/softwares/singularity/cellbender.0.3.0.sif ",
+    correlation_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_correlation.20240411.sif",
+    deseq2_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_correlation.20240411.sif",
+
+    cellbender_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cellbender.0.3.0.sif ",
   };
 }
 
