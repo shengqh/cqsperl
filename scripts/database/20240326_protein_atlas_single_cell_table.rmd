@@ -1,0 +1,131 @@
+---
+title: "ProteinAtlas single cell data tables"
+author: 
+  name: "Quanhu Sheng"
+  affiliation: "CQS/Biostatistics, VUMC"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  rmdformats::readthedown:
+    toc_depth: 3
+    code_folding: hide
+    number_sections: true
+---
+
+```{r,eval=FALSE,echo=FALSE}
+library(xfun)
+
+root_dir = '/data/cqs/references/protein_atlas/v202306/table_preparation'
+dir.create(root_dir, showWarnings = FALSE, recursive = TRUE)
+setwd(root_dir)
+
+file.copy('/home/shengq2/program/ngsperl/lib/CQS/reportFunctions.R', './', overwrite=TRUE)
+file.copy('/nobackup/h_cqs/shengq2/program/cqsperl/scripts/database/20240326_protein_atlas_single_cell_table.rmd', './', overwrite=TRUE)
+
+date_str = format(Sys.time(), "%Y%m%d")
+
+if(1){
+  xfun::Rscript_call(
+    rmarkdown::render,
+    list(input="20240326_protein_atlas_single_cell_table.rmd",
+        output_file=paste0(date_str, "_protein_atlas_single_cell_table.html"))
+  )
+}
+```
+
+```{css, echo=FALSE}
+#content{
+    max-width:1920px;
+}
+```
+
+```{r setup, echo=FALSE, results='hide'}
+root_dir = "/data/cqs/references/protein_atlas/v202306/table_preparation"
+
+library(knitr)
+
+knitr::opts_chunk$set(
+  echo=TRUE, 
+  include=TRUE, 
+  warning=FALSE, 
+  message=FALSE, 
+  error=FALSE,
+  results="asis"
+)
+
+knitr::opts_knit$set(root.dir = root_dir)
+setwd(root_dir)
+```
+
+
+```{r}
+library(data.table)
+library(reshape2)
+source('reportFunctions.R')
+```
+
+# Pseudo-bulk count
+
+Build pseudo-bulk count of each tissue from rna_single_cell_type_tissue.tsv
+
+```{r}
+ct_tissues=fread('unzip -p ../rna_single_cell_type_tissue.tsv.zip')
+tissues=unique(ct_tissues$Tissue)
+tissues=tissues[order(tissues)]
+
+subfolder="../rna_single_cell_type_tissue/"
+dir.create(subfolder, showWarnings = FALSE)
+
+tissue=tissues[1]
+for(tissue in tissues){
+  cat("\n##", tissue, '\n\n')
+  tissue_file_name=gsub(' ', '_', tissue)
+  tissue_count=ct_tissues[ct_tissues$Tissue==tissue,]
+  count_tbl=dcast(tissue_count, `Gene name`~`Cell type`, value.var='Read count', fun.aggregate=sum) 
+  write.table(count_tbl, file=paste0(subfolder, tissue_file_name, '.tsv'), quote=F, sep='\t', row.names=F)
+  print_table(head(count_tbl))
+}
+```
+
+# Single cell count
+
+Build single cell count of each tissue from https://www.proteinatlas.org/download/rna_single_cell_read_count.zip
+
+```{r}
+scaden_folder="../rna_single_cell_read_count_scaden/"
+dir.create(scaden_folder, showWarnings = FALSE)
+
+tissue='vascular'
+tissue=tissues[1]
+for(tissue in tissues){
+  cat("\n##", tissue, '\n\n')
+
+  tissue_str=gsub(" ", "_", tissue)
+
+  tissue_folder=paste0('../rna_single_cell_read_count/', tissue_str)
+  cell_data=fread(file.path(tissue_folder, '/cell_data.tsv'))
+  counts=data.frame(fread(file.path(tissue_folder, 'read_count.tsv'), header=TRUE), row.names=1, check.names=FALSE)
+
+  clusters=ct_tissues[ct_tissues$Tissue==tissue & ct_tissues$Gene=='ENSG00000000003', c("Cluster", "Cell type") ]
+  clusters$Cluster=as.numeric(gsub("c-","",clusters$Cluster))
+
+  all_cell_clusters=unique(cell_data$cluster) |> sort()
+  stopifnot(all(all_cell_clusters ==  clusters$Cluster))
+
+  cell_data_ct=merge(cell_data, clusters, by.x='cluster', by.y='Cluster') |>
+    dplyr::rename(celltype=`Cell type`) |>
+    dplyr::arrange(cell_id)
+
+  ct_df=data.frame("Celltype"=cell_data_ct$celltype)
+  write.table(ct_df, file=file.path(scaden_folder, paste0(tissue_str, '_celltypes.txt')), quote=F, sep='\t', row.names=F)
+
+  counts=counts[rowSums(counts)>0,]
+
+  tcounts=t(counts)
+  stopifnot(all(rownames(tcounts) == as.character(cell_data_ct$cell_id)))
+  write.table(tcounts, file=file.path(scaden_folder, paste0(tissue_str, '_counts.txt')), quote=F, sep='\t', row.names=T, col.names=NA)
+
+  tbl=as.matrix(table(ct_df)) |> as.data.frame()
+  colnames(tbl)="Cell"
+  print_table(tbl)
+}
+```
