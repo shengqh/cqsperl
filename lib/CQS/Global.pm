@@ -82,8 +82,11 @@ sub singularity_prefix {
 
 sub global_options {
   return {
+    emailType => "FAIL",
+    
     #constraint => "haswell",
     sratoolkit_setting_file => "/data/cqs/softwares/cqsperl/config/vdb-config/user-settings.mkfg",
+
     BWA_docker_command => images()->{"exomeseq"},
     bamplot_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/bamplot.simg ",
     chipqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.chipqc.simg ",
@@ -107,7 +110,7 @@ sub global_options {
 sub mm10_options {
   return merge_hash_right_precedent(global_options(), {
     #biomart
-    biomart_host      => "aug2020.archive.ensembl.org",
+    biomart_host      => "https://aug2020.archive.ensembl.org",
     biomart_dataset   => "mmusculus_gene_ensembl",
     biomart_symbolKey => "mgi_symbol",
 
@@ -144,7 +147,7 @@ sub mm10_options {
 sub hg19_options {
   return merge_hash_right_precedent(global_options(), {
     #biomart
-    biomart_host      => "grch37.ensembl.org",
+    biomart_host      => "https://grch37.ensembl.org",
     biomart_dataset   => "hsapiens_gene_ensembl",
     biomart_symbolKey => "hgnc_symbol",
 
@@ -179,7 +182,7 @@ sub hg19_options {
 sub hg38_options {
   return merge_hash_right_precedent(global_options(), {
     #biomart
-    biomart_host      => "www.ensembl.org",
+    biomart_host      => "https://www.ensembl.org",
     biomart_dataset   => "hsapiens_gene_ensembl",
     biomart_symbolKey => "hgnc_symbol",
 
