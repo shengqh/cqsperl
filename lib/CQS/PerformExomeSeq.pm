@@ -150,7 +150,7 @@ sub gatk_hg38_genome {
       species    => "homo_sapiens",
       ncbi_build => "GRCh38",
       plotCNVGenes      => 1,
-      biomart_host      => "www.ensembl.org",
+      biomart_host      => "https://www.ensembl.org",
       biomart_dataset   => "hsapiens_gene_ensembl",
       biomart_symbolKey => "hgnc_symbol",
 
@@ -234,7 +234,7 @@ sub gatk_hg19_genome {
       species    => "homo_sapiens",
       ncbi_build => "GRCh37",
       plotCNVGenes      => 1,
-      biomart_host      => "grch37.ensembl.org",
+      biomart_host      => "https://grch37.ensembl.org",
       biomart_dataset   => "hsapiens_gene_ensembl",
       biomart_symbolKey => "hgnc_symbol",
 
