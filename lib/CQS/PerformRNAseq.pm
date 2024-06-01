@@ -23,6 +23,8 @@ our %EXPORT_TAGS = (
       performRNASeq_gencode_hg38_v33
       add_mouse_gsea
       gencode_mm10_genome
+      gencode_mm10_genome_vM24
+      gencode_mm10_genome_vM25
       performRNASeq_gencode_mm10
       ensembl_Mmul10_genome
       performRNASeq_ensembl_Mmul10
@@ -292,6 +294,7 @@ sub get_gencode_mm10_genome {
       star_index     => "/data/cqs/references/gencode/GRCm38.p6/STAR_index_2.7.8a_${gtfVersion}_sjdb100",
       transcript_gtf => "/data/cqs/references/gencode/GRCm38.p6/gencode.${gtfVersion}.annotation.gtf",
       name_map_file  => "/data/cqs/references/gencode/GRCm38.p6/gencode.${gtfVersion}.annotation.gtf.map",
+      utr3_bed => "/data/cqs/references/gencode/GRCm38.p6/gencode.${gtfVersion}.annotation_3utr.bed",      
       dexseq_gff     => "/data/cqs/references/gencode/GRCm38.p6/gencode.${gtfVersion}.annotation.dexseq.gff",
       annotation_genes_add_chr => 1,
       software_version => {
@@ -306,8 +309,12 @@ sub gencode_mm10_genome_vM25 {
   return(get_gencode_mm10_genome("vM25"));
 }
 
-sub gencode_mm10_genome {
+sub gencode_mm10_genome_vM24 {
   return(get_gencode_mm10_genome("vM24"));
+}
+
+sub gencode_mm10_genome {
+  return(get_gencode_mm10_genome("vM25"));
 }
 
 sub ensembl_Rnor_6_genome {
