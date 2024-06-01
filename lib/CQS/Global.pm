@@ -104,6 +104,9 @@ sub global_options {
     deseq2_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_correlation.20240411.sif",
 
     cellbender_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cellbender.0.3.0.sif ",
+
+    slamdunk_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/slamdunk.v0.4.3.sif ",
+    nextgenmap_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/nextgenmap.v0.5.5.sif ",
   };
 }
 
