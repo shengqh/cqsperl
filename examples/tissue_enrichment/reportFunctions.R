@@ -25,14 +25,25 @@ copy_or_download<-function(source){
   }
 }
 
-copy_report_files=function(lib_folder="https://raw.githubusercontent.com/shengqh/ngsperl/master/lib") {
+copy_module_files=function(lib_folder="https://raw.githubusercontent.com/shengqh/ngsperl/master/lib") {
   #lib_folder="/nobackup/h_cqs/shengq2/program/ngsperl/lib"
   
   copy_or_download(paste0(lib_folder, "/Report/pathway.Rmd"))
   copy_or_download(paste0(lib_folder, "/Report/gene_exp.Rmd"))
-  copy_or_download(paste0(lib_folder, "/Report/tissue_specificity.Rmd"))
+  copy_or_download(paste0(lib_folder, "/Report/TissueExpression.PipelineSub.Rmd"))
+  #copy_or_download(paste0(lib_folder, "/Report/tissue_specificity.Rmd"))
   copy_or_download(paste0(lib_folder, "/Report/StringDb.Rmd"))
+  copy_or_download(paste0(lib_folder, "/CQS/countTableVisFunctions.R"))
 }
+
+copy_report_files=function(lib_folder="https://raw.githubusercontent.com/shengqh/cqsperl/examples/tissue_enrichment") {
+  #lib_folder="/nobackup/h_cqs/shengq2/program/cqsperl/examples/tissue_enrichment"
+  
+  copy_or_download(paste0(lib_folder, "/reportByModules.Rmd"))
+  copy_or_download(paste0(lib_folder, "/reportFunctions.R"))
+
+}
+
 
 prepare_analysis_parameters=function(
     target_genes,
@@ -46,19 +57,21 @@ prepare_analysis_parameters=function(
     
     organism="hsa", #"mmu"
     
+    referenceFolder="/nobackup/h_cqs/references/", #"X:/h_cqs/references/"
+    
     pathway_parameter_list=list(
       pathway_analysis_sets = c("KEGG", "Reactome", "WikiPathways"),
       fromType = "SYMBOL", #target and background genes
       pathway_toType = "ENTREZID" #pathway analysis db ids
     ),
     tissue_specificity_parameter_list=list(
-      proteinAtlasDatabaseFile = "/nobackup/h_cqs/references/tissue_specific/proteinatlas.tsv.zip",
+      proteinAtlasDatabaseFile = file.path(referenceFolder,"tissue_specific","proteinatlas.tsv"),
       database_gene = "ENSEMBL", #What gene annotation is in the gene_exp file
       colNameGenes = "EntrezGeneSymbol",
       horizontalHeatmap=FALSE
     ),
     gene_exp_parameter_list=list(
-      gene_exp_file = "/nobackup/h_cqs/references/tissue_specific/20230627_tabula_logNorm_averageExpression_matrix_by_tissueOnly.txt.gz",
+      gene_exp_file = file.path(referenceFolder,"tissue_specific","20230627_tabula_logNorm_averageExpression_matrix_by_tissueOnly.txt.gz"),
       gene_exp_toType = "ENSEMBL", #pathway analysis db ids
       perform_gene_exp_5perc=TRUE,
       draw_gene_exp_heatmap_5perc_global=TRUE

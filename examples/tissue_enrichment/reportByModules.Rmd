@@ -18,13 +18,33 @@ output:
 
 
 ```{r}
-source("D:/source/cqsperl/examples/reportFunctions.R")
+source("D:/source/cqsperl/examples/tissue_enrichment/reportFunctions.R")
 ```
 
 ```{r}
 output_folder = "D:/temp/tissue_enrichment_report"
 setwd(output_folder)
-#copy_report_files()
+
+#Just use copy_report_files() and copy_module_files() to download from github
+copy_report_files("D:/source/cqsperl/examples/tissue_enrichment")
+copy_module_files("D:/source/ngsperl/lib")
+
+source("countTableVisFunctions.R")
+```
+```{r,eval=FALSE}
+#generate report in output_folder
+#NOT using "knitr" because that will generate report in this Rmd folder
+
+# inputFile should be this Rmd file which is generated from reportByModules.Rmd. 
+# Here use reportByModules.Rmd as an example.
+inputFile="reportByModules.Rmd"
+setwd(output_folder)
+date_str = format(Sys.time(), "%Y%m%d")
+xfun::Rscript_call(
+  rmarkdown::render,
+  list(input=inputFile,
+       output_file=paste0(date_str, "_example.html"))
+)
 
 ```
 
@@ -36,19 +56,27 @@ setwd(output_folder)
 prefix="Gene set 1"
 reportParametersList=prepare_analysis_parameters(
   target_genes=c("CDK2","CDK4","CDK6","CDKN1A","CDKN1B","CDKN2A","CDKN2B","CDKN2C","CDKN2D","CCND1","CCND2","CCND3","CCNE1","CCNE2","CCNA2","CCNB1","CCNB2","CCNB3","CDK1","CDK7","CDK8","CDK9","CDK10","CDK11A","CDK11B"),
-  prefix=prefix)
+  prefix=prefix,
+  #reference file folder. You don't need to set this if in ACCRE
+  referenceFolder="X:/h_cqs/references/")
 
 ```
 
-### Pathway Analysis
-```{r child="pathway.Rmd"}
+<!-- ### Pathway Analysis -->
+<!-- ```{r child="pathway.Rmd"} -->
+
+<!-- ``` -->
+
+### Tissue Expression pattern
+```{r child="TissueExpression.PipelineSub.Rmd"}
 
 ```
 
-### Protein-Protein interactions
-```{r child="StringDb.Rmd"}
+<!-- ### Protein-Protein interactions -->
+<!-- ```{r child="StringDb.Rmd"} -->
 
-```
+<!-- ``` -->
+
 
 ## Save the session information
 
