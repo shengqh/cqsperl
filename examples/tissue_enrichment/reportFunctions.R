@@ -36,11 +36,11 @@ copy_module_files=function(lib_folder="https://raw.githubusercontent.com/shengqh
   copy_or_download(paste0(lib_folder, "/CQS/countTableVisFunctions.R"))
 }
 
-copy_report_files=function(lib_folder="https://raw.githubusercontent.com/shengqh/cqsperl/examples/tissue_enrichment") {
+copy_report_files=function(lib_folder="https://raw.githubusercontent.com/shengqh/cqsperl/master/") {
   #lib_folder="/nobackup/h_cqs/shengq2/program/cqsperl/examples/tissue_enrichment"
   
-  copy_or_download(paste0(lib_folder, "/reportByModules.Rmd"))
-  copy_or_download(paste0(lib_folder, "/reportFunctions.R"))
+  copy_or_download(paste0(lib_folder, "/examples/tissue_enrichment/reportByModules.Rmd"))
+  copy_or_download(paste0(lib_folder, "/examples/tissue_enrichment/reportFunctions.R"))
 
 }
 
