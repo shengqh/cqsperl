@@ -22,7 +22,7 @@ output:
 source("https://raw.githubusercontent.com/shengqh/cqsperl/master/examples/tissue_enrichment/reportFunctions.R")
 ```
 
-```{r}
+```{r,results='hide'}
 output_folder = "D:/temp/tissue_enrichment_report"
 setwd(output_folder)
 
