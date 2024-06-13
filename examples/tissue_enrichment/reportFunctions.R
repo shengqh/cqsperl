@@ -54,6 +54,7 @@ prepare_analysis_parameters=function(
     perform_tissue_specificity = T,
     perform_gene_exp_heatmap = T,
     perform_stringdb = T,
+    perform_singscore = T,
     
     organism="hsa", #"mmu"
     
@@ -109,6 +110,8 @@ prepare_analysis_parameters=function(
     perform_pathway = perform_pathway,
     perform_tissue_specificity = perform_tissue_specificity,
     perform_gene_exp_heatmap = perform_gene_exp_heatmap,
+    perform_stringdb = perform_stringdb,
+    perform_singscore = perform_singscore,
     
     pathway_parameter_list = pathway_parameter_list,
     tissue_specificity_parameter_list = tissue_specificity_parameter_list,
