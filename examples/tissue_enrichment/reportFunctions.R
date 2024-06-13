@@ -73,6 +73,7 @@ prepare_analysis_parameters=function(
     ),
     gene_exp_parameter_list=list(
       gene_exp_file = file.path(referenceFolder,"tissue_specific","20230627_tabula_logNorm_averageExpression_matrix_by_tissueOnly.txt.gz"),
+      fromType = "SYMBOL", #target and background genes
       gene_exp_toType = "ENSEMBL", #pathway analysis db ids
       perform_gene_exp_5perc=TRUE,
       draw_gene_exp_heatmap_5perc_global=TRUE
