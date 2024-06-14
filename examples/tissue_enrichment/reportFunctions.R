@@ -44,7 +44,6 @@ copy_report_files=function(lib_folder="https://raw.githubusercontent.com/shengqh
 
 }
 
-
 prepare_analysis_parameters=function(
     target_genes,
     background_genes=NULL,
@@ -54,7 +53,7 @@ prepare_analysis_parameters=function(
     perform_tissue_specificity = T,
     perform_gene_exp_heatmap = T,
     perform_stringdb = T,
-    perform_singscore = T,
+    perform_activiey_score = T,
     
     organism="hsa", #"mmu"
     
@@ -77,19 +76,20 @@ prepare_analysis_parameters=function(
       gene_exp_toType = "ENSEMBL", #pathway analysis db ids
       perform_gene_exp_5perc=TRUE,
       draw_gene_exp_heatmap_5perc_global=TRUE
-    )
+    ),
+    stringdb_parameter_list=list(
+      confidence = 700,
+      hubGeneMin=5,
+      STRINGdb_directory="d:\\temp\\",
+      #STRINGdb_directory=""
+      exportToCytoscape=TRUE
+    ),
+    activity_score_parameter_list=gene_exp_parameter_list
 ) {
-  stringdb_parameter_list=list(
-    confidence = 700,
-    hubGeneMin=5,
-    STRINGdb_directory="d:\\temp\\",
-    #STRINGdb_directory=""
-    exportToCytoscape=TRUE
-  )
-  
   
   pathway_parameter_list[["organism"]]=organism
   gene_exp_parameter_list[["organism"]]=organism
+  activity_score_parameter_list[["organism"]]=organism
   if (organism=="hsa") {
     OrgDb="org.Hs.eg.db"
     speciesId=9606
@@ -112,12 +112,13 @@ prepare_analysis_parameters=function(
     perform_tissue_specificity = perform_tissue_specificity,
     perform_gene_exp_heatmap = perform_gene_exp_heatmap,
     perform_stringdb = perform_stringdb,
-    perform_singscore = perform_singscore,
+    perform_activiey_score = perform_activiey_score,
     
     pathway_parameter_list = pathway_parameter_list,
     tissue_specificity_parameter_list = tissue_specificity_parameter_list,
     gene_exp_parameter_list = gene_exp_parameter_list,
-    stringdb_parameter_list=stringdb_parameter_list
+    stringdb_parameter_list = stringdb_parameter_list,
+    activity_score_parameter_list = activity_score_parameter_list
   ))
 }
 
