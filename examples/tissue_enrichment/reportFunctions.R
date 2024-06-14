@@ -116,6 +116,8 @@ prepare_analysis_parameters=function(
   }
   pathway_parameter_list[["OrgDb"]]=OrgDb
   gene_exp_parameter_list[["OrgDb"]]=OrgDb
+  activity_score_parameter_list[["OrgDb"]]=OrgDb
+
   stringdb_parameter_list[["species"]]=speciesId
   
   return(list(
