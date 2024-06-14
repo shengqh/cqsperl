@@ -33,6 +33,7 @@ copy_module_files=function(lib_folder="https://raw.githubusercontent.com/shengqh
   copy_or_download(paste0(lib_folder, "/Report/TissueExpression.PipelineSub.Rmd"))
   #copy_or_download(paste0(lib_folder, "/Report/tissue_specificity.Rmd"))
   copy_or_download(paste0(lib_folder, "/Report/StringDb.Rmd"))
+  copy_or_download(paste0(lib_folder, "/Report/activity_score.Rmd"))
   copy_or_download(paste0(lib_folder, "/CQS/countTableVisFunctions.R"))
 }
 
@@ -84,12 +85,26 @@ prepare_analysis_parameters=function(
       #STRINGdb_directory=""
       exportToCytoscape=TRUE
     ),
-    activity_score_parameter_list=gene_exp_parameter_list
+    activity_score_parameter_list=gene_exp_parameter_list,
+    activity_score_target_genes=NULL,
+    activity_score_target_genes_description=NULL
 ) {
-  
   pathway_parameter_list[["organism"]]=organism
   gene_exp_parameter_list[["organism"]]=organism
   activity_score_parameter_list[["organism"]]=organism
+
+  if(!is.null(activity_score_target_genes)){
+    activity_score_parameter_list$target_genes=activity_score_target_genes
+  }else{
+    activity_score_parameter_list$target_genes=target_genes
+  }
+
+  if(!is.null(activity_score_target_genes_description)){
+    activity_score_parameter_list$target_genes_description=activity_score_target_genes_description
+  }else{
+    activity_score_parameter_list$target_genes_description=""
+  }
+
   if (organism=="hsa") {
     OrgDb="org.Hs.eg.db"
     speciesId=9606
