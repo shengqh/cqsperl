@@ -86,8 +86,8 @@ prepare_analysis_parameters=function(
       exportToCytoscape=TRUE
     ),
     activity_score_parameter_list=gene_exp_parameter_list,
-    activity_score_target_genes=NULL,
-    activity_score_target_genes_description=NULL
+    activity_score_target_genes=target_genes,
+    activity_score_target_genes_description="genes"
 ) {
   pathway_parameter_list[["organism"]]=organism
   gene_exp_parameter_list[["organism"]]=organism
@@ -102,7 +102,7 @@ prepare_analysis_parameters=function(
   if(!is.null(activity_score_target_genes_description)){
     activity_score_parameter_list$target_genes_description=activity_score_target_genes_description
   }else{
-    activity_score_parameter_list$target_genes_description=""
+    activity_score_parameter_list$target_genes_description="genes"
   }
 
   if (organism=="hsa") {
