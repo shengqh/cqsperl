@@ -50,7 +50,7 @@ sub global_definition {
     muTect2_option => "--downsampling-stride 20 --max-reads-per-alignment-start 6 --max-suspicious-reads-per-alignment-start 6",
     'Mutect2.run_orientation_bias_mixture_model_filter' => "true",
 
-    # vcf2maf_pl => "/scratch/cqs/softwares/mskcc-vcf2maf/vcf2maf.pl",
+    vcf2maf_pl => "/data/cqs/softwares/mskcc_vcf2maf/vcf2maf.pl",
     vep_path   => "/data/cqs/softwares/ensembl-vep",
     vep_data   => "/data/cqs/references/vep_data",
     cluster    => "slurm",
