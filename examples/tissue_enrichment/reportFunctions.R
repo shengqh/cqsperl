@@ -30,8 +30,8 @@ copy_module_files=function(lib_folder="https://raw.githubusercontent.com/shengqh
   
   copy_or_download(paste0(lib_folder, "/Report/pathway.Rmd"))
   copy_or_download(paste0(lib_folder, "/Report/gene_exp.Rmd"))
-  copy_or_download(paste0(lib_folder, "/Report/TissueExpression.PipelineSub.Rmd"))
-  #copy_or_download(paste0(lib_folder, "/Report/tissue_specificity.Rmd"))
+  #copy_or_download(paste0(lib_folder, "/Report/TissueExpression.PipelineSub.Rmd"))
+  copy_or_download(paste0(lib_folder, "/Report/tissue_specificity.Rmd"))
   copy_or_download(paste0(lib_folder, "/Report/StringDb.Rmd"))
   copy_or_download(paste0(lib_folder, "/Report/activity_score.Rmd"))
   copy_or_download(paste0(lib_folder, "/CQS/countTableVisFunctions.R"))
