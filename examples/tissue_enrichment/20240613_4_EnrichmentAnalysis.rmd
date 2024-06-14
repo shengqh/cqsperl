@@ -1,0 +1,129 @@
+---
+title: "Cardiac specific EV - Enrichment Analysis"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+ rmdformats::readthedown:
+    toc_depth: 3
+    code_folding: hide
+    number_sections: false
+---
+
+```{css, echo=FALSE}
+#content{
+    max-width:1920px;
+}
+```
+
+```{r,eval=FALSE}
+#generate report in output_folder
+#NOT using "knitr" because that will generate report in this Rmd folder
+output_folder = "/nobackup/shah_lab/shengq2/20240514_Cardiac_specific_EV/20240514_KA_11198_rnaseq_hg38/20240613_4_EnrichmentAnalysis"
+dir.create(output_folder, showWarnings = FALSE, recursive = TRUE)
+setwd(output_folder)
+
+source("/nobackup/h_cqs/shengq2/program/cqsperl/examples/tissue_enrichment/reportFunctions.R")
+
+copy_or_download('/nobackup/shah_lab/shengq2/20240514_Cardiac_specific_EV/20240514_KA_11198_rnaseq_hg38/deseq2_genetable/result/AS_PD_vs_EV_min5_fdr0.05_DESeq2_sig.csv')
+copy_or_download('/nobackup/h_cqs/shengq2/program/RaviProjects/20240514_Cardiac_specific_EV/20240613_4_EnrichmentAnalysis.rmd')
+
+inputFile="20240613_4_EnrichmentAnalysis.rmd"
+
+date_str = format(Sys.time(), "%Y%m%d")
+
+xfun::Rscript_call(
+  rmarkdown::render,
+  list(input=inputFile,
+       output_file=paste0(date_str, "_4_EnrichmentAnalysis.html"))
+)
+```
+
+```{r, results='hide', echo=FALSE, warning=FALSE, message=FALSE}
+library(knitr)
+
+knitr::opts_chunk$set(
+  echo=TRUE, 
+  include=TRUE, 
+  warning=FALSE, 
+  message=FALSE, 
+  results="asis"
+)
+
+output_folder = "/nobackup/shah_lab/shengq2/20240514_Cardiac_specific_EV/20240514_KA_11198_rnaseq_hg38/20240613_4_EnrichmentAnalysis"
+dir.create(output_folder, showWarnings = FALSE, recursive = TRUE)
+setwd(output_folder)
+
+#source functions from github to use copy_report_files and copy_module_files
+source("/nobackup/h_cqs/shengq2/program/cqsperl/examples/tissue_enrichment/reportFunctions.R")
+
+lib_folder="/nobackup/h_cqs/shengq2/program/ngsperl/lib"
+
+#Just use copy_report_files() and copy_module_files() to download from github
+copy_report_files("/nobackup/h_cqs/shengq2/program/cqsperl")
+copy_module_files(lib_folder)
+#copy_report_files()
+#copy_module_files()
+
+source("countTableVisFunctions.R")
+source("reportFunctions.R")
+```
+
+# Data preparation
+
+We will look at the genes highly expressed in AS PD group compared to EV group.
+
+```{r}
+library(data.table)
+sig_csv="AS_PD_vs_EV_min5_fdr0.05_DESeq2_sig.csv"
+
+target_genes = fread(sig_csv) |>
+  dplyr::select(Feature_gene_name) |>
+  tibble::remove_rownames() |>
+  unique() |> unlist() |> unname()
+
+up_genes = fread(sig_csv) |>
+  dplyr::filter(log2FoldChange > 0) |>
+  dplyr::select(Feature_gene_name) |>
+  tibble::remove_rownames() |>
+  unique() |> unlist() |> unname()
+```
+
+- Number of DE genes: `r length(target_genes)`
+
+```{r}
+prefix="AS_PD_vs_EV"
+
+reportParametersList=prepare_analysis_parameters(
+  target_genes=target_genes,
+  prefix=prefix,
+  perform_pathway = TRUE,
+  perform_tissue_specificity = TRUE,
+  perform_gene_exp_heatmap = TRUE,
+  perform_stringdb = FALSE,
+  perform_activiey_score = TRUE,
+  activity_score_target_genes=up_genes,
+  activity_score_target_genes_description="upregulated genes in AS_PD_vs_EV")
+```
+
+# `r prefix` Enrichment Analysis
+
+```{r child="pathway.Rmd", eval=reportParametersList$perform_pathway}
+```
+
+```{r child="tissue_specificity.Rmd", eval=reportParametersList$perform_tissue_specificity}
+```
+
+```{r child="gene_exp.Rmd", eval=reportParametersList$perform_gene_exp_heatmap}
+```
+
+```{r child="StringDb.Rmd", eval=reportParametersList$perform_stringdb}
+```
+
+```{r child="activity_score.Rmd", eval=reportParametersList$perform_activiey_score}
+```
+
+# Save the session information
+
+```{r}
+writeLines(capture.output(sessionInfo()), paste0(prefix, '.sessionInfo.txt'))
+```
+
