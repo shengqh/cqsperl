@@ -2,6 +2,10 @@
 
 export mybinds='/home,/tmp'
 
+if [[ -e /accre ]]; then
+  export mybinds=$mybinds,/accre
+fi
+
 if [[ -e /afs ]]; then
   export mybinds=$mybinds,/afs
 fi
