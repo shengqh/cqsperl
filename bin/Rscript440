@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source /nobackup/h_cqs/softwares/cqsperl/scripts/binds.sh
+
+rimg=/data/cqs/softwares/singularity/cqs_bioconductor.3_19_R_4_4_0.20240510.sif
+
+rver=$(singularity exec -c -e -B $mybinds $rimg R --version | grep "R version" | cut -d ' ' -f3)
+
+rlib=/nobackup/h_cqs/rlibs_$rver/$USER
+
+mkdir -p $rlib
+
+singularity exec -c -e -B $mybinds --pwd `pwd` --env R_LIBS="$rlib" $rimg Rscript $@
