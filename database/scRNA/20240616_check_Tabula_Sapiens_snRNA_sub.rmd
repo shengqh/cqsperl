@@ -1,0 +1,43 @@
+```{r}
+meta_file=sub(".rds$", ".meta.rds", obj_file)
+tissue_name=sub("TS_", "", sub(".rds$", "", basename(obj_file)))
+tissue_name_file=sub(" ", "_", tissue_name)
+```
+
+# `r tissue_name`
+
+```{r}
+obj=readRDS(obj_file)
+obj=subset(obj, subset=method=="10X")
+
+cur_meta=obj@meta.data
+if(!file.exists(meta_file)){
+  saveRDS(cur_meta, meta_file)
+}
+
+print_table(head(cur_meta), row.names=F)
+```
+
+```{r}
+umap_width=6 + 3* ceiling(length(unique(obj$cell_ontology_class)) / 10)
+umap_height=6
+```
+
+## scvi_umap
+
+```{r fig.width=umap_width, fig.height=umap_height}
+g=get_dim_plot_labelby(obj, "cell_ontology_class", reduction="scvi_umap")
+scvi_umap_png=paste0(tissue_name_file, ".cell_ontology_class.scvi_umap.png")
+ggsave(scvi_umap_png, g, width=umap_width, height=umap_height, dpi=300, units="in", bg="white")
+include_graphics(scvi_umap_png)
+```
+
+## umap
+
+```{r fig.width=umap_width, fig.height=umap_height}
+g=get_dim_plot_labelby(obj, "cell_ontology_class", reduction="umap")
+umap_png=paste0(tissue_name_file, ".cell_ontology_class.umap.png")
+ggsave(umap_png, g, width=umap_width, height=umap_height, dpi=300, units="in", bg="white")
+include_graphics(umap_png)
+```
+

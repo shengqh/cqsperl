@@ -1,0 +1,96 @@
+---
+title: "Tabula Sapiens snRNA data"
+author: 
+- name: "Quanhu Sheng"
+  affiliation: "CQS/Biostatistics, VUMC"
+  email: "quanhu.sheng.1@vumc.org"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  rmdformats::readthedown:
+    toc_depth: 3
+    code_folding: hide
+    number_sections: yes
+---
+
+```{r,eval=FALSE,echo=FALSE}
+library(xfun)
+root_dir = '/data/cqs/references/Tabula_Sapiens/20240616_check_data'
+dir.create(root_dir, showWarnings=FALSE)
+
+setwd(root_dir)
+
+file.copy('/nobackup/h_cqs/shengq2/program/ngsperl/lib/CQS/reportFunctions.R', "./", overwrite=TRUE)
+file.copy('/nobackup/h_cqs/shengq2/program/ngsperl/lib/scRNA/scRNA_func.r', "./", overwrite=TRUE)
+file.copy('/nobackup/h_cqs/shengq2/program/cqsperl/database/scRNA/20240616_check_Tabula_Sapiens_snRNA.rmd', "./", overwrite=TRUE)
+file.copy('/nobackup/h_cqs/shengq2/program/cqsperl/database/scRNA/20240616_check_Tabula_Sapiens_snRNA_sub.rmd', "./", overwrite=TRUE)
+
+date_str = format(Sys.time(), "%Y%m%d")
+
+xfun::Rscript_call(
+  rmarkdown::render,
+  list(input="20240616_check_Tabula_Sapiens_snRNA.rmd",
+       output_file=paste0(date_str, "_check_Tabula_Sapiens_snRNA.html"))
+)
+```
+
+```{css, echo=FALSE}
+#content{
+    max-width:1920px;
+}
+```
+
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+root_dir = '/data/cqs/references/Tabula_Sapiens/20240616_check_data'
+
+load_install<-function(library_name, library_sources=library_name){
+  if(!require(library_name, character.only = T)){
+    BiocManager::install(library_sources, ask=FALSE)
+  }
+  library(library_name, character.only = T)
+}
+
+load_install("knitr")
+load_install("Hmisc")
+load_install("arsenal")
+load_install("gtsummary")
+load_install("flextable")
+
+knitr::opts_chunk$set(
+  echo=TRUE, 
+  include=TRUE, 
+  warning=FALSE, 
+  message=FALSE, 
+  results="asis"
+)
+
+date_str = format(Sys.time(), "%Y%m%d")
+
+knitr::opts_knit$set(root.dir = root_dir)
+setwd(root_dir)
+
+source('reportFunctions.R')
+source('scRNA_func.r')
+```
+
+```{r}
+rds_files = list.files("..", pattern="\\.rds$", full.names=TRUE)
+rds_files = rds_files[!grepl("meta|TabulaSapiens", basename(rds_files))]
+```
+
+```{r}
+umap_content=""
+for(obj_file in rds_files){
+  umap_content = paste0(umap_content, "```{r}\nobj_file='", obj_file, "'\n```\n\n```{r child='20240616_check_Tabula_Sapiens_snRNA_sub.rmd'}\n```\n\n")
+}
+umap_rmd="umap.rmd"
+writeLines(umap_content, umap_rmd)
+```
+
+```{r child=umap_rmd}
+```
+
+# Save the session information
+
+```{r}
+writeLines(capture.output(sessionInfo()), paste0(date_str, '.sessionInfo.txt'))
+```

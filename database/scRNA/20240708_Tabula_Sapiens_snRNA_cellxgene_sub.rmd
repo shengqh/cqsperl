@@ -1,0 +1,154 @@
+```{r eval=FALSE}
+#tissue="cardiac atrium"
+tissue="Heart"
+```
+
+## `r tissue`
+
+```{r}
+tissue_file=sub(" ", "_", tissue)
+cells=rownames(obj@meta.data)[obj@meta.data$tissue==tissue]
+tissue_obj=subset(obj, cells=cells)
+tissue_obj$cell_type = factor_by_count(tissue_obj$cell_type)
+
+umap_height=4
+```
+
+There are `r length(cells)` cells in `r tissue`.
+
+### Compartment
+
+#### Compartment distribution
+
+```{r}
+get_freq_table(tissue_obj@meta.data, "compartment") |>
+  print_table(row.names=F)
+
+cur_prefix=paste0(tissue_file, ".compartment")
+```
+
+#### Compartment in global UMAP
+
+```{r}
+other_name="other tissues"
+
+tissue_compartment=as.character(obj@meta.data$compartment)
+tissue_compartment[!rownames(obj@meta.data) %in% cells] = other_name
+obj@meta.data$tissue_compartment=factor_by_count(tissue_compartment)
+
+group.by="dummy_cluster"
+group.label="dummy_label"
+
+obj<-build_dummy_cluster(obj, "tissue_compartment", group.by, group.label)
+
+lvs=levels(obj@meta.data$dummy_cluster)
+tissue_ct_colors=get_hue_colors(length(lvs), random_colors=TRUE)
+names(tissue_ct_colors)=lvs
+tissue_ct_colors[which(lvs=="0")]="gray"
+
+g<-get_dim_plot(obj, 
+                group.by=group.by, 
+                label.by=group.label, 
+                legend.title="Compartment",
+                label=TRUE, 
+                reduction="scvi_umap", 
+                ncol=1, 
+                scolors=tissue_ct_colors) + 
+  ggtitle(tissue)
+
+g$data = g$data[order(g$data$dummy_cluster),]
+
+tissue_umap_file=paste0(cur_prefix, ".global_umap.png")
+ggsave(tissue_umap_file, g, width=get_legend_width(g) + umap_height, height=umap_height, dpi=300, units="in", bg="white")
+include_graphics(tissue_umap_file)
+```
+
+### Compartment in tissue UMAP
+
+```{r}
+g2data = g$data |>
+  dplyr::mutate(tissue=ifelse(dummy_cluster==0, "Other tissues", tissue))
+
+g$data = rbind(g$data |> dplyr::mutate(tissue="All"), g2data)
+
+g=g+facet_grid(~tissue) + theme_bw3() + theme(aspect.ratio=1) + ggtitle("")
+
+tissue_umap_file=paste0(cur_prefix, ".facet_umap.png")
+ggsave(tissue_umap_file, g, width=get_legend_width(g) + (umap_height - 0.5) * 3, height=umap_height, dpi=300, units="in", bg="white")
+include_graphics(tissue_umap_file)
+```
+
+### Cell type
+
+#### Cell type distribution
+
+```{r}
+fdf = get_freq_table(tissue_obj@meta.data, "cell_type")
+
+fdf |> print_table(row.names=F)
+
+cur_prefix=paste0(tissue_file, ".cell_type")
+```
+
+```{r}
+if(any(fdf$count < 100)){
+  less_than_100=fdf |> dplyr::filter(count < 100) |> dplyr::pull(cell_type)
+  cat("For cell types with less than 100 cells, we will remove them from the visualization:", paste0(less_than_100, collapse=","))
+  less_cells = rownames(tissue_obj@meta.data)[tissue_obj@meta.data$cell_type %in% less_than_100]
+  cur_obj=subset(obj, cells=less_cells, invert = TRUE)
+  tissue_obj=subset(tissue_obj, cells=less_cells, invert = TRUE)
+}else{
+  cur_obj=obj
+}
+
+```
+
+#### Cell type in global UMAP
+
+```{r}
+other_name="other tissues"
+
+tissue_celltype=as.character(cur_obj@meta.data$cell_type)
+tissue_celltype[!rownames(cur_obj@meta.data) %in% cells] = other_name
+cur_obj@meta.data$tissue_celltype=factor_by_count(tissue_celltype)
+
+group.by="dummy_cluster"
+group.label="dummy_label"
+
+cur_obj<-build_dummy_cluster(cur_obj, "tissue_celltype", group.by, group.label)
+
+lvs=levels(cur_obj@meta.data$dummy_cluster)
+tissue_ct_colors=get_hue_colors(length(lvs), random_colors=TRUE)
+names(tissue_ct_colors)=lvs
+tissue_ct_colors[which(lvs=="0")]="gray"
+
+g<-get_dim_plot(cur_obj, 
+                group.by=group.by, 
+                label.by=group.label, 
+                legend.title="Cell type",
+                label=TRUE, 
+                reduction="scvi_umap", 
+                scolors=tissue_ct_colors) + 
+  ggtitle(tissue)
+
+g$data = g$data[order(g$data$dummy_cluster),]
+
+tissue_umap_file=paste0(cur_prefix, ".global_umap.png")
+ggsave(tissue_umap_file, g, width=get_legend_width(g) + umap_height, height=umap_height, dpi=300, units="in", bg="white")
+include_graphics(tissue_umap_file)
+```
+
+### Cell type in tissue UMAP
+
+```{r}
+g2data = g$data |>
+  dplyr::mutate(tissue=ifelse(dummy_cluster==0, "Other tissues", tissue))
+
+g$data = rbind(g$data |> dplyr::mutate(tissue="All"), g2data)
+
+g=g+facet_grid(~tissue) + theme_bw3() + theme(aspect.ratio=1) + ggtitle("")
+
+tissue_umap_file=paste0(cur_prefix, ".facet_umap.png")
+ggsave(tissue_umap_file, g, width=get_legend_width(g) + (umap_height - 0.5) * 3, height=umap_height, dpi=300, units="in", bg="white")
+include_graphics(tissue_umap_file)
+```

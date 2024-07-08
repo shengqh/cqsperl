@@ -1,0 +1,282 @@
+---
+title: "Tabula Sapiens snRNA data"
+author: 
+- name: "Quanhu Sheng"
+  affiliation: "CQS/Biostatistics, VUMC"
+  email: "quanhu.sheng.1@vumc.org"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  rmdformats::readthedown:
+    toc_depth: 3
+    number_sections: yes
+---
+
+```{r,eval=FALSE,echo=FALSE}
+library(xfun)
+root_dir = '/data/cqs/references/Tabula_Sapiens/20240708_Tabula_Sapiens_snRNA_cellxgene'
+dir.create(root_dir, showWarnings=FALSE)
+
+setwd(root_dir)
+
+file.copy('/nobackup/h_cqs/shengq2/program/ngsperl/lib/CQS/reportFunctions.R', "./", overwrite=TRUE)
+file.copy('/nobackup/h_cqs/shengq2/program/ngsperl/lib/scRNA/scRNA_func.r', "./", overwrite=TRUE)
+
+file.copy('/nobackup/h_cqs/shengq2/program/cqsperl/database/scRNA/20240708_Tabula_Sapiens_snRNA_cellxgene_sub.rmd', "./", overwrite=TRUE)
+file.copy('/nobackup/h_cqs/shengq2/program/cqsperl/database/scRNA/20240708_Tabula_Sapiens_snRNA_cellxgene.rmd', "./", overwrite=TRUE)
+
+date_str = format(Sys.time(), "%Y%m%d")
+
+xfun::Rscript_call(
+  rmarkdown::render,
+  list(input="20240708_Tabula_Sapiens_snRNA_cellxgene.rmd",
+       output_file=paste0(date_str, "_check_Tabula_Sapiens_snRNA_cellxgene.html"))
+)
+```
+
+```{css, echo=FALSE}
+#content{
+    max-width:1920px;
+}
+```
+
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+root_dir = '/data/cqs/references/Tabula_Sapiens/20240701_check_Tabula_Sapiens_snRNA_cellxgene'
+
+load_install<-function(library_name, library_sources=library_name){
+  if(!require(library_name, character.only = T)){
+    BiocManager::install(library_sources, ask=FALSE)
+  }
+  library(library_name, character.only = T)
+}
+
+load_install("knitr")
+load_install("Hmisc")
+load_install("arsenal")
+load_install("gtsummary")
+load_install("flextable")
+
+knitr::opts_chunk$set(
+  include=TRUE, 
+  echo=FALSE, 
+  warning=FALSE, 
+  message=FALSE, 
+  results="asis"
+)
+
+date_str = format(Sys.time(), "%Y%m%d")
+
+knitr::opts_knit$set(root.dir = root_dir)
+setwd(root_dir)
+
+source('reportFunctions.R')
+source('scRNA_func.r')
+```
+
+The Tabula Sapiens snRNA data is available at [cellxgene](https://cellxgene.cziscience.com/e/53d208b0-2cfd-4366-9866-c3c6114081bc.cxg/) and [rds file](https://datasets.cellxgene.cziscience.com/981bcf57-30cb-4a85-b905-e04373432fef.rds).
+
+<pre>
+https://cellxgene.cziscience.com/e/53d208b0-2cfd-4366-9866-c3c6114081bc.cxg/
+https://datasets.cellxgene.cziscience.com/981bcf57-30cb-4a85-b905-e04373432fef.rds
+</pre>
+
+```{r}
+obj_file="/data/cqs/references/Tabula_Sapiens/981bcf57-30cb-4a85-b905-e04373432fef.rds"
+obj_10x3_file="/data/cqs/references/Tabula_Sapiens/cellxgene_10x3.rds"
+```
+
+# MD5 of files
+
+```{r}
+md5_tbl=rbind(
+  data.frame("name"="obj_file", "file"=obj_file, "md5"="18113edf2ab892b2ccd8226cc10e7d8e")
+)
+
+for(i in 1:nrow(md5_tbl)){
+  check_md5(md5_tbl$file[i], md5_tbl$md5[i])
+}
+
+print_table(md5_tbl, row.names=F)
+```
+
+# Data preparation
+
+Load object from `r obj_file`.
+
+```{r}
+obj=readRDS(obj_file)
+```
+
+## Assay
+
+```{r}
+get_freq_table(obj@meta.data, "assay") |>
+  print_table(row.names=F)
+```
+
+<mark>Since we will focus on gene expression in most of the data analysis using Tabula Sapiens data, 
+we will use 10x 3' v3 assay only.</mark>
+
+```{r}
+obj = obj |> subset(assay == "10x 3' v3")
+```
+
+## Compartment
+
+```{r}
+get_freq_table(obj@meta.data, "compartment") |>
+  print_table(row.names=F)
+```
+
+<mark>There are only 11 germ line cells in the object, we will remove those 11 germ line cells from the object.</mark>
+
+```{r}
+obj = obj |> subset(compartment != "germ line")
+```
+
+## Update meta
+
+```{r}
+obj@meta.data |>
+  dplyr::filter(cell_type == "unknown") |>
+  dplyr::select(cell_type, compartment) |>
+  dplyr::count(cell_type, compartment) |>
+  print_table(row.names=F)
+```
+
+<mark>Since all unknown cell types are in epithelial compartment, we will rename cell type of those cells to epithelial.</mark>
+
+```{r}
+obj@meta.data$cell_type=as.character(obj@meta.data$cell_type)
+#obj@meta.data$cell_type[is.na(obj@meta.data$cell_type)] = "epithelial"
+obj@meta.data$cell_type[obj@meta.data$cell_type == "unknown"] = "epithelial"
+```
+
+<mark>Rename tissue_in_publication to tissue, factorize donor_id and compartment, save the object to `r obj_10x3_file`.</mark>
+
+```{r}
+obj@meta.data$orig.tissue=obj@meta.data$tissue
+obj@meta.data$tissue = factor_by_count(obj@meta.data$tissue_in_publication)
+obj@meta.data$donor_id = factor_by_count(obj@meta.data$donor_id)
+obj@meta.data$compartment = factor_by_count(obj@meta.data$compartment)
+```
+
+<mark>Replace gene id with gene feature name</mark>
+
+```{r}
+obj@assays$RNA@counts@Dimnames[[1]]=as.character(obj@assays$RNA@meta.features$feature_name)
+obj@assays$RNA@data@Dimnames[[1]]=as.character(obj@assays$RNA@meta.features$feature_name)
+obj$tissue=factor_by_count(obj$tissue)
+```
+
+<mark>Save the object to `r obj_10x3_file`.</mark>
+
+```{r}
+if(!file.exists(obj_10x3_file)){
+  saveRDS(obj, obj_10x3_file)
+}
+```
+
+## Donor
+
+```{r}
+get_freq_table(obj@meta.data, "donor_id") |>
+  print_table(row.names=F)
+```
+
+<mark>You may notice that the top 2 donors contributed more than half cells.</mark>
+
+# Meta data
+
+## Summary
+
+```{r}
+meta = obj@meta.data |>
+  dplyr::select(-observation_joinid, 
+                -nFeaturess_RNA, 
+                -nCounts_RNA_UMIs, 
+                -assay_ontology_term_id, 
+                -disease_ontology_term_id, 
+                -is_primary_data, 
+                -organism_ontology_term_id, 
+                -suspension_type, 
+                -cell_type_ontology_term_id, 
+                -tissue_ontology_term_id, 
+                -development_stage_ontology_term_id, 
+                -self_reported_ethnicity_ontology_term_id, 
+                -tissue_type, 
+                -sex_ontology_term_id, 
+                -manually_annotated)
+
+s_tbl = meta |> tbl_summary() 
+
+s_tbl |>
+  as_gt() |> 
+  gt::gtsave(filename = "meta.docx")
+
+s_tbl
+```
+
+<mark>You can find the meta data summary in [meta.docx](meta.docx).</mark>
+
+## Tissue ~ Compartment distribution
+
+```{r}
+table(obj$tissue, obj$compartment) |>
+  as.data.frame.matrix() |>
+  print_table(byDT=FALSE, row.names=TRUE)
+```
+
+# Compartment UMAP
+
+```{r}
+g<-get_dim_plot_labelby(obj, label.by="compartment", reduction="scvi_umap")
+compartment_umap_file="compartment_umap.png"
+ggsave(compartment_umap_file, g, width=10 + get_legend_width(g), height=10, units="in", dpi=300, limitsize=FALSE, bg="white")
+include_graphics(compartment_umap_file)
+```
+
+# Tissue UMAP
+
+## Global UMAP
+
+```{r}
+g<-get_dim_plot_labelby(obj, label.by="tissue", reduction="scvi_umap")
+tissue_umap_file="tissue_umap.png"
+ggsave(tissue_umap_file, g, width=10 + get_legend_width(g), height=10, units="in", dpi=300, limitsize=FALSE, bg="white")
+include_graphics(tissue_umap_file)
+```
+
+Since the cells in UMAP were clustered together by cell type rather than tissue, it's really hard to say where the tissue is located in the UMAP plot.
+
+```{r}
+tissues=levels(obj@meta.data$tissue)
+
+umap_content=""
+for(tissue in tissues){
+  umap_content = paste0(umap_content, "```{r}\ntissue='", tissue, "'\n```\n\n```{r child='20240708_Tabula_Sapiens_snRNA_cellxgene_sub.rmd'}\n```\n\n")
+}
+umap_rmd="tissue_umap.rmd"
+writeLines(umap_content, umap_rmd)
+```
+
+```{r child=umap_rmd}
+```
+
+# Final object MD5
+
+```{r}
+md5_tbl=rbind(
+  data.frame("name"="obj_10x3_file", "file"=obj_10x3_file, "md5"="")
+)
+
+for(i in 1:nrow(md5_tbl)){
+  md5_tbl$md5[i] = check_md5(md5_tbl$file[i], "", return_md5=TRUE)
+}
+print_table(md5_tbl, row.names=F)
+```
+
+# Save the session information
+
+```{r}
+writeLines(capture.output(sessionInfo()), paste0(date_str, '.sessionInfo.txt'))
+```
