@@ -48,7 +48,8 @@ sub gencode_hg38_genome {
     webgestalt_organism => "hsapiens",
     wgbs_r_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_wgbs.20240229.sif ",
     #wgbs_r_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/wgbs_r.1.1.sif ",
-    
+
+    probe_locus_file => "/data/cqs/references/methylation/illumina/20240618_illumina_cg_id/illumina.hg38.cg_id.unique.one_based.csv",
   });
 }
 
