@@ -40,7 +40,7 @@ xfun::Rscript_call(
 ```
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
-root_dir = '/data/cqs/references/Tabula_Sapiens/20240701_check_Tabula_Sapiens_snRNA_cellxgene'
+root_dir = '/data/cqs/references/Tabula_Sapiens/20240708_Tabula_Sapiens_snRNA_cellxgene'
 
 load_install<-function(library_name, library_sources=library_name){
   if(!require(library_name, character.only = T)){
@@ -165,7 +165,6 @@ obj@meta.data$compartment = factor_by_count(obj@meta.data$compartment)
 ```{r}
 obj@assays$RNA@counts@Dimnames[[1]]=as.character(obj@assays$RNA@meta.features$feature_name)
 obj@assays$RNA@data@Dimnames[[1]]=as.character(obj@assays$RNA@meta.features$feature_name)
-obj$tissue=factor_by_count(obj$tissue)
 ```
 
 <mark>Save the object to `r obj_10x3_file`.</mark>
