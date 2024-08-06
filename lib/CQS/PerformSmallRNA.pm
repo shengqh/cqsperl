@@ -17,6 +17,8 @@ our %EXPORT_TAGS = (
     qw(hg19_genome
       hg19_3utr
       hg38_genome
+      hg38_genome_v2022
+      hg38_genome_v2022_trna_CCA
       hg38_3utr
       mm10_genome
       mm10_3utr
@@ -24,6 +26,7 @@ our %EXPORT_TAGS = (
       performSmallRNA_hg19
       performSmallRNA_hg38
       performSmallRNA_hg38_v2022
+      performSmallRNA_hg38_v2022_trna_CCA
       performSmallRNA_mm10
       performSmallRNA_rn6
       hg38_mm10_genome
@@ -240,6 +243,32 @@ sub hg38_genome_v2022 {
   );
 }
 
+sub hg38_genome_v2022_trna_CCA {
+  return merge_hash_right_precedent(
+    supplement_genome_v2022(),
+    {
+      #genome database
+      mirbase_count_option => "-p hsa",
+
+      miRNA_coordinate     => "/data/cqs/references/smallrna/v202211_trna_cca/hg38_miRBase22_GtRNAdb19CCA_gencode42.miRNA.bed",
+      coordinate           => "/data/cqs/references/smallrna/v202211_trna_cca/hg38_miRBase22_GtRNAdb19CCA_gencode42_HERVd.bed",
+      coordinate_fasta     => "/data/cqs/references/smallrna/v202211_trna_cca/hg38_miRBase22_GtRNAdb19CCA_gencode42_HERVd.bed.fa",
+      bowtie1_index        => "/data/cqs/references/smallrna/v202211_trna_cca/bowtie_index_1.3.1/hg38_miRBase22_GtRNAdb19CCA_gencode42",
+
+      hasYRNA   => 1,
+      hasSnRNA  => 1,
+      hasSnoRNA => 1,
+      hasERV => 1,
+
+      perform_host_tRNA_cca_distribution => 1,      
+
+      software_version => {
+        host => "GENCODE GRCh38.p13",
+      }
+    }
+  );
+}
+
 sub hg38_genome {
   return hg38_genome_v2022();
 }
@@ -358,6 +387,14 @@ sub performSmallRNA_hg38_v5 {
 sub performSmallRNA_hg38_v2022 {
   my ( $userdef, $perform ) = @_;
   my $def = getSmallRNADefinition( $userdef, hg38_genome_v2022() );
+
+  my $config = performSmallRNA( $def, $perform );
+  return $config;
+}
+
+sub performSmallRNA_hg38_v2022_trna_CCA {
+  my ( $userdef, $perform ) = @_;
+  my $def = getSmallRNADefinition( $userdef, hg38_genome_v2022_trna_CCA() );
 
   my $config = performSmallRNA( $def, $perform );
   return $config;
