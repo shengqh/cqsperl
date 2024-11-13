@@ -32,9 +32,6 @@ sub cutrun_options {
 
     bamplot_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/bamplot.simg",
   
-    cutruntools2_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cutruntools2.sif",
-    cutruntools2_path => "/opt/CUT-RUNTools-2.0",
-
     seacr_path => "/opt/SEACR/SEACR_1.3.sh",
 
     homer_option => "",
