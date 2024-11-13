@@ -99,7 +99,7 @@ sub global_options {
     bamsnap_option => "--no_gene_track",
     multiqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/multiqc.sif ",
     report_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/report.sif ",
-    sratools_docker_command  => singularity_prefix() . " /data/cqs/softwares/singularity/sra-tools.sif ",
+    sratools_docker_command  => singularity_prefix() . " /data/cqs/softwares/singularity/sra-tools.3.1.0.sif ",
     crc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/novartis.20210408.simg ",
     genepos_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg ",
     fastq_screen_configuration_file => "/data/cqs/softwares/FastQ-Screen/fastq_screen.conf",
@@ -107,21 +107,28 @@ sub global_options {
     correlation_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_correlation.20240411.sif",
     deseq2_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_correlation.20240411.sif",
 
-    cellbender_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cellbender.0.3.0.sif ",
+    cellbender_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cellbender.0.3.2.sif ",
 
     slamdunk_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/slamdunk.v0.4.3.sif ",
     nextgenmap_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/nextgenmap.v0.5.5.sif ",
 
     umitools_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/umitools.1.0.0.sif ",
+
+    tetranscripts_docker_command => singularity_prefix() . "/data/cqs/softwares/singularity/tetranscripts.v2.2.3.sif",
+
+    cutruntools2_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cutruntools2.sif",
+    cutruntools2_path => "/opt/CUT-RUNTools-2.0",
   };
 }
 
 sub mm10_options {
   return merge_hash_right_precedent(global_options(), {
     #biomart
-    biomart_host      => "https://aug2020.archive.ensembl.org",
+    #For mm10, we have to use the ensembl 102 which corresponds to GRCm38.p6. The mouse genome became GRCm39 since ensembl 103.
+    biomart_host      => "https://nov2020.archive.ensembl.org/",
     biomart_dataset   => "mmusculus_gene_ensembl",
     biomart_symbolKey => "mgi_symbol",
+    biomart_add_chr => 1,
 
     blacklist_file => "/data/cqs/references/blacklist_files/mm10-blacklist.v2.bed",
 
@@ -159,6 +166,7 @@ sub hg19_options {
     biomart_host      => "https://grch37.ensembl.org",
     biomart_dataset   => "hsapiens_gene_ensembl",
     biomart_symbolKey => "hgnc_symbol",
+    biomart_add_chr => 1,
 
     blacklist_file => "/data/cqs/references/blacklist_files/hg19-blacklist.v2.nochr.bed",
 
@@ -194,6 +202,7 @@ sub hg38_options {
     biomart_host      => "https://www.ensembl.org",
     biomart_dataset   => "hsapiens_gene_ensembl",
     biomart_symbolKey => "hgnc_symbol",
+    biomart_add_chr => 1,
 
     #clean option
     #https://github.com/Boyle-Lab/Blacklist/raw/master/lists/hg38-blacklist.v2.bed.gz
