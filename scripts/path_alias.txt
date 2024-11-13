@@ -22,8 +22,8 @@ alias dexseq_prepare_annotation.py='singularity $SING_OPTION $softwares/singular
 alias cromwell='java -jar $softwares/wdl/cromwell-84.jar '
 alias womtool='java -jar $softwares/wdl/womtool-84.jar '
 
-alias sq='squeue -u $USER -o "%.20i %100j %.2t %.10M %R"'
-alias squ='squeue -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R" -u '
+alias sq='squeue -u $USER -o "%.10i %90j %.2t %.10M %R"'
+alias squ='squeue -o "%.10i %.9P %.50j %.10u %.2t %.10M %.6D %R" -u '
 alias sd='scontrol show jobid -dd '
 
 alias chrome='$softwares/chrome/opt/google/chrome/google-chrome --no-sandbox'
