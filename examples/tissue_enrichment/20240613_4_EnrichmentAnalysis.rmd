@@ -99,7 +99,7 @@ reportParametersList=prepare_analysis_parameters(
   perform_tissue_specificity = TRUE,
   perform_gene_exp_heatmap = TRUE,
   perform_stringdb = FALSE,
-  perform_activiey_score = TRUE,
+  perform_activity_score = TRUE,
   activity_score_target_genes=up_genes,
   activity_score_target_genes_description="upregulated genes in AS_PD_vs_EV")
 ```
@@ -118,7 +118,7 @@ reportParametersList=prepare_analysis_parameters(
 ```{r child="StringDb.Rmd", eval=reportParametersList$perform_stringdb}
 ```
 
-```{r child="activity_score.Rmd", eval=reportParametersList$perform_activiey_score}
+```{r child="activity_score.Rmd", eval=reportParametersList$perform_activity_score}
 ```
 
 # Save the session information
