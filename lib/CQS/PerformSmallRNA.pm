@@ -137,7 +137,12 @@ sub supplement_genome_v5 {
         bowtie1_index => "/data/cqs/references/smallrna/rice/bowtie_index_1.3.1/Oryza_sativa.IRGSP-1.0.dna.toplevel",
         species_map => "/data/cqs/references/smallrna/rice/Oryza_sativa.IRGSP-1.0.dna.toplevel.species.map",
         gtf => "/data/cqs/references/smallrna/rice/Oryza_sativa.IRGSP-1.0.56.gtf",
-      }
+      },
+      'Orange' => {
+        bowtie1_index => "/data/cqs/references/20241213_Citrus_sinensis_Valencia_genome/bowtie_index_1.3.1/GCF_022201045.2_DVS_A1.0_genomic",
+        species_map => "/data/cqs/references/20241213_Citrus_sinensis_Valencia_genome/GCF_022201045.2_DVS_A1.0_genomic.chromosomes.map",
+        gtf => "/data/cqs/references/20241213_Citrus_sinensis_Valencia_genome/GCF_022201045.2_DVS_A1.0_genomic.gtf",
+      },
     },
   });
 }
