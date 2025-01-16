@@ -92,6 +92,9 @@ sub global_options {
     chipqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.chipqc.simg ",
     gatk4_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-gatk4.simg ",
     bamsnap_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-bamsnap.simg ",
+
+    star_fusion_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/star-fusion.simg ",
+
     
     deepvariant_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/deepvariant-1.6.1.sif ",
     glnexus_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/glnexus.v1.2.7.sif ",
