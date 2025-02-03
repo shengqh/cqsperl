@@ -1,0 +1,16 @@
+#!/bin/bash
+
+source /data/cqs/softwares/cqsperl/scripts/binds.sh
+
+rimg=/data/cqs/softwares/singularity/cqs_bioconductor.3_19_R_4_4_1.20250122.sif
+
+rver=$(singularity exec -c -e -B $mybinds $rimg R --version | awk 'NR==1{match($3, /^[0-9]+\.[0-9]+/, v); print v[0]}')
+
+rlib=/nobackup/h_cqs/rlibs_$rver/$USER
+
+mkdir -p $rlib
+
+singularity exec -c -e -B $mybinds --pwd $(pwd) \
+    --env R_LIBS="$rlib" \
+    --env DISPLAY="localhost:11.0" \
+    $rimg R "$@"
