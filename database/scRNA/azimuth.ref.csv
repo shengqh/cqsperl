@@ -1,0 +1,25 @@
+"","Dataset","Version","Summary","species","system","ncells","tech","seurat","default.dataset","disk.datasets","other.datasets","notes","Installed","InstalledVersion"
+"adiposeref.SeuratData","adiposeref",1.0.0,"Azimuth Reference: adipose","human","adipose",160075,"scRNA-seq and sNuc-seq",NA,NA,NA,NA,NA,TRUE,1.0.0
+"bmcite.SeuratData","bmcite",0.3.0,"30k Bone Marrow Cells","human","bone marrow",30672,NA,"3.2.2",NA,NA,NA,NA,FALSE,NA
+"bonemarrowref.SeuratData","bonemarrowref",1.0.0,"Azimuth Reference: bonemarrow","human","bonemarrow",297627,"10x v2",NA,NA,NA,NA,NA,FALSE,NA
+"cbmc.SeuratData","cbmc",3.1.4,"scRNAseq and 13-antibody sequencing of CBMCs","human","CBMC (cord blood)",8617,"CITE-seq","3.1.4","raw","processed",NA,NA,FALSE,NA
+"celegans.embryo.SeuratData","celegans.embryo",0.1.0,"6k C. elegans embryos from Packer and Zhu et al (2019)","C. elegans","embryo",6188,NA,NA,"raw",NA,NA,NA,FALSE,NA
+"fetusref.SeuratData","fetusref",1.0.0,"Azimuth Reference: fetus","human","fetus",377456,NA,NA,NA,NA,NA,NA,FALSE,NA
+"hcabm40k.SeuratData","hcabm40k",3.0.0,"40,000 Cells From the Human Cell Atlas ICA Bone Marrow Dataset","human","bone marrow",40000,"10x v2",NA,"raw",NA,NA,NA,FALSE,NA
+"heartref.SeuratData","heartref",1.0.0,"Azimuth Reference: heart","human","heart",656509,"scRNA-seq and sNuc-seq",NA,NA,NA,NA,NA,FALSE,NA
+"humancortexref.SeuratData","humancortexref",1.0.0,"Azimuth Reference: humancortex","human","motor cortex",76533,NA,NA,NA,NA,NA,NA,FALSE,NA
+"ifnb.SeuratData","ifnb",3.1.0,"IFNB-Stimulated and Control PBMCs","human","PBMC",13999,"10x v1",NA,"raw",NA,"processed",NA,FALSE,NA
+"kidneyref.SeuratData","kidneyref",1.0.2,"Azimuth Reference: kidney","human","kidney",64693,"snRNA-seq",NA,NA,NA,NA,NA,FALSE,NA
+"lungref.SeuratData","lungref",2.0.0,"Azimuth Reference: lung","human","lung",584884,NA,NA,NA,NA,NA,NA,TRUE,2.0.0
+"mousecortexref.SeuratData","mousecortexref",1.0.0,"Azimuth Reference: mousecortex","mouse","motor cortex",159738,"10x v3",NA,NA,NA,NA,NA,FALSE,NA
+"panc8.SeuratData","panc8",3.0.2,"Eight Pancreas Datasets Across Five Technologies","human","Pancreatic Islets",14892,"SMARTSeq2, Fluidigm C1, CelSeq, CelSeq2, inDrops",NA,"raw",NA,NA,NA,FALSE,NA
+"pancreasref.SeuratData","pancreasref",1.0.0,"Azimuth Reference: pancreas","human","pancreas",35289,NA,NA,NA,NA,NA,NA,FALSE,NA
+"pbmc3k.SeuratData","pbmc3k",3.1.4,"3k PBMCs from 10X Genomics","human","PBMC",2700,"10x v1","3.1.4","raw",NA,"pbmc3k.final",NA,FALSE,NA
+"pbmcMultiome.SeuratData","pbmcMultiome",0.1.4,"10X Genomics PBMC Multiome Dataset","human","pbmc",11909,NA,"4.1.1","NA",NA,"pbmc.rna, pbmc.atac","One sample with two modalities, RNA and ATAC",FALSE,NA
+"pbmcref.SeuratData","pbmcref",1.0.0,"Azimuth Reference: pbmc","human","PBMC",2700,"10x v1",NA,NA,NA,NA,NA,TRUE,1.0.0
+"pbmcsca.SeuratData","pbmcsca",3.0.0,"Broad Institute PBMC Systematic Comparative Analysis","human","PBMC",31021,"10x v2, 10x v3, SMARTSeq2, Seq-Well, inDrops, Drop-seq, CelSeq2",NA,"raw",NA,NA,"HCA benchmark",FALSE,NA
+"ssHippo.SeuratData","ssHippo",3.1.4,"Slide-seq v2 dataset of mouse hippocampus","mouse","hippocampus",NA,"slideseq v2",NA,"raw",NA,NA,NA,FALSE,NA
+"stxBrain.SeuratData","stxBrain",0.1.2,"10X Genomics Visium Mouse Brain Dataset","mouse","brain",12167,"visium",NA,"NA",NA,"posterior1, posterior2, anterior1, anterior2","One sample split across four datasets as paired anterior/posterior slices",FALSE,NA
+"stxKidney.SeuratData","stxKidney",0.1.0,"10X Genomics Visium Mouse Kidney Dataset","mouse","kidney",1438,"visium",NA,"raw",NA,NA,NA,FALSE,NA
+"thp1.eccite.SeuratData","thp1.eccite",3.1.5,"ECCITE-seq THP-1","human",NA,NA,NA,NA,NA,NA,NA,NA,FALSE,NA
+"tonsilref.SeuratData","tonsilref",2.0.0,"Azimuth Reference: tonsil","human","tonsil",377963,"scRNA-seq",NA,NA,NA,NA,NA,FALSE,NA
