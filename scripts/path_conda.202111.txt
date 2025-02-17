@@ -1,6 +1,3 @@
-# User specific aliases and functions
-module load Anaconda3/2023.03-1
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/accre/arch/easybuild/software/BinDist/Anaconda3/2023.03-1/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -15,5 +12,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-#conda activate /nobackup/h_cqs/shengq2/.conda/envs/r4
