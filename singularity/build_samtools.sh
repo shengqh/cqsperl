@@ -1,2 +1,2 @@
-singularity build --disable-cache samtools.v1.18.sif docker://evolbioinfo/samtools:v1.18
+singularity build --disable-cache samtools_bcftools_tabix.v1.21.sif docker://shengqh/samtools_bcftools_tabix:v1.21
 

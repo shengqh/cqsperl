@@ -36,5 +36,5 @@ alias biobakery_workflows="singularity $biobakery_BIND_OPTION $softwares/singula
 alias biobakery_workflows_databases="singularity $biobakery_BIND_OPTION $softwares/singularity/biobakery_workflows.20240331.sif biobakery_workflows_databases"
 alias biobakery_workflows_scripts="singularity $biobakery_BIND_OPTION $softwares/singularity/biobakery_workflows.20240331.sif biobakery_workflows_scripts"
 
-alias regenie="singularity $SING_OPTION $softwares/singularity/regenie.3.4.1.gz.sif regenie"
+alias regenie="singularity $SING_OPTION $softwares/singularity/regenie4.20241127.sif regenie"
 

@@ -1,9 +1,14 @@
 #!/bin/bash
 
-if [[ $HOSTNAME == 'cqs1.vampire' || $HOSTNAME == 'cqs3.vampire' ]]; then
-  curl -L http://cpanmin.us | perl - -l /nobackup/h_vangard_1/shengq2/perl5_cqs13lib $1 $2 $3
-else
-  curl -L http://cpanmin.us | perl - -l /data/cqs/softwares/perl5_lib $1 $2 $3
+host=$(echo $HOSTNAME | cut -d'.' -f1)
+lib_path="/nobackup/h_cqs/perl5/perl5_lib_${host}"
+if( [ ! -d $lib_path ] ) 
+then
+  mkdir -p $lib_path
 fi
+
+echo "Install perl modules to $lib_path"
+
+curl -L http://cpanmin.us | perl - -l $lib_path $1 $2 $3
 
 

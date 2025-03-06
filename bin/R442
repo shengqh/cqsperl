@@ -2,19 +2,21 @@
 
 source /data/cqs/softwares/cqsperl/scripts/binds.sh
 
-rimg=/data/cqs/softwares/singularity/cqs_bioconductor.3_20_R_4_4_2.20250211.sif
+rimg=/data/cqs/softwares/singularity/cqs_bioconductor.3_20_R_4_4_2.20250303.sif
 
 rver=$(singularity exec -c -e -B $mybinds $rimg R --version | awk 'NR==1{match($3, /^[0-9]+\.[0-9]+/, v); print v[0]}')
 
-if [[ $HOSTNAME == "cqs1.vampire" ]]; then
-  rlib=/nobackup/h_cqs/rlibs_${rver}_cqs1/$USER
-else
-  rlib=/nobackup/h_cqs/rlibs_$rver/$USER
-fi
+host=$(echo $HOSTNAME | cut -d'.' -f1)
+rlib="/nobackup/h_cqs/rlibs_${rver}_${host}/$USER"
 
-mkdir -p $rlib
+echo DISPLAY=$DISPLAY
+
+if( [ ! -d $rlib ] ) 
+then
+  mkdir -p $rlib
+fi
 
 singularity exec -c -e -B $mybinds --pwd $(pwd) \
     --env R_LIBS="$rlib" \
-    --env DISPLAY="localhost:11.0" \
+    --env DISPLAY="$DISPLAY" \
     $rimg R "$@"

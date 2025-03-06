@@ -9,13 +9,17 @@ mkdir -p lib
 
 source /data/cqs/softwares/cqsperl/scripts/binds.sh
 
-rimg=/data/cqs/softwares/singularity/cqs_bioconductor.3_19_R_4_4_1.20250122.sif
+rimg=/data/cqs/softwares/singularity/cqs_bioconductor.3_20_R_4_4_2.20250303.sif
 
 rver=$(singularity exec -c -e -B $mybinds $rimg R --version | awk 'NR==1{match($3, /^[0-9]+\.[0-9]+/, v); print v[0]}')
 
-rlib=/nobackup/h_cqs/rlibs_$rver/$USER
+host=$(echo $HOSTNAME | cut -d'.' -f1)
+rlib="/nobackup/h_cqs/rlibs_${rver}_${host}/$USER"
 
-mkdir -p $rlib
+if( [ ! -d $rlib ] ) 
+then
+  mkdir -p $rlib
+fi
 
 singularity exec -B $mybinds,${ROOT_DIR}/run:/var/run/rstudio-server,${ROOT_DIR}/lib:/var/lib/rstudio-server,${ROOT_DIR}/tmp:/tmp/rstudio-server \
   --env R_LIBS="$rlib" $rimg \

@@ -34,15 +34,26 @@ else
   module load GSL/2.6
 fi
 
-export SINGULARITY_TMPDIR=/nobackup/h_cqs/singularity_home/temp
-#export softwares=/nobackup/h_cqs/softwares
 export softwares=/data/cqs/softwares
 
-if [[ $HOSTNAME == 'cqs1.vampire' || $HOSTNAME == 'cqs3.vampire' ]]; then
-  MY_PERL_LIB=$softwares/ngsperl/lib:$softwares/cqsperl/lib:/nobackup/h_vangard_1/shengq2/perl5_cqs13lib/lib/perl5
+if [[ $HOSTNAME == "cqs4.vampire" ]]; then
+  setup_accre_software_stack
+  export APPTAINER_CACHEDIR=/workspace/singularity/cache
+  export APPTAINER_TMPDIR=/workspace/singularity/temp
 else
-  MY_PERL_LIB=$softwares/ngsperl/lib:$softwares/cqsperl/lib:$softwares/perl5_lib/lib/perl5
+  export SINGULARITY_CACHEDIR=/data1/singularity/cache
+  export SINGULARITY_TMPDIR=/data1/singularity/temp
 fi
+
+host=$(echo $HOSTNAME | cut -d'.' -f1)
+lib_path="/nobackup/h_cqs/perl5/perl5_lib_${host}/lib/perl5/"
+
+if( [ ! -d $lib_path ] ) 
+then
+  mkdir -p $lib_path
+fi
+
+MY_PERL_LIB=$softwares/ngsperl/lib:$softwares/cqsperl/lib:$lib_path
 
 if [ -z "$PERL5LIB" ]
 then
