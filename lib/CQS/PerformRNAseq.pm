@@ -61,9 +61,10 @@ our %EXPORT_TAGS = (
 
 our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 our $gsea_ver = "4.3.2";
-our $gsea_db_ver = "v2022.1.Hs";
+#our $gsea_db_ver = "v2022.1.Hs";
+our $gsea_db_ver = "v2024.1.Hs";
 
 sub add_human_gsea {
   my ($def, $host) = @_;
@@ -256,7 +257,8 @@ sub add_mouse_gsea {
   $def->{gsea_chip} = undef;
   $def->{use_mouse_gsea_db} = 1;
 
-  my $mouse_gsea_db_ver = "v2022.1.Mm";
+  #my $mouse_gsea_db_ver = "v2022.1.Mm";
+  my $mouse_gsea_db_ver = "v2024.1.Mm";
 
   return merge_hash_right_precedent($def, {
     perform_gsea => 1,
