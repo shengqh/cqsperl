@@ -102,13 +102,13 @@ sub global_options {
     bamsnap_option => "--no_gene_track",
     multiqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/multiqc.sif ",
     report_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/report.sif ",
-    sratools_docker_command  => singularity_prefix() . " /data/cqs/softwares/singularity/sra-tools.3.1.0.sif ",
+    sratools_docker_command  => singularity_prefix() . " /data/cqs/softwares/singularity/sra-tools.3.2.1.sif ",
     crc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/novartis.20210408.simg ",
     genepos_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg ",
     fastq_screen_configuration_file => "/data/cqs/softwares/FastQ-Screen/fastq_screen.conf",
 
-    correlation_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_correlation.20240411.sif",
-    deseq2_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_correlation.20240411.sif",
+    correlation_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_correlation.20250616.sif",
+    deseq2_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_correlation.20250616.sif",
 
     cellbender_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cellbender.0.3.2.sif ",
 

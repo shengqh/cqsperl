@@ -5,7 +5,7 @@ sudo dnf config-manager --add-repo https://developer.download.nvidia.com/compute
 sudo rpm -i cuda-repo-rhel8-12-2-local-12.2.2_535.104.05-1.x86_64.rpm
 sudo dnf clean all
 sudo dnf -y module install nvidia-driver:latest-dkms
-sudo dnf -y install cuda
+sudo dnf -y install cuda-12-2
 
 curl -s -L https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-container-toolkit.repo | \
   sudo tee /etc/yum.repos.d/nvidia-container-toolkit.repo

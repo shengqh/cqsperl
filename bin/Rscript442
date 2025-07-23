@@ -6,8 +6,20 @@ rimg=/data/cqs/softwares/singularity/cqs_bioconductor.3_20_R_4_4_2.20250303.sif
 
 rver=$(singularity exec -c -e -B $mybinds $rimg R --version | awk 'NR==1{match($3, /^[0-9]+\.[0-9]+/, v); print v[0]}')
 
-host=$(echo $HOSTNAME | cut -d'.' -f1)
-rlib="/nobackup/h_cqs/rlibs_${rver}_${host}/$USER"
+myhost=$(echo $HOSTNAME | cut -d'.' -f1)
+
+if [[ $myhost == cqs* ]]; then #from gateway
+  echo "from gateway, $myhost"
+fi
+
+if [[ $myhost == cn* ]]; then #from slurm node
+  myhost="cqs4"
+  echo "from slurm node, use cqs4"
+fi
+
+rlib="/nobackup/h_cqs/rlibs_${rver}_${myhost}/$USER"
+
+echo DISPLAY=$DISPLAY
 
 if( [ ! -d $rlib ] ) 
 then

@@ -1,8 +1,11 @@
-if [[ $HOSTNAME == 'cqs4.vampire' ]]; then
+host=$(echo $HOSTNAME | cut -d'.' -f1)
+
+if [[ $host == 'cqs4' ]]; then
   module load StdEnv/2023
   module load perl/5.36.1
   module load java/21.0.1
   module load miniconda3/23.9.0-0
+  module load openblas/0.3.24
 else
   module load GCC/10.2.0
   module load CMake/3.18.4
@@ -36,18 +39,16 @@ fi
 
 export softwares=/data/cqs/softwares
 
-if [[ $HOSTNAME == "cqs4.vampire" ]]; then
+if [[ $host == "cqs4" ]]; then
   setup_accre_software_stack
-  export APPTAINER_CACHEDIR=/workspace/singularity/cache
-  export APPTAINER_TMPDIR=/workspace/singularity/temp
+  export APPTAINER_CACHEDIR=/workspace/singularity_tmp/cache
+  export APPTAINER_TMPDIR=/workspace/singularity_tmp/temp
 else
-  export SINGULARITY_CACHEDIR=/data1/singularity/cache
-  export SINGULARITY_TMPDIR=/data1/singularity/temp
+  export SINGULARITY_CACHEDIR=/data1/singularity_temp/cache
+  export SINGULARITY_TMPDIR=/data1/singularity_temp/temp
 fi
 
-host=$(echo $HOSTNAME | cut -d'.' -f1)
 lib_path="/nobackup/h_cqs/perl5/perl5_lib_${host}/lib/perl5/"
-
 if( [ ! -d $lib_path ] ) 
 then
   mkdir -p $lib_path
@@ -62,7 +63,13 @@ else
   export PERL5LIB=$MY_PERL_LIB:$PERL5LIB
 fi
 
-MYINCLUDE=$softwares/local/include
+if [[ $host == 'cqs4' ]]; then
+  MYINCLUDE="$softwares/local_${host}/include"
+  mkdir -p $MYINCLUDE
+else
+  MYINCLUDE="$softwares/local/include"
+fi
+
 if [ -z "$C_INCLUDE_PATH" ]
 then
   export C_INCLUDE_PATH=$MYINCLUDE
@@ -84,7 +91,13 @@ else
   export CPLUS_INCLUDE_PATH=$MYINCLUDE:$C_INCLUDE_PATH
 fi
 
-MYLIB=$softwares/local/lib
+if [[ $host == 'cqs4' ]]; then
+  MYLIB="$softwares/local_${host}/lib"
+  mkdir -p $MYLIB
+else
+  MYLIB="$softwares/local/lib"
+fi
+
 if [ -z "$LD_LIBRARY_PATH" ]
 then
   export LD_LIBRARY_PATH=$MYLIB

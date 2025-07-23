@@ -1,2 +1,2 @@
-singularity build gatk.4.5.0.0.sif docker://us.gcr.io/broad-gatk/gatk:4.5.0.0
+singularity build gatk.4.6.2.0.sif docker://broadinstitute/gatk:4.6.2.0
 

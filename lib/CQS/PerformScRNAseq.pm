@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-package CQS::PerformRNAseq;
+package CQS::PerformScRNAseq;
 
 use strict;
 use warnings;
@@ -38,34 +38,11 @@ our %EXPORT_TAGS = (
       performRNASeq_ensembl_Rnor_6
       )
   ]
-  # 'all' => [
-  #   qw(gencode_hg19_genome
-  #     performRNASeq_gencode_hg19
-  #     gatk_b37_genome
-  #     performRNASeq_gatk_b37
-  #     gencode_hg38_genome
-  #     performRNASeq_gencode_hg38
-  #     yan_hg38_genome
-  #     performRNASeq_yan_hg38
-  #     gencode_mm10_genome
-  #     performRNASeq_gencode_mm10
-  #     yan_mm10_genome
-  #     performRNASeq_yan_mm10
-  #     ensembl_Mmul1_genome
-  #     performRNASeq_ensembl_Mmul1
-  #     ensembl_Mmul8_genome
-  #     performRNASeq_ensembl_Mmul8
-  #     ncbi_UMD311_genome
-  #     performRNASeq_ncbi_UMD311
-  #     ensembl_CanFam3_1_genome
-  #     performRNASeq_ensembl_CanFam3_1
-  #     )
-  # ]
 );
 
 our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
-our $VERSION = '0.02';
+our $VERSION = '0.01';
 our $gsea_ver = "4.3.2";
 #our $gsea_db_ver = "v2022.1.Hs";
 our $gsea_db_ver = "v2024.1.Hs";
@@ -124,7 +101,7 @@ sub common_human_genome {
     {
       annovar_param       => "-protocol refGene,avsnp150,cosmic70 -operation g,f,f --remove",
       annovar_db          => "/data/cqs/references/annovar/humandb/",
-      perform_webgestalt  => 1,
+      perform_webgestalt  => 0,
       webgestalt_organism => "hsapiens",
       perform_gsea        => 1,
     }
@@ -300,7 +277,7 @@ sub add_mouse_gsea {
 sub common_mm10_genome {
   my $result = merge_hash_right_precedent(mm10_options(), {
     webgestalt_organism => "mmusculus",
-    perform_webgestalt  => 1,
+    perform_webgestalt  => 0,
     dbsnp               => "/data/cqs/references/dbsnp/mouse_10090_b150_GRCm38.p4.vcf.gz",
     annovar_buildver    => "mm10",
     annovar_param       => "-protocol refGene -operation g --remove",

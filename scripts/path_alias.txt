@@ -12,16 +12,20 @@ alias duck="singularity $SING_OPTION $softwares/singularity/cyberduck.simg duck 
 alias dropest="singularity $SING_OPTION $softwares/singularity/dropest.simg dropest "
 alias cqstools='singularity $SING_OPTION $softwares/singularity/cqs-smallRNA.simg cqstools'
 alias meme='singularity $SING_OPTION $softwares/singularity/meme.simg meme'
-alias gatk='singularity $SING_OPTION $softwares/singularity/gatk.latest.simg gatk'
+#alias gatk='singularity $SING_OPTION $softwares/singularity/gatk.latest.simg gatk'
+alias gatk='singularity $SING_OPTION $softwares/singularity/cqs-gatk4.simg gatk'
 alias qiime2='singularity $SING_OPTION $softwares/singularity/qiime2.simg qiime'
 alias dexseq_count.py='singularity $SING_OPTION $softwares/singularity/cqs-rnaseq.simg dexseq_count.py'
 alias dexseq_prepare_annotation.py='singularity $SING_OPTION $softwares/singularity/cqs-rnaseq.simg dexseq_prepare_annotation.py'
 #alias bowtie2='singularity $SING_OPTION $softwares/singularity/cutruntools2.sif bowtie2'
 
+alias hail='singularity $SING_OPTION $softwares/singularity/hail_gcp.20240211.sif '
+
 alias cromwell='java -jar $softwares/wdl/cromwell-84.jar '
 alias womtool='java -jar $softwares/wdl/womtool-84.jar '
 
 alias sq='squeue -u $USER -o "%.10i %90j %.2t %.10M %R"'
+#alias sqm='squeue -u $USER -o "%.10i %90j %.2t %.10M %R" | more'
 alias squ='squeue -o "%.10i %.9P %.50j %.10u %.2t %.10M %.6D %R" -u '
 alias sd='scontrol show jobid -dd '
 
@@ -37,4 +41,6 @@ alias biobakery_workflows_databases="singularity $biobakery_BIND_OPTION $softwar
 alias biobakery_workflows_scripts="singularity $biobakery_BIND_OPTION $softwares/singularity/biobakery_workflows.20240331.sif biobakery_workflows_scripts"
 
 alias regenie="singularity $SING_OPTION $softwares/singularity/regenie4.20241127.sif regenie"
+
+alias space='du -h -d 1 | grep -v "^[0-9.]*[MK]" |  grep -v "^[0-9]\.[0-9]G" | sort -k 2'
 

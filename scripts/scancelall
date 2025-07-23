@@ -1,1 +1,1 @@
-squeue -u shengq2 | awk '{system("scancel " $1)}'
+squeue -u shengq1 | awk '{system("scancel " $1)}'

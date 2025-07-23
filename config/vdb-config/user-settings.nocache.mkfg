@@ -1,7 +1,7 @@
 ## auto-generated configuration file - DO NOT EDIT ##
 
 /LIBS/GUID = "556af087-e526-4b53-ad4d-78b673326f1f"
-/cache-enabled = "true"
+/cache-enabled = "false"
 /config/default = "false"
 /repository/remote/main/CGI/resolver-cgi = "https://trace.ncbi.nlm.nih.gov/Traces/names/names.fcgi"
 /repository/remote/protected/CGI/resolver-cgi = "https://trace.ncbi.nlm.nih.gov/Traces/names/names.fcgi"
@@ -11,5 +11,5 @@
 /repository/user/ad/public/apps/sraPileup/volumes/ad = "."
 /repository/user/ad/public/apps/sraRealign/volumes/ad = "."
 /repository/user/ad/public/root = "."
-/repository/user/default-path = "/nobackup/h_cqs/ncbi_cache"
+/repository/user/default-path = "."
 /repository/user/main/public/root = "."

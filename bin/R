@@ -2,7 +2,7 @@
 
 source /nobackup/h_cqs/softwares/cqsperl/scripts/binds.sh
 
-sif=/nobackup/h_cqs/softwares/singularity/cqs_bioconductor.sif
+sif=/data/cqs/softwares/singularity/cqs_bioconductor.3_20_R_4_4_2.20250303.sif
 
 rlib_path=/nobackup/h_cqs/rlibs/$USER
 if [[ ! -s $rlib_path ]]; then

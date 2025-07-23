@@ -1,0 +1,6 @@
+#!/bin/bash
+project_id=$1
+password=$2
+
+lftp -u $project_id,$password sftp://shredder.file.vumc.org
+
