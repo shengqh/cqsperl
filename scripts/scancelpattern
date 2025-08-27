@@ -1,2 +1,2 @@
 #!/bin/bash
-squeue -u shengq2 -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R" | grep $1 | awk '{ print("scancel " $1); system( "scancel " $1) }'
+squeue -u $USER -o "%.20i %.9P %.50j %.10u %.2t %.10M %.6D %R" | grep $1 | awk '{ print("scancel " $1); system( "scancel " $1) }'
