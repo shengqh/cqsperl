@@ -2,7 +2,7 @@ cd /data/cqs/references/annovar/humandb
 
 for hg in hg19 hg38
 do
-  for db in refGene avsnp150 1000g2015aug gnomad41_genome clinvar_20190305 exac03 esp6500siv2 gwasCatalog cosmic70 cytoBand 
+  for db in refGene avsnp150 1000g2015aug gnomad41_genome exac03 esp6500siv2 gwasCatalog cosmic70 cytoBand clinvar_20250721
   do
     annotate_variation.pl -downdb -webfrom annovar -buildver $hg $db .
   done
