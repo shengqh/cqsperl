@@ -1,0 +1,21 @@
+num_arg=$#
+
+for jobid in "$@"; do
+  LOG_FILE=$(scontrol show job $jobid | grep 'StdOut=' | cut -d'=' -f2)
+
+  # Step 2: Check if the log file path was found and cat the file
+  if [ -n "$LOG_FILE" ] && [ -f "$LOG_FILE" ]; then
+      cat "$LOG_FILE"
+      if [[ $num_arg > 1 ]]; then
+          input="Press Enter to continue or type 'q' to quit."   
+          read -n 1 -p "$input" user_input
+          echo  # Move to the next line after reading the input
+          if [ "$user_input" == "q" ]; then
+              break
+          fi
+      fi
+  else
+      echo "Log file not found or job ID is invalid."
+  fi
+done
+
