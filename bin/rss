@@ -11,7 +11,7 @@ source /data/cqs/softwares/cqsperl/scripts/binds.sh
 
 rimg=/data/cqs/softwares/singularity/cqs_bioconductor.3_20_R_4_4_2.20250303.sif
 
-rver=$(singularity exec -c -e -B $mybinds $rimg R --version | awk 'NR==1{match($3, /^[0-9]+\.[0-9]+/, v); print v[0]}')
+rver=$(singularity exec -e -B $mybinds $rimg R --version | awk 'NR==1{match($3, /^[0-9]+\.[0-9]+/, v); print v[0]}')
 
 host=$(echo $HOSTNAME | cut -d'.' -f1)
 rlib="/nobackup/h_cqs/rlibs_${rver}_${host}/$USER"
@@ -21,8 +21,10 @@ then
   mkdir -p $rlib
 fi
 
-singularity exec -B $mybinds,${ROOT_DIR}/run:/var/run/rstudio-server,${ROOT_DIR}/lib:/var/lib/rstudio-server,${ROOT_DIR}/tmp:/tmp/rstudio-server \
-  --env R_LIBS="$rlib" $rimg \
+singularity exec -e -B $mybinds,${ROOT_DIR}/run:/var/run/rstudio-server,${ROOT_DIR}/lib:/var/lib/rstudio-server,${ROOT_DIR}/tmp:/tmp/rstudio-server \
+  --env R_LIBS="$rlib" \
+  --env TZ="America/Chicago" \
+  $rimg \
   env PASSWORD='xyz' RSTUDIO_SESSION_TIMEOUT='0' LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-11-openjdk-amd64/lib/server \
   rserver --auth-none=0 --auth-pam-helper-path=pam-helper --www-address=127.0.0.1 --www-port=8787 --server-user shengq2
 

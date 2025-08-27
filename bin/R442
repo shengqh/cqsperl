@@ -4,7 +4,7 @@ source /data/cqs/softwares/cqsperl/scripts/binds.sh
 
 rimg=/data/cqs/softwares/singularity/cqs_bioconductor.3_20_R_4_4_2.20250303.sif
 
-rver=$(singularity exec -c -e -B $mybinds $rimg R --version | awk 'NR==1{match($3, /^[0-9]+\.[0-9]+/, v); print v[0]}')
+rver=$(singularity exec -e -B $mybinds $rimg R --version | awk 'NR==1{match($3, /^[0-9]+\.[0-9]+/, v); print v[0]}')
 
 myhost=$(echo $HOSTNAME | cut -d'.' -f1)
 
@@ -26,11 +26,9 @@ then
   mkdir -p $rlib
 fi
 
-singularity exec -c -e -B $mybinds --pwd $(pwd) \
-    --env R_LIBS="$rlib" \
-    $rimg R "$@"
-
-# singularity exec -c -e -B $mybinds --pwd $(pwd) \
-#     --env R_LIBS="$rlib" \
-#     --env DISPLAY="$DISPLAY" \
-#     $rimg R "$@"
+#Using -c to exclude a lot of folders might cause problem for writing temp files.
+singularity exec -e -B $mybinds --pwd $(pwd) \
+  --env R_LIBS="$rlib" \
+  --env TZ="America/Chicago" \
+  $rimg \
+  R "$@"
