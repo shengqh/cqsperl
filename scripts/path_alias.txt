@@ -21,8 +21,8 @@ alias dexseq_prepare_annotation.py='singularity $SING_OPTION $softwares/singular
 
 alias hail='singularity $SING_OPTION $softwares/singularity/hail_gcp.20240211.sif '
 
-alias cromwell='java -jar $softwares/wdl/cromwell-84.jar '
-alias womtool='java -jar $softwares/wdl/womtool-84.jar '
+alias cromwell='java -jar $softwares/wdl/cromwell-90.jar '
+alias womtool='java -jar $softwares/wdl/womtool-90.jar '
 
 alias sq='squeue -u $USER -o "%.10i %90j %.2t %.10M %R"'
 #alias sqm='squeue -u $USER -o "%.10i %90j %.2t %.10M %R" | more'
