@@ -95,6 +95,7 @@ sub global_options {
 
     star_fusion_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/star-fusion.simg ",
 
+    facets_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/facets-suite-dev.sif ",
     
     deepvariant_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/deepvariant-1.6.1.sif ",
     glnexus_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/glnexus.v1.2.7.sif ",
@@ -121,6 +122,8 @@ sub global_options {
 
     cutruntools2_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cutruntools2.sif",
     cutruntools2_path => "/opt/CUT-RUNTools-2.0",
+
+    ngscheckmate_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/ngscheckmate-1.0.1.sif",
   };
 }
 

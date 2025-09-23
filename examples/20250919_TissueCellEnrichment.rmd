@@ -1,0 +1,164 @@
+---
+title: "Tissue/Cell Enrichment Analysis"
+author: 
+- name: "Quanhu Sheng"
+  affiliation: "CQS/Biostatistics, VUMC"
+  email: "quanhu.sheng.1@vumc.org"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  rmdformats::readthedown:
+    toc_depth: 3
+    code_folding: hide
+    number_sections: yes
+---
+
+```{r,eval=FALSE,echo=FALSE}
+library(xfun)
+root_dir = '/nobackup/h_cqs/shengq2/temp/20250919_TissueCellEnrichment'
+dir.create(root_dir, showWarnings=FALSE)
+
+setwd(root_dir)
+
+copy_or_download<-function(source){
+  target = paste0("./", basename(source))
+  if(file.exists(source)){
+    file.copy(source, target, overwrite=TRUE)
+  }else{
+    if(file.exists(target)){      
+      file.remove(target)
+    }
+    download.file(source, target, "auto")
+  }
+}
+
+copy_or_download('/nobackup/h_cqs/shengq2/program/ngsperl/lib/CQS/reportFunctions.R')
+copy_or_download('/nobackup/h_cqs/shengq2/program/ngsperl/lib/CQS/countTableVisFunctions.R')
+copy_or_download('/nobackup/h_cqs/shengq2/program/ngsperl/lib/scRNA/scRNA_func.r')
+
+copy_or_download('/nobackup/h_cqs/shengq2/program/ngsperl/lib/Annotation/TissueCellEnrichment_LoadData.rmd')
+copy_or_download('/nobackup/h_cqs/shengq2/program/ngsperl/lib/Annotation/TissueCellEnrichment_Vis.rmd')
+
+copy_or_download('/nobackup/h_cqs/shengq2/program/cqsperl/examples/20250919_TissueCellEnrichment.rmd')
+
+date_str = format(Sys.time(), "%Y%m%d")
+
+if(1){
+  xfun::Rscript_call(
+    rmarkdown::render,
+    list(input="20250919_TissueCellEnrichment.rmd",
+        output_file=paste0(date_str, "_TissueCellEnrichment.html"))
+  )
+}
+```
+
+```{css, echo=FALSE}
+#content{
+    max-width:1920px;
+}
+```
+
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+library(xfun)
+root_dir = '/nobackup/h_cqs/shengq2/temp/20250919_TissueCellEnrichment'
+dir.create(root_dir, showWarnings=FALSE)
+
+library(knitr)
+
+knitr::opts_chunk$set(
+  echo=TRUE, 
+  include=TRUE, 
+  warning=FALSE, 
+  message=FALSE, 
+  results="asis"
+)
+
+date_str = format(Sys.time(), "%Y%m%d")
+
+knitr::opts_knit$set(root.dir = root_dir)
+setwd(root_dir)
+```
+
+```{r}
+source('reportFunctions.R')
+source('countTableVisFunctions.R')
+source('scRNA_func.r')
+
+library(ggvenn)
+library(Hmisc)
+require(arsenal)
+library(gtsummary)
+library(flextable)
+
+de_file="/nobackup/h_cqs/shengq2/program/cqsperl/examples/OBESE_vs_LEAN_min5_fdr0.1_DESeq2.csv"
+
+# Those three files are required for TissueCellEnrichment_LoadData.rmd. Don't change the variable names.
+tau_file="/data/cqs/references/tissue_specific/tau_tissue_specificity_gtex.csv"
+gtex_file="/data/cqs/references/protein_atlas/v24.0/rna_tissue_gtex.tsv.zip"
+tabula_file = "/data/cqs/references/Tabula_Sapiens/cellxgene_10x3.rds"
+
+outputFile=paste0(date_str,".TissueCellEnrichment")
+
+venn_width = 6
+venn_height = 4
+
+calc_z_scores<-function(exp_mat){
+  # Calculate Z-scores for each gene (row-wise)
+  t_heatmap=as.matrix(t(exp_mat))
+  z_scores <- data.frame(t(base::scale(t_heatmap, center = TRUE, scale = TRUE)), check.names=FALSE)
+  return(z_scores)
+}
+```
+
+```{r, echo=FALSE, eval=TRUE}
+cat("\n# Data validation by MD5\n\n")
+
+md5_tbl=rbind(
+  data.frame("file"=de_file, "md5"="cf240c776dac55c903b12dd28cb9aafb"),
+  c(tau_file,"43a98ac3dd36b8f8e5b6783f17cd53b0"),
+  c(gtex_file,"1c53204149f8bb4c568cfd2d5384352c"),
+  c(tabula_file,"e716f8fb9cf1661741907f3bd45d44bb")
+)
+
+for(i in 1:nrow(md5_tbl)){
+  check_md5(md5_tbl$file[i], md5_tbl$md5[i])
+}
+
+print_table(md5_tbl, row.names=F)
+```
+
+# Loading DE genes
+
+Let's focus on the up-regulated genes in OBESE vs LEAN.
+
+```{r}
+all = fread(de_file, data.table=FALSE) 
+fdr_up = all |> dplyr::filter(DE_status == 'UP') # only use up-regulated genes
+print_table(fdr_up, byDT=TRUE, row.names=F)
+```
+
+```{r}
+# Those definition are required for TissueCellEnrichment_LoadData.rmd
+all_genes=unique(all$Feature_gene_name)
+all_genes_label="OBESE"
+```
+
+```{r child="TissueCellEnrichment_LoadData.rmd"}
+```
+
+# OBESE vs LEAN UP genes
+
+```{r}
+target_genes = fdr_up$Feature_gene_name
+file_prefix = "OBESE_vs_LEAN_UP"
+perform_significance_test = TRUE
+```
+
+```{r child="TissueCellEnrichment_Vis.rmd"}
+```
+
+# Save the session information
+
+```{r}
+print_table(get_packages_table(), byDT=TRUE, row.names=F)
+```
+

@@ -1,5 +1,7 @@
 {
-	"Mutect2_Panel.pon_name":"panel_of_normal",
+	"Mutect2_Panel.gatk_docker":"gatk.latest",
+
+  "Mutect2_Panel.pon_name":"panel_of_normal",
 	"Mutect2_Panel.normal_bams":"Array[String]",
 	"Mutect2_Panel.normal_bais":"Array[String]",
 	
@@ -8,8 +10,5 @@
 	"Mutect2_Panel.ref_dict":"/scratch/cqs_share/references/gencode/GRCm38.p6/bwa_index_0.7.17/GRCm38.primary_assembly.genome.dict",
 	"Mutect2_Panel.ref_fai":"/scratch/cqs_share/references/gencode/GRCm38.p6/bwa_index_0.7.17/GRCm38.primary_assembly.genome.fa.fai",
 	"Mutect2_Panel.scatter_count":7,
-	"Mutect2_Panel.create_pon_extra_args": "",
-
-	"Mutect2_Panel.gatk_docker":"gatk.latest",
-  "Mutect2_Panel.gatk_override":"/data/cqs/softwares/gatk-4.3.0.0/gatk-package-4.3.0.0-local.jar"
+	"Mutect2_Panel.create_pon_extra_args": ""
 }

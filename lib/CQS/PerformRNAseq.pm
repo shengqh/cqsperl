@@ -222,6 +222,7 @@ sub get_gencode_hg38_genome {
       name_map_file  => "/data/cqs/references/gencode/$genome_ver/gencode.${gtfVersion}.annotation.gtf.map",
       gene_bed       => "/data/cqs/references/gencode/$genome_ver/gencode.${gtfVersion}.annotation.gtf.map.bed",
       dexseq_gff     => "/data/cqs/references/gencode/$genome_ver/gencode.${gtfVersion}.annotation.dexseq.gff",
+      fasta_file => "/data/cqs/references/gencode/$genome_ver/GRCh38.primary_assembly.genome.fa",
       software_version => {
         genome => "Gencode $genome_ver",
         gtf => "Gencode ${gtfVersion}",
