@@ -28,6 +28,11 @@ sub global_definition {
     docker_command => images()->{"exomeseq"},
     dnmtools_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-dnmtools.20231214.sif ",
     wgbs_r_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_wgbs.20250609.sif ",
+    HOMER_perlFile      => "/data/cqs/softwares/homer/bin/findMotifsGenome.pl",
+    addqual_perlFile    => "/data/cqs/softwares/ngsperl/lib/Methylation/add_qual.pl",
+    picard              => "/data/cqs/softwares/picard.jar",
+    # only 4.3.0.0 works for cqs-dnmtools.20231214.sif since the java version is too low in the container. Don't change it.
+    gatk                => "/data/cqs/softwares/gatk-4.3.0.0/gatk-package-4.3.0.0-local.jar",
   });
 
   return($result);
@@ -35,17 +40,15 @@ sub global_definition {
 
 sub gencode_hg38_genome {
   return merge_hash_right_precedent(global_definition(), {
-    abismal_index       => "/data/cqs/references/gencode/GRCh38.p13/abismal_index/GRCh38_chrm.abismalidx",
-    chr_fasta           => "/data/cqs/references/gencode/GRCh38.p13/abismal_index/GRCh38_chrm.fa",
+    abismal_index       => "/data/cqs/references/gencode/GRCh38.p13/abismal_index_1.4.2/GRCh38.primary_assembly.genome.abismalidx",
+    chr_fasta           => "/data/cqs/references/gencode/GRCh38.p13/GRCh38.primary_assembly.genome.fa",
     chr_size_file       => "/data/cqs/references/gencode/GRCh38.p13/GRCh38.primary_assembly.genome.sizes",
+
     genome => "hg38",
     annovar_buildver    => "hg38",
     annovar_db          => "/data/cqs/references/annovar/humandb",
-    annovar_param       => "--otherinfo -protocol refGene,avsnp150,cosmic70, -operation g,f,f --remove",
+    annovar_param       => "--otherinfo -protocol refGene,avsnp151,clinvar_20250721 -operation g,f,f --remove",
     annovar_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
-    HOMER_perlFile      => "/data/cqs/softwares/homer/bin/findMotifsGenome.pl",
-    addqual_perlFile    => "/data/cqs/softwares/ngsperl/lib/Methylation/add_qual.pl",
-    picard              => "/data/cqs/softwares/picard.jar",
     is_paired_end       => 1,
     webgestalt_organism => "hsapiens",
 
@@ -70,9 +73,6 @@ sub ucsc_mm10_genome {
     annovar_db          => "/data/cqs/references/annovar/mousedb",
     annovar_param       => "--otherinfo -protocol refGene, -operation g --remove",
     annovar_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
-    HOMER_perlFile      => "/data/cqs/softwares/homer/bin/findMotifsGenome.pl",
-    addqual_perlFile    => "/data/cqs/softwares/ngsperl/lib/Methylation/add_qual.pl",
-    picard              => "/data/cqs/softwares/picard.jar",
     is_paired_end       => 1,
     webgestalt_organism => "mmusculus",
   });
