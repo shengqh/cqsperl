@@ -6,7 +6,6 @@
 
   "CNVSomaticPairWorkflow.common_sites": "/data/cqs/references/broad/hg19/v0/cnv/common_snps.interval_list",
   "CNVSomaticPairWorkflow.gatk_docker": "gatk.latest",
-  "CNVSomaticPairWorkflow.gatk4_jar_override": "/data/cqs/softwares/gatk-4.5.0.0/gatk-package-4.5.0.0-local.jar",
   "CNVSomaticPairWorkflow.intervals": "/data/cqs/references/broad/hg19/v0/wgs_calling_regions.v1.interval_list",
   "CNVSomaticPairWorkflow.read_count_pon": "", 
 
