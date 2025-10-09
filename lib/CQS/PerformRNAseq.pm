@@ -635,7 +635,7 @@ sub ncbi_Sscrofa11_genome {
       software_version => {
         genome => "NCBI Sscrofa11.1",
         gtf => "Refseq v106",
-      }
+      },
     
       # Asuming pig gene symbol is human gene symbol now
       annovar_param       => "-protocol refGene,avsnp151,cosmic70 -operation g,f,f --remove",
