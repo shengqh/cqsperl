@@ -36,6 +36,8 @@ our %EXPORT_TAGS = (
       performRNASeq_ensembl_GRCz11
       ensembl_Rnor_6_genome
       performRNASeq_ensembl_Rnor_6
+      ncbi_Sscrofa11_genome
+      performRNASeq_ncbi_Sscrofa11
       )
   ]
   # 'all' => [
@@ -68,7 +70,7 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 our $VERSION = '0.02';
 our $gsea_ver = "4.3.2";
 #our $gsea_db_ver = "v2022.1.Hs";
-our $gsea_db_ver = "v2024.1.Hs";
+our $gsea_db_ver = "v2025.1.Hs";
 
 sub add_human_gsea {
   my ($def, $host) = @_;
@@ -82,13 +84,13 @@ sub add_human_gsea {
   if($host eq "Human"){
     $def->{gsea_chip} = undef;
   }else{
-    $def->{gsea_chip} = "/data/cqs/references/gsea/$gsea_db_ver/${host}_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.$gsea_db_ver.chip",
+    $def->{gsea_chip} = "/data/cqs/references/gsea/msigdb_${gsea_db_ver}_chip_files_to_download_locally/${host}_Gene_Symbol_Remapping_Human_Orthologs_MSigDB.$gsea_db_ver.chip",
   }
 
   return merge_hash_left_precedent($def, {
     perform_gsea => 1,
     gsea_jar => "gsea-cli.sh",
-    gsea_db => "/data/cqs/references/gsea/${gsea_db_ver}",
+    gsea_db => "/data/cqs/references/gsea/msigdb_${gsea_db_ver}_GMTs",
     gsea_categories => "'h.all.$gsea_db_ver.symbols.gmt', 'c2.all.$gsea_db_ver.symbols.gmt', 'c5.all.$gsea_db_ver.symbols.gmt', 'c6.all.$gsea_db_ver.symbols.gmt', 'c7.all.$gsea_db_ver.symbols.gmt'",
     gsea_makeReport => 0,
     software_version => {
@@ -122,7 +124,7 @@ sub common_human_genome {
   my $result = merge_hash_right_precedent(
     global_definition(),
     {
-      annovar_param       => "-protocol refGene,avsnp150,cosmic70 -operation g,f,f --remove",
+      annovar_param       => "-protocol refGene,avsnp151,cosmic70 -operation g,f,f --remove",
       annovar_db          => "/data/cqs/references/annovar/humandb/",
       perform_webgestalt  => 1,
       webgestalt_organism => "hsapiens",
@@ -285,13 +287,13 @@ sub add_mouse_gsea {
   $def->{use_mouse_gsea_db} = 1;
 
   #my $mouse_gsea_db_ver = "v2022.1.Mm";
-  my $mouse_gsea_db_ver = "v2024.1.Mm";
+  my $mouse_gsea_db_ver = "v2025.1.Mm";
 
   return merge_hash_right_precedent($def, {
     perform_gsea => 1,
     gsea_jar => "gsea-cli.sh",
-    gsea_db             => "/data/cqs/references/gsea/${mouse_gsea_db_ver}",
-    gsea_categories     => "'mh.all.$mouse_gsea_db_ver.symbols.gmt', 'm2.all.$mouse_gsea_db_ver.symbols.gmt', 'm5.all.$mouse_gsea_db_ver.symbols.gmt'",
+    gsea_db => "/data/cqs/references/gsea/msigdb_${mouse_gsea_db_ver}_GMTs",
+    gsea_categories => "'mh.all.$mouse_gsea_db_ver.symbols.gmt', 'm2.all.$mouse_gsea_db_ver.symbols.gmt', 'm5.all.$mouse_gsea_db_ver.symbols.gmt'",
     software_version => {
       "GSEA_DB" => ["${mouse_gsea_db_ver}"],
     }
@@ -619,4 +621,41 @@ sub performRNASeq_ensembl_GRCz11 {
 #   return $config;
 # }
 
+sub ncbi_Sscrofa11_genome {
+  my $result = merge_hash_right_precedent(
+    global_definition(),
+    {
+      #genome database
+      fasta_file => "/data/cqs/references/swine_pig/ncbi/GCF_000003025.6/GCF_000003025.6_Sscrofa11.1_genomic.fna",
+
+      star_index          => "/data/cqs/references/swine_pig/ncbi/GCF_000003025.6/STAR_index_2.7.11b_v106_sjdb100",
+      transcript_gtf      => "/data/cqs/references/swine_pig/ncbi/GCF_000003025.6/genomic.v106.gtf",
+      name_map_file       => "/data/cqs/references/swine_pig/ncbi/GCF_000003025.6/genomic.v106.gtf.map",
+      featureCount_option => "-g gene",
+      software_version => {
+        genome => "NCBI Sscrofa11.1",
+        gtf => "Refseq v106",
+      }
+    
+      # Asuming pig gene symbol is human gene symbol now
+      annovar_param       => "-protocol refGene,avsnp151,cosmic70 -operation g,f,f --remove",
+      annovar_db          => "/data/cqs/references/annovar/humandb/",
+
+      perform_webgestalt  => 1,
+      webgestalt_organism => "hsapiens",
+    }
+  );
+  # There is no pig to human conversion chip file, we will assume it as human gene symbol already.
+  $result = add_human_gsea($result, "Human");
+  return($result);
+}
+
+sub performRNASeq_ncbi_Sscrofa11 {
+  my ( $userdef, $perform ) = @_;
+  my $def = merge_hash_left_precedent( $userdef, ncbi_Sscrofa11_genome() );
+  my $config = performRNASeq( $def, $perform );
+  return $config;
+}
+
 1;
+
