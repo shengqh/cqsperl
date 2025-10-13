@@ -5,6 +5,7 @@ use strict;
 use warnings;
 use CQS::Global;
 use CQS::ConfigUtils;
+use CQS::PerformWGBS;
 use Pipeline::NextflowMethylation;
 
 require Exporter;
@@ -13,6 +14,7 @@ our @ISA = qw(Exporter);
 our %EXPORT_TAGS = (
   'all' => [
     qw(
+        performNextflowMethylation_gencode_hg38_twist_v4_1_0
         performNextflowMethylation_ucsc_hg38_twist_v4_1_0
         performNextflowMethylation_ucsc_mm10_twist_v4_1_0
     )
@@ -58,26 +60,28 @@ sub get_NextflowMethylation {
 } ## end sub get_NextflowMethylation
 
 
-sub performNextflowMethylation_ucsc_hg38_twist_v4_1_0 {
+sub performNextflowMethylation_gencode_hg38_twist_v4_1_0 {
   my ( $userdef, $perform ) = @_;
 
-  my $def = merge_hash_left_precedent(
+  my $def1 = merge_hash_left_precedent(
     get_NextflowMethylation( $userdef, "4.1.0" ),
-    { software_version => { genome => "hg38", },
-      genome           => "hg38",
+    { software_version => { genome => "GRCh38", },
+      genome           => "GRCh38",
       convered_bed     => "/data/cqs/references/methylation/twist/covered_targets_Twist_Methylome_hg38_annotated_collapsed.bed",
     }
   );
 
-  my $config = performNextflowMethylation( $def, $perform );
+  my $def2 = merge_hash_left_precedent( $def1, gencode_hg38_genome() );
+
+  my $config = performNextflowMethylation( $def2, $perform );
   return $config;
-} ## end sub performNextflowMethylation_ucsc_hg38_twist_v4_1_0
+} ## end sub performNextflowMethylation_gencode_hg38_twist_v4_1_0
 
 
 sub performNextflowMethylation_ucsc_mm10_twist_v4_1_0 {
   my ( $userdef, $perform ) = @_;
 
-  my $def = merge_hash_left_precedent(
+  my $def1 = merge_hash_left_precedent(
     get_NextflowMethylation( $userdef, "4.1.0" ),
     { software_version => { genome => "mm10", },
       genome           => "mm10",
@@ -85,7 +89,9 @@ sub performNextflowMethylation_ucsc_mm10_twist_v4_1_0 {
     }
   );
 
-  my $config = performNextflowMethylation( $def, $perform );
+  my $def2 = merge_hash_left_precedent( $def1, ucsc_mm10_genome() );
+
+  my $config = performNextflowMethylation( $def2, $perform );
   return $config;
 } ## end sub performNextflowMethylation_ucsc_mm10_twist_v4_1_0
 
