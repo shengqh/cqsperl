@@ -631,7 +631,7 @@ sub ncbi_Sscrofa11_genome {
       star_index          => "/data/cqs/references/swine_pig/ncbi/GCF_000003025.6/STAR_index_2.7.11b_v106_sjdb100",
       transcript_gtf      => "/data/cqs/references/swine_pig/ncbi/GCF_000003025.6/genomic.v106.gtf",
       name_map_file       => "/data/cqs/references/swine_pig/ncbi/GCF_000003025.6/genomic.v106.gtf.map",
-      featureCount_option => "-g gene",
+      featureCount_option => "-g gene_id",
       software_version => {
         genome => "NCBI Sscrofa11.1",
         gtf => "Refseq v106",
