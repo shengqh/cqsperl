@@ -101,7 +101,7 @@ sub global_options {
     glnexus_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/glnexus.v1.2.7.sif ",
 
     bamsnap_option => "--no_gene_track",
-    multiqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/multiqc.sif ",
+    multiqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/multiqc.v1.31.sif ",
     report_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/report.sif ",
     sratools_docker_command  => singularity_prefix() . " /data/cqs/softwares/singularity/sra-tools.3.2.1.sif ",
     crc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/novartis.20210408.simg ",
@@ -124,6 +124,8 @@ sub global_options {
     cutruntools2_path => "/opt/CUT-RUNTools-2.0",
 
     ngscheckmate_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/ngscheckmate-1.0.1.sif",
+
+    twist_methyl_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/twist_methylation.20251009.sif",
   };
 }
 
