@@ -13,7 +13,9 @@ our @ISA = qw(Exporter);
 our %EXPORT_TAGS = (
   'all' => [
     qw(
+      gencode_hg38_genome
       performWGBS_gencode_hg38
+      ucsc_mm10_genome
       performWGBS_ucsc_mm10
       )
   ]
