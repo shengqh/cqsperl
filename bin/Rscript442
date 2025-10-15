@@ -2,7 +2,7 @@
 
 source /data/cqs/softwares/cqsperl/scripts/binds.sh
 
-rimg=/data/cqs/softwares/singularity/cqs_bioconductor.3_20_R_4_4_2.20250303.sif
+rimg=/data/cqs/softwares/singularity/cqs_bioconductor_3_21_r451.20250908.sif
 
 rver=$(singularity exec -e -B $mybinds $rimg R --version | awk 'NR==1{match($3, /^[0-9]+\.[0-9]+/, v); print v[0]}')
 
@@ -19,8 +19,6 @@ fi
 
 rlib="/nobackup/h_cqs/rlibs_${rver}_${myhost}/$USER"
 
-echo DISPLAY=$DISPLAY
-
 if( [ ! -d $rlib ] ) 
 then
   mkdir -p $rlib
@@ -29,5 +27,4 @@ fi
 singularity exec -e -B $mybinds --pwd $(pwd) \
     --env TZ="America/Chicago" \
     --env R_LIBS="$rlib" \
-    --env DISPLAY="$DISPLAY" \
     $rimg Rscript "$@"
