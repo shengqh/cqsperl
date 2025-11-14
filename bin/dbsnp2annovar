@@ -1,0 +1,357 @@
+#! /usr/bin/env python3
+"""
+convert the dbsnp vcf file to ANNOVAR reference format
+e.g. version = 2025_01_15
+"""
+
+import os, sys, re
+import gzip
+# from chctool import addback_iterable
+from itertools import chain
+def addback_iterable(*items):
+    # append add header or lines or list to file handle
+    
+    tmp = []
+    for i in items:
+        if isinstance(i, (list, set, tuple)):
+            tmp.append(i)
+        elif isinstance(i, str):
+            tmp.append([i])
+        else:
+            try:
+                itmp = iter(i)
+            except:
+                tmp.append([i])
+            else:
+                tmp.append(i)
+
+    return chain(*tmp)
+
+
+chr_all = set()
+import sys
+def getlogger(fn_log=None, logger_name=None, nocolor=False):
+    import logging
+    logger_name = logger_name or "main"
+    
+    try:
+        logger = logging.getLogger(logger_name)
+    except:
+        logger = logging.getLogger('terminal')
+
+    class CustomFormatter(logging.Formatter):
+    
+        def __init__(self, nocolor=False):
+            self.nocolor = nocolor
+        colors = {
+            'black': '\u001b[30;20m',
+            'red': '\u001b[31;20m',
+            'r': '\u001b[31;20m',
+            'bold_red': '\u001b[31;1m',
+            'rb': '\u001b[31;1m',
+            'green': '\u001b[32;20m',
+            'g': '\u001b[32;20m',
+            'gb': '\u001b[32;1m',
+            'yellow': '\u001b[33;20m',
+            'blue': '\u001b[34;20m',
+            'b': '\u001b[34;20m',
+            'purple': '\u001b[35;1m',
+            'p': '\u001b[35;1m',
+            'grey': '\u001b[38;20m',
+        }
+        FORMATS = {
+            logging.WARNING: colors['purple'],
+            logging.ERROR: colors['bold_red'],
+            logging.CRITICAL: colors['bold_red'],
+        }
+    
+        def format(self, record):
+            format_str = "%(asctime)s  %(levelname)-6s %(funcName)-20s  line: %(lineno)-5s  %(message)s"
+            reset = "\u001b[0m"
+            log_fmt = None
+            
+            record.msg = str(record.msg)
+            if self.nocolor:
+                pass
+            elif '@' in record.msg[:10]:
+                try:
+                    icolor, tmp = record.msg.split('@', 1)
+                    log_fmt = self.colors.get(icolor)
+                    if log_fmt:
+                        record.msg = tmp
+                except:
+                    raise
+                    pass
+            else:
+                log_fmt = self.FORMATS.get(record.levelno)
+            if log_fmt:
+                record.msg = log_fmt + record.msg + reset
+            formatter = logging.Formatter(format_str, datefmt='%Y-%m-%d %H:%M:%S')
+            return formatter.format(record)
+    
+    logger.setLevel('DEBUG')
+    handler_names = {_.name for _ in logger.handlers}
+    if 'console' not in handler_names:
+        console = logging.StreamHandler(sys.stdout)
+        console.setFormatter(CustomFormatter(nocolor=nocolor))
+        console.setLevel('INFO')
+        console.name = 'console'
+        logger.addHandler(console)
+
+    if fn_log and 'file' not in handler_names:
+        fh_file = logging.FileHandler(fn_log, mode='w', encoding='utf8')
+        fh_file.setLevel('DEBUG')
+        fh_file.setFormatter(CustomFormatter())
+        fh_file.name = 'file'
+        logger.addHandler(fh_file)
+    return logger
+logger = getlogger('convert_dbsnp.log')
+
+chr_map = {
+    'NC_000001': '1',
+    'NC_000002': '2',
+    'NC_000003': '3',
+    'NC_000004': '4',
+    'NC_000005': '5',
+    'NC_000006': '6',
+    'NC_000007': '7',
+    'NC_000008': '8',
+    'NC_000009': '9',
+    'NC_000010': '10',
+    'NC_000011': '11',
+    'NC_000012': '12',
+    'NC_000013': '13',
+    'NC_000014': '14',
+    'NC_000015': '15',
+    'NC_000016': '16',
+    'NC_000017': '17',
+    'NC_000018': '18',
+    'NC_000019': '19',
+    'NC_000020': '20',
+    'NC_000021': '21',
+    'NC_000022': '22',
+    'NC_000023': 'X',
+    'NC_000024': 'Y',
+    'NC_000025': 'MT',
+    
+}
+
+min_repr_ct = [0]
+
+def min_repr(pos, ref, alt):
+    # If it's a simple SNV, don't remap anything
+    if len(ref) == 1 or len(alt) == 1: 
+        return pos, ref, alt
+    else:
+        # strip off identical suffixes
+        changed = 0
+        while(alt[-1] == ref[-1] and min(len(alt),len(ref)) > 1):
+            alt = alt[:-1]
+            ref = ref[:-1]
+            changed = 1
+        # strip off identical prefixes and increment position
+        while(alt[0] == ref[0] and min(len(alt),len(ref)) > 1):
+            alt = alt[1:]
+            ref = ref[1:]
+            pos += 1
+            changed = 1
+        if changed:
+            min_repr_ct[0] += 1
+        return pos, ref, alt 
+
+def process_line(line, o, pool, pool_sorted_keys, chr_prev):
+    chr_, pos, id_, ref, alt = line.split('\t')[:5]
+    alt = alt.split(',')
+    pos = int(pos)
+    chr_ = chr_.split('.', 1)[0]
+    if chr_ in chr_map:
+        chr_ = chr_map[chr_]
+    else:
+        return 1, pool, pool_sorted_keys, chr_
+    chr_all.add(chr_)
+    safe_distance = 200 # savely dump the SNPs with distance > 200 from current site
+    # dump the previous sites
+    n_pop = 0
+    for pos_prev in pool_sorted_keys:
+        if chr_ != chr_prev or pos_prev + safe_distance < pos:
+            n_pop += 1
+            print('\n'.join(pool.pop(pos_prev)), file=o)
+        else:
+            break
+    if n_pop:
+        pool_sorted_keys = pool_sorted_keys[n_pop:]
+
+    for a in alt:
+        pos_new, ref, a = min_repr(pos, ref, a)
+        if pos_new - pos > safe_distance:
+            continue
+        end = pos_new + len(ref) - 1
+        if pos_new not in pool:
+            pool_sorted_keys.append(pos_new)
+            pool_sorted_keys = sorted(pool_sorted_keys)
+        pool.setdefault(pos_new, []).append(f'{chr_}\t{pos_new}\t{end}\t{ref}\t{a}\t{id_}')
+
+    return 0, pool, pool_sorted_keys, chr_
+
+def patch(f, fo):
+    pool = {}
+    pos_prev = 57217214
+    same_ct = 0
+    n_added = 0
+    f.seek(49413126551)
+    fo.seek(49236115565)  # jump to file end
+    for line in f:
+        chr_, pos, pos_e, ref, a, id_ = line[:-1].split('\t')
+        pos = int(pos)
+        if pos_prev == pos:
+            same_ct += 1
+            continue
+        if pos < pos_prev:
+            continue
+        pos_new, ref, a = min_repr(pos, ref, a)
+        if pos_new <= pos_prev:
+            if pos_new == pos_prev:
+                same_ct += 1
+            continue
+        end = pos_new + len(ref) - 1
+        pool.setdefault(pos_new, []).append(f'{chr_}\t{pos_new}\t{end}\t{ref}\t{a}\t{id_}')
+        n_added += 1
+
+    # dump the end
+    ntotal = sum(len(pool[_]) for _ in pool)
+    n_pos = len(pool)
+    fo.seek(49236115565)
+    for ipos in sorted(pool):
+        print('\n'.join(pool[ipos]), file=fo)
+
+    print('\n', file=fo)
+    
+    logger.info(f'dumping the end, n pos = {n_pos} , n sites = {ntotal}, after dump, same_ct = {same_ct}, n added = {n_added}')
+
+
+def main(fn, build, version, seek=None):
+    fno = f'{build}_dbsnp{version}.txt'
+    fn_done = f'{fno}.done'
+    #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO
+    # NC_000001.11    10001   rs1570391677    T       A,C
+    n = 0
+    if os.path.exists(fn_done):
+        logger.info(f'g@{fno} already exists, skip')
+        return
+    
+    logger.info(f'processing {fn} to {fno}')
+    pool = {}
+    pool_sorted_keys = []
+    chr_prev = None
+    
+    if seek is not None:
+        out_mode = 'a'
+    else:
+        out_mode = 'w'
+    
+    with gzip.open(fn, 'rt') if fn.endswith('.gz') else open(fn, 'rt') as f, open(fno, out_mode) as o:
+        if seek is not None and not fn.endswith('.gz'):
+            logger.info(f'jump to position seek = {seek}')
+            f.seek(seek)
+        for line in f:
+            if line.startswith('#'):
+                continue
+            break
+        iternew = addback_iterable(line, f)
+        for line in iternew:
+            n += 1
+            if n % 1_000_000 == 0:
+                logger.info(f'processing input - {n/1_000_000:.0f} m, min_repr_ct = {min_repr_ct[0]}')
+                # print(f'processing input - {n/1_000_000:.0f} m', file=sys.stderr)
+            normal_chr_flag, pool, pool_sorted_keys, chr_prev = process_line(line, o, pool, pool_sorted_keys, chr_prev)
+            if normal_chr_flag == 1:
+                break
+        # dump the end
+        ntotal = sum(len(pool[_]) for _ in pool)
+        n_pos = len(pool)
+        for pos_prev in pool_sorted_keys:
+            print('\n'.join(pool.pop(pos_prev)), file=o)
+        logger.info(f'dumping the end, n pos = {n_pos} , n sites = {ntotal}, after dump, pool size = {len(pool)}')
+
+
+    logger.info(f'chr_all: {sorted(chr_all)}')
+    with open(f'{fno}.chr.txt', 'w') as o:
+        for c in sorted(chr_all):
+            print(c, file=o)
+    
+    with open(fn_done, 'w') as o:
+        print('done', file=o)
+
+def build_idx(fno, bin_size):
+    fn_idx = f'{fno}.idx'
+    fn_done = f'{fn_idx}.done'
+    filesize = os.path.getsize(fno)
+    if os.path.exists(fn_done):
+        logger.info(f'{fn_idx} already exists, skip')
+        return
+    
+    regions = {}
+    logger.info(f'building index for {fno}')
+    with open(fno) as f, open(fn_idx, 'w') as idx:
+        idx.write(f"#BIN\t{bin_size}\t{filesize}\n")
+        n = 0
+        key_prev = None
+        irg = None
+        chr_prev = None
+        pos_prev = -1
+        while True:
+            line = f.readline()
+            if not line:
+                break
+            n += 1
+            chr_, pos, _ = line.split('\t', 2)
+            pos = int(pos)
+            pos_bin = (pos // bin_size) * bin_size
+            k = f'{chr_}\t{pos_bin}'
+            if n % 1_000_000 == 0:
+                logger.info(f'processig idx - {n/1_000_000:.0f} m - bin = {chr_}:{pos_bin}')
+            if k != key_prev:
+                file_pos = f.tell()
+                file_pos_start = file_pos - len(line)
+                try:
+                    irg[2] = file_pos_start
+                    idx.write('\t'.join(map(str, irg)) + '\n')
+                except:
+                    pass
+                
+                irg = [k, file_pos_start, file_pos]
+                key_prev = k
+
+            if chr_ == chr_prev and pos < pos_prev:
+                logger.error(f'file not sorted, line = {n}, prev pos = {chr_prev}:{pos_prev}, current pos = {chr_}:{pos}')
+                return
+            pos_prev = pos
+            chr_prev = chr_
+        
+        # last block
+        file_pos = f.tell()
+        file_pos_start = file_pos - len(line)
+        irg[2] = file_pos_start
+        idx.write('\t'.join(map(str, irg)) + '\n')
+
+    logger.info(f'g@building index done')
+    with open(fn_done, 'w') as o:
+        print('done', file=o)
+if __name__ == "__main__":
+    import argparse as arg
+    from argparse import RawTextHelpFormatter
+    ps = arg.ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
+    ps.add_argument('fn', help="""vcf file of dbsnp""")
+    ps.add_argument('build', help="""genomic build, hg19 or hg38""", choices=['hg19', 'hg38'])
+    ps.add_argument('version', help="""dbsnp version, e.g. 202405,  non-word characters are not allowed""")
+    ps.add_argument('-bin', help="""bin size for index, default is 1000""", type=int, default=1000)
+
+    args = ps.parse_args()
+    fn = args.fn
+    build = args.build
+    version = args.version
+    version = re.sub(r'\W+', '', version)
+    bin_size = args.bin
+    main(fn, build, version)
+    fno = f'{build}_dbsnp{version}.txt'
+    build_idx(fno, bin_size)
