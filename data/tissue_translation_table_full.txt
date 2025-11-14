@@ -1,0 +1,213 @@
+English	中文 (Chinese)
+alveolar system	肺泡系统
+alveolus of lung	肺泡
+anterior cingulate cortex	前扣带皮层
+arteriole of lymph node	淋巴结小动脉
+auditory cortex	听觉皮层
+basal forebrain	基底前脑
+biliary ductule	小胆管
+blood	血液
+blood brain barrier	血脑屏障
+blood plasma	血浆
+blood serum	血清
+bone marrow	骨髓
+brain	脑
+bronchiole	细支气管
+caudal ganglionic eminence	尾侧神经节隆起
+caudate-putamen	尾状核-壳核复合体
+celiac lymph node	腹腔淋巴结
+central nervous system	中枢神经系统
+central vein of liver	肝中央静脉
+cerebellum	小脑
+cerebral cortex	大脑皮层
+cerebrospinal fluid	脑脊液
+choroid plexus	脉络丛
+circumventricular organ	脑室旁器官
+collecting duct of renal tubule	肾小管集合管
+common iliac lymph node	髂总淋巴结
+cortex of thymus	胸腺皮质
+cortical collecting duct	皮质集合管
+deep inguinal lymph node	深腹股沟淋巴结
+descending thin limb	降支薄段
+distal convoluted tubule	远曲小管
+dorsal pancreatic duct	背侧胰管
+dorsal root of spinal cord	脊髓背根
+dorsolateral prefrontal cortex	背外侧前额叶皮层
+efferent lymphatic vessel	输出性淋巴管
+endothelium of peritubular capillary	管周毛细血管内皮
+enteric nervous system	肠神经系统
+entorhinal cortex	内嗅皮层
+epithelium of bronchiole	细支气管上皮
+epithelium of lobar bronchus	叶支气管上皮
+epithelium of respiratory bronchiole	呼吸性细支气管上皮
+epithelium of segmental bronchus	节支气管上皮
+exocrine pancreas	外分泌胰腺
+external iliac lymph node	髂外淋巴结
+forebrain	前脑
+frontal cortex	额叶皮层
+ganglion	神经节
+germinal center	生发中心
+glomerular capillary endothelium	肾小球毛细血管内皮
+glomerular mesangium	肾小球系膜
+glomerular parietal epithelium	肾小球壁层上皮
+glomerular visceral epithelium	肾小球脏层上皮
+gray matter of forebrain	前脑灰质
+gray matter of hindbrain	后脑灰质
+hepatic cord	肝索
+hepatic sinusoid	肝窦
+high endothelial venule of lymph node	淋巴结高内皮微静脉
+hilum of lymph node	淋巴结门
+hilum of spleen	脾门
+hippocampal formation	海马结构
+hypothalamus	下丘脑
+ileocolic lymph node	回结肠淋巴结
+immune system	免疫系统
+inferior colliculus	下丘
+inner medulla of kidney	肾内髓质
+insect embryonic brain	昆虫胚胎脑
+intercalated duct of pancreas	胰腺插入管
+internal iliac lymph node	髂内淋巴结
+intrahepatic bile duct	肝内胆管
+juxtaglomerular apparatus	肾小球旁器
+kidney	肾脏
+kidney blood vessel	肾血管
+kidney interstitium	肾间质
+kidney pyramid	肾锥体
+kidney vasculature	肾血管系统
+lateral ganglionic eminence	外侧神经节隆起
+layer of developing cerebral cortex	发育中大脑皮层层
+layer of neocortex	新皮层层
+liver	肝脏
+liver blood vessel	肝血管
+liver lobule	肝小叶
+liver perisinusoidal space	肝窦周隙
+lobar bronchus	叶支气管
+lobar bronchus mesenchyme	叶支气管间质
+lumbar spinal cord dorsal horn	腰髓背角
+lumbar spinal cord lateral horn	腰髓侧角
+lumbar spinal cord ventral horn	腰髓腹角
+lumbar spinal cord white matter	腰髓白质
+lung	肺
+lung connective tissue	肺结缔组织
+lymph	淋巴液
+lymph node	淋巴结
+lymph node germinal center dark zone	淋巴结生发中心暗区
+lymph node germinal center light zone	淋巴结生发中心亮区
+lymph node germinal center mantle zone	淋巴结生发中心外套区
+lymph node interfollicular cortex	淋巴结滤泡间皮质
+lymph node medullary cord	淋巴结髓索
+lymph node medullary sinus	淋巴结髓窦
+lymph node paracortical cord	淋巴结副皮质索
+lymph node paracortical sinus	淋巴结副皮质窦
+lymph node primary follicle	淋巴结原始滤泡
+lymph vasculature	淋巴血管系统
+lymphatic capillary	淋巴毛细管
+lymphatic vessel	淋巴管
+lymphatic vessel endothelium	淋巴管内皮
+lymphoid tissue	淋巴组织
+macula densa	致密斑
+marginal zone of spleen	脾边缘区
+medial ganglionic eminence	内侧神经节隆起
+medulla oblongata	延髓
+medulla of thymus	胸腺髓质
+medullary arteriole of lymph node	淋巴结髓质小动脉
+medullary venule of lymph node	淋巴结髓质小静脉
+meninx	脑膜
+mesenteric lymph node	肠系膜淋巴结
+mesocolic lymph node	结肠系膜淋巴结
+midbrain	中脑
+middle frontal gyrus	额中回
+neocortex	新皮层
+nephron	肾单位
+nerve	神经
+nervous system	神经系统
+neural tissue	神经组织
+neuron projection bundle connecting eye with brain	连接眼与脑的神经束
+outer medullary collecting duct	外髓质集合管
+palatine tonsil	腭扁桃体
+pancreas	胰腺
+pancreatic acinus	胰泡
+pancreatic duct	胰管
+paraaortic lymph node	主动脉旁淋巴结
+penicillar arteriole	笔毛小动脉
+periarterial lymphatic sheath	动脉周淋巴鞘
+peripheral nervous system	周围神经系统
+pigmented layer of retina	视网膜色素层
+pituitary gland	垂体
+pons	脑桥
+popliteal lymph node	腘淋巴结
+portal triad	门管三联
+prefrontal cortex	前额叶皮层
+primary motor cortex	初级运动皮层
+pronephros	原肾
+proximal convoluted tubule segment 1	近曲小管第1段
+proximal convoluted tubule segment 2	近曲小管第2段
+proximal straight tubule	近直小管
+proximal tubule	近端小管
+pulmonary alveolar duct	肺泡管
+pulmonary alveolar parenchyma	肺泡实质
+pulmonary capillary	肺毛细血管
+pulmonary interlobular septum	肺小叶间隔
+pulmonary nerve plexus	肺神经丛
+pulmonary vascular system	肺血管系统
+red pulp of spleen	脾红髓
+renal afferent arteriole	肾入球小动脉
+renal collecting system	肾集合系统
+renal connecting tubule	肾连接小管
+renal efferent arteriole	肾出球小动脉
+renal glomerulus	肾小球
+respiratory system lymphatic vessel endothelium	呼吸系统淋巴管内皮
+retina	视网膜
+segmental bronchus	节支气管
+short descending thin limb	短降支薄段
+smooth muscle tissue of bronchiole	细支气管平滑肌组织
+smooth muscle tissue of respiratory bronchiole	呼吸性细支气管平滑肌组织
+smooth muscle tissue of terminal bronchiole	终末细支气管平滑肌组织
+somatosensory cortex	躯体感觉皮层
+spinal cord	脊髓
+spleen	脾脏
+spleen central arteriole	脾中央小动脉
+spleen germinal center	脾生发中心
+spleen perifollicular zone	脾滤泡周区
+spleen pulp	脾髓
+spleen trabecular artery	脾小梁动脉
+spleen trabecular vein	脾小梁静脉
+splenic cord	脾索
+splenic lymph node	脾淋巴结
+sputum	痰液
+stroma of pancreas	胰腺基质
+subcapsular sinus floor	被膜下窦底
+subcapsular sinus of lymph node	淋巴结被膜下窦
+subparaventricular zone	副脑室下区
+subsegmental bronchus	亚节支气管
+superior frontal gyrus	额上回
+supraclavicular lymph node	锁骨上淋巴结
+sympathetic ganglion	交感神经节
+sympathetic nerve	交感神经
+systemic artery	体循环动脉
+taste bud	味蕾
+temporal lobe	颞叶
+terminal bronchiole epithelium	终末细支气管上皮
+thoracic duct	胸导管
+thoracic lymph node	胸淋巴结
+thymus	胸腺
+thymus corticomedullary boundary	胸腺皮髓交界区
+thymus epithelium	胸腺上皮
+thymus subcapsular epithelium	胸腺被膜下上皮
+thymus trabecula	胸腺小梁
+tip of renal papilla	肾乳头尖
+tonsil	扁桃体
+tonsil germinal center	扁桃体生发中心
+trabecula of lymph node	淋巴结小梁
+trabecular sinus of lymph node	淋巴结小梁窦
+umbilical cord blood	脐带血
+upper part of cisterna chyli	乳糜池上部
+venous blood	静脉血
+venous blood vessel	静脉血管
+ventral pancreatic duct	腹侧胰管
+ventricular zone	脑室区
+venule of lymph node	淋巴结微静脉
+visceral pleura	脏胸膜
+white matter	白质
+white matter of forebrain	前脑白质
+white pulp of spleen	脾白髓
