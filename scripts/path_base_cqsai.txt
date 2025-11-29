@@ -1,0 +1,55 @@
+export softwares=/data/cqs/softwares
+
+lib_path="/nobackup/h_cqs/perl5/perl5_lib_${host}/lib/perl5/"
+if( [ ! -d $lib_path ] ) 
+then
+  mkdir -p $lib_path
+fi
+
+MY_PERL_LIB=$softwares/ngsperl/lib:$softwares/cqsperl/lib:$lib_path
+
+if [ -z "$PERL5LIB" ]
+then
+  export PERL5LIB=$MY_PERL_LIB
+else
+  export PERL5LIB=$MY_PERL_LIB:$PERL5LIB
+fi
+
+MYINCLUDE="$softwares/local/include"
+
+if [ -z "$C_INCLUDE_PATH" ]
+then
+  export C_INCLUDE_PATH=$MYINCLUDE
+else
+  export C_INCLUDE_PATH=$MYINCLUDE:$C_INCLUDE_PATH
+fi
+
+if [ -z "$CPATH" ]
+then
+  export CPATH=$MYINCLUDE
+else
+  export CPATH=$MYINCLUDE:$CPATH
+fi
+
+if [ -z "$CPLUS_INCLUDE_PATH" ]
+then
+  export CPLUS_INCLUDE_PATH=$MYINCLUDE
+else
+  export CPLUS_INCLUDE_PATH=$MYINCLUDE:$C_INCLUDE_PATH
+fi
+
+MYLIB="$softwares/local/lib"
+
+if [ -z "$LD_LIBRARY_PATH" ]
+then
+  export LD_LIBRARY_PATH=$MYLIB
+else
+  export LD_LIBRARY_PATH=$MYLIB:$LD_LIBRARY_PATH
+fi
+
+if [ -z "$LIBRARY_PATH" ]
+then
+  export LIBRARY_PATH=$MYLIB
+else
+  export LIBRARY_PATH=$MYLIB:$LIBRARY_PATH
+fi

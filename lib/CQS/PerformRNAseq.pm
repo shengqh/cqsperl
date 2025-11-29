@@ -93,6 +93,7 @@ sub add_human_gsea {
     gsea_db => "/data/cqs/references/gsea/msigdb_${gsea_db_ver}_GMTs",
     gsea_categories => "'h.all.$gsea_db_ver.symbols.gmt', 'c2.all.$gsea_db_ver.symbols.gmt', 'c5.all.$gsea_db_ver.symbols.gmt', 'c6.all.$gsea_db_ver.symbols.gmt', 'c7.all.$gsea_db_ver.symbols.gmt'",
     gsea_makeReport => 0,
+    gsea_species => "Homo sapiens",
     software_version => {
       "GSEA" => ["v${gsea_ver}"],
       "GSEA_DB" => ["${gsea_db_ver}"],
@@ -294,6 +295,7 @@ sub add_mouse_gsea {
     gsea_jar => "gsea-cli.sh",
     gsea_db => "/data/cqs/references/gsea/msigdb_${mouse_gsea_db_ver}_GMTs",
     gsea_categories => "'mh.all.$mouse_gsea_db_ver.symbols.gmt', 'm2.all.$mouse_gsea_db_ver.symbols.gmt', 'm5.all.$mouse_gsea_db_ver.symbols.gmt'",
+    gsea_species => "Mus musculus",
     software_version => {
       "GSEA_DB" => ["${mouse_gsea_db_ver}"],
     }
