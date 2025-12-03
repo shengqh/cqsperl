@@ -19,6 +19,8 @@ alias dexseq_count.py='singularity $SING_OPTION $softwares/singularity/cqs-rnase
 alias dexseq_prepare_annotation.py='singularity $SING_OPTION $softwares/singularity/cqs-rnaseq.simg dexseq_prepare_annotation.py'
 #alias bowtie2='singularity $SING_OPTION $softwares/singularity/cutruntools2.sif bowtie2'
 
+alias multiqc='singularity $SING_OPTION $softwares/singularity/multiqc.v1.32.sif multiqc'
+
 alias hail='singularity $SING_OPTION $softwares/singularity/hail_gcp.20240211.sif '
 
 alias cromwell='java -jar $softwares/wdl/cromwell-90.jar '
