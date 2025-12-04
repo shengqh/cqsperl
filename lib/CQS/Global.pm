@@ -101,7 +101,7 @@ sub global_options {
     glnexus_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/glnexus.v1.2.7.sif ",
 
     bamsnap_option => "--no_gene_track",
-    multiqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/multiqc.v1.31.sif ",
+    multiqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/multiqc.v1.32.sif ",
     report_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/report.sif ",
     sratools_docker_command  => singularity_prefix() . " /data/cqs/softwares/singularity/sra-tools.3.2.1.sif ",
     crc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/novartis.20210408.simg ",
