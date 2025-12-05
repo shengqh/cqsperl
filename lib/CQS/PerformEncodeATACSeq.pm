@@ -32,6 +32,7 @@ sub global_definition {
     "croo_docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-encode.sif",
 
     "use_caper" => 1,
+    "caper_conda_env" => "/nobackup/h_cqs/shengq2/.conda/envs/caper",
     "encode_option" => "--backend-file /data/cqs/softwares/cqsperl/config/caper/backend.conf --singularity",
     #"encode_option" => "--singularity",
     "encode_atac_walltime" => "48",
