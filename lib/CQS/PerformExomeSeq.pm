@@ -148,7 +148,7 @@ sub gatk_hg38_genome {
       annovar_buildver => "hg38",
       annovar_param => "-protocol refGene,cytoBand,dbsnp157,cosmic70,exac03,1000g2015aug_all,1000g2015aug_afr,1000g2015aug_amr,1000g2015aug_eas,1000g2015aug_eur,1000g2015aug_sas,gnomad41_genome,clinvar_20251109 -operation g,r,f,f,f,f,f,f,f,f,f,f,f --remove",
       annovar_db => "/data/cqs/references/annovar/humandb/",
-      annovar_filter => "--exac_key ExAC_ALL --g1000_key 1000g2015aug_all --gnomad_key AF",
+      annovar_filter => "--exac_key ExAC_ALL --g1000_key 1000g2015aug_all --gnomad_key gnomad41_genome_AF",
       species    => "homo_sapiens",
       ncbi_build => "GRCh38",
       plotCNVGenes      => 1,

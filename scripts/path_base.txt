@@ -115,7 +115,7 @@ fi
 #change the default mode of new file to 644 instead of 640
 umask 022
 
-MYBIN=$softwares/10x/cellranger-9.0.1:$softwares/10x/spaceranger-4.0.1:$softwares/aws-cli/v2/current/dist:$softwares/mixcr:$softwares/cqsperl/bin:$softwares/FastQ-Screen:$softwares/subread/bin:$softwares/FastQC:$softwares/annovar:$softwares/salmon/bin:$softwares/Recon:$softwares/GSEA:$softwares/homer/bin:$softwares/dotnet:$softwares/sratoolkit/bin:$softwares/strelka-2.9.10.centos6_x86_64/bin:$softwares/ngsperl/bin/:$softwares/cqsperl/scripts:$softwares/local/bin:$softwares/bowtie:$softwares/edirect
+MYBIN=$softwares/10x/cellranger-10.0.0/bin:$softwares/10x/spaceranger-4.0.1:$softwares/aws-cli/v2/current/dist:$softwares/mixcr:$softwares/cqsperl/bin:$softwares/FastQ-Screen:$softwares/subread/bin:$softwares/FastQC:$softwares/annovar:$softwares/salmon/bin:$softwares/Recon:$softwares/GSEA:$softwares/homer/bin:$softwares/dotnet:$softwares/sratoolkit/bin:$softwares/strelka-2.9.10.centos6_x86_64/bin:$softwares/ngsperl/bin/:$softwares/cqsperl/scripts:$softwares/local/bin:$softwares/bowtie:$softwares/edirect
 export PATH=$MYBIN:$PATH
 
 mkdir -p /nobackup/h_vangard_1/NXF_SINGULARITY_CACHEDIR

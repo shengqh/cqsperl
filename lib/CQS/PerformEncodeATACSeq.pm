@@ -32,12 +32,12 @@ sub global_definition {
     "croo_docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-encode.sif",
 
     "use_caper" => 1,
-    "caper_conda_env" => "/nobackup/h_cqs/shengq2/.conda/envs/caper",
+    "caper_conda_env" => "/nobackup/h_cqs/shengq2/.conda/envs/conda_py3_10",
     "encode_option" => "--backend-file /data/cqs/softwares/cqsperl/config/caper/backend.conf --singularity",
     #"encode_option" => "--singularity",
     "encode_atac_walltime" => "48",
-    "atac.singularity" => "/data/cqs/softwares/singularity/atac-seq-pipeline.v2.2.2.sif",
-    "croo_out_def_json" => "/data/cqs/softwares/encode/atac-seq-pipeline.v2.2.2/atac.croo.v5.json",
+    "atac.singularity" => "/data/cqs/softwares/singularity/atac-seq-pipeline.v2.2.3.sif",
+    "croo_out_def_json" => "/data/cqs/softwares/encode/atac-seq-pipeline.v2.2.3/atac.croo.v5.json",
 
     "wdl" => {
       "cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-64.jar",
@@ -45,7 +45,7 @@ sub global_definition {
       "local" => {
         "cromwell_config_file" => "/data/cqs/softwares/cromwell/cromwell.local.conf",
         "encode_atacseq" => {
-          "wdl_file" => "/data/cqs/softwares/encode/atac-seq-pipeline.v2.2.2/atac.wdl",
+          "wdl_file" => "/data/cqs/softwares/encode/atac-seq-pipeline.v2.2.3/atac.wdl",
           "input_file" => "/data/cqs/softwares/cqsperl/config/wdl/encode-atacseq.inputs.json"
         }
       }

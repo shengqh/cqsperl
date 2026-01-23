@@ -1,2 +1,4 @@
-singularity build --disable-cache --tmpdir . star-fusion.simg docker://trinityctat/starfusion:1.10.0
+cd /data/cqs/softwares/singularity
+
+singularity build --disable-cache starfusion.1.15.1.sif docker://trinityctat/starfusion:1.15.1
 

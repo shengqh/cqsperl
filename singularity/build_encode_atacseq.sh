@@ -1,2 +1,4 @@
-singularity build --disable-cache atac-seq-pipeline.v2.2.2.sif docker://encodedcc/atac-seq-pipeline:v2.2.2
+cd /data/cqs/softwares/singularity/
+
+singularity build --disable-cache atac-seq-pipeline.v2.2.3.sif docker://encodedcc/atac-seq-pipeline:v2.2.3
 
