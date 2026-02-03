@@ -61,7 +61,7 @@ our $VERSION = '0.01';
 
 sub images {
   return {
-    exomeseq => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.20231031.sif "
+    exomeseq => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.20240418.sif "
   }
 }
 
@@ -111,6 +111,8 @@ sub global_options {
     correlation_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_correlation.20250616.sif",
     deseq2_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_correlation.20250616.sif",
 
+    fgsea_docker_command =>  singularity_prefix() . " /data/cqs/softwares/singularity/fgsea.20260125.sif",
+
     cellbender_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cellbender.0.3.2.sif ",
     scrna_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.20250908.sif ",  
     spatial_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.20251026.sif ",
@@ -119,7 +121,7 @@ sub global_options {
     slamdunk_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/slamdunk.v0.4.3.sif ",
     nextgenmap_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/nextgenmap.v0.5.5.sif ",
 
-    umitools_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/umitools.1.0.0.sif ",
+    umitools_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/umitools.20260130.sif ",
 
     tetranscripts_docker_command => singularity_prefix() . "/data/cqs/softwares/singularity/tetranscripts.v2.2.3.sif",
 
