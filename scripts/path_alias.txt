@@ -23,8 +23,8 @@ alias multiqc='singularity $SING_OPTION $softwares/singularity/multiqc.v1.32.sif
 
 alias hail='singularity $SING_OPTION $softwares/singularity/hail_gcp.20240211.sif '
 
-alias cromwell='java -jar $softwares/wdl/cromwell-90.jar '
-alias womtool='java -jar $softwares/wdl/womtool-90.jar '
+alias cromwell='java -jar $softwares/wdl/cromwell-92.jar '
+alias womtool='java -jar $softwares/wdl/womtool-92.jar '
 
 alias sq='squeue -u $USER -o "%.10i %90j %.2t %.10M %R"'
 #alias sqm='squeue -u $USER -o "%.10i %90j %.2t %.10M %R" | more'
