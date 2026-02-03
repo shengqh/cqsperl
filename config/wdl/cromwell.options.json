@@ -2,5 +2,7 @@
     "final_workflow_outputs_dir": "./cromwell_finalOutputs",
     "use_relative_output_paths": true,
     "final_workflow_log_dir": "./cromwell_wf_logs",
-    "final_call_logs_dir": "./cromwell_call_logs"
+    "final_call_logs_dir": "./cromwell_call_logs", 
+    "write_to_cache": true,
+    "read_from_cache": true
 }
