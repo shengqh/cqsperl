@@ -67,9 +67,7 @@ sub global_definition {
     },
 
     wdl => {
-      #"cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-53.1.jar",
-      #"cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-64.jar",
-      "cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-81.jar",
+      "cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-92.jar",
       "cromwell_option_file" => "/data/cqs/softwares/cqsperl/config/wdl/cromwell.options.json",
       "local" => {
         "cromwell_config_file" => "/data/cqs/softwares/cqsperl/config/wdl/cromwell.local.conf",
