@@ -28,7 +28,9 @@ sub global_definition {
     #constraint                => "haswell",
     docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.simg ",
 
-    pipseeker_command => "/data/cqs/softwares/pipseeker_v3.1.3/pipseeker",
+    #pipseeker_command => "/data/cqs/softwares/pipseeker_v3.1.3/pipseeker",
+    pipseeker_command => "/data/cqs/softwares/pipseeker-v3.3.0-linux/pipseeker",
+
 
     perform_individual_qc => 1,
 
