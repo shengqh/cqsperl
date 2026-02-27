@@ -1,7 +1,5 @@
 export softwares=/data/cqs/softwares
 
-host=$(echo $HOSTNAME | cut -d'.' -f1)
-
 lib_path="/nobackup/h_cqs/perl5/perl5_lib_${host}/lib/perl5/"
 if( [ ! -d $lib_path ] ) 
 then
@@ -55,7 +53,3 @@ then
 else
   export LIBRARY_PATH=$MYLIB:$LIBRARY_PATH
 fi
-
-MYBIN="$softwares/cqsperl/scripts"
-export PATH=$MYBIN:$PATH
-
