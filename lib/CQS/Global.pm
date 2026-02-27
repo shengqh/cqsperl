@@ -114,9 +114,9 @@ sub global_options {
     fgsea_docker_command =>  singularity_prefix() . " /data/cqs/softwares/singularity/fgsea.20260125.sif",
 
     cellbender_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cellbender.0.3.2.sif ",
-    scrna_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.20250908.sif ",  
+    scrna_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.20260224.sif ",  
     spatial_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.20251026.sif ",
-    scdynamic_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/scDynamic.20250908.sif ",
+    scdynamic_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/scDynamic.20260224.sif ",
 
     slamdunk_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/slamdunk.v0.4.3.sif ",
     nextgenmap_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/nextgenmap.v0.5.5.sif ",
