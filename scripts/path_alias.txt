@@ -23,8 +23,9 @@ alias multiqc='singularity $SING_OPTION $softwares/singularity/multiqc.v1.32.sif
 
 alias hail='singularity $SING_OPTION $softwares/singularity/hail_gcp.20240211.sif '
 
-alias cromwell='java -jar $softwares/cromwell/cromwell-92.jar '
-alias womtool='java -jar $softwares/cromwell/womtool-92.jar '
+#don't use cromwell 92. it will cause error to parse docker image string.
+alias cromwell='java -jar $softwares/cromwell/cromwell-90.jar '
+alias womtool='java -jar $softwares/cromwell/womtool-90.jar '
 
 alias sq='squeue -u $USER -o "%.10i %90j %.2t %.10M %R"'
 #alias sqm='squeue -u $USER -o "%.10i %90j %.2t %.10M %R" | more'

@@ -20,7 +20,7 @@ fi
 cd "$source_folder"
 if [[ ! -s $target_file ]]; then
   echo "Calculating MD5 checksums for files in $source_folder"
-  find . -type f ! -name "raw_md5.txt" ! -name "$target_file" -exec md5sum {} \; > raw_md5.txt
+  find . -type f ! -name "raw_md5.txt" ! -name "$target_file" ! -name "*.md5" ! -name "*fastqc.html" -exec md5sum {} \; > raw_md5.txt
   sort -k2 raw_md5.txt > $target_file
   rm raw_md5.txt
   echo "MD5 checksums saved to $target_file"
