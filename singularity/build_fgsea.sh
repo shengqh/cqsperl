@@ -1,1 +1,2 @@
-singularity build --disable-cache fgsea.20260125.sif docker://shengqh/fgsea:20260125
+cd /data/cqs/softwares/singularity
+singularity build --disable-cache fgsea.20260325.sif docker://shengqh/fgsea:20260325

@@ -111,7 +111,7 @@ sub global_options {
     correlation_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_correlation.20250616.sif",
     deseq2_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_correlation.20250616.sif",
 
-    fgsea_docker_command =>  singularity_prefix() . " /data/cqs/softwares/singularity/fgsea.20260125.sif",
+    fgsea_docker_command =>  singularity_prefix() . " /data/cqs/softwares/singularity/fgsea.20260325.sif",
 
     cellbender_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cellbender.0.3.2.sif ",
     scrna_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.20260311.sif ",  
