@@ -212,7 +212,7 @@ sub hg19_options {
 sub hg38_options {
   return merge_hash_right_precedent(global_options(), {
     #biomart
-    biomart_host      => "https://www.ensembl.org",
+    biomart_host      => "https://useast.ensembl.org",
     biomart_dataset   => "hsapiens_gene_ensembl",
     biomart_symbolKey => "hgnc_symbol",
     biomart_add_chr => 1,
