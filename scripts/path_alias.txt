@@ -29,6 +29,7 @@ alias womtool='java -jar $softwares/cromwell/womtool-90.jar '
 
 alias sq='squeue -u $USER -o "%.10i %90j %.2t %.10M %R"'
 alias sqa='squeue -o "%.10i %90j %.2t %.10M %R %g %u"'
+alias sqg='squeue -o "%.10i %90j %.2t %.10M %R %g %u" -A '
 #alias sqm='squeue -u $USER -o "%.10i %90j %.2t %.10M %R" | more'
 alias squ='squeue -o "%.10i %.9P %.50j %.10u %.2t %.10M %.6D %R" -u '
 alias sd='scontrol show jobid -dd '
