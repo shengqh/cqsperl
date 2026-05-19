@@ -114,8 +114,8 @@ sub global_options {
     fgsea_docker_command =>  singularity_prefix() . " /data/cqs/softwares/singularity/fgsea.20260325.sif",
 
     cellbender_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cellbender.0.3.2.sif ",
-    scrna_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.20260311.sif ",  
-    spatial_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.20260311.sif ",
+    scrna_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.20260516.sif ",  
+    spatial_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.20260516.sif ",
     scdynamic_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/scDynamic.20260224.sif ",
 
     slamdunk_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/slamdunk.v0.4.3.sif ",
@@ -131,6 +131,11 @@ sub global_options {
     ngscheckmate_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/ngscheckmate-1.0.1.sif",
 
     twist_methyl_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/twist_methylation.20251009.sif",
+
+    celltypist_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/celltypist.20260512.sif",
+    stcat_docker_command      => singularity_prefix() . " /data/cqs/softwares/singularity/stcat.20260512.sif",
+    azimuth_docker_command    => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.20260324.sif",
+
   };
 }
 
