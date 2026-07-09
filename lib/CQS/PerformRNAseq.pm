@@ -115,7 +115,7 @@ sub global_definition {
       perform_qc3bam            => 0,
       qc3_perl                  => "/data/cqs/softwares/QC3/qc3.pl",
       docker_command            => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-rnaseq.20240813.sif ",
-      fgsea_docker_command      => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-rnaseq-20240813.20260413.sif ",
+      #fgsea_docker_command      => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-rnaseq-20240813.20260413.sif ",
       gatk_jar                  => "/opt/gatk3.jar",
       picard_jar                => "/opt/picard.jar",
     }
