@@ -33,7 +33,7 @@ alias sqg='squeue -o "%.10i %90j %.2t %.10M %R %g %u" -A '
 #alias sqm='squeue -u $USER -o "%.10i %90j %.2t %.10M %R" | more'
 alias squ='squeue -o "%.10i %.9P %.50j %.10u %.2t %.10M %.6D %R" -u '
 alias sd='scontrol show jobid -dd '
-alias cqs3='ssh shengq2@10.151.18.55'
+alias cqs3='ssh $USER@10.151.18.55'
 
 alias chrome='$softwares/chrome/opt/google/chrome/google-chrome --no-sandbox'
 
