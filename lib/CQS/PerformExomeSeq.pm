@@ -102,9 +102,17 @@ sub global_definition {
           "wdl_file" => "/home/zhaos/source/ngsperl/lib/WDL/ExomeSeq/CollectAllelicCounts.wdl",
           "input_file" => "/home/zhaos/source/ngsperl/lib/WDL/ExomeSeq/CollectAllelicCounts.wdl.json"
         },
+      },
+      "slurm" => {
+        "cromwell_config_file" => "/data/cqs/softwares/cqsperl/config/wdl/cromwell.slurm.20220714.conf",
+        "mutect2" => {
+          "perform_mutect2_pon" => 0,
+          "wdl_file" => "/data/cqs/softwares/cqsperl/data/wdl/mutect2.wdl",
+          #new mutect2 wdl doesn't output correct file name, which make the trouble
+          #"wdl_file" => "/data/cqs/softwares/gatk/scripts/mutect2_wdl/mutect2.wdl",
+        },
       }
     }
-
   });
 }
 
@@ -178,8 +186,13 @@ sub gatk_hg38_genome {
           "somaticCNV" => {
             "input_file" => "/nobackup/h_cqs/shengq2/program/cqsperl/config/wdl/cnv_somatic_pair_workflow.hg38.wdl.json",
           },
-        }
-      }
+        },
+        slurm => {
+          "mutect2" => {
+            "input_file" => "/data/cqs/softwares/cqsperl/data/wdl/local/mutect2.inputs.hg38.json",
+          },
+        },
+      },
     }
   );
 
