@@ -248,8 +248,8 @@ sub get_gencode_hg38_genome {
 
 
 sub gencode_hg38_genome {
-  my ($userdef) = @_;
-  return ( get_gencode_hg38_genome( $userdef, "v38" ) );
+  my ($userdef) = @_; 
+  return ( get_gencode_hg38_genome( $userdef, "v43", "GRCh38.p13", "2.7.8a" ) ); #v43 is the latest GTF of GRCh38.p13
 }
 
 
