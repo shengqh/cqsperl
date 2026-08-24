@@ -49,7 +49,7 @@ sub gencode_hg38_genome {
     genome => "hg38",
     annovar_buildver    => "hg38",
     annovar_db          => "/data/cqs/references/annovar/humandb",
-    annovar_param       => "--otherinfo -protocol refGene,avsnp151,clinvar_20250721 -operation g,f,f --remove",
+    annovar_param       => "--otherinfo -protocol refGene,dbsnp157,clinvar_20260816 -operation g,f,f --remove",
     annovar_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-exomeseq.simg ",
     is_paired_end       => 1,
     webgestalt_organism => "hsapiens",

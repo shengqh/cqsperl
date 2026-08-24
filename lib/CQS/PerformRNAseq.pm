@@ -135,7 +135,7 @@ sub common_human_genome {
 
   my $result = merge_hash_right_precedent(
     global_definition(),
-    { annovar_param       => "-protocol refGene,avsnp151,cosmic70 -operation g,f,f --remove",
+    { annovar_param       => "-protocol refGene,dbsnp157,cosmic70 -operation g,f,f --remove",
       annovar_db          => "/data/cqs/references/annovar/humandb/",
       perform_webgestalt  => 1,
       webgestalt_organism => "hsapiens",
@@ -674,7 +674,7 @@ sub ncbi_Sscrofa11_genome {
       },
 
       # Asuming pig gene symbol is human gene symbol now
-      annovar_param => "-protocol refGene,avsnp151,cosmic70 -operation g,f,f --remove",
+      annovar_param => "-protocol refGene,dbsnp157,cosmic70 -operation g,f,f --remove",
       annovar_db    => "/data/cqs/references/annovar/humandb/",
 
       perform_webgestalt  => 1,
