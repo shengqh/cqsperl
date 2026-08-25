@@ -67,11 +67,7 @@ sub global_definition {
     },
 
     wdl => {
-      "cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-90.jar",
-      "cromwell_option_file" => "/data/cqs/softwares/cqsperl/config/wdl/cromwell.options.json",
       "local" => {
-        "cromwell_config_file" => "/data/cqs/softwares/cqsperl/config/wdl/cromwell.local.conf",
-        #"cromwell_config_file" => "/home/zhaos/source/perl_cqs/test/cromwell/cromwell.examples.local.conf",
         "mutect2" => {
           "perform_mutect2_pon" => 0,
           "wdl_file" => "/data/cqs/softwares/cqsperl/data/wdl/mutect2.wdl",
@@ -104,7 +100,6 @@ sub global_definition {
         },
       },
       "slurm" => {
-        "cromwell_config_file" => "/data/cqs/softwares/cqsperl/config/wdl/cromwell.slurm.20220714.conf",
         "mutect2" => {
           "perform_mutect2_pon" => 0,
           "wdl_file" => "/data/cqs/softwares/cqsperl/data/wdl/mutect2.wdl",

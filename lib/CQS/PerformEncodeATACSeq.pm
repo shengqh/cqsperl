@@ -40,10 +40,7 @@ sub global_definition {
     "croo_out_def_json" => "/data/cqs/softwares/encode/atac-seq-pipeline.v2.2.3/atac.croo.v5.json",
 
     "wdl" => {
-      "cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-90.jar",
-      "cromwell_option_file" => "/data/cqs/softwares/cromwell/cromwell.options.json",
       "local" => {
-        "cromwell_config_file" => "/data/cqs/softwares/cromwell/cromwell.local.conf",
         "encode_atacseq" => {
           "wdl_file" => "/data/cqs/softwares/encode/atac-seq-pipeline.v2.2.3/atac.wdl",
           "input_file" => "/data/cqs/softwares/cqsperl/config/wdl/encode-atacseq.inputs.json"
