@@ -43,9 +43,11 @@ sub supplement_genome_v5 {
   return merge_hash_right_precedent(global_options(), {
     version    => 5,
     #constraint => "haswell",
-    #cqstools   => "/home/shengq2/cqstools/cqstools.exe",
+
     #docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_smallrnaseq.20231105.sif ",
-    docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_smallrnaseq.20240117.sif ",
+    #docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_smallrnaseq.20240117.sif ",
+    docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_smallrnaseq.20260831.sif ",
+    smallrna_count => "dotnet /opt/SmallRNACountBuilder/SmallRNACountBuilder.dll",
 
     #miRBase database
     bowtie1_miRBase_index => "/data/cqs/references/smallrna/mature.dna",
