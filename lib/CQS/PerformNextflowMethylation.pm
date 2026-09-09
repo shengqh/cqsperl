@@ -17,6 +17,7 @@ our %EXPORT_TAGS = (
         performNextflowMethylation_gencode_hg38_twist_v4_1_0
         performNextflowMethylation_ucsc_hg38_twist_v4_1_0
         performNextflowMethylation_ucsc_mm10_twist_v4_1_0
+        performNextflowMethylation_ucsc_mm10_twistV2_v4_2_0
         performNextflowMethylation_ucsc_mm10_WGBS
     )
   ]
@@ -47,6 +48,9 @@ sub get_NextflowMethylation {
       nextflow_run_mode => $nextflow_run_mode,
       nextflow_config   => "/nobackup/h_cqs/shengq2/program/cqsperl/config/nextflow/${nextflow_run_mode}.config",
       nextflow_main_nf  => "/data/cqs/softwares/nextflow/methylseq-${methylseq_ver}/main.nf",
+
+      # the new nextflow doesn't compatible with methylseq workflow, we use the old nextflow for now.
+      nextflow => "/data/cqs/softwares/nextflow/nextflow_25.04.8/nextflow",
 
       # If local, sh_direct should be 0, then the pbs can be submitted to slurm directly.
       # If slurm, sh_direct should be "nohup", then we can run the .sh file with nohup to run all pbs files and then nextflow will submit each step to slurm.
@@ -86,7 +90,7 @@ sub performNextflowMethylation_ucsc_mm10_twist_v4_1_0 {
     get_NextflowMethylation( $userdef, "4.1.0" ),
     { software_version => { genome => "mm10", },
       genome           => "mm10",
-      convered_bed     => "/data/cqs/references/ucsc/mm10/Target_bases_covered_by_probes_Methyl_Twist_Mouse_CpG_Islands_MTE-92874077_mm10_230825155415.bed",
+      convered_bed     => "/data/cqs/references/methylation/twist/Target_bases_covered_by_probes_Methyl_Twist_Mouse_CpG_Islands_MTE-92874077_mm10_230825155415.bed",
     }
   );
 
@@ -95,6 +99,26 @@ sub performNextflowMethylation_ucsc_mm10_twist_v4_1_0 {
   my $config = performNextflowMethylation( $def2, $perform );
   return $config;
 } ## end sub performNextflowMethylation_ucsc_mm10_twist_v4_1_0
+
+
+sub performNextflowMethylation_ucsc_mm10_twistV2_v4_2_0 {
+  # this is the probe set that Twist updated based on Dr. Kasey Vickers' WGBS data.
+  my ( $userdef, $perform ) = @_;
+
+  my $def1 = merge_hash_left_precedent(
+    get_NextflowMethylation( $userdef, "4.2.0" ),
+    { software_version => { genome => "mm10", },
+      genome           => "mm10",
+      convered_bed     => "/data/cqs/references/methylation/twist/Probes_merged_ok_Methyl_Twist_Mouse_Methylome_V2_MTE-91243309_mm10_260511172842.bed",
+    }
+  );
+
+  my $def2 = merge_hash_left_precedent( $def1, ucsc_mm10_genome() );
+
+  my $config = performNextflowMethylation( $def2, $perform );
+  return $config;
+} ## end sub performNextflowMethylation_ucsc_mm10_twistV2_v4_2_0
+
 
 sub performNextflowMethylation_ucsc_mm10_WGBS {
   my ( $userdef, $perform ) = @_;
