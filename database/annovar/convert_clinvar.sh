@@ -12,19 +12,25 @@ fi
 
 cd /data/cqs/references/clinvar
 
-clinvar_version=20260816
+clinvar_version=20260905
 
-wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_${clinvar_version}.vcf.gz
-gunzip clinvar_${clinvar_version}.vcf.gz
-prepare_annovar_user.pl -dbtype clinvar2 clinvar_${clinvar_version}.vcf -out hg38_clinvar_${clinvar_version}_raw.txt
+if [[ ! -s hg38_clinvar_${clinvar_version}_raw_cut.txt ]]; then
+  wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_${clinvar_version}.vcf.gz
+  gunzip clinvar_${clinvar_version}.vcf.gz
+  prepare_annovar_user.pl -dbtype clinvar2 clinvar_${clinvar_version}.vcf -out hg38_clinvar_${clinvar_version}_raw.txt
 
-# We only need the CLNALLELEID     CLNDN   CLNDISDB        CLNREVSTAT      CLNSIG
-cut -f 1-10 hg38_clinvar_${clinvar_version}_raw.txt > hg38_clinvar_${clinvar_version}_raw_cut.txt
+  # We only need the CLNALLELEID     CLNDN   CLNDISDB        CLNREVSTAT      CLNSIG
+  cut -f 1-10 hg38_clinvar_${clinvar_version}_raw.txt > hg38_clinvar_${clinvar_version}_raw_cut.txt
+fi
+
 # must use comment file, otherwise the final result will be missing the header line
-index_annovar.pl hg38_clinvar_${clinvar_version}_raw_cut.txt -out hg38_clinvar_${clinvar_version}.txt -comment /nobackup/h_cqs/shengq2/program/cqsperl/database/annovar/comment_clinvar_${clinvar_version}.txt
+index_annovar.pl hg38_clinvar_${clinvar_version}_raw_cut.txt -out hg38_clinvar_${clinvar_version}.txt -comment /nobackup/h_cqs/shengq2/program/cqsperl/database/annovar/comment_clinvar_20260510.txt
 
 mv hg38_clinvar_${clinvar_version}.txt* ../annovar/humandb/
 rm -f clinvar_${clinvar_version}.vcf* prepare_annovar_user.pl index_annovar.pl hg38_clinvar_${clinvar_version}_raw.txt
+
+cd ../annovar/
+tar -czvf hg38_clinvar_${clinvar_version}.tar.gz humandb/hg38_clinvar_${clinvar_version}.txt*
 
 # test
 
