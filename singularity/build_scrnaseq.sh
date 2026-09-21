@@ -1,4 +1,4 @@
 cd /data/cqs/softwares/singularity
 
-singularity build --disable-cache cqs-scrnaseq.20260516.sif docker://shengqh/cqs_scrnaseq:20260516
+singularity build --disable-cache cqs-scrnaseq.20260921.sif docker://shengqh/cqs_scrnaseq:20260921
 
