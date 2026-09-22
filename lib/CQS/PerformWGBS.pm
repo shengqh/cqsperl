@@ -47,6 +47,7 @@ sub gencode_hg38_genome {
     chr_size_file       => "/data/cqs/references/gencode/GRCh38.p13/GRCh38.primary_assembly.genome.sizes",
 
     methylKitDMR_gene_bed => "/data/cqs/references/gencode/GRCh38.p13/gencode.v43.annotation.gtf",
+    methylKitDMR_cpg_island_bed => "/data/cqs/references/ucsc/hg38_cpg_islands.bed",
 
     genome => "hg38",
     annovar_buildver    => "hg38",
