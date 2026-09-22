@@ -75,6 +75,7 @@ sub ucsc_mm10_genome {
     chr_size_file       => "/data/cqs/references/ucsc/mm10/mm10.len",
 
     methylKitDMR_gene_bed => "/data/cqs/references/ucsc/mm10/mm10.ncbiRefSeq.gtf",
+    methylKitDMR_cpg_island_bed => "/data/cqs/references/ucsc/mm10_cpg_islands.bed",
 
     genome => "mm10",
     annovar_buildver    => "mm10",
