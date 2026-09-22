@@ -46,6 +46,8 @@ sub gencode_hg38_genome {
     chr_fasta           => "/data/cqs/references/gencode/GRCh38.p13/GRCh38.primary_assembly.genome.fa",
     chr_size_file       => "/data/cqs/references/gencode/GRCh38.p13/GRCh38.primary_assembly.genome.sizes",
 
+    methylKitDMR_gene_bed => "/data/cqs/references/gencode/GRCh38.p13/gencode.v43.annotation.gtf",
+
     genome => "hg38",
     annovar_buildver    => "hg38",
     annovar_db          => "/data/cqs/references/annovar/humandb",
@@ -70,6 +72,9 @@ sub ucsc_mm10_genome {
     abismal_index       => "/data/cqs/references/ucsc/mm10/abismal_index/mm10.abismalidx",
     chr_fasta           => "/data/cqs/references/ucsc/mm10/mm10.fa",
     chr_size_file       => "/data/cqs/references/ucsc/mm10/mm10.len",
+
+    methylKitDMR_gene_bed => "/data/cqs/references/ucsc/mm10/mm10.ncbiRefSeq.gtf",
+
     genome => "mm10",
     annovar_buildver    => "mm10",
     annovar_db          => "/data/cqs/references/annovar/mousedb",
