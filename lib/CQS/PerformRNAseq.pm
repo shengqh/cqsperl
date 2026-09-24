@@ -17,12 +17,12 @@ our %EXPORT_TAGS = (
         gencode_hg19_genome
         performRNASeq_gencode_hg19
         gencode_hg38_genome
-        gencode_hg38_genome_v47_LncBookv2_1
+        gencode_hg38_genome_p14v47_LncBookv2_1
         gencode_hg38_genome_v37
         performRNASeq_gencode_hg38
-        performRNASeq_gencode_hg38_v48
-        performRNASeq_gencode_hg38_v47
-        performRNASeq_gencode_hg38_v47_LncBookv2_1
+        performRNASeq_gencode_hg38_p14v48
+        performRNASeq_gencode_hg38_p14v47
+        performRNASeq_gencode_hg38_p14v47_LncBookv2_1
         performRNASeq_gencode_hg38_v37
         performRNASeq_gencode_hg38_v33
         add_mouse_gsea
@@ -116,8 +116,8 @@ sub global_definition {
       qc3_perl                  => "/data/cqs/softwares/QC3/qc3.pl",
       docker_command            => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-rnaseq.20240813.sif ",
       #fgsea_docker_command      => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-rnaseq-20240813.20260413.sif ",
-      gatk_jar                  => "/opt/gatk3.jar",
-      picard_jar                => "/opt/picard.jar",
+      gatk_jar   => "/opt/gatk3.jar",
+      picard_jar => "/opt/picard.jar",
     }
   );
 
@@ -248,24 +248,24 @@ sub get_gencode_hg38_genome {
 
 
 sub gencode_hg38_genome {
-  my ($userdef) = @_; 
-  return ( get_gencode_hg38_genome( $userdef, "v43", "GRCh38.p13", "2.7.8a" ) ); #v43 is the latest GTF of GRCh38.p13
+  my ($userdef) = @_;
+  return ( get_gencode_hg38_genome( $userdef, "v43", "GRCh38.p13", "2.7.8a" ) );    #v43 is the latest GTF of GRCh38.p13
 }
 
 
-sub gencode_hg38_genome_v47 {
+sub gencode_hg38_genome_p14v47 {
   my ($userdef) = @_;
   return ( get_gencode_hg38_genome( $userdef, "v47", "GRCh38.p14", "2.7.11b" ) );
 }
 
 
-sub gencode_hg38_genome_v48 {
+sub gencode_hg38_genome_p14v48 {
   my ($userdef) = @_;
   return ( get_gencode_hg38_genome( $userdef, "v48", "GRCh38.p14", "2.7.11b" ) );
 }
 
 
-sub gencode_hg38_genome_v47_LncBookv2_1 {
+sub gencode_hg38_genome_p14v47_LncBookv2_1 {
   my ($userdef) = @_;
   return ( get_gencode_hg38_genome( $userdef, "v47.LncBookv2_1", "GRCh38.p14", "2.7.11b" ) );
 }
@@ -560,12 +560,12 @@ sub performRNASeq_gencode_hg38_v48 {
 } ## end sub performRNASeq_gencode_hg38_v48
 
 
-sub performRNASeq_gencode_hg38_v47_LncBookv2_1 {
+sub performRNASeq_gencode_hg38_p14v47_LncBookv2_1 {
   my ( $userdef, $perform ) = @_;
   my $def    = merge_hash_left_precedent( $userdef, gencode_hg38_genome_v47_LncBookv2_1($userdef) );
   my $config = performRNASeq( $def, $perform );
   return $config;
-} ## end sub performRNASeq_gencode_hg38_v47_LncBookv2_1
+} ## end sub performRNASeq_gencode_hg38_p14v47_LncBookv2_1
 
 
 sub performRNASeq_gencode_hg38_v37 {
