@@ -29,7 +29,7 @@ sub global_definition {
   my $result = merge_hash_right_precedent(global_options(), {
     docker_command => images()->{"exomeseq"},
     dnmtools_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-dnmtools.20231214.sif ",
-    wgbs_r_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_wgbs.20250609.sif ",
+    wgbs_r_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs_wgbs.20260923.sif ",
     HOMER_perlFile      => "/data/cqs/softwares/homer/bin/findMotifsGenome.pl",
     addqual_perlFile    => "/data/cqs/softwares/ngsperl/lib/Methylation/add_qual.pl",
     picard              => "/data/cqs/softwares/picard.jar",
