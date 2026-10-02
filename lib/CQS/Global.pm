@@ -103,7 +103,7 @@ sub global_options {
     bamsnap_option => "--no_gene_track",
     multiqc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/multiqc.v1.32.sif ",
     report_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/report.sif ",
-    sratools_docker_command  => singularity_prefix() . " /data/cqs/softwares/singularity/sra-tools.3.2.1.sif ",
+    sratools_docker_command  => singularity_prefix() . " /data/cqs/softwares/singularity/sra-tools.3.4.1.sif ",
     crc_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/novartis.20210408.simg ",
     genepos_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg ",
     fastq_screen_configuration_file => "/data/cqs/softwares/FastQ-Screen/fastq_screen.conf",
