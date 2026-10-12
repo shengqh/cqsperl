@@ -137,6 +137,8 @@ sub global_options {
     stcat_docker_command      => singularity_prefix() . " /data/cqs/softwares/singularity/stcat.20260512.sif",
     azimuth_docker_command    => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.20260324.sif",
 
+    edgeR_docker_command => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-scrnaseq.20260516.sif ",  
+
     wdl => {
       "cromwell_jar" => "/data/cqs/softwares/cromwell/cromwell-90.jar",
       "cromwell_option_file" => "/data/cqs/softwares/cqsperl/config/wdl/cromwell.options.json",
