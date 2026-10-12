@@ -1,0 +1,27 @@
+#!/bin/bash
+printf "%-10s %-40s %-10s %-10s %-10s\n" \
+    JOBID JOBNAME REQMEM CUR_GB MAX_GB
+
+squeue -h -t RUNNING -u $USER -o "%A|%j|%m" |
+while IFS='|' read id job req; do
+
+    read ave max <<< $(sstat -j ${id}.batch \
+        --format=AveRSS,MaxRSS \
+        --noheader 2>/dev/null | head -1)
+
+    to_gb() {
+        echo "$1" | awk '
+        /K$/ {printf "%.2f", substr($0,1,length($0)-1)/1024/1024}
+        /M$/ {printf "%.2f", substr($0,1,length($0)-1)/1024}
+        /G$/ {printf "%.2f", substr($0,1,length($0)-1)}
+        /T$/ {printf "%.2f", substr($0,1,length($0)-1)*1024}
+        /^[0-9.]+$/ {printf "%.2f", $0/1024/1024/1024}
+        '
+    }
+
+    avegb=$(to_gb "$ave")
+    maxgb=$(to_gb "$max")
+
+    printf "%-10s %-40s %-10s %-10s %-10s\n" \
+        "$id" "$job" "$req" "${avegb:-NA}" "${maxgb:-NA}"
+done
