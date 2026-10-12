@@ -13,9 +13,9 @@ our @ISA = qw(Exporter);
 our %EXPORT_TAGS = (
   'all' => [
     qw(
-      PerformEncodeATACSeq_gencode_hg38
-      PerformEncodeATACSeq_gencode_mm10
-      )
+        PerformEncodeATACSeq_gencode_hg38
+        PerformEncodeATACSeq_gencode_mm10
+    )
   ]
 );
 
@@ -23,77 +23,92 @@ our @EXPORT = ( @{ $EXPORT_TAGS{'all'} } );
 
 our $VERSION = '0.01';
 
+
 sub global_definition {
-  my $result = merge_hash_right_precedent(global_options(), {
-    #"constraint" => "haswell",
+  my $result = merge_hash_right_precedent(
+    global_options(),
+    {
+      #"constraint" => "haswell",
 
-    "docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg",
-    "report_docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/report.sif",
-    "croo_docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-encode.sif",
+      "docker_command"        => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg",
+      "report_docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/report.sif",
+      "croo_docker_command"   => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-encode.sif",
 
-    "use_caper" => 1,
-    "caper_conda_env" => "/nobackup/h_cqs/shengq2/.conda/envs/caper_python3_10",
-    "encode_option" => "--backend-file /data/cqs/softwares/cqsperl/config/caper/backend.conf --singularity",
-    #"encode_option" => "--singularity",
-    "encode_atac_walltime" => "48",
-    "atac.singularity" => "/data/cqs/softwares/singularity/atac-seq-pipeline.v2.2.3.sif",
-    "croo_out_def_json" => "/data/cqs/softwares/encode/atac-seq-pipeline.v2.2.3/atac.croo.v5.json",
+      "use_caper"       => 1,
+      "caper_conda_env" => "/nobackup/h_cqs/shengq2/.conda/envs/caper_python3_10",
+      "encode_option"   => "--backend-file /data/cqs/softwares/cqsperl/config/caper/backend.conf --singularity",
+      #"encode_option" => "--singularity",
+      "encode_atac_walltime" => "48",
+      "atac.singularity"     => "/data/cqs/softwares/singularity/atac-seq-pipeline.v2.2.3.sif",
+      "croo_out_def_json"    => "/data/cqs/softwares/encode/atac-seq-pipeline.v2.2.3/atac.croo.v5.json",
 
-    "wdl" => {
-      "local" => {
-        "encode_atacseq" => {
-          "wdl_file" => "/data/cqs/softwares/encode/atac-seq-pipeline.v2.2.3/atac.wdl",
-          "input_file" => "/data/cqs/softwares/cqsperl/config/wdl/encode-atacseq.inputs.json"
+      "wdl" => {
+        "local" => {
+          "encode_atacseq" => {
+            "wdl_file"   => "/data/cqs/softwares/encode/atac-seq-pipeline.v2.2.3/atac.wdl",
+            "input_file" => "/data/cqs/softwares/cqsperl/config/wdl/encode-atacseq.inputs.json"
+          }
         }
-      }
-    },
-  });
+      },
+    }
+  );
 
-  return($result);
-}
+  return ($result);
+} ## end sub global_definition
+
 
 sub gencode_hg38_genome {
-  return merge_hash_right_precedent(global_definition(), {
-    "encode_atacseq_genome_tsv" => "/data/cqs/references/encode-pipeline-genome-data/hg38/hg38.tsv",
-    "macs2_genome" => "hs",
-  });
-}
+  return merge_hash_right_precedent(
+    global_definition(),
+    { "encode_atacseq_genome_tsv" => "/data/cqs/references/encode-pipeline-genome-data/hg38/hg38.tsv",
+      "macs2_genome"              => "hs",
+      "gtf"                       => "/data/cqs/references/gencode/GRCh38.p13/gencode.v43.annotation.gtf"
+    }
+  );
+} ## end sub gencode_hg38_genome
+
 
 sub gencode_mm10_genome {
-  return merge_hash_right_precedent(global_definition(), {
-    "encode_atacseq_genome_tsv" => "/data/cqs/references/encode-pipeline-genome-data/mm10/mm10.tsv",
-    "macs2_genome" => "mm",
-  });
-}
+  return merge_hash_right_precedent(
+    global_definition(),
+    { "encode_atacseq_genome_tsv" => "/data/cqs/references/encode-pipeline-genome-data/mm10/mm10.tsv",
+      "macs2_genome"              => "mm",
+      "gtf"                       => "/data/cqs/references/gencode/GRCm38.p6/gencode.vM25.annotation.gtf"
+    }
+  );
+} ## end sub gencode_mm10_genome
+
 
 sub init_singularity {
   my ($userdef) = @_;
 
-  if(defined $userdef->{encode_option}){
-    if (not $userdef->{encode_option} =~ /singularity/){
+  if ( defined $userdef->{encode_option} ) {
+    if ( not $userdef->{encode_option} =~ /singularity/ ) {
       $userdef->{encode_option} = $userdef->{encode_option} . " --singularity";
     }
   }
-}
+} ## end sub init_singularity
+
 
 sub PerformEncodeATACSeq_gencode_hg38 {
-  my ($userdef, $perform) = @_;
+  my ( $userdef, $perform ) = @_;
 
   init_singularity($userdef);
 
-  my $def = merge_hash_left_precedent($userdef, gencode_hg38_genome());
-  my $config = performEncodeATACseq($def, $perform);
+  my $def    = merge_hash_left_precedent( $userdef, gencode_hg38_genome() );
+  my $config = performEncodeATACseq( $def, $perform );
   return $config;
-}
+} ## end sub PerformEncodeATACSeq_gencode_hg38
+
 
 sub PerformEncodeATACSeq_gencode_mm10 {
-  my ($userdef, $perform) = @_;
+  my ( $userdef, $perform ) = @_;
 
   init_singularity($userdef);
 
-  my $def = merge_hash_left_precedent($userdef, gencode_mm10_genome());
-  my $config = performEncodeATACseq($def, $perform);
+  my $def    = merge_hash_left_precedent( $userdef, gencode_mm10_genome() );
+  my $config = performEncodeATACseq( $def, $perform );
   return $config;
-}
+} ## end sub PerformEncodeATACSeq_gencode_mm10
 
 1;
