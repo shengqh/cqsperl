@@ -30,10 +30,13 @@ sub global_definition {
     {
       #"constraint" => "haswell",
 
-      "docker_command"        => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.simg",
-      "report_docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/report.sif",
-      "croo_docker_command"   => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-encode.sif",
+      "docker_command"        => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-chipseq.20240620.sif",
+      "report_docker_command" => singularity_prefix() . " /data/cqs/softwares/singularity/report.20250415.sif",
+      "croo_docker_command"   => singularity_prefix() . " /data/cqs/softwares/singularity/cqs-encode.20210527.sif",
 
+      "java_module"     => "java/11.0.22",
+      "cromwell_jar"    => "/data/cqs/softwares/cromwell/cromwell-82.jar",
+      "womtool_jar"     => "/data/cqs/softwares/cromwell/womtool-82.jar",
       "use_caper"       => 1,
       "caper_conda_env" => "/nobackup/h_cqs/shengq2/.conda/envs/caper_python3_10",
       "encode_option"   => "--backend-file /data/cqs/softwares/cqsperl/config/caper/backend.conf --singularity",
