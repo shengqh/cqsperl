@@ -43,50 +43,6 @@ if [[ -s segmented_outputs/cloupe.cloupe ]]; then
   ln -s segmented_outputs/cloupe.cloupe cloupe_cell.cloupe
 fi
 
-if [[ ! -s segmented_outputs/spatial/tissue_lowres_image.png ]]; then
-  cd segmented_outputs/spatial/
-  ln -s ../../spatial/tissue_lowres_image.png tissue_lowres_image.png 
-  ln -s ../../spatial/tissue_hires_image.png tissue_hires_image.png 
-  cd ../../
-fi
-
-if [[ -s binned_outputs.tar.gz ]]; then
-  if [[ -s binned_outputs/square_016um/filtered_feature_bc_matrix.h5 ]]; then
-    echo "binned_outputs has already been extracted. "
-    rm -f binned_outputs.tar.gz
-  else
-    mkdir -p binned_outputs
-    echo "Extracting binned_outputs.tar.gz"
-    tar -xzvf binned_outputs.tar.gz -C binned_outputs
-    status=$?
-    if [ $status -ne 0 ]; then
-      echo "Error extracting binned_outputs.tar.gz"
-      exit $status
-    else
-      echo "Extracting binned_outputs.tar.gz succeeded, delete the binned_outputs.tar.gz file."
-      rm -f binned_outputs.tar.gz
-    fi
-  fi
-else
-  if [[ ! -s binned_outputs/square_016um/filtered_feature_bc_matrix.h5 ]]; then
-    echo "Error: binned_outputs.tar.gz not found and binned_outputs/square_016um/filtered_feature_bc_matrix.h5 not exist. "
-    exit 1
-  else
-    echo "binned_outputs.tar.gz not found, but binned_outputs/square_016um/filtered_feature_bc_matrix.h5 exist. "
-  fi
-fi
-
-if [[ -s binned_outputs/square_008um/cloupe.cloupe ]]; then
-  rm -f cloupe_008um.cloupe
-  ln -s binned_outputs/square_008um/cloupe.cloupe cloupe_008um.cloupe
-fi
-
-if [[ ! -s binned_outputs/square_008um/spatial/tissue_lowres_image.png ]]; then
-  cd binned_outputs/square_008um/spatial/
-  ln -s ../../../spatial/tissue_lowres_image.png tissue_lowres_image.png 
-  ln -s ../../../spatial/tissue_hires_image.png tissue_hires_image.png 
-  cd ../../../
-fi
 
 if [[ -s spatial.tar.gz ]]; then
   if [[ -s spatial/detected_tissue_image.jpg ]]; then
@@ -114,3 +70,49 @@ else
     echo "spatial.tar.gz not found, but spatial/detected_tissue_image.jpg exist. "
   fi
 fi
+
+if [[ ! -s segmented_outputs/spatial/tissue_lowres_image.png ]]; then
+  mkdir -p segmented_outputs/spatial/
+  cd segmented_outputs/spatial/
+  ln -s ../../spatial/tissue_lowres_image.png tissue_lowres_image.png 
+  ln -s ../../spatial/tissue_hires_image.png tissue_hires_image.png 
+  cd ../../
+fi
+
+# if [[ -s binned_outputs.tar.gz ]]; then
+#   if [[ -s binned_outputs/square_016um/filtered_feature_bc_matrix.h5 ]]; then
+#     echo "binned_outputs has already been extracted. "
+#     rm -f binned_outputs.tar.gz
+#   else
+#     mkdir -p binned_outputs
+#     echo "Extracting binned_outputs.tar.gz"
+#     tar -xzvf binned_outputs.tar.gz -C binned_outputs
+#     status=$?
+#     if [ $status -ne 0 ]; then
+#       echo "Error extracting binned_outputs.tar.gz"
+#       exit $status
+#     else
+#       echo "Extracting binned_outputs.tar.gz succeeded, delete the binned_outputs.tar.gz file."
+#       rm -f binned_outputs.tar.gz
+#     fi
+#   fi
+# else
+#   if [[ ! -s binned_outputs/square_016um/filtered_feature_bc_matrix.h5 ]]; then
+#     echo "Error: binned_outputs.tar.gz not found and binned_outputs/square_016um/filtered_feature_bc_matrix.h5 not exist. "
+#     exit 1
+#   else
+#     echo "binned_outputs.tar.gz not found, but binned_outputs/square_016um/filtered_feature_bc_matrix.h5 exist. "
+#   fi
+# fi
+
+# if [[ -s binned_outputs/square_008um/cloupe.cloupe ]]; then
+#   rm -f cloupe_008um.cloupe
+#   ln -s binned_outputs/square_008um/cloupe.cloupe cloupe_008um.cloupe
+# fi
+
+# if [[ ! -s binned_outputs/square_008um/spatial/tissue_lowres_image.png ]]; then
+#   cd binned_outputs/square_008um/spatial/
+#   ln -s ../../../spatial/tissue_lowres_image.png tissue_lowres_image.png 
+#   ln -s ../../../spatial/tissue_hires_image.png tissue_hires_image.png 
+#   cd ../../../
+# fi
