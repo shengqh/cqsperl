@@ -56,3 +56,6 @@ fi
 
 MYBIN="$softwares/cqsperl/scripts"
 export PATH=$MYBIN:$PATH
+
+alias womtool='java -jar /data/cqs/softwares/cromwell/womtool-53.1.jar'
+alias cromwell='java -jar /data/cqs/softwares/cromwell/cromwell-53.1.jar'
