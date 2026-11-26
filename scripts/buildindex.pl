@@ -165,7 +165,7 @@ if ( !-e "${base}.dict" ) {
 }
 
 if ( !-e "${base}.len" ) {
-  run_command("perl /home/shengq2/local/bin/get_fasta_lengths.pl $fastaFile");
+  run_command("perl /nobackup/h_cqs/shengq2/program/ngsperl/bin/get_fasta_lengths.pl $fastaFile");
   run_command("mv res_${basename} ${base}.len ");
 }
 

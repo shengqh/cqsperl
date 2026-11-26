@@ -12,7 +12,7 @@ fi
 
 cd /data/cqs/references/clinvar
 
-clinvar_version=20260905
+clinvar_version=20261101
 
 if [[ ! -s hg38_clinvar_${clinvar_version}_raw_cut.txt ]]; then
   wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar_${clinvar_version}.vcf.gz
@@ -29,16 +29,18 @@ index_annovar.pl hg38_clinvar_${clinvar_version}_raw_cut.txt -out hg38_clinvar_$
 mv hg38_clinvar_${clinvar_version}.txt* ../annovar/humandb/
 rm -f clinvar_${clinvar_version}.vcf* prepare_annovar_user.pl index_annovar.pl hg38_clinvar_${clinvar_version}_raw.txt
 
+#test
+
+zcat /nobackup/h_cqs/shengq2/biovu/agd250k/eligible_v6_202504/primary-pass-msvcf-sites/agd250k_chr1.pass.vcf.gz | head -n 100000 | cut -f1-9 > agd250k_chr1.avinput.vcf
+
+/data/cqs/softwares/annovar/convert2annovar.pl -format vcf4old agd250k_chr1.avinput.vcf | cut -f1-7 | awk '{gsub(",\\*", "", $0); print}'> agd250k_chr1.avinput
+
+/data/cqs/softwares/annovar/table_annovar.pl agd250k_chr1.avinput /data/cqs/references/annovar/humandb -buildver hg38 -protocol clinvar_${clinvar_version} -operation f --remove --outfile agd250k_chr1.clinvar_${clinvar_version}.annovar
+
+grep 924518 agd250k_chr1.clinvar_${clinvar_version}.annovar.hg38_multianno.txt
+
 cd ../annovar/
-tar -czvf hg38_clinvar_${clinvar_version}.tar.gz humandb/hg38_clinvar_${clinvar_version}.txt*
-
-# test
-
-# zcat /nobackup/h_cqs/shengq2/biovu/agd250k/eligible_v6_202504/primary-pass-msvcf-sites/agd250k_chr1.pass.vcf.gz | head -n 100000 | cut -f1-9 > agd250k_chr1.avinput.vcf
-
-# /data/cqs/softwares/annovar/convert2annovar.pl -format vcf4old agd250k_chr1.avinput.vcf | cut -f1-7 | awk '{gsub(",\\*", "", $0); print}'> agd250k_chr1.avinput
-
-# /data/cqs/softwares/annovar/table_annovar.pl agd250k_chr1.avinput /data/cqs/references/annovar/humandb -buildver hg38 -protocol clinvar_20251109 -operation f --remove --outfile agd250k_chr1.clinvar_20251109.annovar
-# /data/cqs/softwares/annovar/table_annovar.pl agd250k_chr1.avinput /data/cqs/references/annovar/humandb -buildver hg38 -protocol clinvar_20260510 -operation f --remove --outfile agd250k_chr1.clinvar_20260510.annovar
-
-#grep 925987 agd250k_chr1.dbnsfp47a.annovar.hg38_multianno.txt agd250k_chr1.dbnsfp531a.annovar.hg38_multianno.txt
+if [[ ! -s hg38_clinvar_${clinvar_version}.tar.gz ]]; then
+  tar -czvf hg38_clinvar_${clinvar_version}.tar.gz humandb/hg38_clinvar_${clinvar_version}.txt*
+  gu cp hg38_clinvar_${clinvar_version}.tar.gz gs://working-set-redeposit/ica-agd/annovar/
+fi
