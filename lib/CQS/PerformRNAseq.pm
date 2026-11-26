@@ -139,7 +139,10 @@ sub common_human_genome {
       annovar_db          => "/data/cqs/references/annovar/humandb/",
       perform_webgestalt  => 1,
       webgestalt_organism => "hsapiens",
-      perform_gsea        => 1,
+      perform_gsea        => 0,
+      perform_fgsea       => 1,
+      msigdbr_species => "Homo sapiens",
+      msigdbr_collections => "H;C2:CP:REACTOME",
     }
   );
 
@@ -331,6 +334,10 @@ sub common_mm10_genome {
       annovar_buildver    => "mm10",
       annovar_param       => "-protocol refGene -operation g --remove",
       annovar_db          => "/data/cqs/references/annovar/mousedb/",
+      perform_gsea        => 0,
+      perform_fgsea       => 1,
+      msigdbr_species     => "Mus musculus",
+      msigdbr_collections => "H"
     }
   );
 

@@ -43,7 +43,36 @@ if [[ -s segmented_outputs/cloupe.cloupe ]]; then
   ln -s segmented_outputs/cloupe.cloupe cloupe_cell.cloupe
 fi
 
+
+if [[ -s spatial.tar.gz ]]; then
+  if [[ -s spatial/detected_tissue_image.jpg ]]; then
+    echo "spatial has already been extracted. "
+    rm -f spatial.tar.gz
+  else
+    mkdir -p spatial
+    echo "Extracting spatial.tar.gz"
+    tar -xzvf spatial.tar.gz -C spatial
+
+    status=$?
+    if [ $status -ne 0 ]; then
+      echo "Error extracting spatial.tar.gz"
+      exit $status
+    else
+      echo "Extracting spatial.tar.gz succeeded, delete the spatial.tar.gz file."
+      rm -f spatial.tar.gz
+    fi
+  fi
+else
+  if [[ ! -s spatial/detected_tissue_image.jpg ]]; then
+    echo "Error: spatial.tar.gz not found and spatial/detected_tissue_image.jpg not exist. "
+    exit 1
+  else
+    echo "spatial.tar.gz not found, but spatial/detected_tissue_image.jpg exist. "
+  fi
+fi
+
 if [[ ! -s segmented_outputs/spatial/tissue_lowres_image.png ]]; then
+  mkdir -p segmented_outputs/spatial/
   cd segmented_outputs/spatial/
   ln -s ../../spatial/tissue_lowres_image.png tissue_lowres_image.png 
   ln -s ../../spatial/tissue_hires_image.png tissue_hires_image.png 
@@ -86,31 +115,4 @@ if [[ ! -s binned_outputs/square_008um/spatial/tissue_lowres_image.png ]]; then
   ln -s ../../../spatial/tissue_lowres_image.png tissue_lowres_image.png 
   ln -s ../../../spatial/tissue_hires_image.png tissue_hires_image.png 
   cd ../../../
-fi
-
-if [[ -s spatial.tar.gz ]]; then
-  if [[ -s spatial/detected_tissue_image.jpg ]]; then
-    echo "spatial has already been extracted. "
-    rm -f spatial.tar.gz
-  else
-    mkdir -p spatial
-    echo "Extracting spatial.tar.gz"
-    tar -xzvf spatial.tar.gz -C spatial
-
-    status=$?
-    if [ $status -ne 0 ]; then
-      echo "Error extracting spatial.tar.gz"
-      exit $status
-    else
-      echo "Extracting spatial.tar.gz succeeded, delete the spatial.tar.gz file."
-      rm -f spatial.tar.gz
-    fi
-  fi
-else
-  if [[ ! -s spatial/detected_tissue_image.jpg ]]; then
-    echo "Error: spatial.tar.gz not found and spatial/detected_tissue_image.jpg not exist. "
-    exit 1
-  else
-    echo "spatial.tar.gz not found, but spatial/detected_tissue_image.jpg exist. "
-  fi
 fi
